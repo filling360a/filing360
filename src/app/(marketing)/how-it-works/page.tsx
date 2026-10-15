@@ -50,13 +50,13 @@ export default function HowItWorksPage() {
                 className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-seal"
                 aria-hidden
               />
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-seal">
+              <p className="text-[13.5px] font-semibold uppercase tracking-[0.1em] text-seal">
                 Step {i + 1}
               </p>
               <h2 className="mt-2 font-display text-2xl tracking-tight text-ink">
                 {step.title}
               </h2>
-              <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-muted">
+              <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink-muted">
                 {step.body}
               </p>
             </li>
@@ -72,7 +72,7 @@ export default function HowItWorksPage() {
             structure fits.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button variant="on-dark" href="/services/business-registration">
+            <Button variant="on-dark" href="/services/startup">
               Business registration
             </Button>
             <Button variant="on-dark-ghost" href="/about">

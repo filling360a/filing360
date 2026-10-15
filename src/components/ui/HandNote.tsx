@@ -194,7 +194,9 @@ export function HandNote({
   const rootRef = useRef<HTMLDivElement>(null);
   const inView = useInView(rootRef, { amount: 0.15, margin: "-60px" });
   const inViewRef = useRef(inView);
-  inViewRef.current = inView;
+  useEffect(() => {
+    inViewRef.current = inView;
+  }, [inView]);
 
   const [visible, setVisible] = useState(false);
   const [playId, setPlayId] = useState(0);
@@ -307,7 +309,7 @@ export function HandNote({
 
   const copy = (
     <p
-      className={`text-[12.5px] font-semibold leading-[1.35] text-[#3b82f6] ${textAlign}`}
+      className={`text-[14px] font-semibold leading-[1.35] text-[#3b82f6] ${textAlign}`}
       style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
     >
       {tokens.map((token) => {

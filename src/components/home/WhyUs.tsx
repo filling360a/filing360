@@ -155,7 +155,7 @@ function DocsIllustration() {
       </svg>
 
       <div className="mt-3 rounded-xl border border-[#bfdbfe] bg-white/80 px-3.5 py-3 backdrop-blur-sm">
-        <p className="flex items-start gap-2 text-[12px] leading-snug text-[#475569]">
+        <p className="flex items-start gap-2 text-[13.5px] leading-snug text-[#475569]">
           <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#eff6ff] text-[#2563eb]">
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
               <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10c-.8.7-1.3 1.6-1.5 2.5h-5C9.3 14.6 8.8 13.7 8 13a6 6 0 0 1 4-10Z" />
@@ -194,7 +194,7 @@ export function WhyUs() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1180px] px-5 py-12 md:px-8 lg:py-14">
+      <div className="relative mx-auto max-w-[1180px] px-5 py-10 md:px-8 lg:py-14">
         <HandNote
           text={homeWhy.noteTop}
           className="right-4 top-6 hidden text-right xl:block"
@@ -213,11 +213,11 @@ export function WhyUs() {
             >
               {homeWhy.title}
             </h2>
-            <p className="mt-2 max-w-lg text-[14px] leading-snug text-[#64748b]">
+            <p className="mt-2 max-w-lg text-[15px] leading-snug text-[#64748b]">
               {homeWhy.subtitle}
             </p>
 
-            <ul className="mt-6 grid flex-1 gap-3.5 sm:grid-cols-2 sm:grid-rows-2">
+            <ul className="rail rail-bleed mt-5 grid flex-1 gap-3.5 [--rail-item:72%] [--rail-item-sm:40%] lg:mt-6 lg:grid-cols-2 lg:grid-rows-2">
               {homeWhy.items.map((item) => {
                 const tone = toneStyles[item.tone as Tone];
                 return (
@@ -233,16 +233,16 @@ export function WhyUs() {
                           {whyIcons[item.icon]}
                         </span>
                         <span
-                          className={`rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.06em] ${tone.badge}`}
+                          className={`rounded-full px-2 py-0.5 text-[11.5px] font-bold uppercase tracking-[0.06em] ${tone.badge}`}
                         >
                           {item.badge}
                         </span>
                       </div>
 
-                      <h3 className="mt-3 text-[14px] font-bold text-[#0b2c5e]">
+                      <h3 className="mt-3 text-[15px] font-bold text-[#0b2c5e]">
                         {item.title}
                       </h3>
-                      <p className="mt-1.5 flex-1 text-[12px] leading-snug text-[#64748b]">
+                      <p className="mt-1.5 flex-1 text-[13.5px] leading-snug text-[#64748b]">
                         {item.body}
                       </p>
 
@@ -261,11 +261,11 @@ export function WhyUs() {
           {/* Right — table + benefits + CTA */}
           <div className="relative flex min-w-0 flex-col">
             <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-[#e8eef5] bg-white shadow-[0_12px_32px_-18px_rgba(15,23,42,0.18)]">
-              <div className="grid shrink-0 text-[11px] font-bold uppercase tracking-[0.1em] sm:grid-cols-2">
-                <p className="border-b border-[#e8eef5] bg-[#f8fafc] px-4 py-3.5 text-[#94a3b8] sm:border-b-0 sm:border-r">
+              <div className="grid shrink-0 grid-cols-2 text-[12px] font-bold uppercase tracking-[0.08em] sm:text-[13px] sm:tracking-[0.1em]">
+                <p className="border-r border-[#e8eef5] bg-[#f8fafc] px-3 py-3 text-[#94a3b8] sm:px-4 sm:py-3.5">
                   Common elsewhere
                 </p>
-                <p className="flex items-center gap-1.5 bg-[#eff6ff] px-4 py-3.5 text-[#2563eb]">
+                <p className="flex items-center gap-1.5 bg-[#eff6ff] px-3 py-3 text-[#2563eb] sm:px-4 sm:py-3.5">
                   <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[#2563eb] text-white">
                     <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
                       <path d="m5 12 4 4 10-9" strokeLinecap="round" strokeLinejoin="round" />
@@ -279,9 +279,9 @@ export function WhyUs() {
                 {homeWhy.contrast.map((row) => (
                   <div
                     key={row.bad}
-                    className="grid flex-1 border-t border-[#eef2f7] text-[12.5px] leading-snug sm:grid-cols-2"
+                    className="grid flex-1 grid-cols-2 border-t border-[#eef2f7] text-[13px] leading-snug sm:text-[14px]"
                   >
-                    <p className="flex h-full items-center gap-2.5 border-b border-[#eef2f7] bg-white px-4 py-4 text-[#64748b] sm:border-b-0 sm:border-r">
+                    <p className="flex h-full items-center gap-2 border-r border-[#eef2f7] bg-white px-3 py-3 text-[#64748b] sm:gap-2.5 sm:px-4 sm:py-4">
                       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#fee2e2] text-[#ef4444]">
                         <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="2.8" aria-hidden>
                           <path d="M7 7l10 10M17 7 7 17" strokeLinecap="round" />
@@ -289,7 +289,7 @@ export function WhyUs() {
                       </span>
                       {row.bad}
                     </p>
-                    <p className="flex h-full items-center gap-2.5 bg-[#f8fbff] px-4 py-4 font-medium text-[#0b2c5e]">
+                    <p className="flex h-full items-center gap-2 bg-[#f8fbff] px-3 py-3 font-medium text-[#0b2c5e] sm:gap-2.5 sm:px-4 sm:py-4">
                       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#dcfce7] text-[#16a34a]">
                         <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="2.8" aria-hidden>
                           <path d="m5 12 4 4 10-9" strokeLinecap="round" strokeLinejoin="round" />
@@ -302,17 +302,17 @@ export function WhyUs() {
               </div>
             </div>
 
-            <ul className="mt-5 grid gap-3 sm:grid-cols-3">
+            <ul className="mt-5 grid grid-cols-3 gap-3">
               {homeWhy.benefits.map((b) => (
-                <li key={b.title} className="flex items-start gap-2.5">
+                <li key={b.title} className="flex flex-col items-start gap-1.5 sm:flex-row sm:gap-2.5">
                   <span className="mt-0.5 shrink-0 text-[#2563eb]">
                     {benefitIcons[b.icon]}
                   </span>
                   <span>
-                    <span className="block text-[12.5px] font-bold text-[#0b2c5e]">
+                    <span className="block text-[14px] font-bold text-[#0b2c5e]">
                       {b.title}
                     </span>
-                    <span className="mt-0.5 block text-[11px] text-[#64748b]">
+                    <span className="mt-0.5 block text-[13px] text-[#64748b]">
                       {b.body}
                     </span>
                   </span>
@@ -323,12 +323,12 @@ export function WhyUs() {
             <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#2563eb] px-6 text-[13px] font-semibold text-white transition hover:bg-[#1d4ed8]"
+                className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#2563eb] px-6 text-[14.5px] font-semibold text-white transition hover:bg-[#1d4ed8]"
               >
                 {homeWhy.cta}
                 <span aria-hidden>→</span>
               </a>
-              <p className="max-w-xs text-[12px] leading-snug text-[#64748b]">
+              <p className="max-w-xs text-[13.5px] leading-snug text-[#64748b]">
                 {homeWhy.ctaNote}
               </p>
             </div>
@@ -338,7 +338,7 @@ export function WhyUs() {
         </div>
 
         {/* Documents / Be prepared */}
-        <div className="relative mt-10 overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#eef5fc] p-6 md:p-8">
+        <div className="relative mt-8 overflow-hidden rounded-3xl border border-[#dbeafe] bg-[#eef5fc] p-4 sm:p-6 md:p-8 lg:mt-10">
           <div
             className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#bfdbfe]/40 blur-2xl"
             aria-hidden
@@ -349,17 +349,17 @@ export function WhyUs() {
               <h3 className="text-[22px] font-bold leading-tight tracking-tight text-[#0b2c5e] md:text-[26px]">
                 {homeDocuments.title}
               </h3>
-              <p className="mt-2 max-w-xl text-[13px] leading-snug text-[#64748b]">
+              <p className="mt-2 max-w-xl text-[14.5px] leading-snug text-[#64748b]">
                 {homeDocuments.subtitle}
               </p>
 
-              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+              <ul className="mt-4 grid grid-cols-2 gap-2 sm:mt-5 sm:gap-2.5">
                 {homeDocuments.items.map((doc) => (
                   <li
                     key={doc.label}
-                    className="flex items-center gap-2.5 rounded-xl border border-white/80 bg-white px-3.5 py-3 text-[12.5px] font-medium leading-snug text-[#0b2c5e] shadow-[0_4px_14px_-10px_rgba(15,23,42,0.2)]"
+                    className="flex flex-col items-start gap-2 rounded-xl border border-white/80 bg-white px-3 py-2.5 text-[13px] font-medium leading-snug text-[#0b2c5e] shadow-[0_4px_14px_-10px_rgba(15,23,42,0.2)] sm:flex-row sm:items-center sm:gap-2.5 sm:px-3.5 sm:py-3 sm:text-[14px]"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#eff6ff] text-[#2563eb]">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#eff6ff] text-[#2563eb] sm:h-8 sm:w-8">
                       {docIcons[doc.icon]}
                     </span>
                     {doc.label}
@@ -370,14 +370,14 @@ export function WhyUs() {
               <div className="mt-5 flex flex-wrap gap-2.5">
                 <a
                   href="#hero-lead"
-                  className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] px-5 text-[13px] font-semibold text-white transition hover:bg-[#1d4ed8]"
+                  className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] px-5 text-[14.5px] font-semibold text-white transition hover:bg-[#1d4ed8]"
                 >
                   Get free consultation
                   <span aria-hidden>→</span>
                 </a>
                 <a
                   href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                  className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-[#93c5fd] bg-white px-4 text-[13px] font-semibold text-[#2563eb] transition hover:border-[#2563eb]"
+                  className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-[#93c5fd] bg-white px-4 text-[14.5px] font-semibold text-[#2563eb] transition hover:border-[#2563eb]"
                 >
                   <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                     <path d="M21 12c0 4-4 7-9 7-1.2 0-2.3-.2-3.3-.6L3 20l1.7-4.2C4.2 14.7 3.9 13.4 3.9 12 3.9 8 7.9 5 12.9 5S21 8 21 12Z" />
@@ -390,7 +390,7 @@ export function WhyUs() {
                 {homeDocuments.trust.map((t, i) => (
                   <li
                     key={t}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#64748b]"
+                    className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#64748b]"
                   >
                     {i === 0 ? (
                       <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>

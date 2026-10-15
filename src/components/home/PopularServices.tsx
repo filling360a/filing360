@@ -181,7 +181,7 @@ function SoftIcon({ name }: { name: string }) {
         </g>
       </svg>
     ),
-    "Trademark Registration": (
+    "Income Tax Return (ITR)": (
       <svg viewBox="0 0 56 56" className="h-12 w-12" aria-hidden>
         <defs>
           <linearGradient id="tm-bg" x1="0" y1="0" x2="1" y2="1">
@@ -200,30 +200,26 @@ function SoftIcon({ name }: { name: string }) {
         <rect width="56" height="56" rx="14" fill="url(#tm-bg)" />
         <g filter="url(#tm-sh)">
           <path
-            d="M28 8 12 14.5v12.5c0 10.2 6.6 16.8 16 18.5 9.4-1.7 16-8.3 16-18.5V14.5L28 8Z"
+            d="M17 9h16l8 8v28a2.5 2.5 0 0 1-2.5 2.5h-21.5A2.5 2.5 0 0 1 14.5 45V11.5A2.5 2.5 0 0 1 17 9Z"
             fill="url(#tm-s)"
           />
-          <path
-            d="M28 12.2 16 17v9.8c0 7.8 5 13 12 14.4 7-1.4 12-6.6 12-14.4V17L28 12.2Z"
-            fill="#8b5cf6"
-            opacity="0.45"
-          />
+          <path d="M33 9v8h8" fill="#8b5cf6" opacity="0.7" />
           <text
-            x="28"
-            y="32"
+            x="27.5"
+            y="35"
             textAnchor="middle"
             fill="#fff"
-            fontSize="11"
+            fontSize="16"
             fontWeight="800"
             fontFamily="system-ui,sans-serif"
-            letterSpacing="0.5"
           >
-            TM
+            ₹
           </text>
+          <rect x="20" y="39" width="15" height="2.2" rx="1.1" fill="#ddd6fe" />
         </g>
       </svg>
     ),
-    "MCA / Secretarial": (
+    "Annual MCA Compliance": (
       <svg viewBox="0 0 56 56" className="h-12 w-12" aria-hidden>
         <defs>
           <linearGradient id="mca-bg" x1="0" y1="0" x2="1" y2="1">
@@ -355,7 +351,8 @@ export function PopularServices() {
     setStart((s) => Math.min(maxStart, s + 1));
   }, [maxStart]);
 
-  const visible = items.slice(start, start + perView);
+  const isRail = perView < VISIBLE;
+  const visible = isRail ? items : items.slice(start, start + perView);
   const centerIdx = Math.floor((visible.length - 1) / 2);
 
   return (
@@ -382,7 +379,7 @@ export function PopularServices() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1200px] px-5 py-12 md:px-8 lg:py-16">
+      <div className="relative mx-auto max-w-[1200px] px-5 py-10 md:px-8 lg:py-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="services-heading"
@@ -390,14 +387,20 @@ export function PopularServices() {
           >
             {homePopular.title}
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-[#64748b]">
+          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#64748b]">
             {homePopular.subtitle}
           </p>
         </div>
 
         {/* Arc carousel */}
-        <div className="relative mt-10">
-          <ul className="flex items-start justify-center gap-3 px-2 md:gap-4 lg:gap-5">
+        <div className="relative mt-6 lg:mt-10">
+          <ul
+            className={
+              isRail
+                ? "rail rail-bleed pt-3 [--rail-item-sm:31%] [--rail-item:60%]"
+                : "flex items-start justify-center gap-3 px-2 md:gap-4 lg:gap-5"
+            }
+          >
             {visible.map((item, i) => {
               const tone = toneStyles[(item.tone as Tone) ?? "blue"];
               const offset = i - centerIdx;
@@ -422,7 +425,7 @@ export function PopularServices() {
                   >
                     {popular ? (
                       <span
-                        className={`absolute -right-1 -top-2 inline-flex items-center gap-1 rounded-full ${tone.badge} px-2.5 py-1 text-[9px] font-bold uppercase tracking-wide text-white shadow-md`}
+                        className={`absolute -right-1 -top-2 inline-flex items-center gap-1 rounded-full ${tone.badge} px-2.5 py-1 text-[11.5px] font-bold uppercase tracking-wide text-white shadow-md`}
                       >
                         <span aria-hidden>★</span> Most Popular
                       </span>
@@ -432,23 +435,23 @@ export function PopularServices() {
                       <SoftIcon name={item.name} />
                     </div>
 
-                    <h3 className="mt-3 text-[14px] font-bold leading-snug text-[#0f172a]">
+                    <h3 className="mt-3 text-[15px] font-bold leading-snug text-[#0f172a]">
                       {item.name}
                     </h3>
-                    <p className="mt-1.5 line-clamp-3 flex-1 text-[11.5px] leading-snug text-[#64748b]">
+                    <p className="mt-1.5 line-clamp-3 flex-1 text-[13px] leading-snug text-[#64748b]">
                       {item.blurb}
                     </p>
 
                     <div className="mt-3">
-                      <p className="text-[10px] text-[#94a3b8]">From</p>
+                      <p className="text-[12px] text-[#94a3b8]">From</p>
                       <p className={`text-[20px] font-bold leading-none ${tone.price}`}>
                         {formatInr(item.feeFrom)}
                       </p>
-                      <p className="mt-0.5 text-[11px] text-[#94a3b8]">+ Govt. fees</p>
+                      <p className="mt-0.5 text-[13px] text-[#94a3b8]">{item.feeNote}</p>
                     </div>
 
                     <div className="mt-3 flex items-center justify-between gap-2 border-t border-[#f1f5f9] pt-3">
-                      <p className="flex min-w-0 items-center gap-1 text-[10.5px] leading-snug text-[#64748b]">
+                      <p className="flex min-w-0 items-center gap-1 text-[12.5px] leading-snug text-[#64748b]">
                         <svg viewBox="0 0 24 24" className="h-3 w-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                           <circle cx="12" cy="12" r="8" />
                           <path d="M12 8v4l2.5 1.5" strokeLinecap="round" />
@@ -471,7 +474,7 @@ export function PopularServices() {
           </ul>
 
           {/* Controls */}
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className={`mt-8 items-center justify-center gap-4 ${isRail ? "hidden" : "flex"}`}>
             <button
               type="button"
               onClick={prev}
@@ -514,7 +517,7 @@ export function PopularServices() {
           </div>
         </div>
 
-        <p className="mt-10 flex items-center justify-center gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#94a3b8]">
+        <p className="mt-6 flex items-center justify-center gap-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-[#94a3b8] lg:mt-10">
           <span className="h-px w-10 bg-[#cbd5e1] sm:w-16" aria-hidden />
           {homePopular.trust}
           <span className="h-px w-10 bg-[#cbd5e1] sm:w-16" aria-hidden />

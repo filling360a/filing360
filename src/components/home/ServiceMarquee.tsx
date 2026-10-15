@@ -13,7 +13,7 @@ export function ServiceMarquee() {
           {loop.map((label, i) => (
             <span
               key={`${label}-${i}`}
-              className="flex items-center gap-4 whitespace-nowrap text-sm font-medium text-[#64748b]"
+              className="flex items-center gap-4 whitespace-nowrap text-[15px] font-medium text-[#64748b]"
             >
               <span className="text-[#0b1f3a]">{label}</span>
               <span className="text-[#2563eb]" aria-hidden>

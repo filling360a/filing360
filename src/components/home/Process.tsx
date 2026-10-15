@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { homeHow } from "@/content/home";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -91,20 +91,24 @@ function ConnectorArrow({ active }: { active: boolean }) {
   );
 }
 
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+function getReducedMotion() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
 const STEP_COUNT = homeHow.steps.length;
 const CYCLE_MS = 2200;
 
 export function Process() {
   const [active, setActive] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mq.matches);
-    const onChange = () => setReduceMotion(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  const reduceMotion = useSyncExternalStore(subscribeReducedMotion, getReducedMotion, () => false);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -159,7 +163,7 @@ export function Process() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1100px] px-5 py-12 md:px-8 lg:py-14">
+      <div className="relative mx-auto max-w-[1100px] px-5 py-10 md:px-8 lg:py-14">
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="how-heading"
@@ -167,13 +171,13 @@ export function Process() {
           >
             {homeHow.title}
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-[14px] leading-snug text-[#64748b]">
+          <p className="mx-auto mt-2 max-w-xl text-[15px] leading-snug text-[#64748b]">
             {homeHow.subtitle}
           </p>
         </div>
 
         {/* Progress track — fills as steps advance */}
-        <ol className="mx-auto mt-8 flex max-w-md items-start justify-between">
+        <ol className="mx-auto mt-6 flex max-w-md items-start justify-between lg:mt-8">
           {homeHow.track.map((item, i) => {
             const done = i < active;
             const current = i === active;
@@ -192,7 +196,7 @@ export function Process() {
                   </span>
                 ) : null}
                 <span
-                  className={`relative z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold transition-all duration-500 ${
+                  className={`relative z-[1] flex h-8 w-8 items-center justify-center rounded-full text-[13.5px] font-bold transition-all duration-500 ${
                     done
                       ? "bg-[#2563eb] text-white"
                       : current
@@ -214,7 +218,7 @@ export function Process() {
                   )}
                 </span>
                 <span
-                  className={`mt-2 text-[11px] font-semibold transition-colors duration-500 ${
+                  className={`mt-2 text-[13px] font-semibold transition-colors duration-500 ${
                     current || done ? "text-[#0b2c5e]" : "text-[#94a3b8]"
                   }`}
                 >
@@ -226,7 +230,7 @@ export function Process() {
         </ol>
 
         {/* Step cards */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center lg:gap-3">
+        <div className="rail rail-bleed mt-6 grid gap-4 [--rail-item:72%] [--rail-item-sm:40%] lg:mt-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center lg:gap-3">
           {homeHow.steps.map((step, i) => {
             const done = i < active;
             const current = i === active;
@@ -242,7 +246,7 @@ export function Process() {
                   }`}
                 >
                   <span
-                    className={`flex h-8 w-8 items-center justify-center rounded-full text-[12px] font-bold transition-colors duration-500 ${
+                    className={`flex h-8 w-8 items-center justify-center rounded-full text-[13.5px] font-bold transition-colors duration-500 ${
                       done
                         ? "bg-[#22c55e] text-white"
                         : current
@@ -266,17 +270,17 @@ export function Process() {
                     <StepIllustration index={i} />
                   </div>
                   <h3
-                    className={`mt-3 text-center text-[15px] font-bold transition-colors duration-500 ${
+                    className={`mt-3 text-center text-[16px] font-bold transition-colors duration-500 ${
                       current ? "text-[#2563eb]" : "text-[#0b2c5e]"
                     }`}
                   >
                     {step.title}
                   </h3>
-                  <p className="mt-1.5 flex-1 text-center text-[12px] leading-snug text-[#64748b]">
+                  <p className="mt-1.5 flex-1 text-center text-[13.5px] leading-snug text-[#64748b]">
                     {step.body}
                   </p>
                   {current ? (
-                    <span className="mx-auto mt-3 inline-flex items-center gap-1 rounded-full bg-[#eff6ff] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#2563eb]">
+                    <span className="mx-auto mt-3 inline-flex items-center gap-1 rounded-full bg-[#eff6ff] px-2.5 py-0.5 text-[12px] font-bold uppercase tracking-wide text-[#2563eb]">
                       <span className="relative flex h-1.5 w-1.5">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2563eb] opacity-60" />
                         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2563eb]" />
@@ -284,11 +288,11 @@ export function Process() {
                       In progress
                     </span>
                   ) : done ? (
-                    <span className="mx-auto mt-3 inline-flex items-center gap-1 rounded-full bg-[#ecfdf5] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#16a34a]">
+                    <span className="mx-auto mt-3 inline-flex items-center gap-1 rounded-full bg-[#ecfdf5] px-2.5 py-0.5 text-[12px] font-bold uppercase tracking-wide text-[#16a34a]">
                       Done
                     </span>
                   ) : (
-                    <span className="mx-auto mt-3 inline-flex items-center rounded-full bg-[#f1f5f9] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#94a3b8]">
+                    <span className="mx-auto mt-3 inline-flex items-center rounded-full bg-[#f1f5f9] px-2.5 py-0.5 text-[12px] font-bold uppercase tracking-wide text-[#94a3b8]">
                       Up next
                     </span>
                   )}
@@ -304,20 +308,20 @@ export function Process() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
           <a
             href="#hero-lead"
-            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] px-5 text-[13px] font-semibold text-white shadow-[0_10px_22px_-10px_rgba(37,99,235,0.6)] transition hover:bg-[#1d4ed8]"
+            className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] px-5 text-[14.5px] font-semibold text-white shadow-[0_10px_22px_-10px_rgba(37,99,235,0.6)] transition hover:bg-[#1d4ed8]"
           >
             Get free consultation
             <span aria-hidden>→</span>
           </a>
           <a
             href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-            className="inline-flex h-10 items-center justify-center rounded-lg border border-[#93c5fd] bg-white px-5 text-[13px] font-semibold text-[#2563eb] transition hover:border-[#2563eb]"
+            className="inline-flex h-10 items-center justify-center rounded-lg border border-[#93c5fd] bg-white px-5 text-[14.5px] font-semibold text-[#2563eb] transition hover:border-[#2563eb]"
           >
             Talk to an Expert
           </a>
           <Link
             href="/how-it-works"
-            className="inline-flex h-10 items-center justify-center gap-1 px-2 text-[13px] font-semibold text-[#2563eb] transition hover:text-[#0b2c5e]"
+            className="inline-flex h-10 items-center justify-center gap-1 px-2 text-[14.5px] font-semibold text-[#2563eb] transition hover:text-[#0b2c5e]"
           >
             View Process
             <span aria-hidden>→</span>
@@ -328,7 +332,7 @@ export function Process() {
           {homeHow.trust.map((item, i) => (
             <li
               key={item.label}
-              className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#475569]"
+              className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-[#475569]"
             >
               {i === 0 ? (
                 <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#2563eb]" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>

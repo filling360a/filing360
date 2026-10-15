@@ -21,71 +21,78 @@
 export const homePopular = {
   title: "Everything your business needs, under one roof",
   subtitle:
-    "From company registration to taxes, licenses, and intellectual property — everything you need to start, run, and grow your business, with expert support.",
+    "From startup registration to GST, income tax, and MCA compliance — everything you need to start, run, and grow your business, with expert support.",
   trust: "Trusted by 100,000+ businesses",
   items: [
     {
       name: "Section 8 Company",
-      feeFrom: 4999,
-      timeline: "15–30 business days",
+      feeFrom: 2899,
+      feeNote: "+ GST & govt. fees",
+      timeline: "7–10 days",
       blurb:
-        "Non-profit company under the Companies Act for charitable, educational, or social objects.",
-      href: "/services/ngo-non-profit/section-8-company",
+        "Non-profit company with RD licence, MOA & AOA drafting, PAN & TAN — start your NGO legally.",
+      href: "/services/startup/section-8-company",
       tone: "pink",
     },
     {
       name: "Private Limited Company",
-      feeFrom: 1499,
-      timeline: "7–14 business days",
+      feeFrom: 3000,
+      feeNote: "Incl. GST · govt. fees extra",
+      timeline: "7–10 days",
       blurb:
-        "Best for startups raising equity or issuing ESOPs. Limited liability, share capital, investor-ready.",
-      href: "/services/business-registration/private-limited-company",
+        "CA-backed incorporation with a dedicated RM. GST-inclusive fee — pay just 50% to start.",
+      href: "/services/startup/private-limited-company",
       tone: "blue",
     },
     {
       name: "GST Registration",
       feeFrom: 999,
+      feeNote: "+ GST",
       timeline: "3–7 business days",
       blurb:
-        "Get your GSTIN for B2B invoices, e-commerce, or when you cross the turnover threshold.",
-      href: "/services/tax-gst/gst-registration",
+        "Your GSTIN, done in no time — application, TRN, ARN and certificate handled by Filing360.",
+      href: "/services/gst/gst-registration",
       badge: "Most popular",
       tone: "green",
     },
     {
-      name: "Trademark Registration",
-      feeFrom: 1499,
-      timeline: "Filing in 3–7 days",
+      name: "Income Tax Return (ITR)",
+      feeFrom: 999,
+      feeNote: "+ GST",
+      timeline: "Filed by experts",
       blurb:
-        "Protect your brand name and logo. We handle search, TM-A filing, and examination follow-up.",
-      href: "/services/intellectual-property/trademark-registration",
+        "ITR plans for salary, house property, business, capital gains, F&O, crypto, NRIs and foreign income.",
+      href: "/services/income-tax/itr-filing-individual",
       tone: "purple",
     },
     {
-      name: "MCA / Secretarial",
-      feeFrom: 2999,
-      timeline: "Per filing season",
+      name: "Annual MCA Compliance",
+      feeFrom: 19899,
+      feeNote: "+ GST & govt. fees",
+      timeline: "Per financial year",
       blurb:
-        "Annual ROC filings, director changes, and event-based MCA compliance after incorporation.",
-      href: "/services/mca-secretarial",
+        "AOC-4, MGT-7, ITR-6 and director KYC with a dedicated accountant and compliance advisor.",
+      href: "/services/mca/company-compliance",
       tone: "orange",
     },
     {
       name: "Limited Liability Partnership",
-      feeFrom: 1499,
-      timeline: "7–12 business days",
+      feeFrom: 2899,
+      feeNote: "+ GST & govt. fees",
+      timeline: "7–10 days",
       blurb:
         "Ideal for consultants and professional firms — limited liability with lighter annual compliance.",
-      href: "/services/business-registration/llp",
+      href: "/services/startup/llp",
       tone: "sky",
     },
     {
       name: "One Person Company",
-      feeFrom: 1499,
-      timeline: "7–14 business days",
+      feeFrom: 2899,
+      feeNote: "+ GST & govt. fees",
+      timeline: "7–10 days",
       blurb:
         "Solo founders who want company protection without a co-founder — requires a nominee.",
-      href: "/services/business-registration/opc",
+      href: "/services/startup/opc",
       tone: "teal",
     },
   ],
@@ -99,19 +106,19 @@ export const homeCompare = {
     {
       id: "pvt",
       short: "Private Limited",
-      href: "/services/business-registration/private-limited-company",
+      href: "/services/startup/private-limited-company",
       accent: "blue",
     },
     {
       id: "llp",
       short: "LLP",
-      href: "/services/business-registration/llp",
+      href: "/services/startup/llp",
       accent: "green",
     },
     {
       id: "opc",
       short: "OPC",
-      href: "/services/business-registration/opc",
+      href: "/services/startup/opc",
       accent: "orange",
     },
   ],
@@ -159,9 +166,9 @@ export const homeCompare = {
     {
       label: "Starting fee",
       cells: [
-        { text: "₹1,499 + Govt. fees", tone: "fee" },
-        { text: "₹1,499 + Govt. fees", tone: "fee" },
-        { text: "₹1,499 + Govt. fees", tone: "fee" },
+        { text: "₹3,000 incl. GST + Govt. fees", tone: "fee" },
+        { text: "₹2,899 + GST + Govt. fees", tone: "fee" },
+        { text: "₹2,899 + GST + Govt. fees", tone: "fee" },
       ],
     },
   ],
@@ -194,32 +201,32 @@ export const homePaths = {
       id: "startup",
       label: "I’m starting a company",
       description:
-        "Pvt. Ltd., LLP, or OPC — name check, DSC, SPICe+/FiLLiP, PAN & TAN in one flow.",
-      href: "/services/business-registration",
+        "Proprietorship, partnership, LLP, OPC or Pvt. Ltd. — name approval, PAN & TAN in one flow.",
+      href: "/services/startup",
       icon: "/images/startheresection/01_starting_company_icon.png",
     },
     {
       id: "tax",
-      label: "I need GST or tax filings",
+      label: "I need GST registration or returns",
       description:
-        "GST registration, returns, and basic tax compliance so you stay filing-ready.",
-      href: "/services/tax-gst",
+        "GST registration, monthly and quarterly returns, LUT and annual returns — filed by accountants.",
+      href: "/services/gst",
       icon: "/images/startheresection/02_gst_tax_filings_icon.png",
     },
     {
-      id: "brand",
-      label: "I want to protect my brand",
+      id: "income-tax",
+      label: "I need to file income tax",
       description:
-        "Trademark search and filing so your name and logo stay yours.",
-      href: "/services/intellectual-property",
-      icon: "/images/startheresection/03_trademark_brand_icon.png",
+        "ITR filing, tax planning, TDS returns and notices — plans for every kind of income.",
+      href: "/services/income-tax",
+      icon: "itr",
     },
     {
       id: "ngo",
       label: "I’m registering an NGO",
       description:
-        "Section 8, trust, society, 12A/80G — guided filings for non-profits.",
-      href: "/services/ngo-non-profit",
+        "Section 8 company or trust registration, with 12A & 80G — guided filings for non-profits.",
+      href: "/services/startup/section-8-company",
       icon: "/images/startheresection/04_ngo_registration_icon.png",
     },
   ],
@@ -279,7 +286,7 @@ export const homePricing = {
     title: "Government fees",
     subtitle: "Statutory charges paid to the government",
     items: [
-      "MCA / GST / IP India charges",
+      "MCA / GST / Income Tax charges",
       "State stamp duty (varies by state and capital)",
       "DSC costs (varies by entity)",
       "Confirmed in writing first",
@@ -289,7 +296,7 @@ export const homePricing = {
   },
   upsells: {
     title: "No surprise upsells",
-    body: "Optional add-ons (GST, trademark, annual ROC) are offered after you understand the base package — never forced at checkout.",
+    body: "Optional add-ons (GST, income tax, annual ROC) are offered after you understand the base package — never forced at checkout.",
     footerTitle: "Your goals, your choice.",
     footerBody: "Add services only when you need them.",
   },
@@ -338,7 +345,7 @@ export const homeWhy = {
     },
     {
       title: "Same desk after incorporation",
-      body: "GST, trademark, and annual MCA compliance on the same platform so you don’t juggle three vendors.",
+      body: "GST, income tax, and annual MCA compliance on the same platform so you don’t juggle three vendors.",
       icon: "desk",
       badge: "Long-term partner",
       tone: "orange",
@@ -409,57 +416,45 @@ export const homeMarketplace = {
     "From company registration to ongoing compliance, get expert support, transparent pricing, and end-to-end service — all in one place.",
   /** Short card blurbs + 3 checklist highlights */
   cards: {
-    "business-registration": {
-      blurb: "Incorporate the right entity with clear fees and MCA support.",
+    "income-tax": {
+      blurb: "Tax planning, ITR filing, TDS returns and notices.",
+      highlights: ["Tax planning from ₹99", "ITR filing from ₹999", "TDS · notices · PAN/TAN"],
+      tone: "purple",
+    },
+    gst: {
+      blurb: "Registration, returns by accountants, LUT and amendments.",
+      highlights: ["GST registration ₹999", "Monthly returns ₹999/month", "LUT · GSTR-10 · revocation"],
+      tone: "green",
+    },
+    startup: {
+      blurb: "Register the right structure for your business.",
       highlights: [
-        "Pvt. Ltd. · LLP · OPC",
-        "Partnership & proprietorship",
-        "Name + SPICe+ support",
+        "Pvt. Ltd. from ₹3,000 incl. GST",
+        "LLP · OPC from ₹2,899",
+        "Partnership · proprietorship",
+        "Section 8 · trust · DPIIT",
       ],
       tone: "blue",
     },
-    "ngo-non-profit": {
-      blurb: "Section 8, trusts, societies, and tax exemptions.",
-      highlights: ["Section 8 company", "Trust & society", "12A / 80G / FCRA"],
-      tone: "purple",
-    },
-    "tax-gst": {
-      blurb: "GST, income tax, and notices — filed accurately.",
-      highlights: ["GST registration", "ITR & TDS", "Notice support"],
-      tone: "green",
-    },
-    "intellectual-property": {
-      blurb: "Protect names, logos, inventions, and creative work.",
-      highlights: [
-        "Trademark filing",
-        "Copyright & design",
-        "Patent coordination",
-      ],
-      tone: "amber",
-    },
-    licenses: {
-      blurb: "Trade, food, import-export, and quality certifications.",
-      highlights: ["FSSAI · Shop Act", "IEC · MSME / Udyam", "ISO partners"],
-      tone: "teal",
-    },
-    "mca-secretarial": {
+    mca: {
       blurb: "Stay compliant after incorporation — annual filings & changes.",
-      highlights: [
-        "Annual ROC filings",
-        "Director changes",
-        "Name / office updates",
-      ],
+      highlights: ["Company · LLP · OPC compliance", "Director & DIN filings", "MOA / AOA / capital changes"],
       tone: "sky",
     },
-    "global-incorporation": {
-      blurb: "Set up abroad with coordinated partners.",
-      highlights: ["UAE · Singapore", "USA · UK", "Partner-led setup"],
-      tone: "violet",
-    },
-    advisory: {
-      blurb: "Expert time for decisions paperwork alone can't solve.",
-      highlights: ["CA consultation", "Virtual CFO", "Contracts & agreements"],
+    consultation: {
+      blurb: "Talk to an expert before you decide.",
+      highlights: ["Business structure", "GST & income tax", "MCA questions"],
       tone: "indigo",
+    },
+    accounting: {
+      blurb: "Bookkeeping and financial statements, done for you.",
+      highlights: ["Monthly bookkeeping", "Reconciliations", "Financial statements"],
+      tone: "teal",
+    },
+    "other-services": {
+      blurb: "Specialist finance and brand services for growing teams.",
+      highlights: ["Logo · SOP designing", "Ind AS · IFRS · consolidation", "MIS dashboards"],
+      tone: "amber",
     },
   } as Record<
     string,
@@ -499,7 +494,7 @@ export const homeHuman = {
   eyebrow: "Expert-led filings",
   titleLead: "You build the business.",
   titleAccent: "We handle the paperwork.",
-  body: "Filing360 helps founders with business registration, compliance and government filings. Expert-led support for MCA, GST, and IP India — so you can focus on what you do best.",
+  body: "Filing360 helps founders with business registration, compliance and government filings. Expert-led support for MCA, GST, and Income Tax — so you can focus on what you do best.",
   points: [
     {
       label: "Name availability & objection handling",
@@ -537,38 +532,38 @@ export const homeNext = {
   eyebrow: "After incorporation",
   title: "Registration is day one — stay compliant from day two",
   subtitle:
-    "Top platforms win lifetime value with post-incorporation services. Filing360 keeps GST, brand, and ROC on the same desk.",
+    "Top platforms win lifetime value with post-incorporation services. Filing360 keeps GST, income tax, and ROC on the same desk.",
   secondaryCta: "View all compliance services",
-  secondaryHref: "/services/mca-secretarial",
-  footerNote: "GST • Trademark • ROC — all on one desk",
+  secondaryHref: "/services/mca",
+  footerNote: "GST • Income Tax • ROC — all on one desk",
   highlights: [
     { title: "GST", body: "Keep returns on track", tone: "blue" },
-    { title: "Trademark", body: "Protect your brand", tone: "purple" },
+    { title: "Income Tax", body: "File ITR on time", tone: "purple" },
     { title: "ROC", body: "Stay compliant always", tone: "green" },
   ],
   items: [
     {
       title: "GST registration & returns",
-      body: "GSTIN via AGILE-PRO-S or separate filing, then return support as you scale.",
-      href: "/services/tax-gst",
+      body: "GSTIN in no time, then monthly or quarterly returns filed by a dedicated accountant.",
+      href: "/services/gst",
       icon: "gst",
       badge: "Popular",
       badgeIcon: "fire",
       tone: "blue",
     },
     {
-      title: "Trademark protection",
-      body: "Lock your brand name and logo before copycats do.",
-      href: "/services/intellectual-property",
-      icon: "tm",
-      badge: "Protect your brand",
+      title: "Income tax filing",
+      body: "Business ITR, TDS returns and tax planning — filed accurately and on time.",
+      href: "/services/income-tax",
+      icon: "itr",
+      badge: "Save more tax",
       badgeIcon: "crown",
       tone: "purple",
     },
     {
       title: "Annual MCA compliance",
       body: "AOC-4, MGT-7, director KYC — avoid late fees and ROC notices.",
-      href: "/services/mca-secretarial",
+      href: "/services/mca/company-compliance",
       icon: "mca",
       badge: "Avoid late fees",
       badgeIcon: "chart",
@@ -600,10 +595,10 @@ export const homeReviews = {
     },
     {
       quote:
-        "Registered our Pvt. Ltd. and trademark without juggling three different agencies.",
+        "Registered our Pvt. Ltd. and got GST sorted without juggling three different agencies.",
       name: "Vikram S.",
       role: "Co-founder, D2C brand",
-      service: "Pvt. Ltd. + TM",
+      service: "Pvt. Ltd. + GST",
       initials: "VS",
     },
     {

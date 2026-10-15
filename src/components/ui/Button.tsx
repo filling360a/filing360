@@ -31,7 +31,7 @@ export function Button({
   ...rest
 }: Props) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold tracking-tight transition-colors duration-200 disabled:opacity-50";
+    "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-[15px] font-semibold tracking-tight transition-colors duration-200 disabled:opacity-50";
   const classes = `${base} ${variants[variant]} ${className}`;
 
   if (href) {

@@ -3,7 +3,7 @@ import { homePricing } from "@/content/home";
 
 function CheckItem({ children }: { children: ReactNode }) {
   return (
-    <li className="flex items-start gap-2.5 text-[13px] leading-snug text-[#334155]">
+    <li className="flex items-start gap-2.5 text-[14.5px] leading-snug text-[#334155]">
       <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#dbeafe] text-[#2563eb]">
         <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.8" aria-hidden>
           <path d="m5 12 4 4 10-9" strokeLinecap="round" strokeLinejoin="round" />
@@ -29,7 +29,7 @@ function CardFooter({
         <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-[#2563eb] shadow-sm">
           {icon}
         </span>
-        <p className="text-[12px] leading-snug text-[#475569]">
+        <p className="text-[13.5px] leading-snug text-[#475569]">
           <span className="font-bold text-[#0b2c5e]">{title}</span>{" "}
           {body}
         </p>
@@ -56,7 +56,7 @@ export function PricingClarity() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1100px] px-5 py-12 md:px-8 lg:py-14">
+      <div className="relative mx-auto max-w-[1100px] px-5 py-10 md:px-8 lg:py-14">
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="pricing-heading"
@@ -64,13 +64,13 @@ export function PricingClarity() {
           >
             {homePricing.title}
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-[14px] leading-snug text-[#64748b]">
+          <p className="mx-auto mt-2 max-w-xl text-[15px] leading-snug text-[#64748b]">
             {homePricing.subtitle}
           </p>
         </div>
 
         {/* Cards row */}
-        <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_auto_1fr_1fr] lg:items-stretch">
+        <div className="rail rail-bleed mt-6 grid gap-4 [--rail-item:84%] [--rail-item-sm:46%] lg:mt-8 lg:grid-cols-[1fr_auto_1fr_1fr] lg:items-stretch">
           {/* Professional fee */}
           <article className="flex flex-col rounded-2xl border border-[#e8eef5] bg-white p-5 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.16)]">
             <div className="flex items-start gap-3">
@@ -84,7 +84,7 @@ export function PricingClarity() {
                 <h3 className="text-[16px] font-bold text-[#0b2c5e]">
                   {professional.title}
                 </h3>
-                <p className="mt-0.5 text-[12px] text-[#64748b]">
+                <p className="mt-0.5 text-[13.5px] text-[#64748b]">
                   {professional.subtitle}
                 </p>
               </div>
@@ -112,19 +112,14 @@ export function PricingClarity() {
           {/* Separator */}
           <div className="hidden flex-col items-center justify-center px-1 lg:flex" aria-hidden>
             <span className="h-10 w-px bg-[#bfdbfe]" />
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#bfdbfe] bg-white text-[14px] font-bold text-[#2563eb] shadow-sm">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#bfdbfe] bg-white text-[15px] font-bold text-[#2563eb] shadow-sm">
               +
             </span>
             <span className="h-10 w-px bg-[#bfdbfe]" />
-            <p className="mt-2 max-w-[4.5rem] text-center text-[9px] font-bold uppercase tracking-[0.12em] text-[#2563eb]">
+            <p className="mt-2 max-w-[4.5rem] text-center text-[11.5px] font-bold uppercase tracking-[0.12em] text-[#2563eb]">
               Separate and clear
             </p>
           </div>
-
-          {/* Mobile separator */}
-          <p className="text-center text-[11px] font-bold uppercase tracking-[0.14em] text-[#2563eb] lg:hidden">
-            + Separate and clear
-          </p>
 
           {/* Government fees */}
           <article className="flex flex-col rounded-2xl border border-[#e8eef5] bg-white p-5 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.16)]">
@@ -138,7 +133,7 @@ export function PricingClarity() {
                 <h3 className="text-[16px] font-bold text-[#0b2c5e]">
                   {government.title}
                 </h3>
-                <p className="mt-0.5 text-[12px] text-[#64748b]">
+                <p className="mt-0.5 text-[13.5px] text-[#64748b]">
                   {government.subtitle}
                 </p>
               </div>
@@ -177,7 +172,7 @@ export function PricingClarity() {
                 </h3>
               </div>
             </div>
-            <p className="mt-4 flex-1 text-[13px] leading-relaxed text-[#64748b]">
+            <p className="mt-4 flex-1 text-[14.5px] leading-relaxed text-[#64748b]">
               {upsells.body}
             </p>
             <div className="mt-4">
@@ -195,12 +190,12 @@ export function PricingClarity() {
         </div>
 
         {/* Trust bar */}
-        <ul className="mt-5 flex flex-col overflow-hidden rounded-2xl border border-[#e8eef5] bg-white shadow-[0_8px_24px_-18px_rgba(15,23,42,0.14)] sm:flex-row">
+        <ul className="mt-5 grid grid-cols-3 overflow-hidden rounded-2xl border border-[#e8eef5] bg-white shadow-[0_8px_24px_-18px_rgba(15,23,42,0.14)]">
           {homePricing.trust.map((item, i) => (
             <li
               key={item.title}
-              className={`flex flex-1 items-center justify-center gap-3 px-5 py-4 ${
-                i > 0 ? "border-t border-[#eef2f7] sm:border-l sm:border-t-0" : ""
+              className={`flex flex-col items-center justify-center gap-1.5 px-2 py-3 text-center sm:flex-row sm:gap-3 sm:px-5 sm:py-4 sm:text-left ${
+                i > 0 ? "border-l border-[#eef2f7]" : ""
               }`}
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#eff6ff] text-[#2563eb]">
@@ -223,14 +218,14 @@ export function PricingClarity() {
                 ) : null}
               </span>
               <div>
-                <p className="text-[13px] font-bold text-[#0b2c5e]">{item.title}</p>
-                <p className="text-[11px] text-[#64748b]">{item.sub}</p>
+                <p className="text-[14.5px] font-bold text-[#0b2c5e]">{item.title}</p>
+                <p className="text-[13px] text-[#64748b]">{item.sub}</p>
               </div>
             </li>
           ))}
         </ul>
 
-        <p className="mx-auto mt-5 max-w-2xl text-center text-[12px] leading-relaxed text-[#64748b]">
+        <p className="mx-auto mt-5 max-w-2xl text-center text-[13.5px] leading-relaxed text-[#64748b]">
           {homePricing.note}
         </p>
       </div>

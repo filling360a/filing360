@@ -134,7 +134,7 @@ function FilingCard({
         <span className="shrink-0">{logo}</span>
         <div className="min-w-0 flex-1 pt-0.5">
           <div className="flex items-start justify-between gap-2">
-            <p className="text-[13px] font-bold leading-snug text-[#0b2c5e]">{title}</p>
+            <p className="text-[14.5px] font-bold leading-snug text-[#0b2c5e]">{title}</p>
             <CheckDot />
           </div>
           <div className={`space-y-2 ${tall ? "mt-4" : "mt-3.5"}`} aria-hidden>
@@ -245,7 +245,7 @@ export function HumanOverview() {
       <div className="relative mx-auto max-w-[1240px] px-5 py-10 md:px-8 lg:py-12">
         <div className="relative lg:min-h-[440px]">
           {/* Photo */}
-          <div className="relative z-[1] mx-auto w-full max-w-[560px] lg:absolute lg:inset-y-0 lg:left-0 lg:mx-0 lg:w-[46%] lg:max-w-none">
+          <div className="relative z-[1] mx-auto w-full max-w-[300px] sm:max-w-[420px] lg:absolute lg:inset-y-0 lg:left-0 lg:mx-0 lg:w-[46%] lg:max-w-none">
             <HandNote
               text={homeHuman.noteLeft}
               className="left-2 top-2 hidden text-left xl:block"
@@ -269,8 +269,8 @@ export function HumanOverview() {
           {/* CTA card + filings cluster */}
           <div className="relative z-[3] mt-4 flex w-full flex-col items-center gap-8 lg:ml-auto lg:mt-0 lg:w-[62%] lg:flex-row lg:items-start lg:gap-4 lg:pl-2 xl:gap-6">
             <div className="w-full min-w-0 flex-1">
-              <div className="rounded-[28px] border border-white bg-white px-6 py-7 text-center shadow-[0_24px_60px_-28px_rgba(15,23,42,0.35)] md:px-8 md:py-8">
-                <p className="mx-auto inline-flex rounded-full bg-[#eff6ff] px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#0b2c5e]">
+              <div className="rounded-[28px] border border-white bg-white px-5 py-6 text-center shadow-[0_24px_60px_-28px_rgba(15,23,42,0.35)] md:px-8 md:py-8">
+                <p className="mx-auto inline-flex rounded-full bg-[#eff6ff] px-3.5 py-1 text-[12px] font-bold uppercase tracking-[0.14em] text-[#0b2c5e]">
                   {homeHuman.eyebrow}
                 </p>
                 <h2
@@ -280,17 +280,17 @@ export function HumanOverview() {
                   {homeHuman.titleLead}{" "}
                   <span className="text-[#2563eb]">{homeHuman.titleAccent}</span>
                 </h2>
-                <p className="mx-auto mt-3 max-w-lg text-[13.5px] leading-relaxed text-[#64748b]">
+                <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-[#64748b]">
                   {homeHuman.body}
                 </p>
 
-                <ul className="mx-auto mt-5 grid max-w-lg gap-3 text-left sm:grid-cols-2">
+                <ul className="mx-auto mt-5 grid max-w-lg grid-cols-2 gap-3 text-left">
                   {homeHuman.points.map((point) => (
-                    <li key={point.label} className="flex items-start gap-2.5">
-                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#dcfce7] text-[#16a34a]">
+                    <li key={point.label} className="flex items-start gap-2 sm:gap-2.5">
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#dcfce7] text-[#16a34a] sm:h-7 sm:w-7">
                         {pointIcons[point.icon]}
                       </span>
-                      <span className="text-[12.5px] font-semibold leading-snug text-[#0b2c5e]">
+                      <span className="text-[13px] font-semibold leading-snug text-[#0b2c5e] sm:text-[14px]">
                         {point.label}
                       </span>
                     </li>
@@ -300,14 +300,14 @@ export function HumanOverview() {
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
                   <a
                     href="#hero-lead"
-                    className="inline-flex h-11 items-center justify-center gap-1.5 rounded-lg bg-[#0b2c5e] px-5 text-[13px] font-semibold text-white transition hover:bg-[#071f42]"
+                    className="inline-flex h-11 items-center justify-center gap-1.5 rounded-lg bg-[#0b2c5e] px-5 text-[14.5px] font-semibold text-white transition hover:bg-[#071f42]"
                   >
                     {siteConfig.cta.quote}
                     <span aria-hidden>→</span>
                   </a>
                   <a
                     href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                    className="inline-flex h-11 items-center justify-center rounded-lg border border-[#d1d5db] bg-white px-5 text-[13px] font-semibold text-[#0b2c5e] transition hover:border-[#0b2c5e]/40"
+                    className="inline-flex h-11 items-center justify-center rounded-lg border border-[#d1d5db] bg-white px-5 text-[14.5px] font-semibold text-[#0b2c5e] transition hover:border-[#0b2c5e]/40"
                   >
                     {siteConfig.cta.expert}
                   </a>
@@ -322,17 +322,17 @@ export function HumanOverview() {
         </div>
 
         {/* Bottom stats bar */}
-        <ul className="mx-auto mt-10 grid gap-4 rounded-2xl border border-white/80 bg-white px-5 py-5 shadow-[0_12px_32px_-20px_rgba(15,23,42,0.2)] sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <ul className="mx-auto mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-white/80 bg-white px-4 py-4 shadow-[0_12px_32px_-20px_rgba(15,23,42,0.2)] sm:px-5 sm:py-5 lg:mt-10 lg:grid-cols-4 lg:px-8">
           {homeHuman.stats.map((stat) => (
-            <li key={stat.title} className="flex items-start gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#eff6ff] text-[#2563eb]">
+            <li key={stat.title} className="flex items-start gap-2.5 sm:gap-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#eff6ff] text-[#2563eb] sm:h-10 sm:w-10">
                 {statIcons[stat.icon]}
               </span>
               <span>
-                <span className="block text-[13px] font-bold text-[#0b2c5e]">
+                <span className="block text-[14.5px] font-bold text-[#0b2c5e]">
                   {stat.title}
                 </span>
-                <span className="mt-0.5 block text-[11.5px] text-[#64748b]">
+                <span className="mt-0.5 block text-[13px] text-[#64748b]">
                   {stat.body}
                 </span>
               </span>

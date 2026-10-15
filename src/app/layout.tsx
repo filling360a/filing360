@@ -1,5 +1,6 @@
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Analytics, CookieBanner } from "@/components/site/Consent";
 import { siteConfig } from "@/lib/siteConfig";
 import "./globals.css";
 
@@ -18,12 +19,32 @@ const fraunces = Fraunces({
   subsets: ["latin"],
 });
 
+const verificationOther: Record<string, string> = {};
+if (process.env.BING_SITE_VERIFICATION) verificationOther["msvalidate.01"] = process.env.BING_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url),
   title: {
     default: `${siteConfig.brandName} — ${siteConfig.tagline}`,
     template: `%s · ${siteConfig.brandName}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.brandName,
+  openGraph: {
+    type: "website",
+    siteName: siteConfig.brandName,
+    locale: "en_IN",
+  },
+  twitter: { card: "summary_large_image" },
+  formatDetection: { telephone: false },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    other: Object.keys(verificationOther).length ? verificationOther : undefined,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b2c5e",
 };
 
 export default function RootLayout({
@@ -33,11 +54,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         {children}
+        <CookieBanner />
+        <Analytics />
       </body>
     </html>
   );

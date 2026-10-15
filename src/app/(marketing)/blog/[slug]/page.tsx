@@ -1,76 +1,92 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { ArticleView } from "@/components/blog/ArticleView";
+import { JsonLd } from "@/components/blog/JsonLd";
+import { getPostBySlug, getRelatedPosts, listPosts } from "@/lib/blog/queries";
+import { env } from "@/lib/env";
+import { siteConfig } from "@/lib/siteConfig";
 
-const posts: Record<
-  string,
-  { title: string; excerpt: string; body: string[] }
-> = {
-  "private-limited-company-registration-guide": {
-    title: "Private Limited Company registration — a plain guide",
-    excerpt: "What happens between name check and certificate of incorporation.",
-    body: [
-      "A Private Limited Company is a separate legal entity under the Companies Act, 2013. Founders usually choose it when they expect to raise equity or want clearer ownership records.",
-      "The typical path: obtain DSC for directors, reserve a name, prepare MOA and AOA, file SPICe+, then wait for MCA review. Professional fees and government fees are separate.",
-      "This page is a design stub. Replace with full editorial content when content production starts.",
-    ],
-  },
-  "llp-vs-private-limited": {
-    title: "LLP vs Private Limited: which structure fits?",
-    excerpt: "Liability, funding, and compliance trade-offs in plain language.",
-    body: [
-      "LLPs suit professional partnerships that want limited liability without share capital complexity. Private Limited companies suit startups that plan to issue shares.",
-      "Compliance cost and investor preference usually tip growth companies toward Pvt Ltd.",
-      "This page is a design stub for the article template.",
-    ],
-  },
-  "gst-registration-checklist": {
-    title: "GST registration checklist for new businesses",
-    excerpt: "Documents and thresholds before you apply for GSTIN.",
-    body: [
-      "Have PAN, address proof, and bank details ready. Composition vs regular scheme depends on turnover and supply type.",
-      "Portal filing yields an ARN; GSTIN follows after approval.",
-      "This page is a design stub for the article template.",
-    ],
-  },
-};
+export const revalidate = 300;
 
-type Props = { params: Promise<{ slug: string }> };
-
-export function generateStaticParams() {
-  return Object.keys(posts).map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const { posts } = await listPosts({ page: 1, pageSize: 50 });
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = posts[slug];
+  const post = await getPostBySlug(slug);
   if (!post) return {};
-  return { title: post.title, description: post.excerpt };
+  const title = post.seo_title || post.title;
+  const description = post.seo_description || post.excerpt || undefined;
+  const images = post.cover_image_url ? [{ url: post.cover_image_url, alt: post.cover_image_alt ?? post.title }] : undefined;
+  return {
+    title,
+    description,
+    alternates: { canonical: post.canonical_url || `/blog/${post.slug}` },
+    robots: post.noindex ? { index: false, follow: true } : undefined,
+    authors: post.author?.full_name ? [{ name: post.author.full_name }] : undefined,
+    keywords: post.tags.length ? post.tags : undefined,
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url: `/blog/${post.slug}`,
+      siteName: siteConfig.brandName,
+      publishedTime: post.published_at ?? undefined,
+      modifiedTime: post.updated_at,
+      section: post.category?.name,
+      tags: post.tags,
+      images,
+    },
+    twitter: { card: images ? "summary_large_image" : "summary", title, description, images: images?.map((i) => i.url) },
+  };
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">) {
   const { slug } = await params;
-  const post = posts[slug];
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
+  const related = await getRelatedPosts(post);
+  const url = `${env.siteUrl}/blog/${post.slug}`;
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.seo_description || post.excerpt || undefined,
+      image: post.cover_image_url ? [post.cover_image_url] : undefined,
+      datePublished: post.published_at,
+      dateModified: post.updated_at,
+      wordCount: post.word_count,
+      articleSection: post.category?.name,
+      keywords: post.tags.join(", ") || undefined,
+      mainEntityOfPage: { "@type": "WebPage", "@id": url },
+      author: post.author?.full_name
+        ? { "@type": "Person", name: post.author.full_name, jobTitle: post.author.job_title ?? undefined }
+        : { "@type": "Organization", name: siteConfig.brandName, url: env.siteUrl },
+      publisher: { "@type": "Organization", name: siteConfig.brandName, url: env.siteUrl },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: env.siteUrl },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${env.siteUrl}/blog` },
+        ...(post.category
+          ? [{ "@type": "ListItem", position: 3, name: post.category.name, item: `${env.siteUrl}/blog/category/${post.category.slug}` }]
+          : []),
+        { "@type": "ListItem", position: post.category ? 4 : 3, name: post.title, item: url },
+      ],
+    },
+  ];
+
   return (
-    <article className="bg-paper">
-      <div className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
-        <p className="text-sm text-ink-muted">
-          <Link href="/blog" className="hover:text-ink">
-            Guides
-          </Link>
-        </p>
-        <h1 className="mt-4 font-display text-4xl tracking-tight text-ink md:text-5xl">
-          {post.title}
-        </h1>
-        <p className="mt-4 text-lg text-ink-muted">{post.excerpt}</p>
-        <div className="prose-brand mt-10">
-          {post.body.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
-        </div>
-      </div>
-    </article>
+    <>
+      <JsonLd data={structuredData} />
+      <ArticleView post={post} related={related} shareUrl={url} />
+    </>
   );
 }

@@ -86,14 +86,14 @@ function ToneIcon({ tone }: { tone?: string }) {
   }
   if (tone === "info") {
     return (
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#dbeafe] text-[11px] font-bold text-[#2563eb]">
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#dbeafe] text-[13px] font-bold text-[#2563eb]">
         i
       </span>
     );
   }
   if (tone === "fee") {
     return (
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2563eb] text-[11px] font-bold text-white">
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2563eb] text-[13px] font-bold text-white">
         ₹
       </span>
     );
@@ -129,7 +129,7 @@ export function CompareEntities() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1180px] px-5 py-10 md:px-8 lg:py-12">
+      <div className="relative mx-auto max-w-[1180px] px-5 py-9 md:px-8 lg:py-12">
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="compare-heading"
@@ -137,21 +137,21 @@ export function CompareEntities() {
           >
             {homeCompare.title}
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-[14px] leading-snug text-[#64748b]">
+          <p className="mx-auto mt-2 max-w-xl text-[15px] leading-snug text-[#64748b]">
             {homeCompare.subtitle}
           </p>
         </div>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-stretch">
+        <div className="mt-6 grid gap-5 md:grid-cols-[minmax(0,1fr)_280px] lg:mt-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-stretch">
           {/* Left: table + CTA */}
           <div className="flex min-w-0 flex-col gap-4">
             <div>
               <div className="overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white shadow-[0_10px_28px_-18px_rgba(15,23,42,0.22)]">
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[640px] border-collapse text-left text-[13px]">
+                  <table className="w-full min-w-[640px] border-collapse text-left text-[14.5px]">
                     <thead>
                       <tr className="border-b border-[#e2e8f0]">
-                        <th className="bg-[#f8fafc] px-4 py-3 text-[12px] font-semibold text-[#64748b]">
+                        <th className="bg-[#f8fafc] px-4 py-3 text-[13.5px] font-semibold text-[#64748b]">
                           Compare
                         </th>
                         {homeCompare.entities.map((entity) => {
@@ -211,8 +211,8 @@ export function CompareEntities() {
                   </table>
                 </div>
 
-                <div className="flex items-center gap-2 border-t border-[#eef2f7] bg-[#f8fafc]/80 px-4 py-2.5 text-[12px] text-[#64748b]">
-                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-[#94a3b8] text-[9px] font-bold text-[#64748b]">
+                <div className="flex items-center gap-2 border-t border-[#eef2f7] bg-[#f8fafc]/80 px-4 py-2.5 text-[13.5px] text-[#64748b]">
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-[#94a3b8] text-[11.5px] font-bold text-[#64748b]">
                     i
                   </span>
                   {homeCompare.feeNote}
@@ -229,10 +229,10 @@ export function CompareEntities() {
                   </svg>
                 </span>
                 <div>
-                  <p className="text-[14px] font-bold text-[#0b2c5e]">
+                  <p className="text-[15px] font-bold text-[#0b2c5e]">
                     {homeCompare.cta.title}
                   </p>
-                  <p className="mt-0.5 text-[12px] leading-snug text-[#64748b]">
+                  <p className="mt-0.5 text-[13.5px] leading-snug text-[#64748b]">
                     {homeCompare.cta.subtitle}
                   </p>
                 </div>
@@ -241,19 +241,19 @@ export function CompareEntities() {
               <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
                 <a
                   href="#hero-lead"
-                  className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] px-3.5 text-[12px] font-semibold text-white transition hover:bg-[#1d4ed8]"
+                  className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] px-3.5 text-[13.5px] font-semibold text-white transition hover:bg-[#1d4ed8]"
                 >
                   Get Expert Advice
                 </a>
                 <Link
-                  href="/services/business-registration"
-                  className="inline-flex h-9 items-center justify-center gap-1 rounded-lg border border-[#93c5fd] bg-white px-3.5 text-[12px] font-semibold text-[#2563eb] transition hover:border-[#2563eb]"
+                  href="/services/startup"
+                  className="inline-flex h-9 items-center justify-center gap-1 rounded-lg border border-[#93c5fd] bg-white px-3.5 text-[13.5px] font-semibold text-[#2563eb] transition hover:border-[#2563eb]"
                 >
                   Start Registration ›
                 </Link>
                 <Link
                   href="/pricing"
-                  className="inline-flex h-9 items-center justify-center rounded-lg border border-[#cbd5e1] bg-white px-3.5 text-[12px] font-semibold text-[#475569] transition hover:border-[#94a3b8]"
+                  className="inline-flex h-9 items-center justify-center rounded-lg border border-[#cbd5e1] bg-white px-3.5 text-[13.5px] font-semibold text-[#475569] transition hover:border-[#94a3b8]"
                 >
                   View Pricing
                 </Link>
@@ -278,10 +278,10 @@ export function CompareEntities() {
                     </svg>
                   </span>
                   <div className="min-w-0">
-                    <h3 className="text-[15px] font-bold leading-tight text-[#0b2c5e]">
+                    <h3 className="text-[16px] font-bold leading-tight text-[#0b2c5e]">
                       {homeCompare.sidebar.title}
                     </h3>
-                    <p className="mt-0.5 text-[11px] leading-snug text-[#64748b]">
+                    <p className="mt-0.5 text-[13px] leading-snug text-[#64748b]">
                       {homeCompare.sidebar.subtitle}
                     </p>
                   </div>
@@ -292,7 +292,7 @@ export function CompareEntities() {
                   {homeCompare.sidebar.benefits.map((b) => (
                     <li
                       key={b}
-                      className="inline-flex items-center gap-1 text-[10px] font-medium text-[#475569]"
+                      className="inline-flex items-center gap-1 text-[12px] font-medium text-[#475569]"
                     >
                       <span className="flex h-3 w-3 shrink-0 items-center justify-center rounded-full bg-[#22c55e] text-white">
                         <svg viewBox="0 0 24 24" className="h-1.5 w-1.5" fill="none" stroke="currentColor" strokeWidth="4" aria-hidden>
@@ -313,10 +313,10 @@ export function CompareEntities() {
                           <path d="m5 12 4 4 10-9" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>
-                      <p className="mt-2 text-[13px] font-bold text-[#0b2c5e]">
+                      <p className="mt-2 text-[14.5px] font-bold text-[#0b2c5e]">
                         We&apos;ll call you shortly
                       </p>
-                      <p className="mt-1 text-[11px] leading-snug text-[#64748b]">
+                      <p className="mt-1 text-[13px] leading-snug text-[#64748b]">
                         <span className="font-semibold text-[#2563eb]">
                           {suggestedEntity.short}
                         </span>{" "}
@@ -324,13 +324,13 @@ export function CompareEntities() {
                       </p>
                       <a
                         href="#hero-lead"
-                        className="mt-3 inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-[#0b2c5e] text-[12px] font-semibold text-white transition hover:bg-[#071f42]"
+                        className="mt-3 inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-[#0b2c5e] text-[13.5px] font-semibold text-white transition hover:bg-[#071f42]"
                       >
                         Get free consultation →
                       </a>
                       <button
                         type="button"
-                        className="mt-2 text-[11px] font-medium text-[#64748b] hover:text-[#0b2c5e]"
+                        className="mt-2 text-[13px] font-medium text-[#64748b] hover:text-[#0b2c5e]"
                         onClick={() => {
                           setSent(false);
                           setDescribe("");
@@ -344,11 +344,11 @@ export function CompareEntities() {
                       onSubmit={onRecommend}
                       className="flex flex-1 flex-col"
                     >
-                      <p className="text-[11px] font-semibold text-[#0b2c5e]">
+                      <p className="text-[13px] font-semibold text-[#0b2c5e]">
                         What best describes you?
                       </p>
                       <div
-                        className="mt-2 flex flex-1 flex-col justify-center gap-1.5"
+                        className="mt-2 grid flex-1 grid-cols-2 content-center gap-1.5 md:flex md:flex-col md:justify-center"
                         role="radiogroup"
                         aria-label="What best describes you?"
                       >
@@ -361,7 +361,7 @@ export function CompareEntities() {
                               role="radio"
                               aria-checked={active}
                               onClick={() => setDescribe(o)}
-                              className={`flex w-full items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-[11px] leading-snug transition ${
+                              className={`flex w-full items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-[13px] leading-snug transition ${
                                 active
                                   ? "border-[#2563eb] bg-[#eff6ff] font-semibold text-[#0b2c5e] shadow-[0_0_0_2px_rgba(37,99,235,0.1)]"
                                   : "border-[#e8eef5] bg-[#fafbfc] text-[#475569] hover:border-[#93c5fd] hover:bg-[#f8fbff]"
@@ -385,18 +385,18 @@ export function CompareEntities() {
                         })}
                       </div>
 
-                      <div className="mt-auto space-y-2 pt-3">
+                      <div className="mt-auto grid grid-cols-2 gap-2 pt-3 md:block md:space-y-2">
                         <button
                           type="submit"
                           disabled={!describe}
-                          className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] text-[12px] font-semibold text-white shadow-[0_8px_20px_-10px_rgba(37,99,235,0.7)] transition hover:bg-[#1d4ed8] disabled:cursor-not-allowed disabled:bg-[#94a3b8] disabled:shadow-none"
+                          className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-[#2563eb] text-[13.5px] font-semibold text-white shadow-[0_8px_20px_-10px_rgba(37,99,235,0.7)] transition hover:bg-[#1d4ed8] disabled:cursor-not-allowed disabled:bg-[#94a3b8] disabled:shadow-none"
                         >
                           Talk to Our Expert
                           <span aria-hidden>→</span>
                         </button>
                         <a
                           href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                          className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg border border-[#e2e8f0] bg-white text-[12px] font-semibold text-[#0b2c5e] transition hover:border-[#2563eb]/35"
+                          className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg border border-[#e2e8f0] bg-white text-[13.5px] font-semibold text-[#0b2c5e] transition hover:border-[#2563eb]/35"
                         >
                           Schedule a Call
                         </a>
@@ -405,7 +405,7 @@ export function CompareEntities() {
                   )}
                 </div>
 
-                <p className="mt-2.5 text-center text-[9px] text-[#94a3b8]">
+                <p className="mt-2.5 text-center text-[11.5px] text-[#94a3b8]">
                   Confidential · No spam · Expert advisors
                 </p>
               </div>

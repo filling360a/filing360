@@ -26,26 +26,26 @@ export function MidPageCta() {
               sizes="420px"
             />
           </div>
-          <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#93c5fd]">
+          <p className="text-[13.5px] font-semibold uppercase tracking-[0.16em] text-[#93c5fd]">
             {homeMidCta.eyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">
             {homeMidCta.title}
           </h2>
-          <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white/70">
+          <p className="mt-3 max-w-md text-[16px] leading-relaxed text-white/70">
             {homeMidCta.body}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="#mid-lead"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-[#0b2c5e] transition hover:bg-[#eff6ff]"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold text-[#0b2c5e] transition hover:bg-[#eff6ff]"
             >
               {siteConfig.cta.quote}
               <span aria-hidden>→</span>
             </a>
             <a
               href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/30 px-5 text-sm font-semibold text-white transition hover:border-white/60"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/30 px-5 text-[15px] font-semibold text-white transition hover:border-white/60"
             >
               Call {siteConfig.contact.phone}
             </a>

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { homeMarketplace } from "@/content/home";
-import { pillars } from "@/content/services";
+import { pillarHref, pillars } from "@/content/services";
 import { HandNote } from "@/components/ui/HandNote";
+import { PillarsRail } from "./PillarsRail";
 
 type Tone =
   | "blue"
@@ -27,54 +28,49 @@ const toneStyles: Record<Tone, { bg: string; color: string }> = {
 
 /** Flat colored icons in soft squares — marketplace mock style */
 const pillarIcons: Record<string, ReactNode> = {
-  "business-registration": (
+  "income-tax": (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-      <path d="M4 20h16M6 20V9l6-4 6 4v11" />
-      <path d="M10 20v-5h4v5M9 12h2M13 12h2" strokeLinecap="round" />
+      <path d="M7 3h8l3 3v15H7V3Z" />
+      <path d="M14 3v4h4M10 10h4M10 12.5h4M12.5 10c1 0 1.5.7 1.5 1.6 0 1-.8 1.7-2 1.7h-.8l2.6 2.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
-  "ngo-non-profit": (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-      <path d="M12 20s-6.5-4-6.5-9a3.5 3.5 0 0 1 6.5-1.7A3.5 3.5 0 0 1 18.5 11c0 5-6.5 9-6.5 9Z" />
-      <circle cx="9" cy="8" r="1.2" fill="currentColor" stroke="none" />
-      <circle cx="15" cy="8" r="1.2" fill="currentColor" stroke="none" />
-    </svg>
-  ),
-  "tax-gst": (
+  gst: (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
       <rect x="3" y="6" width="18" height="12" rx="2" />
       <path d="M3 10h18M7 14h3M14 14h3" strokeLinecap="round" />
     </svg>
   ),
-  "intellectual-property": (
+  startup: (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-      <path d="M12 3a5 5 0 0 1 3 9c-.7.6-1.1 1.4-1.2 2.2h-3.6C10.1 13.4 9.7 12.6 9 12a5 5 0 0 1 3-9Z" />
-      <path d="M10 17h4M10.5 20h3" strokeLinecap="round" />
+      <path d="M4 20h16M6 20V9l6-4 6 4v11" />
+      <path d="M10 20v-5h4v5M9 12h2M13 12h2" strokeLinecap="round" />
     </svg>
   ),
-  licenses: (
+  mca: (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
       <path d="M12 3 4 7v5c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V7l-8-4Z" />
       <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
-  "mca-secretarial": (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-      <path d="M7 3h8l3 3v15H7V3Z" />
-      <path d="M14 3v4h4M9 12h6M9 16h4" strokeLinecap="round" />
-    </svg>
-  ),
-  "global-incorporation": (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-      <circle cx="12" cy="12" r="8" />
-      <path d="M4 12h16M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16" />
-    </svg>
-  ),
-  advisory: (
+  consultation: (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
       <circle cx="9" cy="9" r="3" />
       <circle cx="16" cy="10" r="2.2" />
       <path d="M3 19c.8-2.8 3-4.5 6-4.5s5.2 1.7 6 4.5M14 14.5c1.7.2 3.2 1.2 4 3" />
+    </svg>
+  ),
+  accounting: (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M8 7h8M8 11h2M11 11h2M14 11h2M8 14h2M11 14h2M14 14h2M8 17h2M11 17h5" strokeLinecap="round" />
+    </svg>
+  ),
+  "other-services": (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+      <rect x="4" y="4" width="7" height="7" rx="1.5" />
+      <rect x="13" y="4" width="7" height="7" rx="1.5" />
+      <rect x="4" y="13" width="7" height="7" rx="1.5" />
+      <path d="M16.5 13.5v6M13.5 16.5h6" strokeLinecap="round" />
     </svg>
   ),
 };
@@ -112,7 +108,7 @@ export function Pillars() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1180px] px-5 py-12 md:px-8 lg:py-16">
+      <div className="relative mx-auto max-w-[1180px] px-5 py-10 md:px-8 lg:py-16">
         <HandNote
           text={homeMarketplace.noteLeft}
           className="left-2 top-10 hidden xl:block"
@@ -131,20 +127,22 @@ export function Pillars() {
           >
             {homeMarketplace.title}
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-[#64748b]">
+          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#64748b]">
             {homeMarketplace.subtitle}
           </p>
         </div>
 
-        {/* 4×2 service cards */}
-        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <PillarsRail>
           {pillars.map((pillar) => {
             const card = homeMarketplace.cards[pillar.slug];
             const tone = toneStyles[(card?.tone ?? "blue") as Tone];
             return (
-              <li key={pillar.slug} className="min-w-0">
+              <li
+                key={pillar.slug}
+                className="min-w-0 lg:shrink-0 lg:grow-0 lg:basis-[calc((100%-3rem)/4)] lg:snap-start"
+              >
                 <Link
-                  href={`/services/${pillar.slug}`}
+                  href={pillarHref(pillar)}
                   className="group flex h-full flex-col rounded-2xl border border-white/80 bg-white p-4 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.22)] transition hover:border-[#bfdbfe] hover:shadow-[0_14px_28px_-14px_rgba(37,99,235,0.28)]"
                 >
                   <div className="flex items-start justify-between gap-2">
@@ -153,15 +151,15 @@ export function Pillars() {
                     >
                       {pillarIcons[pillar.slug]}
                     </span>
-                    <span className="rounded-full bg-[#eff6ff] px-2 py-0.5 text-[10px] font-semibold text-[#2563eb]">
-                      {pillar.services.length} services
+                    <span className="rounded-full bg-[#eff6ff] px-2 py-0.5 text-[12px] font-semibold text-[#2563eb]">
+                      {pillar.services.length} service{pillar.services.length === 1 ? "" : "s"}
                     </span>
                   </div>
 
-                  <h3 className="mt-3 text-[14px] font-bold text-[#0b2c5e]">
+                  <h3 className="mt-3 text-[15px] font-bold text-[#0b2c5e]">
                     {pillar.name}
                   </h3>
-                  <p className="mt-1.5 text-[12px] leading-snug text-[#64748b]">
+                  <p className="mt-1.5 text-[13.5px] leading-snug text-[#64748b]">
                     {card?.blurb ?? pillar.description}
                   </p>
 
@@ -169,7 +167,7 @@ export function Pillars() {
                     {(card?.highlights ?? []).map((h) => (
                       <li
                         key={h}
-                        className="flex items-start gap-2 text-[11.5px] leading-snug text-[#475569]"
+                        className="flex items-start gap-2 text-[13px] leading-snug text-[#475569]"
                       >
                         <span className="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-[#2563eb] text-white">
                           <svg viewBox="0 0 24 24" className="h-2 w-2" fill="none" stroke="currentColor" strokeWidth="3.5" aria-hidden>
@@ -192,7 +190,7 @@ export function Pillars() {
               </li>
             );
           })}
-        </ul>
+        </PillarsRail>
       </div>
     </section>
   );

@@ -2,8 +2,13 @@
 export const siteConfig = {
   brandName: "Filing360",
   tagline: "Your business. Our priority.",
+  logo: {
+    src: "/images/Filingedge360_Primary_logo_transparent.png",
+    width: 1357,
+    height: 312,
+  },
   description:
-    "Online company registration and compliance in India — Private Limited, LLP, OPC, GST, trademark, and NGO filings with transparent professional fees + government charges.",
+    "Income tax, GST, startup registration and MCA compliance in India — Private Limited, LLP, OPC, GST returns and ITR filing with transparent professional fees + government charges.",
   url: "https://filing360.in",
   contact: {
     email: "hello@filing360.in",
@@ -28,11 +33,13 @@ export const siteConfig = {
 
 export const leadInterestOptions = [
   "Private Limited Company Registration",
-  "LLP Registration",
-  "One Person Company (OPC)",
+  "LLP / OPC / Partnership Registration",
+  "Section 8 / Trust Registration",
   "GST Registration",
-  "Trademark Registration",
-  "Section 8 / NGO Registration",
+  "GST Return Filing",
+  "Income Tax Return (ITR) Filing",
+  "Tax Planning",
   "Annual MCA Compliance",
+  "Accounting & Bookkeeping",
   "Not sure — advise me",
 ] as const;

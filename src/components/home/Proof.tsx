@@ -45,7 +45,7 @@ function CertificateArt() {
             <path d="m5 12 4.5 4.5L19 7" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <p className="mt-2.5 text-center text-[11px] font-bold leading-snug text-[#0b2c5e]">
+        <p className="mt-2.5 text-center text-[13px] font-bold leading-snug text-[#0b2c5e]">
           Company
           <br />
           Registered
@@ -92,11 +92,11 @@ export function Proof() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1180px] px-5 py-14 md:px-8 lg:py-16">
+      <div className="relative mx-auto max-w-[1180px] px-5 py-10 md:px-8 lg:py-16">
         {/* Reviews header — no eyebrow */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
           <div className="max-w-xl">
-            <h2 className="text-[28px] font-bold leading-[1.2] tracking-tight text-[#0b1f3a] md:text-[34px]">
+            <h2 className="text-[24px] font-bold leading-[1.2] tracking-tight text-[#0b1f3a] md:text-[34px]">
               {homeReviews.titleLead}{" "}
               <span className="relative inline-block text-[#2563eb]">
                 {homeReviews.titleAccent}
@@ -115,7 +115,7 @@ export function Proof() {
                 </svg>
               </span>
             </h2>
-            <p className="mt-3 text-[14px] leading-relaxed text-[#64748b]">
+            <p className="mt-3 text-[15px] leading-relaxed text-[#64748b]">
               {homeReviews.subtitle}
             </p>
           </div>
@@ -143,7 +143,7 @@ export function Proof() {
             </button>
             <a
               href="#hero-lead"
-              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-[#0b2c5e] px-5 text-[13px] font-semibold text-white transition hover:bg-[#071f42]"
+              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl bg-[#0b2c5e] px-5 text-[14.5px] font-semibold text-white transition hover:bg-[#071f42]"
             >
               {siteConfig.cta.quoteInstant}
               <span aria-hidden>→</span>
@@ -154,35 +154,35 @@ export function Proof() {
         {/* Review cards */}
         <div
           ref={scrollerRef}
-          className="mt-9 flex gap-5 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible md:pb-0"
+          className="rail rail-bleed mt-6 grid gap-5 scroll-smooth [--rail-item:84%] [--rail-item-sm:46%] lg:mt-9 lg:grid-cols-3"
         >
           {homeReviews.items.map((r) => (
             <figure
               key={r.name}
-              className="flex w-[min(100%,300px)] shrink-0 snap-start flex-col rounded-2xl border border-white bg-white p-5 shadow-[0_12px_36px_-16px_rgba(15,23,42,0.16)] md:w-auto"
+              className="flex flex-col rounded-2xl border border-white bg-white p-5 shadow-[0_12px_36px_-16px_rgba(15,23,42,0.16)]"
             >
               <div className="flex items-start justify-between">
                 <Stars />
                 <QuoteMark />
               </div>
-              <blockquote className="mt-4 flex-1 text-[13.5px] leading-relaxed text-[#475569]">
+              <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-[#475569]">
                 “{r.quote}”
               </blockquote>
               <figcaption className="mt-5 flex items-center justify-between gap-3 border-t border-[#eef2f7] pt-4">
                 <span className="flex min-w-0 items-center gap-2.5">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#dbeafe] text-[11px] font-bold text-[#0b2c5e]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#dbeafe] text-[13px] font-bold text-[#0b2c5e]">
                     {r.initials}
                   </span>
                   <span className="min-w-0">
-                    <span className="block truncate text-[13px] font-bold text-[#0b1f3a]">
+                    <span className="block truncate text-[14.5px] font-bold text-[#0b1f3a]">
                       {r.name}
                     </span>
-                    <span className="block truncate text-[11px] text-[#64748b]">
+                    <span className="block truncate text-[13px] text-[#64748b]">
                       {r.role}
                     </span>
                   </span>
                 </span>
-                <span className="shrink-0 rounded-full bg-[#eff6ff] px-2.5 py-1 text-[10.5px] font-semibold text-[#2563eb]">
+                <span className="shrink-0 rounded-full bg-[#eff6ff] px-2.5 py-1 text-[12.5px] font-semibold text-[#2563eb]">
                   {r.service}
                 </span>
               </figcaption>
@@ -191,7 +191,7 @@ export function Proof() {
         </div>
 
         {/* Ready CTA banner — matches mock */}
-        <div className="relative mt-12 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#062a5c] via-[#0b3d8a] to-[#1a56c4] px-6 py-9 text-white sm:px-8 md:px-10 md:py-10">
+        <div className="relative mt-8 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#062a5c] via-[#0b3d8a] to-[#1a56c4] px-5 py-7 text-white sm:px-8 md:px-10 md:py-10 lg:mt-12">
           {/* Wave shapes */}
           <div
             className="pointer-events-none absolute -left-16 top-[-40%] h-[180%] w-[55%] rounded-[100%] bg-[#1e4fa8]/35 blur-2xl"
@@ -227,16 +227,16 @@ export function Proof() {
             />
           </svg>
 
-          <div className="relative grid items-center gap-8 lg:grid-cols-[1.35fr_auto_auto] lg:gap-10">
+          <div className="relative grid items-center gap-6 lg:grid-cols-[1.35fr_auto_auto] lg:gap-10">
             {/* Left copy */}
             <div className="min-w-0">
               <h3 className="text-[24px] font-bold tracking-tight md:text-[28px]">
                 {homeReadyCta.title}
               </h3>
-              <p className="mt-2.5 max-w-xl text-[13.5px] leading-relaxed text-white/80 md:text-[14px]">
+              <p className="mt-2.5 max-w-xl text-[15px] leading-relaxed text-white/80 md:text-[15px]">
                 {homeReadyCta.body}
               </p>
-              <ul className="mt-6 flex flex-wrap items-center gap-y-2 text-[12.5px] font-medium text-white sm:text-[13px]">
+              <ul className="mt-6 flex flex-wrap items-center gap-y-2 text-[14px] font-medium text-white sm:text-[14.5px]">
                 {homeReadyCta.points.map((point, i) => (
                   <li key={point} className="flex items-center">
                     {i > 0 ? (
@@ -258,17 +258,17 @@ export function Proof() {
             <CertificateArt />
 
             {/* Buttons */}
-            <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:min-w-[200px]">
+            <div className="grid w-full shrink-0 grid-cols-2 gap-3 sm:flex sm:w-auto sm:min-w-[200px] sm:flex-col">
               <a
                 href="#hero-lead"
-                className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-white px-6 text-[14px] font-semibold text-[#0b2c5e] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-[#eff6ff]"
+                className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-white px-6 text-[15px] font-semibold text-[#0b2c5e] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] transition hover:bg-[#eff6ff]"
               >
                 {siteConfig.cta.quote}
                 <span aria-hidden>→</span>
               </a>
               <a
                 href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/50 bg-transparent px-6 text-[14px] font-semibold text-white transition hover:border-white hover:bg-white/10"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/50 bg-transparent px-6 text-[15px] font-semibold text-white transition hover:border-white hover:bg-white/10"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
                   <path d="M7 3h3.5l1.2 4.2-2.2 1.4a12 12 0 0 0 5.7 5.7l1.4-2.2L21 13.5V17a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z" strokeLinejoin="round" />
@@ -279,7 +279,7 @@ export function Proof() {
           </div>
         </div>
 
-        <p className="mt-6 flex items-start gap-2 text-[11.5px] leading-relaxed text-[#94a3b8]">
+        <p className="mt-6 flex items-start gap-2 text-[13px] leading-relaxed text-[#94a3b8]">
           <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#94a3b8]" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
             <path d="M12 3 4 7v5c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V7l-8-4Z" strokeLinejoin="round" />
           </svg>
