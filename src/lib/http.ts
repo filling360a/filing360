@@ -1,5 +1,6 @@
 import "server-only";
 import { NextResponse, type NextRequest } from "next/server";
+import { REQUESTED_WITH } from "@/lib/api-headers";
 import { env } from "@/lib/env";
 
 export function clientIp(request: NextRequest): string | null {
@@ -9,8 +10,9 @@ export function clientIp(request: NextRequest): string | null {
 }
 
 export function sameOrigin(request: NextRequest): boolean {
+  if (request.headers.get("x-requested-with") !== REQUESTED_WITH) return false;
   const origin = request.headers.get("origin");
-  if (!origin) return true;
+  if (!origin) return false;
   try {
     const host = new URL(origin).host;
     return host === request.headers.get("host") || host === new URL(env.siteUrl).host;

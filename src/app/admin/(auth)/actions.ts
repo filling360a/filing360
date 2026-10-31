@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { getStaff } from "@/lib/auth/dal";
 import { sendStaffAccessEmail } from "@/lib/auth/staffAccess";
 import { isEmailConfigured, isSupabaseAdminConfigured, isSupabaseConfigured } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -87,6 +88,8 @@ const passwordSchema = z
 
 export async function updatePassword(_: AuthFormState, formData: FormData): Promise<AuthFormState> {
   if (!isSupabaseConfigured()) return { error: NOT_CONFIGURED };
+  const staff = await getStaff();
+  if (!staff) return { error: "You are signed out. Please sign in again." };
   const parsed = passwordSchema.safeParse({ password: formData.get("password"), confirm: formData.get("confirm") });
   if (!parsed.success) return { error: parsed.error.issues[0]?.message };
 

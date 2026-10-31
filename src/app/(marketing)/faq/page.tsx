@@ -52,7 +52,7 @@ export default function FaqPage() {
   const all = GROUPS.flatMap((g) => g.items);
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd data={faqJsonLd(all)} />
       <PageHero
         eyebrow="FAQs"
@@ -61,7 +61,7 @@ export default function FaqPage() {
         intro={
           <p>
             Quick answers about registrations, tax, GST and working with us. Can&apos;t find yours?{" "}
-            <Link href="/contact" className="font-semibold text-[#2563eb] hover:underline">Ask us directly</Link>.
+            <Link href="/contact" className="font-semibold text-[#0e7b5b] hover:underline">Ask us directly</Link>.
           </p>
         }
       />
@@ -70,7 +70,7 @@ export default function FaqPage() {
           <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
             {GROUPS.map((g) => (
               <li key={g.id}>
-                <a href={`#${g.id}`} className="block rounded-lg px-3 py-1.5 text-[15px] font-medium text-[#0b2c5e] hover:bg-white hover:text-[#2563eb]">
+                <a href={`#${g.id}`} className="block rounded-lg px-3 py-1.5 text-[15px] font-medium text-[#0f2a45] hover:bg-white hover:text-[#0e7b5b]">
                   {g.title}
                 </a>
               </li>
@@ -80,20 +80,20 @@ export default function FaqPage() {
         <div className="space-y-10">
           {GROUPS.map((g) => (
             <section key={g.id} id={g.id} className="scroll-mt-24">
-              <h2 className="text-[22px] font-bold text-[#0b2c5e] md:text-[26px]">{g.title}</h2>
+              <h2 className="text-[22px] font-bold text-[#0f2a45] md:text-[26px]">{g.title}</h2>
               <div className="mt-4"><FaqList items={g.items} withSchema={false} /></div>
               {g.more && (
-                <Link href={g.more.href} className="mt-3 inline-block text-[15px] font-semibold text-[#2563eb] hover:underline">
+                <Link href={g.more.href} className="mt-3 inline-block text-[15px] font-semibold text-[#0e7b5b] hover:underline">
                   {g.more.label} →
                 </Link>
               )}
             </section>
           ))}
-          <p className="text-[15px] text-[#64748b]">
+          <p className="text-[15px] text-[#5b6e7a]">
             More in our guides: {guides.map((g, i) => (
               <span key={g.slug}>
                 {i > 0 && " · "}
-                <Link href={guideHref(g)} className="text-[#2563eb] hover:underline">{g.table.columns.join(" vs ")}</Link>
+                <Link href={guideHref(g)} className="text-[#0e7b5b] hover:underline">{g.table.columns.join(" vs ")}</Link>
               </span>
             ))}
           </p>

@@ -15,9 +15,9 @@ export const metadata = pageMetadata({
 });
 
 const TAG_STYLE: Record<CalendarTag, string> = {
-  GST: "bg-[#ecfdf5] text-[#047857]",
+  GST: "bg-[#e8f6f1] text-[#0b6550]",
   "TDS / TCS": "bg-[#fef3c7] text-[#92400e]",
-  "Income tax": "bg-[#eff6ff] text-[#1d4ed8]",
+  "Income tax": "bg-[#e3f2ed] text-[#0b6550]",
   "ROC / MCA": "bg-[#f5f3ff] text-[#6d28d9]",
   Payroll: "bg-[#fdf2f8] text-[#be185d]",
 };
@@ -38,7 +38,7 @@ export default function ComplianceCalendarPage() {
   }
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd data={webPageJsonLd({ name: TITLE, description: DESCRIPTION, path: "/compliance-calendar", dateModified: calendarYear.reviewed })} />
       <PageHero
         eyebrow="Compliance calendar"
@@ -62,10 +62,10 @@ export default function ComplianceCalendarPage() {
           Always confirm before relying on a date.
         </div>
 
-        <h2 className="mt-10 text-[22px] font-bold tracking-tight text-[#0b2c5e] md:text-[28px]">Every month</h2>
-        <div className="mt-5 overflow-x-auto rounded-2xl border border-[#e2e8f0] bg-white">
+        <h2 className="mt-10 text-[22px] font-bold tracking-tight text-[#0f2a45] md:text-[28px]">Every month</h2>
+        <div className="mt-5 overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white">
           <table className="w-full min-w-[640px] text-left text-[15px]">
-            <thead className="bg-[#f1f5f9] text-[#0b2c5e]">
+            <thead className="bg-[#eef4f1] text-[#0f2a45]">
               <tr>
                 <th scope="col" className="px-4 py-3 font-semibold">Due by</th>
                 <th scope="col" className="px-4 py-3 font-semibold">Compliance</th>
@@ -73,43 +73,43 @@ export default function ComplianceCalendarPage() {
                 <th scope="col" className="px-4 py-3 font-semibold">Type</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0]">
+            <tbody className="divide-y divide-[#d7e4de]">
               {monthlyDeadlines.map((d) => (
                 <tr key={d.title} className="align-top">
-                  <td className="whitespace-nowrap px-4 py-3 font-bold text-[#0b2c5e]">{d.day}</td>
-                  <td className="px-4 py-3 text-[#334155]">{d.title}</td>
-                  <td className="px-4 py-3 text-[#64748b]">{d.who}</td>
+                  <td className="whitespace-nowrap px-4 py-3 font-bold text-[#0f2a45]">{d.day}</td>
+                  <td className="px-4 py-3 text-[#2c3f4e]">{d.title}</td>
+                  <td className="px-4 py-3 text-[#5b6e7a]">{d.who}</td>
                   <td className="px-4 py-3"><Tag tag={d.tag} /></td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-[14.5px] text-[#64748b]">{QRMP_NOTE}</p>
+        <p className="mt-3 text-[14.5px] text-[#5b6e7a]">{QRMP_NOTE}</p>
       </section>
 
       <section className={`${container} pb-12`}>
         <SectionHeading title="Month-by-month due dates" />
         <nav aria-label="Months" className="mt-4 flex flex-wrap gap-2">
           {[...months.keys()].map((k) => (
-            <a key={k} href={`#m-${k}`} className="rounded-full border border-[#cbd5e1] bg-white px-3 py-1.5 text-[14px] font-medium text-[#0b2c5e] hover:border-[#2563eb]">
+            <a key={k} href={`#m-${k}`} className="rounded-full border border-[#bfd4cb] bg-white px-3 py-1.5 text-[14px] font-medium text-[#0f2a45] hover:border-[#0e7b5b]">
               {monthLabel(k)}
             </a>
           ))}
         </nav>
         <div className="mt-6 space-y-6">
           {[...months.entries()].map(([k, events]) => (
-            <section key={k} id={`m-${k}`} className="scroll-mt-24 rounded-2xl border border-[#e2e8f0] bg-white">
-              <h3 className="border-b border-[#e2e8f0] px-5 py-3 text-[18px] font-bold text-[#0b2c5e]">{monthLabel(k)}</h3>
-              <ul className="divide-y divide-[#f1f5f9]">
+            <section key={k} id={`m-${k}`} className="scroll-mt-24 rounded-2xl border border-[#d7e4de] bg-white">
+              <h3 className="border-b border-[#d7e4de] px-5 py-3 text-[18px] font-bold text-[#0f2a45]">{monthLabel(k)}</h3>
+              <ul className="divide-y divide-[#eef4f1]">
                 {events.map((e) => (
                   <li key={`${e.date}-${e.title}`} className="flex flex-col gap-1 px-5 py-3 sm:flex-row sm:items-start sm:gap-4">
-                    <time dateTime={e.date} className="w-20 shrink-0 font-bold text-[#0b2c5e]">{dayLabel(e.date)}</time>
+                    <time dateTime={e.date} className="w-20 shrink-0 font-bold text-[#0f2a45]">{dayLabel(e.date)}</time>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[15.5px] text-[#334155]">
-                        {e.href ? <Link href={e.href} className="hover:text-[#2563eb] hover:underline">{e.title}</Link> : e.title}
+                      <p className="text-[15.5px] text-[#2c3f4e]">
+                        {e.href ? <Link href={e.href} className="hover:text-[#0e7b5b] hover:underline">{e.title}</Link> : e.title}
                       </p>
-                      <p className="text-[14px] text-[#64748b]">{e.who}</p>
+                      <p className="text-[14px] text-[#5b6e7a]">{e.who}</p>
                     </div>
                     <Tag tag={e.tag} />
                   </li>

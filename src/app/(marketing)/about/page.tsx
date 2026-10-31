@@ -29,7 +29,7 @@ const HOW = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd data={webPageJsonLd({ name: TITLE, description: DESCRIPTION, path: "/about", type: "AboutPage" })} />
       <PageHero
         eyebrow="About us"
@@ -51,9 +51,9 @@ export default function AboutPage() {
         <SectionHeading title="What we stand for" />
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PRINCIPLES.map((p) => (
-            <div key={p.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <h3 className="text-[17px] font-bold text-[#0b2c5e]">{p.title}</h3>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#475569]">{p.body}</p>
+            <div key={p.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <h3 className="text-[17px] font-bold text-[#0f2a45]">{p.title}</h3>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{p.body}</p>
             </div>
           ))}
         </div>
@@ -63,10 +63,10 @@ export default function AboutPage() {
         <SectionHeading title="How we work" />
         <ol className="mt-6 grid gap-4 md:grid-cols-4">
           {HOW.map((s, i) => (
-            <li key={s.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Step {i + 1}</span>
-              <p className="mt-1 text-[17px] font-bold text-[#0b2c5e]">{s.title}</p>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-[#475569]">{s.body}</p>
+            <li key={s.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Step {i + 1}</span>
+              <p className="mt-1 text-[17px] font-bold text-[#0f2a45]">{s.title}</p>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-[#4a5d68]">{s.body}</p>
             </li>
           ))}
         </ol>

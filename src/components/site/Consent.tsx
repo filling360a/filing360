@@ -119,31 +119,31 @@ export function CookieBanner() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed inset-x-3 bottom-[4.75rem] z-[60] mx-auto max-w-[560px] rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.45)] md:bottom-5 md:left-5 md:right-auto md:mx-0 md:p-5"
+      className="fixed inset-x-3 bottom-[4.75rem] z-[60] mx-auto max-w-[560px] rounded-2xl border border-[#d7e4de] bg-white p-4 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.45)] md:bottom-5 md:left-5 md:right-auto md:mx-0 md:p-5"
     >
-      <p id="cookie-title" className="text-[16px] font-bold text-[#0b2c5e]">We value your privacy</p>
-      <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#475569]">
+      <p id="cookie-title" className="text-[16px] font-bold text-[#0f2a45]">We value your privacy</p>
+      <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#4a5d68]">
         We use essential cookies to run this site. With your permission we&rsquo;d also like to use analytics
         {usesMarketing ? " and advertising" : ""} cookies to understand what helps visitors. Read our{" "}
-        <Link href="/cookie-policy" className="font-semibold text-[#2563eb] hover:underline">Cookie Policy</Link>.
+        <Link href="/cookie-policy" className="font-semibold text-[#0e7b5b] hover:underline">Cookie Policy</Link>.
       </p>
 
       {customise && (
-        <div className="mt-3 space-y-2 rounded-xl bg-[#f8fafc] p-3 text-[14.5px]">
-          <label className="flex items-start gap-2.5 text-[#334155]">
+        <div className="mt-3 space-y-2 rounded-xl bg-[#f3f7fa] p-3 text-[14.5px]">
+          <label className="flex items-start gap-2.5 text-[#2c3f4e]">
             <input type="checkbox" checked disabled className="mt-1 h-4 w-4" />
-            <span><strong className="text-[#0f172a]">Essential</strong> — security, forms and your cookie choice. Always on.</span>
+            <span><strong className="text-[#0f2a45]">Essential</strong> — security, forms and your cookie choice. Always on.</span>
           </label>
           {usesAnalytics && (
-            <label className="flex items-start gap-2.5 text-[#334155]">
-              <input type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} className="mt-1 h-4 w-4 accent-[#2563eb]" />
-              <span><strong className="text-[#0f172a]">Analytics</strong> — anonymous usage statistics that help us improve pages.</span>
+            <label className="flex items-start gap-2.5 text-[#2c3f4e]">
+              <input type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} className="mt-1 h-4 w-4 accent-[#0e7b5b]" />
+              <span><strong className="text-[#0f2a45]">Analytics</strong> — anonymous usage statistics that help us improve pages.</span>
             </label>
           )}
           {usesMarketing && (
-            <label className="flex items-start gap-2.5 text-[#334155]">
-              <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} className="mt-1 h-4 w-4 accent-[#2563eb]" />
-              <span><strong className="text-[#0f172a]">Advertising</strong> — measure our ads and show relevant ones on other sites.</span>
+            <label className="flex items-start gap-2.5 text-[#2c3f4e]">
+              <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} className="mt-1 h-4 w-4 accent-[#0e7b5b]" />
+              <span><strong className="text-[#0f2a45]">Advertising</strong> — measure our ads and show relevant ones on other sites.</span>
             </label>
           )}
         </div>
@@ -154,7 +154,7 @@ export function CookieBanner() {
           <button
             type="button"
             onClick={() => choose({ analytics: usesAnalytics && analytics, marketing: usesMarketing && marketing })}
-            className="h-10 rounded-xl bg-[#0b2c5e] px-4 text-[14.5px] font-semibold text-white hover:bg-[#123a74]"
+            className="h-10 rounded-xl bg-[#0f2a45] px-4 text-[14.5px] font-semibold text-white hover:bg-[#173a58]"
           >
             Save choices
           </button>
@@ -163,11 +163,11 @@ export function CookieBanner() {
             <button
               type="button"
               onClick={() => choose({ analytics: usesAnalytics, marketing: usesMarketing })}
-              className="h-10 rounded-xl bg-[#0b2c5e] px-4 text-[14.5px] font-semibold text-white hover:bg-[#123a74]"
+              className="h-10 rounded-xl bg-[#0f2a45] px-4 text-[14.5px] font-semibold text-white hover:bg-[#173a58]"
             >
               Accept all
             </button>
-            <button type="button" onClick={() => setCustomise(true)} className="h-10 rounded-xl border border-[#cbd5e1] px-4 text-[14.5px] font-semibold text-[#0b2c5e] hover:bg-[#f8fafc]">
+            <button type="button" onClick={() => setCustomise(true)} className="h-10 rounded-xl border border-[#bfd4cb] px-4 text-[14.5px] font-semibold text-[#0f2a45] hover:bg-[#f3f7fa]">
               Customise
             </button>
           </>
@@ -175,7 +175,7 @@ export function CookieBanner() {
         <button
           type="button"
           onClick={() => choose({ analytics: false, marketing: false })}
-          className="h-10 rounded-xl border border-[#cbd5e1] px-4 text-[14.5px] font-semibold text-[#0b2c5e] hover:bg-[#f8fafc]"
+          className="h-10 rounded-xl border border-[#bfd4cb] px-4 text-[14.5px] font-semibold text-[#0f2a45] hover:bg-[#f3f7fa]"
         >
           Reject non-essential
         </button>

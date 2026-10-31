@@ -29,7 +29,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
   const [a, b] = guide.table.columns;
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -55,33 +55,33 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
         intro={
           <>
             <p>{guide.intro}</p>
-            <p className="mt-3 text-[14px] text-[#64748b]">Updated {fmt(guide.updated)} · Reviewed by the Filing360 tax & compliance team</p>
+            <p className="mt-3 text-[14px] text-[#5b6e7a]">Updated {fmt(guide.updated)} · Reviewed by the Filing360 tax & compliance team</p>
           </>
         }
       />
 
       <article className={`${container} py-10 md:py-14`}>
-        <div className="rounded-2xl border border-[#bfdbfe] bg-[#eff6ff] p-5 md:p-6">
-          <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Quick answer</p>
-          <p className="mt-2 text-[16.5px] leading-relaxed text-[#0b2c5e]">{guide.verdict}</p>
+        <div className="rounded-2xl border border-[#c5e8dc] bg-[#e3f2ed] p-5 md:p-6">
+          <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Quick answer</p>
+          <p className="mt-2 text-[16.5px] leading-relaxed text-[#0f2a45]">{guide.verdict}</p>
         </div>
 
-        <h2 className="mt-10 text-[22px] font-bold tracking-tight text-[#0b2c5e] md:text-[28px]">{a} vs {b} at a glance</h2>
-        <div className="mt-5 overflow-x-auto rounded-2xl border border-[#e2e8f0] bg-white">
+        <h2 className="mt-10 text-[22px] font-bold tracking-tight text-[#0f2a45] md:text-[28px]">{a} vs {b} at a glance</h2>
+        <div className="mt-5 overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white">
           <table className="w-full min-w-[640px] text-left text-[15px]">
-            <thead className="bg-[#f1f5f9] text-[#0b2c5e]">
+            <thead className="bg-[#eef4f1] text-[#0f2a45]">
               <tr>
                 <th scope="col" className="w-[26%] px-4 py-3 font-semibold">Feature</th>
                 <th scope="col" className="px-4 py-3 font-semibold">{a}</th>
                 <th scope="col" className="px-4 py-3 font-semibold">{b}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0]">
+            <tbody className="divide-y divide-[#d7e4de]">
               {guide.table.rows.map((r) => (
                 <tr key={r.label} className="align-top">
-                  <th scope="row" className="px-4 py-3 font-semibold text-[#334155]">{r.label}</th>
-                  <td className="px-4 py-3 text-[#475569]">{r.values[0]}</td>
-                  <td className="px-4 py-3 text-[#475569]">{r.values[1]}</td>
+                  <th scope="row" className="px-4 py-3 font-semibold text-[#2c3f4e]">{r.label}</th>
+                  <td className="px-4 py-3 text-[#4a5d68]">{r.values[0]}</td>
+                  <td className="px-4 py-3 text-[#4a5d68]">{r.values[1]}</td>
                 </tr>
               ))}
             </tbody>
@@ -90,12 +90,12 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {[guide.chooseFirst, guide.chooseSecond].map((c) => (
-            <div key={c.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <h2 className="text-[18px] font-bold text-[#0b2c5e]">{c.title}</h2>
+            <div key={c.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <h2 className="text-[18px] font-bold text-[#0f2a45]">{c.title}</h2>
               <ul className="mt-3 space-y-2">
                 {c.points.map((p) => (
-                  <li key={p} className="flex gap-2.5 text-[15.5px] text-[#334155]">
-                    <span className="text-[#16a34a]" aria-hidden>✓</span>
+                  <li key={p} className="flex gap-2.5 text-[15.5px] text-[#2c3f4e]">
+                    <span className="text-[#0e7b5b]" aria-hidden>✓</span>
                     {p}
                   </li>
                 ))}
@@ -121,9 +121,9 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
             <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {services.map((s) => (
                 <li key={s.href}>
-                  <Link href={s.href} className="group flex h-full flex-col rounded-2xl border border-[#e2e8f0] bg-white p-5 transition hover:border-[#93c5fd]">
-                    <span className="text-[16.5px] font-bold text-[#0b2c5e] group-hover:text-[#2563eb]">{s.name}</span>
-                    <span className="mt-auto pt-3 text-[14.5px] font-semibold text-[#2563eb]">{s.priceLabel} →</span>
+                  <Link href={s.href} className="group flex h-full flex-col rounded-2xl border border-[#d7e4de] bg-white p-5 transition hover:border-[#8ecfbc]">
+                    <span className="text-[16.5px] font-bold text-[#0f2a45] group-hover:text-[#0e7b5b]">{s.name}</span>
+                    <span className="mt-auto pt-3 text-[14.5px] font-semibold text-[#0e7b5b]">{s.priceLabel} →</span>
                   </Link>
                 </li>
               ))}
@@ -138,18 +138,18 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
 
         {related.length > 0 && (
           <section className="mt-10">
-            <p className="text-[15px] font-semibold text-[#0b2c5e]">Related guides</p>
+            <p className="text-[15px] font-semibold text-[#0f2a45]">Related guides</p>
             <ul className="mt-2 space-y-1.5">
               {related.map((g) => (
                 <li key={g.slug}>
-                  <Link href={guideHref(g)} className="text-[15.5px] font-semibold text-[#2563eb] hover:underline">{g.title}</Link>
+                  <Link href={guideHref(g)} className="text-[15.5px] font-semibold text-[#0e7b5b] hover:underline">{g.title}</Link>
                 </li>
               ))}
             </ul>
           </section>
         )}
 
-        <p className="mt-10 text-[13.5px] leading-relaxed text-[#64748b]">
+        <p className="mt-10 text-[13.5px] leading-relaxed text-[#5b6e7a]">
           This guide is general information, not legal or tax advice. Laws and rates change; confirm the position for your case with a
           professional. See our <Link href="/disclaimer" className="underline">disclaimer</Link>.
         </p>

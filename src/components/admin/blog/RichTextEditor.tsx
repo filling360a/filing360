@@ -46,7 +46,7 @@ export function RichTextEditor({
   });
 
   return (
-    <div className="overflow-hidden rounded-xl border border-[#e3e8ef] bg-white">
+    <div className="overflow-hidden rounded-xl border border-[#d7e4de] bg-white">
       {editor && <Toolbar editor={editor} postId={postId} />}
       <EditorContent editor={editor} />
     </div>
@@ -106,7 +106,7 @@ function Toolbar({ editor, postId }: { editor: Editor; postId?: string }) {
   const chain = () => editor.chain().focus();
 
   return (
-    <div className="sticky top-14 z-10 flex flex-wrap items-center gap-0.5 border-b border-[#e3e8ef] bg-[#f8fafc] px-2 py-1.5 lg:top-0" role="toolbar" aria-label="Formatting">
+    <div className="sticky top-14 z-10 flex flex-wrap items-center gap-0.5 border-b border-[#d7e4de] bg-[#f3f7fa] px-2 py-1.5 lg:top-0" role="toolbar" aria-label="Formatting">
       <Tool label="Heading 2" active={state.h2} onClick={() => chain().toggleHeading({ level: 2 }).run()}>H2</Tool>
       <Tool label="Heading 3" active={state.h3} onClick={() => chain().toggleHeading({ level: 3 }).run()}>H3</Tool>
       <Tool label="Heading 4" active={state.h4} onClick={() => chain().toggleHeading({ level: 4 }).run()}>H4</Tool>
@@ -162,7 +162,7 @@ function Tool({
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       className={`h-8 min-w-8 rounded-md px-2 text-[13px] font-semibold transition disabled:opacity-40 ${
-        active ? "bg-[#0b2c5e] text-white" : "text-[#334155] hover:bg-white"
+        active ? "bg-[#0f2a45] text-white" : "text-[#2c3f4e] hover:bg-white"
       }`}
     >
       {children}
@@ -171,5 +171,5 @@ function Tool({
 }
 
 function Divider() {
-  return <span className="mx-1 h-5 w-px bg-[#e3e8ef]" aria-hidden />;
+  return <span className="mx-1 h-5 w-px bg-[#d7e4de]" aria-hidden />;
 }

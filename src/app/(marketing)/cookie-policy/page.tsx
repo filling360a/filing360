@@ -35,7 +35,7 @@ export default function CookiePolicyPage() {
                 be switched off because the website needs them. You can change your choice at any time:
               </p>
               <p>
-                <CookieSettingsButton className="inline-flex h-10 items-center rounded-xl bg-[#0b2c5e] px-4 text-[15px] font-semibold text-white hover:bg-[#123a74]" />
+                <CookieSettingsButton className="inline-flex h-10 items-center rounded-xl bg-[#0f2a45] px-4 text-[15px] font-semibold text-white hover:bg-[#173a58]" />
               </p>
               <p>
                 You can also block or delete cookies in your browser settings. Blocking essential cookies may stop forms or sign-in from working.

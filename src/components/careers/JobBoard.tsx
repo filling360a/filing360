@@ -12,7 +12,7 @@ import type { JobCard } from "@/lib/careers/queries";
 import { siteConfig } from "@/lib/siteConfig";
 
 const selectClass =
-  "h-11 rounded-xl border border-[#dbe3ee] bg-white px-3 text-[15px] text-[#0f172a] outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/15";
+  "h-11 rounded-xl border border-[#dbe3ee] bg-white px-3 text-[15px] text-[#0f2a45] outline-none focus:border-[#0e7b5b] focus:ring-2 focus:ring-[#0e7b5b]/15";
 
 export function JobBoard({ jobs }: { jobs: JobCard[] }) {
   const [query, setQuery] = useState("");
@@ -41,11 +41,11 @@ export function JobBoard({ jobs }: { jobs: JobCard[] }) {
 
   if (jobs.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-[#cbd5e1] bg-white px-6 py-14 text-center">
-        <p className="text-[18px] font-semibold text-[#0b2c5e]">No open roles right now</p>
-        <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-[#64748b]">
+      <div className="rounded-2xl border border-dashed border-[#bfd4cb] bg-white px-6 py-14 text-center">
+        <p className="text-[18px] font-semibold text-[#0f2a45]">No open roles right now</p>
+        <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-[#5b6e7a]">
           We&apos;re always happy to meet great people. Send your résumé to{" "}
-          <a href={`mailto:${siteConfig.contact.email}?subject=Career%20enquiry`} className="font-semibold text-[#2563eb] hover:underline">
+          <a href={`mailto:${siteConfig.contact.email}?subject=Career%20enquiry`} className="font-semibold text-[#0e7b5b] hover:underline">
             {siteConfig.contact.email}
           </a>{" "}
           and we&apos;ll reach out when something fits.
@@ -58,7 +58,7 @@ export function JobBoard({ jobs }: { jobs: JobCard[] }) {
 
   return (
     <div>
-      <div className="grid gap-2.5 rounded-2xl border border-[#e2e8f0] bg-white p-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_200px_170px_170px]">
+      <div className="grid gap-2.5 rounded-2xl border border-[#d7e4de] bg-white p-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_200px_170px_170px]">
         <label className="sr-only" htmlFor="job-search">Search roles</label>
         <input
           id="job-search"
@@ -88,7 +88,7 @@ export function JobBoard({ jobs }: { jobs: JobCard[] }) {
         </select>
       </div>
 
-      <p className="mt-4 text-[14.5px] text-[#64748b]" aria-live="polite">
+      <p className="mt-4 text-[14.5px] text-[#5b6e7a]" aria-live="polite">
         {filtered.length} open {filtered.length === 1 ? "role" : "roles"}
         {filtersActive && (
           <button
@@ -99,7 +99,7 @@ export function JobBoard({ jobs }: { jobs: JobCard[] }) {
               setWorkplace("");
               setType("");
             }}
-            className="ml-3 font-semibold text-[#2563eb] hover:underline"
+            className="ml-3 font-semibold text-[#0e7b5b] hover:underline"
           >
             Clear filters
           </button>
@@ -107,15 +107,15 @@ export function JobBoard({ jobs }: { jobs: JobCard[] }) {
       </p>
 
       {filtered.length === 0 ? (
-        <p className="mt-6 rounded-2xl border border-dashed border-[#cbd5e1] bg-white px-6 py-10 text-center text-[15px] text-[#64748b]">
+        <p className="mt-6 rounded-2xl border border-dashed border-[#bfd4cb] bg-white px-6 py-10 text-center text-[15px] text-[#5b6e7a]">
           No roles match these filters.
         </p>
       ) : (
         <div className="mt-4 space-y-8">
           {grouped.map(([dept, list]) => (
             <section key={dept} aria-labelledby={`dept-${dept}`}>
-              <h3 id={`dept-${dept}`} className="mb-3 text-[13.5px] font-bold uppercase tracking-[0.08em] text-[#64748b]">
-                {dept} <span className="font-semibold text-[#94a3b8]">· {list.length}</span>
+              <h3 id={`dept-${dept}`} className="mb-3 text-[13.5px] font-bold uppercase tracking-[0.08em] text-[#5b6e7a]">
+                {dept} <span className="font-semibold text-[#8a9ba6]">· {list.length}</span>
               </h3>
               <ul className="space-y-3">
                 {list.map((job) => (
@@ -143,22 +143,22 @@ function JobRow({ job }: { job: JobCard }) {
   return (
     <Link
       href={`/careers/${job.slug}`}
-      className="group flex flex-col gap-3 rounded-2xl border border-[#e2e8f0] bg-white p-5 transition hover:border-[#93c5fd] hover:shadow-[0_10px_30px_-18px_rgba(37,99,235,0.45)] sm:flex-row sm:items-center sm:justify-between"
+      className="group flex flex-col gap-3 rounded-2xl border border-[#d7e4de] bg-white p-5 transition hover:border-[#8ecfbc] hover:shadow-[0_10px_30px_-18px_rgba(14,123,91,0.45)] sm:flex-row sm:items-center sm:justify-between"
     >
       <div className="min-w-0">
-        <p className="text-[18px] font-bold tracking-tight text-[#0b2c5e] group-hover:text-[#1d4ed8]">{job.title}</p>
-        <p className="mt-1.5 flex flex-wrap gap-x-2 gap-y-1 text-[14.5px] text-[#64748b]">
+        <p className="text-[18px] font-bold tracking-tight text-[#0f2a45] group-hover:text-[#0b6550]">{job.title}</p>
+        <p className="mt-1.5 flex flex-wrap gap-x-2 gap-y-1 text-[14.5px] text-[#5b6e7a]">
           {meta.map((m, i) => (
             <span key={m} className="flex items-center gap-2">
-              {i > 0 && <span aria-hidden className="text-[#cbd5e1]">•</span>}
+              {i > 0 && <span aria-hidden className="text-[#bfd4cb]">•</span>}
               {m}
             </span>
           ))}
         </p>
-        {job.summary && <p className="mt-2 line-clamp-2 text-[15px] leading-relaxed text-[#475569]">{job.summary}</p>}
-        {salary && <p className="mt-2 text-[14.5px] font-semibold text-[#15803d]">{salary}</p>}
+        {job.summary && <p className="mt-2 line-clamp-2 text-[15px] leading-relaxed text-[#4a5d68]">{job.summary}</p>}
+        {salary && <p className="mt-2 text-[14.5px] font-semibold text-[#0b6550]">{salary}</p>}
       </div>
-      <span className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 self-start rounded-xl bg-[#eff6ff] px-4 text-[15px] font-semibold text-[#1d4ed8] transition group-hover:bg-[#2563eb] group-hover:text-white sm:self-center">
+      <span className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 self-start rounded-xl bg-[#e3f2ed] px-4 text-[15px] font-semibold text-[#0b6550] transition group-hover:bg-[#0e7b5b] group-hover:text-white sm:self-center">
         View role <span aria-hidden>→</span>
       </span>
     </Link>

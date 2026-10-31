@@ -57,8 +57,8 @@ export function LeadsTable({ leads, team }: Props) {
   return (
     <div>
       {selected.size > 0 && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-[#e3e8ef] bg-[#f8fafc] px-4 py-2.5">
-          <span className="text-[13px] font-semibold text-[#0f172a]">{selected.size} selected</span>
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#d7e4de] bg-[#f3f7fa] px-4 py-2.5">
+          <span className="text-[13px] font-semibold text-[#0f2a45]">{selected.size} selected</span>
           <select value={action} onChange={(e) => setAction(e.target.value)} className={`${inputClass} !w-auto !py-1.5`} aria-label="Bulk action">
             <optgroup label="Set status">
               {LEAD_STATUSES.map((s) => (
@@ -94,14 +94,14 @@ export function LeadsTable({ leads, team }: Props) {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[920px] text-left text-[13.5px]">
           <thead>
-            <tr className="border-b border-[#e3e8ef] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">
+            <tr className="border-b border-[#d7e4de] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">
               <th className="w-10 px-4 py-3">
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={() => setSelected(allSelected ? new Set() : new Set(leads.map((l) => l.id)))}
                   aria-label="Select all"
-                  className="h-4 w-4 accent-[#2563eb]"
+                  className="h-4 w-4 accent-[#0e7b5b]"
                 />
               </th>
               <th className="px-3 py-3">Lead</th>
@@ -118,18 +118,18 @@ export function LeadsTable({ leads, team }: Props) {
               const overdue =
                 lead.next_follow_up_at && new Date(lead.next_follow_up_at).getTime() < now && !["won", "lost", "spam"].includes(lead.status);
               return (
-                <tr key={lead.id} className={`border-b border-[#eef2f7] last:border-0 hover:bg-[#f8fafc] ${selected.has(lead.id) ? "bg-[#eff6ff]" : ""}`}>
+                <tr key={lead.id} className={`border-b border-[#e8f0ec] last:border-0 hover:bg-[#f3f7fa] ${selected.has(lead.id) ? "bg-[#e3f2ed]" : ""}`}>
                   <td className="px-4 py-3 align-top">
                     <input
                       type="checkbox"
                       checked={selected.has(lead.id)}
                       onChange={() => toggle(lead.id)}
                       aria-label={`Select ${lead.name}`}
-                      className="h-4 w-4 accent-[#2563eb]"
+                      className="h-4 w-4 accent-[#0e7b5b]"
                     />
                   </td>
                   <td className="px-3 py-3 align-top">
-                    <Link href={`/admin/leads/${lead.id}`} className="font-semibold text-[#0b2c5e] hover:text-[#2563eb]">
+                    <Link href={`/admin/leads/${lead.id}`} className="font-semibold text-[#0f2a45] hover:text-[#0e7b5b]">
                       {lead.name}
                     </Link>
                     {lead.submission_count > 1 && (
@@ -137,13 +137,13 @@ export function LeadsTable({ leads, team }: Props) {
                         ×{lead.submission_count}
                       </span>
                     )}
-                    <div className="mt-0.5 text-[12.5px] text-[#64748b]">
-                      <a href={`tel:${lead.phone}`} className="hover:text-[#0f172a]">{lead.phone}</a>
+                    <div className="mt-0.5 text-[12.5px] text-[#5b6e7a]">
+                      <a href={`tel:${lead.phone}`} className="hover:text-[#0f2a45]">{lead.phone}</a>
                       {lead.city ? ` · ${lead.city}` : ""}
                     </div>
-                    <div className="text-[11.5px] text-[#94a3b8]">{lead.ref}</div>
+                    <div className="text-[11.5px] text-[#8a9ba6]">{lead.ref}</div>
                   </td>
-                  <td className="max-w-[220px] px-3 py-3 align-top text-[#334155]">
+                  <td className="max-w-[220px] px-3 py-3 align-top text-[#2c3f4e]">
                     <span className="line-clamp-2">{lead.interest ?? "—"}</span>
                   </td>
                   <td className="px-3 py-3 align-top">
@@ -152,14 +152,14 @@ export function LeadsTable({ leads, team }: Props) {
                       {lead.priority !== "normal" && <PriorityBadge priority={lead.priority} />}
                     </div>
                   </td>
-                  <td className="px-3 py-3 align-top text-[#334155]">
-                    {lead.assignee ? lead.assignee.full_name || lead.assignee.email : <span className="text-[#94a3b8]">Unassigned</span>}
+                  <td className="px-3 py-3 align-top text-[#2c3f4e]">
+                    {lead.assignee ? lead.assignee.full_name || lead.assignee.email : <span className="text-[#8a9ba6]">Unassigned</span>}
                   </td>
-                  <td className={`px-3 py-3 align-top ${overdue ? "font-semibold text-[#b91c1c]" : "text-[#334155]"}`}>
-                    {lead.next_follow_up_at ? formatDateTime(lead.next_follow_up_at) : <span className="text-[#94a3b8]">—</span>}
+                  <td className={`px-3 py-3 align-top ${overdue ? "font-semibold text-[#b91c1c]" : "text-[#2c3f4e]"}`}>
+                    {lead.next_follow_up_at ? formatDateTime(lead.next_follow_up_at) : <span className="text-[#8a9ba6]">—</span>}
                   </td>
-                  <td className="px-3 py-3 align-top text-[12.5px] text-[#64748b]">{lead.source}</td>
-                  <td className="px-3 py-3 text-right align-top text-[12.5px] text-[#64748b]" title={formatDateTime(lead.created_at)} suppressHydrationWarning>
+                  <td className="px-3 py-3 align-top text-[12.5px] text-[#5b6e7a]">{lead.source}</td>
+                  <td className="px-3 py-3 text-right align-top text-[12.5px] text-[#5b6e7a]" title={formatDateTime(lead.created_at)} suppressHydrationWarning>
                     {timeAgo(lead.created_at)}
                   </td>
                 </tr>

@@ -115,7 +115,7 @@ export function StructureChooser() {
           {visible.map((q, i) => (
             <li key={q.id}>
               <fieldset>
-                <legend className="text-[16px] font-bold text-[#0b2c5e]">{i + 1}. {q.q}</legend>
+                <legend className="text-[16px] font-bold text-[#0f2a45]">{i + 1}. {q.q}</legend>
                 <div className="mt-2.5 flex flex-wrap gap-2">
                   {q.options.map((o) => (
                     <button
@@ -124,7 +124,7 @@ export function StructureChooser() {
                       aria-pressed={answers[q.id] === o.value}
                       onClick={() => setAnswers((s) => ({ ...s, [q.id]: o.value }))}
                       className={`rounded-xl border px-4 py-2.5 text-[15px] font-semibold transition ${
-                        answers[q.id] === o.value ? "border-[#0b2c5e] bg-[#0b2c5e] text-white" : "border-[#cbd5e1] bg-white text-[#0b2c5e] hover:border-[#2563eb]"
+                        answers[q.id] === o.value ? "border-[#0f2a45] bg-[#0f2a45] text-white" : "border-[#bfd4cb] bg-white text-[#0f2a45] hover:border-[#0e7b5b]"
                       }`}
                     >
                       {o.label}
@@ -136,41 +136,41 @@ export function StructureChooser() {
           ))}
         </ol>
         {Object.keys(answers).length > 0 && (
-          <button type="button" onClick={() => setAnswers({})} className="mt-6 text-[14.5px] font-semibold text-[#64748b] hover:text-[#0b2c5e]">
+          <button type="button" onClick={() => setAnswers({})} className="mt-6 text-[14.5px] font-semibold text-[#5b6e7a] hover:text-[#0f2a45]">
             Start over
           </button>
         )}
       </Panel>
       <div aria-live="polite">
         {rec ? (
-          <Panel className="border-[#16a34a] ring-1 ring-[#16a34a]">
-            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#15803d]">Our suggestion</p>
-            <h2 className="mt-1 text-[24px] font-bold text-[#0b2c5e]">{RESULTS[rec.main].name}</h2>
-            <p className="mt-2 text-[15.5px] leading-relaxed text-[#475569]">{RESULTS[rec.main].why}</p>
+          <Panel className="border-[#0e7b5b] ring-1 ring-[#0e7b5b]">
+            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0b6550]">Our suggestion</p>
+            <h2 className="mt-1 text-[24px] font-bold text-[#0f2a45]">{RESULTS[rec.main].name}</h2>
+            <p className="mt-2 text-[15.5px] leading-relaxed text-[#4a5d68]">{RESULTS[rec.main].why}</p>
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link href={RESULTS[rec.main].href} className="inline-flex h-11 items-center rounded-xl bg-[#0b2c5e] px-5 text-[15px] font-semibold text-white hover:bg-[#123a74]">
+              <Link href={RESULTS[rec.main].href} className="inline-flex h-11 items-center rounded-xl bg-[#0f2a45] px-5 text-[15px] font-semibold text-white hover:bg-[#173a58]">
                 See packages & pricing
               </Link>
               {RESULTS[rec.main].guide && (
-                <Link href={RESULTS[rec.main].guide!.href} className="inline-flex h-11 items-center rounded-xl border border-[#cbd5e1] px-5 text-[15px] font-semibold text-[#0b2c5e] hover:border-[#2563eb]">
+                <Link href={RESULTS[rec.main].guide!.href} className="inline-flex h-11 items-center rounded-xl border border-[#bfd4cb] px-5 text-[15px] font-semibold text-[#0f2a45] hover:border-[#0e7b5b]">
                   {RESULTS[rec.main].guide!.label}
                 </Link>
               )}
             </div>
             {rec.alt && (
-              <p className="mt-5 border-t border-[#e2e8f0] pt-4 text-[15px] text-[#475569]">
+              <p className="mt-5 border-t border-[#d7e4de] pt-4 text-[15px] text-[#4a5d68]">
                 Also worth considering:{" "}
-                <Link href={RESULTS[rec.alt].href} className="font-semibold text-[#2563eb] hover:underline">{RESULTS[rec.alt].name}</Link>
+                <Link href={RESULTS[rec.alt].href} className="font-semibold text-[#0e7b5b] hover:underline">{RESULTS[rec.alt].name}</Link>
               </p>
             )}
-            <p className="mt-4 text-[13.5px] text-[#64748b]">
+            <p className="mt-4 text-[13.5px] text-[#5b6e7a]">
               A starting point, not legal advice. A free call with our team will confirm the right fit.
             </p>
           </Panel>
         ) : (
           <Panel>
-            <p className="text-[16px] font-semibold text-[#0b2c5e]">Answer {visible.length} quick questions</p>
-            <p className="mt-1.5 text-[15px] text-[#475569]">We&apos;ll suggest the structure that best fits your plans, with a link to compare alternatives.</p>
+            <p className="text-[16px] font-semibold text-[#0f2a45]">Answer {visible.length} quick questions</p>
+            <p className="mt-1.5 text-[15px] text-[#4a5d68]">We&apos;ll suggest the structure that best fits your plans, with a link to compare alternatives.</p>
           </Panel>
         )}
       </div>

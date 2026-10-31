@@ -22,7 +22,6 @@ export const homePopular = {
   title: "Everything your business needs, under one roof",
   subtitle:
     "From startup registration to GST, income tax, and MCA compliance — everything you need to start, run, and grow your business, with expert support.",
-  trust: "Trusted by 100,000+ businesses",
   items: [
     {
       name: "Section 8 Company",
@@ -173,22 +172,53 @@ export const homeCompare = {
     },
   ],
   feeNote: "Government fees are additional and shown transparently during checkout.",
-  cta: {
-    title: "Still not sure which structure fits you?",
-    subtitle:
-      "Talk to our experts and get a personalised recommendation — at no extra cost.",
+} as const;
+
+export const homeBanners = [
+  {
+    src: "/images/banners/tax-summary.png",
+    title: "File ITR with a CA",
+    line: "26AS and AIS checked before we file.",
+    href: "/services/income-tax/itr-filing-individual",
+    cta: "File ITR",
+    color: "#0f2a45",
+    muted: "#2c3f4e",
+    button: "#0e7b5b",
+    align: "right",
   },
-  sidebar: {
-    title: "Need a recommendation?",
-    subtitle:
-      "Answer a quick question — we’ll suggest the right structure and call you back.",
-    benefits: [
-      "Quick 2-minute assessment",
-      "Personalized recommendation",
-      "Free expert consultation",
-      "No obligation",
-    ],
+  {
+    src: "/images/banners/expert-help.png",
+    title: "A CA on the line",
+    line: "Notices, GST, filings — someone picks up.",
+    href: "/book-consultation",
+    cta: "Talk to us",
+    color: "#143652",
+    muted: "#2a4a66",
+    button: "#143652",
+    align: "right",
   },
+  {
+    src: "/images/banners/itr-refund.png",
+    title: "See it before you file",
+    line: "Refund picture first. Then the return goes in.",
+    href: "/services/income-tax/itr-filing-individual",
+    cta: "Start filing",
+    color: "#0f2a45",
+    muted: "#2c3f4e",
+    button: "#0e7b5b",
+    align: "right",
+  },
+] as const;
+
+export const homeSpotlightBanner = {
+  src: "/images/banners/itr-office.png",
+  title: "File ITR in minutes",
+  line: "A CA reviews it. Then the return goes in.",
+  href: "/services/income-tax/itr-filing-individual",
+  cta: "Start filing",
+  color: "#0f2a45",
+  muted: "#3d5a4c",
+  button: "#0e7b5b",
 } as const;
 
 export const homePaths = {

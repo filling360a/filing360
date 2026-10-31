@@ -71,10 +71,10 @@ export default async function BlogAdminPage({ searchParams }: PageProps<"/admin/
               <Link
                 key={tab.label}
                 href={href({ status: tab.value })}
-                className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-semibold ${active ? "bg-[#0b2c5e] text-white" : "text-[#475569] hover:bg-white"}`}
+                className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-semibold ${active ? "bg-[#0f2a45] text-white" : "text-[#4a5d68] hover:bg-white"}`}
               >
                 {tab.label}
-                <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20" : "bg-[#e2e8f0]"}`}>{tab.n}</span>
+                <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20" : "bg-[#d7e4de]"}`}>{tab.n}</span>
               </Link>
             );
           })}
@@ -97,7 +97,7 @@ export default async function BlogAdminPage({ searchParams }: PageProps<"/admin/
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-[13.5px]">
               <thead>
-                <tr className="border-b border-[#e3e8ef] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">
+                <tr className="border-b border-[#d7e4de] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">
                   <th className="px-5 py-3">Title</th>
                   <th className="px-3 py-3">Status</th>
                   <th className="px-3 py-3">Category</th>
@@ -108,18 +108,18 @@ export default async function BlogAdminPage({ searchParams }: PageProps<"/admin/
               </thead>
               <tbody>
                 {posts.map((p) => (
-                  <tr key={p.id} className="border-b border-[#eef2f7] last:border-0 hover:bg-[#f8fafc]">
+                  <tr key={p.id} className="border-b border-[#e8f0ec] last:border-0 hover:bg-[#f3f7fa]">
                     <td className="max-w-[360px] px-5 py-3">
-                      <Link href={`/admin/blog/${p.id}`} className="line-clamp-2 font-semibold text-[#0b2c5e] hover:text-[#2563eb]">
+                      <Link href={`/admin/blog/${p.id}`} className="line-clamp-2 font-semibold text-[#0f2a45] hover:text-[#0e7b5b]">
                         {p.title}
                       </Link>
-                      <p className="mt-0.5 truncate text-[12px] text-[#94a3b8]">/blog/{p.slug} · {p.word_count.toLocaleString("en-IN")} words</p>
+                      <p className="mt-0.5 truncate text-[12px] text-[#8a9ba6]">/blog/{p.slug} · {p.word_count.toLocaleString("en-IN")} words</p>
                     </td>
                     <td className="px-3 py-3"><PostStatusBadge status={p.status} publishedAt={p.published_at} /></td>
-                    <td className="px-3 py-3 text-[#334155]">{p.category?.name ?? "—"}</td>
-                    <td className="px-3 py-3 text-[#334155]">{p.author?.full_name ?? "—"}</td>
-                    <td className="px-3 py-3 text-[12.5px] text-[#64748b]">{p.published_at ? formatDateTime(p.published_at) : "—"}</td>
-                    <td className="px-5 py-3 text-right text-[12.5px] text-[#64748b]">{timeAgo(p.updated_at)}</td>
+                    <td className="px-3 py-3 text-[#2c3f4e]">{p.category?.name ?? "—"}</td>
+                    <td className="px-3 py-3 text-[#2c3f4e]">{p.author?.full_name ?? "—"}</td>
+                    <td className="px-3 py-3 text-[12.5px] text-[#5b6e7a]">{p.published_at ? formatDateTime(p.published_at) : "—"}</td>
+                    <td className="px-5 py-3 text-right text-[12.5px] text-[#5b6e7a]">{timeAgo(p.updated_at)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -130,7 +130,7 @@ export default async function BlogAdminPage({ searchParams }: PageProps<"/admin/
 
       {pages > 1 && (
         <nav className="mt-4 flex items-center justify-between text-[13px]" aria-label="Pagination">
-          <span className="text-[#64748b]">Page {page} of {pages}</span>
+          <span className="text-[#5b6e7a]">Page {page} of {pages}</span>
           <div className="flex gap-2">
             {page > 1 && <Link href={href({ status, page: page - 1 })} className={buttonClass("secondary", "sm")}>← Previous</Link>}
             {page < pages && <Link href={href({ status, page: page + 1 })} className={buttonClass("secondary", "sm")}>Next →</Link>}

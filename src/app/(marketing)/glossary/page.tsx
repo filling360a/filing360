@@ -16,7 +16,7 @@ export default function GlossaryPage() {
   const letters = [...new Set(terms.map((t) => t.term[0].toUpperCase()))];
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -40,7 +40,7 @@ export default function GlossaryPage() {
       <section className={`${container} py-12`}>
         <nav aria-label="Jump to letter" className="flex flex-wrap gap-1.5">
           {letters.map((l) => (
-            <a key={l} href={`#letter-${l}`} className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#cbd5e1] bg-white text-[14px] font-semibold text-[#0b2c5e] hover:border-[#2563eb]">
+            <a key={l} href={`#letter-${l}`} className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#bfd4cb] bg-white text-[14px] font-semibold text-[#0f2a45] hover:border-[#0e7b5b]">
               {l}
             </a>
           ))}
@@ -48,19 +48,19 @@ export default function GlossaryPage() {
         <div className="mt-8 space-y-8">
           {letters.map((l) => (
             <section key={l} id={`letter-${l}`} className="scroll-mt-24">
-              <h2 className="text-[22px] font-bold text-[#0b2c5e]">{l}</h2>
-              <dl className="mt-3 divide-y divide-[#e2e8f0] rounded-2xl border border-[#e2e8f0] bg-white">
+              <h2 className="text-[22px] font-bold text-[#0f2a45]">{l}</h2>
+              <dl className="mt-3 divide-y divide-[#d7e4de] rounded-2xl border border-[#d7e4de] bg-white">
                 {terms
                   .filter((t) => t.term[0].toUpperCase() === l)
                   .map((t) => (
                     <div key={t.slug} id={t.slug} className="scroll-mt-24 px-5 py-4">
-                      <dt className="text-[16.5px] font-bold text-[#0b2c5e]">{t.term}</dt>
-                      <dd className="mt-1 text-[15.5px] leading-relaxed text-[#475569]">
+                      <dt className="text-[16.5px] font-bold text-[#0f2a45]">{t.term}</dt>
+                      <dd className="mt-1 text-[15.5px] leading-relaxed text-[#4a5d68]">
                         {t.definition}
                         {t.href && (
                           <>
                             {" "}
-                            <Link href={t.href} className="font-semibold text-[#2563eb] hover:underline">Learn more →</Link>
+                            <Link href={t.href} className="font-semibold text-[#0e7b5b] hover:underline">Learn more →</Link>
                           </>
                         )}
                       </dd>

@@ -19,7 +19,7 @@ export function LoginForm({ next, notice }: { next?: string; notice?: string }) 
       <div>
         <div className="flex items-center justify-between">
           <label htmlFor="password" className={labelClass}>Password</label>
-          <Link href="/admin/forgot-password" className="mb-1 text-[12.5px] font-medium text-[#2563eb] hover:underline">
+          <Link href="/admin/forgot-password" className="mb-1 text-[12.5px] font-medium text-[#0e7b5b] hover:underline">
             Forgot password?
           </Link>
         </div>
@@ -46,7 +46,7 @@ export function ForgotPasswordForm() {
         {pending ? "Sending…" : "Send reset link"}
       </Button>
       <p className="text-center text-[13px]">
-        <Link href="/admin/login" className="font-medium text-[#2563eb] hover:underline">Back to sign in</Link>
+        <Link href="/admin/login" className="font-medium text-[#0e7b5b] hover:underline">Back to sign in</Link>
       </p>
     </form>
   );
@@ -60,7 +60,7 @@ export function UpdatePasswordForm() {
       <div>
         <label htmlFor="password" className={labelClass}>New password</label>
         <input id="password" name="password" type="password" autoComplete="new-password" minLength={10} required className={inputClass} />
-        <p className="mt-1 text-[12px] text-[#64748b]">At least 10 characters, with a letter and a number.</p>
+        <p className="mt-1 text-[12px] text-[#5b6e7a]">At least 10 characters, with a letter and a number.</p>
       </div>
       <div>
         <label htmlFor="confirm" className={labelClass}>Confirm password</label>

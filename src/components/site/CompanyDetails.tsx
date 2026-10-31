@@ -15,13 +15,13 @@ function rows() {
 
 export function CompanyDetails() {
   return (
-    <dl className="grid gap-x-8 gap-y-4 rounded-2xl border border-[#e2e8f0] bg-white p-5 text-[15px] sm:grid-cols-2 md:p-6 lg:grid-cols-3">
+    <dl className="grid gap-x-8 gap-y-4 rounded-2xl border border-[#d7e4de] bg-white p-5 text-[15px] sm:grid-cols-2 md:p-6 lg:grid-cols-3">
       {rows().map((r) => (
         <div key={r.label} className="min-w-0">
-          <dt className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-[#64748b]">{r.label}</dt>
-          <dd className="mt-1 break-words text-[#0f172a]">
+          <dt className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-[#5b6e7a]">{r.label}</dt>
+          <dd className="mt-1 break-words text-[#0f2a45]">
             {r.href ? (
-              <a href={r.href} className="hover:text-[#2563eb]">{r.value}</a>
+              <a href={r.href} className="hover:text-[#0e7b5b]">{r.value}</a>
             ) : (
               r.value
             )}

@@ -37,12 +37,12 @@ export function PipelineControls({
               onClick={() => setRating(rating === n ? 0 : n)}
               aria-label={`${n} star${n === 1 ? "" : "s"}`}
               aria-pressed={rating >= n}
-              className={`text-[22px] leading-none transition ${rating >= n ? "text-[#f59e0b]" : "text-[#e2e8f0] hover:text-[#fcd34d]"}`}
+              className={`text-[22px] leading-none transition ${rating >= n ? "text-[#f59e0b]" : "text-[#d7e4de] hover:text-[#fcd34d]"}`}
             >
               ★
             </button>
           ))}
-          {rating > 0 && <span className="ml-2 text-[12px] text-[#64748b]">{rating}/5</span>}
+          {rating > 0 && <span className="ml-2 text-[12px] text-[#5b6e7a]">{rating}/5</span>}
         </div>
       </fieldset>
       <div>
@@ -73,7 +73,7 @@ export function NoteComposer({ applicationId }: { applicationId: string }) {
       <div className="flex flex-wrap items-center gap-2">
         <Button type="submit" size="sm" disabled={pending}>Add note</Button>
         {state?.error && <span className="text-[12.5px] font-medium text-[#b91c1c]">{state.error}</span>}
-        {state?.ok && <span className="text-[12.5px] font-medium text-[#15803d]">{state.message}</span>}
+        {state?.ok && <span className="text-[12.5px] font-medium text-[#0b6550]">{state.message}</span>}
       </div>
     </form>
   );
@@ -130,7 +130,7 @@ export function ApplicantEmailComposer({ applicationId, name, role }: { applicat
               if (bodyRef.current) bodyRef.current.value = t.body(role);
               setNextStatus(t.nextStatus ?? "");
             }}
-            className="rounded-full border border-[#d7dee8] px-2 py-0.5 text-[11.5px] font-medium text-[#475569] hover:bg-[#f8fafc]"
+            className="rounded-full border border-[#d0dcd6] px-2 py-0.5 text-[11.5px] font-medium text-[#4a5d68] hover:bg-[#f3f7fa]"
           >
             {t.label}
           </button>
@@ -148,7 +148,7 @@ export function ApplicantEmailComposer({ applicationId, name, role }: { applicat
       {state?.error && <Alert>{state.error}</Alert>}
       {state?.ok && <Alert tone="green">{state.message}</Alert>}
       <Button type="submit" disabled={pending} className="w-full">{pending ? "Sending…" : "Send email"}</Button>
-      <p className="text-[11.5px] text-[#94a3b8]">Sent from the company address; replies come to your inbox.</p>
+      <p className="text-[11.5px] text-[#8a9ba6]">Sent from the company address; replies come to your inbox.</p>
     </form>
   );
 }

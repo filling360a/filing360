@@ -34,7 +34,7 @@ export default function TeamPage() {
   }));
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       {people.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@graph": people }} />}
       <PageHero
         eyebrow="Our team"
@@ -50,9 +50,9 @@ export default function TeamPage() {
 
       <section className={`${container} py-12`}>
         {team.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-[#cbd5e1] bg-white p-8 text-center">
-            <p className="text-[18px] font-bold text-[#0b2c5e]">Team profiles are being added</p>
-            <p className="mx-auto mt-2 max-w-xl text-[15.5px] leading-relaxed text-[#475569]">
+          <div className="rounded-2xl border border-dashed border-[#bfd4cb] bg-white p-8 text-center">
+            <p className="text-[18px] font-bold text-[#0f2a45]">Team profiles are being added</p>
+            <p className="mx-auto mt-2 max-w-xl text-[15.5px] leading-relaxed text-[#4a5d68]">
               We&apos;re publishing profiles of our professionals with their ICAI / ICSI membership details. Meanwhile, ask us on a call who will
               handle your work — we&apos;re happy to share their credentials.
             </p>
@@ -63,45 +63,45 @@ export default function TeamPage() {
         ) : (
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((m) => (
-              <li key={m.name} className="flex flex-col rounded-2xl border border-[#e2e8f0] bg-white p-5">
+              <li key={m.name} className="flex flex-col rounded-2xl border border-[#d7e4de] bg-white p-5">
                 <div className="flex items-center gap-4">
                   {m.photo ? (
                     <Image src={m.photo} alt={m.name} width={64} height={64} className="h-16 w-16 rounded-full object-cover" />
                   ) : (
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#eff6ff] text-[20px] font-bold text-[#2563eb]" aria-hidden>
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#e3f2ed] text-[20px] font-bold text-[#0e7b5b]" aria-hidden>
                       {initials(m.name)}
                     </span>
                   )}
                   <div>
-                    <h2 className="text-[17px] font-bold text-[#0b2c5e]">
+                    <h2 className="text-[17px] font-bold text-[#0f2a45]">
                       {m.name}
-                      {m.qualifications && <span className="ml-1.5 text-[14px] font-semibold text-[#2563eb]">{m.qualifications}</span>}
+                      {m.qualifications && <span className="ml-1.5 text-[14px] font-semibold text-[#0e7b5b]">{m.qualifications}</span>}
                     </h2>
-                    <p className="text-[14.5px] text-[#475569]">{m.role}</p>
+                    <p className="text-[14.5px] text-[#4a5d68]">{m.role}</p>
                   </div>
                 </div>
-                <p className="mt-4 text-[15px] leading-relaxed text-[#334155]">{m.bio}</p>
+                <p className="mt-4 text-[15px] leading-relaxed text-[#2c3f4e]">{m.bio}</p>
                 {m.expertise && m.expertise.length > 0 && (
                   <ul className="mt-3 flex flex-wrap gap-1.5">
                     {m.expertise.map((e) => (
-                      <li key={e} className="rounded-full bg-[#f1f5f9] px-2.5 py-1 text-[13px] text-[#475569]">{e}</li>
+                      <li key={e} className="rounded-full bg-[#eef4f1] px-2.5 py-1 text-[13px] text-[#4a5d68]">{e}</li>
                     ))}
                   </ul>
                 )}
-                <div className="mt-auto flex flex-wrap items-center gap-3 pt-4 text-[13.5px] text-[#64748b]">
+                <div className="mt-auto flex flex-wrap items-center gap-3 pt-4 text-[13.5px] text-[#5b6e7a]">
                   {m.experienceYears ? <span>{m.experienceYears}+ years experience</span> : null}
                   {m.membershipNo && <span>Membership no. {m.membershipNo}</span>}
                   {m.linkedin && (
-                    <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#2563eb] hover:underline">LinkedIn</a>
+                    <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0e7b5b] hover:underline">LinkedIn</a>
                   )}
                 </div>
               </li>
             ))}
           </ul>
         )}
-        <p className="mt-8 text-[15px] text-[#64748b]">
-          Want to join us? See <Link href="/careers" className="font-semibold text-[#2563eb] hover:underline">open roles</Link> or write to{" "}
-          <a href={`mailto:${company.contact.careersEmail}`} className="font-semibold text-[#2563eb] hover:underline">{company.contact.careersEmail}</a>.
+        <p className="mt-8 text-[15px] text-[#5b6e7a]">
+          Want to join us? See <Link href="/careers" className="font-semibold text-[#0e7b5b] hover:underline">open roles</Link> or write to{" "}
+          <a href={`mailto:${company.contact.careersEmail}`} className="font-semibold text-[#0e7b5b] hover:underline">{company.contact.careersEmail}</a>.
         </p>
       </section>
       <CtaBand />

@@ -89,7 +89,7 @@ const TABLES: { id: string; title: string; intro?: string; head: [string, string
 
 export default function GovernmentFeesPage() {
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd data={webPageJsonLd({ name: TITLE, description: DESCRIPTION, path: "/government-fees", dateModified: REVIEWED })} />
       <PageHero
         eyebrow="Government fees"
@@ -106,7 +106,7 @@ export default function GovernmentFeesPage() {
       <section className={`${container} py-12`}>
         <nav aria-label="Sections" className="flex flex-wrap gap-2">
           {TABLES.map((t) => (
-            <a key={t.id} href={`#${t.id}`} className="rounded-full border border-[#cbd5e1] bg-white px-3 py-1.5 text-[14px] font-medium text-[#0b2c5e] hover:border-[#2563eb]">
+            <a key={t.id} href={`#${t.id}`} className="rounded-full border border-[#bfd4cb] bg-white px-3 py-1.5 text-[14px] font-medium text-[#0f2a45] hover:border-[#0e7b5b]">
               {t.title}
             </a>
           ))}
@@ -116,21 +116,21 @@ export default function GovernmentFeesPage() {
           {TABLES.map((t) => (
             <section key={t.id}>
               <SectionHeading id={t.id} title={t.title} intro={t.intro} />
-              <div className="mt-4 overflow-x-auto rounded-2xl border border-[#e2e8f0] bg-white">
+              <div className="mt-4 overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white">
                 <table className="w-full min-w-[560px] text-left text-[15px]">
-                  <thead className="bg-[#f1f5f9] text-[#0b2c5e]">
+                  <thead className="bg-[#eef4f1] text-[#0f2a45]">
                     <tr>
                       <th scope="col" className="px-4 py-3 font-semibold">{t.head[0]}</th>
                       <th scope="col" className="px-4 py-3 font-semibold">{t.head[1]}</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#e2e8f0]">
+                  <tbody className="divide-y divide-[#d7e4de]">
                     {t.rows.map(([label, fee, note]) => (
                       <tr key={label} className="align-top">
-                        <th scope="row" className="px-4 py-3 font-medium text-[#334155]">{label}</th>
-                        <td className="px-4 py-3 text-[#0b2c5e]">
+                        <th scope="row" className="px-4 py-3 font-medium text-[#2c3f4e]">{label}</th>
+                        <td className="px-4 py-3 text-[#0f2a45]">
                           <span className="font-semibold">{fee}</span>
-                          {note && <span className="block text-[13.5px] text-[#64748b]">{note}</span>}
+                          {note && <span className="block text-[13.5px] text-[#5b6e7a]">{note}</span>}
                         </td>
                       </tr>
                     ))}
@@ -138,7 +138,7 @@ export default function GovernmentFeesPage() {
                 </table>
               </div>
               {t.source && (
-                <p className="mt-2 text-[13.5px] text-[#64748b]">
+                <p className="mt-2 text-[13.5px] text-[#5b6e7a]">
                   Source:{" "}
                   <a href={t.source.href} target="_blank" rel="noopener noreferrer" className="underline">{t.source.label}</a>
                 </p>

@@ -22,14 +22,14 @@ const PROMISES = [
 
 export default function TrustPage() {
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <PageHero
         eyebrow="Trust & legal"
         title="How we earn your trust"
         crumbs={[{ name: "Trust & legal", path: "/trust" }]}
         intro={
           <p>
-            <strong className="text-[#0b2c5e]">{siteConfig.brandName} is not a government website.</strong> We are a private, technology-enabled
+            <strong className="text-[#0f2a45]">{siteConfig.brandName} is not a government website.</strong> We are a private, technology-enabled
             facilitation platform that helps you complete registrations, tax filings and compliance in India — with transparent fees and qualified
             professionals.
           </p>
@@ -40,23 +40,23 @@ export default function TrustPage() {
         <SectionHeading title="Our commitments" />
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PROMISES.map((p) => (
-            <li key={p.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <p className="text-[17px] font-bold text-[#0b2c5e]">{p.title}</p>
-              <p className="mt-2 text-[15px] leading-relaxed text-[#475569]">{p.body}</p>
+            <li key={p.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <p className="text-[17px] font-bold text-[#0f2a45]">{p.title}</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-[#4a5d68]">{p.body}</p>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="border-y border-[#e2e8f0] bg-white">
+      <section className="border-y border-[#d7e4de] bg-white">
         <div className={`${container} py-10 md:py-14`}>
           <SectionHeading title="Policies" intro="Everything that governs how we work with you, written in plain language." />
           <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {policies.map((p) => (
               <li key={p.path}>
-                <Link href={p.path} className="group flex h-full flex-col rounded-2xl border border-[#e2e8f0] p-5 transition hover:border-[#93c5fd]">
-                  <span className="text-[17px] font-bold text-[#0b2c5e] group-hover:text-[#2563eb]">{p.title}</span>
-                  <span className="mt-1.5 text-[15px] leading-relaxed text-[#475569]">{p.summary}</span>
+                <Link href={p.path} className="group flex h-full flex-col rounded-2xl border border-[#d7e4de] p-5 transition hover:border-[#8ecfbc]">
+                  <span className="text-[17px] font-bold text-[#0f2a45] group-hover:text-[#0e7b5b]">{p.title}</span>
+                  <span className="mt-1.5 text-[15px] leading-relaxed text-[#4a5d68]">{p.summary}</span>
                 </Link>
               </li>
             ))}

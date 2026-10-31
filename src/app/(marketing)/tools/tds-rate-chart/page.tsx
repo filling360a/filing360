@@ -66,10 +66,10 @@ export default function Page() {
         { q: "What happens if TDS is deposited late?", a: "Interest of 1.5% per month applies from the date of deduction to the date of deposit, and a late-filing fee of ₹200 per day for the return." },
       ]}
     >
-      <div className="overflow-x-auto rounded-2xl border border-[#e2e8f0] bg-white">
+      <div className="overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white">
         <table className="w-full min-w-[720px] text-left text-[15px]">
           <caption className="sr-only">TDS rates for FY 2025-26</caption>
-          <thead className="bg-[#f1f5f9] text-[#0b2c5e]">
+          <thead className="bg-[#eef4f1] text-[#0f2a45]">
             <tr>
               <th scope="col" className="px-4 py-3 font-semibold">Section (1961 Act)</th>
               <th scope="col" className="px-4 py-3 font-semibold">Nature of payment</th>
@@ -77,13 +77,13 @@ export default function Page() {
               <th scope="col" className="px-4 py-3 font-semibold">Rate</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e2e8f0]">
+          <tbody className="divide-y divide-[#d7e4de]">
             {ROWS.map(([s, n, t, r]) => (
               <tr key={`${s}-${n}`} className="align-top">
-                <td className="whitespace-nowrap px-4 py-3 font-semibold text-[#0b2c5e]">{s}</td>
-                <td className="px-4 py-3 text-[#334155]">{n}</td>
-                <td className="px-4 py-3 text-[#475569]">{t}</td>
-                <td className="whitespace-nowrap px-4 py-3 font-semibold text-[#0b2c5e]">{r}</td>
+                <td className="whitespace-nowrap px-4 py-3 font-semibold text-[#0f2a45]">{s}</td>
+                <td className="px-4 py-3 text-[#2c3f4e]">{n}</td>
+                <td className="px-4 py-3 text-[#4a5d68]">{t}</td>
+                <td className="whitespace-nowrap px-4 py-3 font-semibold text-[#0f2a45]">{r}</td>
               </tr>
             ))}
           </tbody>

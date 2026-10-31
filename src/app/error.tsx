@@ -10,7 +10,7 @@ export default function Error({ error, retry }: { error: Error & { digest?: stri
   }, [error]);
 
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center bg-paper px-5 py-16 text-center">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center bg-background px-5 py-16 text-center">
       <p className="font-display text-6xl text-seal/40">Oops</p>
       <h1 className="mt-4 font-display text-3xl text-ink">Something went wrong</h1>
       <p className="mt-2 max-w-md text-ink-muted">

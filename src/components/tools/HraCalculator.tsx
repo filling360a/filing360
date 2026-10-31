@@ -14,7 +14,7 @@ export function HraCalculator() {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Panel>
-        <p className="text-[14px] text-[#64748b]">Enter yearly amounts.</p>
+        <p className="text-[14px] text-[#5b6e7a]">Enter yearly amounts.</p>
         <div className="mt-3 space-y-4">
           <MoneyField label="Basic salary + DA" value={basicDa} onChange={setBasicDa} hint="Include DA only if it counts for retirement benefits." />
           <MoneyField label="HRA received" value={hraReceived} onChange={setHraReceived} />
@@ -31,16 +31,16 @@ export function HraCalculator() {
         </div>
       </Panel>
       <Panel>
-        <h2 className="text-[18px] font-bold text-[#0b2c5e]">HRA exemption</h2>
-        <p className="mt-3 text-[30px] font-bold tracking-tight text-[#0b2c5e]" aria-live="polite">{inr(r.exempt)}</p>
-        <p className="text-[14px] text-[#64748b]">Taxable HRA: {inr(r.taxable)}</p>
-        <p className="mt-4 text-[14.5px] font-semibold text-[#334155]">Exemption is the lowest of:</p>
+        <h2 className="text-[18px] font-bold text-[#0f2a45]">HRA exemption</h2>
+        <p className="mt-3 text-[30px] font-bold tracking-tight text-[#0f2a45]" aria-live="polite">{inr(r.exempt)}</p>
+        <p className="text-[14px] text-[#5b6e7a]">Taxable HRA: {inr(r.taxable)}</p>
+        <p className="mt-4 text-[14.5px] font-semibold text-[#2c3f4e]">Exemption is the lowest of:</p>
         <div className="mt-1">
           <Row label="Actual HRA received" value={inr(r.parts.received)} />
           <Row label="Rent paid minus 10% of salary" value={inr(r.parts.rentMinus10)} />
           <Row label={`${metro === "metro" ? "50%" : "40%"} of salary`} value={inr(r.parts.percentOfSalary)} />
         </div>
-        <p className="mt-4 text-[13.5px] text-[#64748b]">
+        <p className="mt-4 text-[13.5px] text-[#5b6e7a]">
           HRA exemption is available only in the old tax regime. If annual rent exceeds ₹1 lakh, your employer needs your landlord&apos;s PAN.
         </p>
       </Panel>

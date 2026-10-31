@@ -9,7 +9,7 @@ const variants: Record<Variant, string> = {
     "bg-transparent text-ink border border-line-strong hover:border-ink",
   ghost: "bg-transparent text-ink-muted hover:text-ink",
   "on-dark":
-    "bg-seal text-paper hover:bg-seal-deep focus-visible:outline-seal-soft",
+    "bg-white text-ink hover:bg-paper-deep focus-visible:outline-white",
   "on-dark-ghost":
     "bg-transparent text-paper border border-white/30 hover:border-white/55",
 };

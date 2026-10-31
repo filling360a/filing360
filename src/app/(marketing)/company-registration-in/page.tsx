@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 
 export default function CitiesHubPage() {
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <PageHero
         eyebrow="Locations"
         title="Company registration in your city"

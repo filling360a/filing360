@@ -1,15 +1,12 @@
+import { BannerCarousel } from "@/components/home/BannerCarousel";
 import { CompareEntities } from "@/components/home/CompareEntities";
 import { Faq } from "@/components/home/Faq";
 import { Hero } from "@/components/home/Hero";
-import { HumanOverview } from "@/components/home/HumanOverview";
 import { NextSteps } from "@/components/home/NextSteps";
-import { PathPicker } from "@/components/home/PathPicker";
-import { Pillars } from "@/components/home/Pillars";
 import { PopularServices } from "@/components/home/PopularServices";
-import { PricingClarity } from "@/components/home/PricingClarity";
 import { Process } from "@/components/home/Process";
 import { Proof } from "@/components/home/Proof";
-import { WhyUs } from "@/components/home/WhyUs";
+import { SpotlightBanner } from "@/components/home/SpotlightBanner";
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -25,8 +22,7 @@ export const metadata: Metadata = {
 
 /**
  * Post-hero order researched to beat RegisterKaro, IndiaFilings, Zolvit, Rize:
- * Services → Entity compare (AEO) → Paths → Process → Fee clarity →
- * Why us + docs → Marketplace → Human proof → After incorporation →
+ * Services → Entity compare (AEO) → Process → After incorporation →
  * Reviews → FAQ
  */
 export default function HomePage() {
@@ -35,13 +31,10 @@ export default function HomePage() {
       <Hero />
       <PopularServices />
       <CompareEntities />
-      <PathPicker />
+      <BannerCarousel />
       <Process />
-      <PricingClarity />
-      <WhyUs />
-      <Pillars />
-      <HumanOverview />
       <NextSteps />
+      <SpotlightBanner />
       <Proof />
       <Faq />
     </>

@@ -1,5 +1,5 @@
 /** Renders structured data safely (escapes `<` so content can't break out of the script tag). */
-export function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unknown>[] }) {
+export function JsonLd({ data }: { data: object | object[] }) {
   return (
     <script
       type="application/ld+json"

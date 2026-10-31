@@ -1,8 +1,7 @@
 import "server-only";
 import { z } from "zod";
 import { isSupabaseAdminConfigured } from "@/lib/env";
-import { enforceRateLimits } from "@/lib/careers/apply";
-import { hashIp } from "@/lib/leads/capture";
+import { enforceRateLimits, hashIp } from "@/lib/rate-limit";
 import { normalizeIndianMobile } from "@/lib/leads/schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 

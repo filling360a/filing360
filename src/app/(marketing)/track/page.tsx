@@ -22,7 +22,7 @@ export default async function TrackPage({ searchParams }: PageProps<"/track">) {
   const ref = typeof sp.ref === "string" && /^[A-Za-z0-9-]{1,20}$/.test(sp.ref) ? sp.ref.toUpperCase() : "";
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <PageHero
         eyebrow="Track status"
         title="Track your request"
@@ -31,13 +31,13 @@ export default async function TrackPage({ searchParams }: PageProps<"/track">) {
       />
       <section className={`${container} py-10 md:py-14`}>
         <TrackForm initialRef={ref} />
-        <div className="mt-6 flex flex-wrap items-center gap-3 text-[15px] text-[#475569]">
+        <div className="mt-6 flex flex-wrap items-center gap-3 text-[15px] text-[#4a5d68]">
           <span>Lost your reference?</span>
           <SecondaryButton href={whatsappLink("Hi Filing360, I'd like an update on my request. My registered mobile is ")}>Ask on WhatsApp</SecondaryButton>
         </div>
       </section>
       <section className={`${container} pb-14`}>
-        <h2 className="text-[22px] font-bold text-[#0b2c5e] md:text-[26px]">Tracking FAQs</h2>
+        <h2 className="text-[22px] font-bold text-[#0f2a45] md:text-[26px]">Tracking FAQs</h2>
         <div className="mt-5"><FaqList items={FAQS} /></div>
       </section>
     </div>

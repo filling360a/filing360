@@ -137,9 +137,9 @@ function SpiralMark({
       >
         <defs>
           <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#93c5fd" />
-            <stop offset="50%" stopColor="#60a5fa" />
-            <stop offset="100%" stopColor="#2563eb" />
+            <stop offset="0%" stopColor="#8ecfbc" />
+            <stop offset="50%" stopColor="#5bb89a" />
+            <stop offset="100%" stopColor="#0e7b5b" />
           </linearGradient>
         </defs>
 
@@ -309,7 +309,7 @@ export function HandNote({
 
   const copy = (
     <p
-      className={`text-[14px] font-semibold leading-[1.35] text-[#3b82f6] ${textAlign}`}
+      className={`text-[14px] font-semibold leading-[1.35] text-[#1a8f6c] ${textAlign}`}
       style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
     >
       {tokens.map((token) => {

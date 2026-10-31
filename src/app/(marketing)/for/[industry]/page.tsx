@@ -28,7 +28,7 @@ export default async function IndustryPage({ params }: PageProps<"/for/[industry
   const others = industries.filter((i) => i.slug !== ind.slug);
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd data={webPageJsonLd({ name: ind.metaTitle, description: ind.description, path: industryHref(ind) })} />
       <PageHero
         eyebrow={`For ${ind.name.toLowerCase()}`}
@@ -49,9 +49,9 @@ export default async function IndustryPage({ params }: PageProps<"/for/[industry
         <SectionHeading title="What you need to stay compliant" />
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {ind.compliance.map((c) => (
-            <div key={c.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <h3 className="text-[17px] font-bold text-[#0b2c5e]">{c.title}</h3>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#475569]">{c.body}</p>
+            <div key={c.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <h3 className="text-[17px] font-bold text-[#0f2a45]">{c.title}</h3>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{c.body}</p>
             </div>
           ))}
         </div>
@@ -62,21 +62,21 @@ export default async function IndustryPage({ params }: PageProps<"/for/[industry
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <li key={s.href}>
-              <Link href={s.href} className="group flex h-full flex-col rounded-2xl border border-[#e2e8f0] bg-white p-5 transition hover:border-[#93c5fd]">
-                <span className="text-[17px] font-bold text-[#0b2c5e] group-hover:text-[#2563eb]">{s.name}</span>
-                <span className="mt-1.5 text-[15px] leading-relaxed text-[#475569]">{s.tagline}</span>
-                <span className="mt-auto pt-3 text-[14.5px] font-semibold text-[#2563eb]">{s.priceLabel} →</span>
+              <Link href={s.href} className="group flex h-full flex-col rounded-2xl border border-[#d7e4de] bg-white p-5 transition hover:border-[#8ecfbc]">
+                <span className="text-[17px] font-bold text-[#0f2a45] group-hover:text-[#0e7b5b]">{s.name}</span>
+                <span className="mt-1.5 text-[15px] leading-relaxed text-[#4a5d68]">{s.tagline}</span>
+                <span className="mt-auto pt-3 text-[14.5px] font-semibold text-[#0e7b5b]">{s.priceLabel} →</span>
               </Link>
             </li>
           ))}
         </ul>
         {guides.length > 0 && (
-          <p className="mt-5 text-[15px] text-[#64748b]">
+          <p className="mt-5 text-[15px] text-[#5b6e7a]">
             Read next:{" "}
             {guides.map((g, i) => (
               <span key={g.slug}>
                 {i > 0 && " · "}
-                <Link href={guideHref(g)} className="font-semibold text-[#2563eb] hover:underline">{g.title}</Link>
+                <Link href={guideHref(g)} className="font-semibold text-[#0e7b5b] hover:underline">{g.title}</Link>
               </span>
             ))}
           </p>
@@ -89,11 +89,11 @@ export default async function IndustryPage({ params }: PageProps<"/for/[industry
       </section>
 
       <section className={`${container} pb-14`}>
-        <p className="text-[15px] font-semibold text-[#0b2c5e]">We also help</p>
+        <p className="text-[15px] font-semibold text-[#0f2a45]">We also help</p>
         <ul className="mt-2 flex flex-wrap gap-2.5">
           {others.map((o) => (
             <li key={o.slug}>
-              <Link href={industryHref(o)} className="inline-flex rounded-full border border-[#cbd5e1] bg-white px-4 py-2 text-[15px] font-medium text-[#0b2c5e] hover:border-[#2563eb]">
+              <Link href={industryHref(o)} className="inline-flex rounded-full border border-[#bfd4cb] bg-white px-4 py-2 text-[15px] font-medium text-[#0f2a45] hover:border-[#0e7b5b]">
                 {o.name}
               </Link>
             </li>

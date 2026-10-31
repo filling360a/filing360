@@ -124,8 +124,8 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
         <div className="min-w-0 space-y-5">
           <Card className="p-5">
             <dl className="grid gap-x-6 gap-y-4 text-[13.5px] sm:grid-cols-2">
-              <Field label="Email"><a href={`mailto:${app.email}`} className="break-all text-[#2563eb] hover:underline">{app.email}</a></Field>
-              <Field label="Phone"><a href={`tel:${app.phone}`} className="text-[#2563eb] hover:underline">{app.phone}</a></Field>
+              <Field label="Email"><a href={`mailto:${app.email}`} className="break-all text-[#0e7b5b] hover:underline">{app.email}</a></Field>
+              <Field label="Phone"><a href={`tel:${app.phone}`} className="text-[#0e7b5b] hover:underline">{app.phone}</a></Field>
               <Field label="Current city">{app.current_city ?? "—"}</Field>
               <Field label="Total experience">{app.total_experience !== null ? `${Number(app.total_experience)} years` : "—"}</Field>
               <Field label="Current CTC">{lpa(app.current_ctc)}</Field>
@@ -135,27 +135,27 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
               </Field>
               <Field label="Role">
                 {app.job ? (
-                  <Link href={`/admin/careers/${app.job.id}`} className="text-[#2563eb] hover:underline">{app.job.title}</Link>
+                  <Link href={`/admin/careers/${app.job.id}`} className="text-[#0e7b5b] hover:underline">{app.job.title}</Link>
                 ) : (
                   "—"
                 )}
               </Field>
               {app.linkedin_url && (
                 <Field label="LinkedIn">
-                  <a href={app.linkedin_url} target="_blank" rel="noopener noreferrer nofollow" className="break-all text-[#2563eb] hover:underline">{app.linkedin_url.replace(/^https?:\/\/(www\.)?/, "")}</a>
+                  <a href={app.linkedin_url} target="_blank" rel="noopener noreferrer nofollow" className="break-all text-[#0e7b5b] hover:underline">{app.linkedin_url.replace(/^https?:\/\/(www\.)?/, "")}</a>
                 </Field>
               )}
               {app.portfolio_url && (
                 <Field label="Portfolio / website">
-                  <a href={app.portfolio_url} target="_blank" rel="noopener noreferrer nofollow" className="break-all text-[#2563eb] hover:underline">{app.portfolio_url.replace(/^https?:\/\/(www\.)?/, "")}</a>
+                  <a href={app.portfolio_url} target="_blank" rel="noopener noreferrer nofollow" className="break-all text-[#0e7b5b] hover:underline">{app.portfolio_url.replace(/^https?:\/\/(www\.)?/, "")}</a>
                 </Field>
               )}
             </dl>
 
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#e3e8ef] bg-[#f8fafc] px-4 py-3">
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#d7e4de] bg-[#f3f7fa] px-4 py-3">
               <div className="min-w-0">
-                <p className="truncate text-[13.5px] font-semibold text-[#0f172a]">{app.resume_name}</p>
-                <p className="text-[12px] text-[#64748b]">{fileLabel} · {kb(app.resume_size)}</p>
+                <p className="truncate text-[13.5px] font-semibold text-[#0f2a45]">{app.resume_name}</p>
+                <p className="text-[12px] text-[#5b6e7a]">{fileLabel} · {kb(app.resume_size)}</p>
               </div>
               <div className="flex gap-2">
                 <a href={`/admin/careers/applications/${app.id}/resume`} target="_blank" rel="noopener" className={buttonClass("secondary", "sm")}>Open</a>
@@ -164,8 +164,8 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
             </div>
 
             {campaign.length > 0 && (
-              <div className="mt-4 border-t border-[#eef2f7] pt-3">
-                <p className="mb-2 text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">Campaign</p>
+              <div className="mt-4 border-t border-[#e8f0ec] pt-3">
+                <p className="mb-2 text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">Campaign</p>
                 <div className="flex flex-wrap gap-1.5">
                   {campaign.map(([k, v]) => <Badge key={k} tone="indigo">{k}: {v}</Badge>)}
                 </div>
@@ -175,12 +175,12 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
 
           {answers.length > 0 && (
             <Card className="p-5">
-              <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Screening answers</h2>
+              <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Screening answers</h2>
               <dl className="space-y-3">
                 {answers.map((a) => (
                   <div key={a.id}>
-                    <dt className="text-[13px] font-semibold text-[#334155]">{a.label}</dt>
-                    <dd className="mt-0.5 whitespace-pre-line text-[13.5px] text-[#0f172a]">{a.answer || <span className="text-[#94a3b8]">No answer</span>}</dd>
+                    <dt className="text-[13px] font-semibold text-[#2c3f4e]">{a.label}</dt>
+                    <dd className="mt-0.5 whitespace-pre-line text-[13.5px] text-[#0f2a45]">{a.answer || <span className="text-[#8a9ba6]">No answer</span>}</dd>
                   </div>
                 ))}
               </dl>
@@ -189,30 +189,30 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
 
           {app.cover_letter && (
             <Card className="p-5">
-              <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Cover letter</h2>
-              <p className="whitespace-pre-line text-[13.5px] leading-relaxed text-[#334155]">{app.cover_letter}</p>
+              <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Cover letter</h2>
+              <p className="whitespace-pre-line text-[13.5px] leading-relaxed text-[#2c3f4e]">{app.cover_letter}</p>
             </Card>
           )}
 
           <Card className="p-5">
-            <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Activity</h2>
+            <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Activity</h2>
             <NoteComposer applicationId={app.id} />
-            <ol className="mt-5 space-y-4 border-l-2 border-[#eef2f7] pl-4">
+            <ol className="mt-5 space-y-4 border-l-2 border-[#e8f0ec] pl-4">
               {(activities ?? []).map((a) => {
                 const detail = describe(a.type, a.meta, people);
                 const actor = a.actor ? a.actor.full_name || a.actor.email : a.type === "created" ? "Candidate" : "System";
                 return (
                   <li key={a.id} className="relative">
-                    <span className="absolute -left-[23px] top-1 h-3 w-3 rounded-full border-2 border-white bg-[#cbd5e1]" aria-hidden />
+                    <span className="absolute -left-[23px] top-1 h-3 w-3 rounded-full border-2 border-white bg-[#bfd4cb]" aria-hidden />
                     <p className="text-[13px]">
-                      <span className="font-semibold text-[#0f172a]">{ACTIVITY_LABEL[a.type]}</span>
-                      {detail && <span className="text-[#475569]"> · {detail}</span>}
+                      <span className="font-semibold text-[#0f2a45]">{ACTIVITY_LABEL[a.type]}</span>
+                      {detail && <span className="text-[#4a5d68]"> · {detail}</span>}
                     </p>
-                    <p className="text-[12px] text-[#94a3b8]" title={formatDateTime(a.created_at)}>
+                    <p className="text-[12px] text-[#8a9ba6]" title={formatDateTime(a.created_at)}>
                       {actor} · {timeAgo(a.created_at)}
                     </p>
                     {a.body && (
-                      <p className="mt-1.5 whitespace-pre-line rounded-lg bg-[#f8fafc] px-3 py-2 text-[13px] leading-relaxed text-[#334155]">{a.body}</p>
+                      <p className="mt-1.5 whitespace-pre-line rounded-lg bg-[#f3f7fa] px-3 py-2 text-[13px] leading-relaxed text-[#2c3f4e]">{a.body}</p>
                     )}
                   </li>
                 );
@@ -223,7 +223,7 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
 
         <div className="space-y-5">
           <Card className="p-5">
-            <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Pipeline</h2>
+            <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Pipeline</h2>
             <PipelineControls
               key={`${app.status}-${app.rating}-${app.assigned_to}`}
               application={{ id: app.id, status: app.status, rating: app.rating, assigned_to: app.assigned_to }}
@@ -232,15 +232,15 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
           </Card>
 
           <Card className="p-5">
-            <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Email candidate</h2>
+            <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Email candidate</h2>
             <ApplicantEmailComposer applicationId={app.id} name={app.full_name} role={role} />
             {emails && emails.length > 0 && (
-              <ul className="mt-4 space-y-2 border-t border-[#eef2f7] pt-3">
+              <ul className="mt-4 space-y-2 border-t border-[#e8f0ec] pt-3">
                 {emails.map((e) => (
                   <li key={e.id} className="flex items-start justify-between gap-2 text-[12.5px]">
                     <span className="min-w-0">
-                      <span className="block truncate font-medium text-[#334155]">{e.subject}</span>
-                      <span className="text-[#94a3b8]">{e.template} · {timeAgo(e.created_at)}</span>
+                      <span className="block truncate font-medium text-[#2c3f4e]">{e.subject}</span>
+                      <span className="text-[#8a9ba6]">{e.template} · {timeAgo(e.created_at)}</span>
                     </span>
                     <Badge tone={e.status === "sent" ? "green" : e.status === "failed" ? "red" : "zinc"}>{e.status}</Badge>
                   </li>
@@ -249,9 +249,9 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
             )}
           </Card>
 
-          <Card className="p-5 text-[12.5px] text-[#64748b]">
+          <Card className="p-5 text-[12.5px] text-[#5b6e7a]">
             <p>
-              Consent to process data: <span className="font-semibold text-[#0f172a]">{app.consent ? "Given" : "Not recorded"}</span>
+              Consent to process data: <span className="font-semibold text-[#0f2a45]">{app.consent ? "Given" : "Not recorded"}</span>
             </p>
             {app.referrer && <p className="mt-1 break-all">Referrer: {app.referrer}</p>}
           </Card>
@@ -259,7 +259,7 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
           {staff.role === "admin" && (
             <Card className="p-5">
               <h2 className="mb-1 text-[15px] font-bold text-[#b91c1c]">Danger zone</h2>
-              <p className="mb-3 text-[12.5px] text-[#64748b]">Prefer moving to Rejected. Delete only for a candidate&apos;s data-deletion request — this also removes the résumé file.</p>
+              <p className="mb-3 text-[12.5px] text-[#5b6e7a]">Prefer moving to Rejected. Delete only for a candidate&apos;s data-deletion request — this also removes the résumé file.</p>
               <DeleteApplicationButton applicationId={app.id} />
             </Card>
           )}
@@ -272,8 +272,8 @@ export default async function ApplicationDetailPage({ params }: PageProps<"/admi
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="min-w-0">
-      <dt className="text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">{label}</dt>
-      <dd className="mt-0.5 text-[#0f172a]">{children}</dd>
+      <dt className="text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">{label}</dt>
+      <dd className="mt-0.5 text-[#0f2a45]">{children}</dd>
     </div>
   );
 }

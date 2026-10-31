@@ -75,11 +75,11 @@ export default async function ApplicationsPage({ searchParams }: PageProps<"/adm
               key={tab.label}
               href={`/admin/careers/applications${applicationFiltersToSearch(filters, { status: tab.value, page: 1 })}`}
               className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-semibold transition ${
-                active ? "bg-[#0b2c5e] text-white" : "text-[#475569] hover:bg-white"
+                active ? "bg-[#0f2a45] text-white" : "text-[#4a5d68] hover:bg-white"
               }`}
             >
               {tab.label}
-              <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20" : "bg-[#e2e8f0]"}`}>{counts[tab.value ?? "all"]}</span>
+              <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20" : "bg-[#d7e4de]"}`}>{counts[tab.value ?? "all"]}</span>
             </Link>
           );
         })}
@@ -144,7 +144,7 @@ export default async function ApplicationsPage({ searchParams }: PageProps<"/adm
 
       {pages > 1 && (
         <nav className="mt-4 flex items-center justify-between text-[13px]" aria-label="Pagination">
-          <span className="text-[#64748b]">
+          <span className="text-[#5b6e7a]">
             Page {filters.page} of {pages}
           </span>
           <div className="flex gap-2">

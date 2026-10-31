@@ -19,7 +19,7 @@ export function StaffAccessEmail({ kind, name, link, invitedBy }: Props) {
       <Button href={link} style={emailText.button}>
         {invite ? "Accept invite & set password" : "Choose a new password"}
       </Button>
-      <Text style={{ ...emailText.p, marginTop: "20px", fontSize: "13px", color: "#64748b" }}>
+      <Text style={{ ...emailText.p, marginTop: "20px", fontSize: "13px", color: "#5b6e7a" }}>
         This link works once and expires in 24 hours.{" "}
         {invite ? "If you weren't expecting this invite, you can ignore this email." : "If you didn't ask for this, you can ignore this email — your password won't change."}
       </Text>

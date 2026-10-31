@@ -138,15 +138,15 @@ async function LeadsOverview({ staffId }: { staffId: string }) {
           {dueRows.length === 0 ? (
             <EmptyState title="You're all caught up" description="No follow-ups due today." />
           ) : (
-            <ul className="divide-y divide-[#eef2f7]">
+            <ul className="divide-y divide-[#e8f0ec]">
               {dueRows.map((l) => {
                 const overdue = l.next_follow_up_at && new Date(l.next_follow_up_at) < new Date();
                 return (
                   <li key={l.id}>
-                    <Link href={`/admin/leads/${l.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f8fafc]">
+                    <Link href={`/admin/leads/${l.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f3f7fa]">
                       <span className="min-w-0">
-                        <span className="block truncate text-[13.5px] font-semibold text-[#0f172a]">{l.name}</span>
-                        <span className="block truncate text-[12.5px] text-[#64748b]">{l.interest ?? l.phone}</span>
+                        <span className="block truncate text-[13.5px] font-semibold text-[#0f2a45]">{l.name}</span>
+                        <span className="block truncate text-[12.5px] text-[#5b6e7a]">{l.interest ?? l.phone}</span>
                       </span>
                       <span className={`shrink-0 text-[12.5px] font-semibold ${overdue ? "text-[#b91c1c]" : "text-[#b45309]"}`}>
                         {formatDateTime(l.next_follow_up_at)}
@@ -164,19 +164,19 @@ async function LeadsOverview({ staffId }: { staffId: string }) {
           {recentLeads.length === 0 ? (
             <EmptyState title="No leads yet" description="Website enquiries will show up here in real time." />
           ) : (
-            <ul className="divide-y divide-[#eef2f7]">
+            <ul className="divide-y divide-[#e8f0ec]">
               {recentLeads.map((l) => (
                 <li key={l.id}>
-                  <Link href={`/admin/leads/${l.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f8fafc]">
+                  <Link href={`/admin/leads/${l.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f3f7fa]">
                     <span className="min-w-0">
-                      <span className="block truncate text-[13.5px] font-semibold text-[#0f172a]">{l.name}</span>
-                      <span className="block truncate text-[12.5px] text-[#64748b]">
+                      <span className="block truncate text-[13.5px] font-semibold text-[#0f2a45]">{l.name}</span>
+                      <span className="block truncate text-[12.5px] text-[#5b6e7a]">
                         {l.interest ?? "General enquiry"} · {l.source}
                       </span>
                     </span>
                     <span className="flex shrink-0 flex-col items-end gap-1">
                       <LeadStatusBadge status={l.status} />
-                      <span className="text-[11.5px] text-[#94a3b8]">{timeAgo(l.created_at)}</span>
+                      <span className="text-[11.5px] text-[#8a9ba6]">{timeAgo(l.created_at)}</span>
                     </span>
                   </Link>
                 </li>
@@ -188,15 +188,15 @@ async function LeadsOverview({ staffId }: { staffId: string }) {
 
       <div className="grid gap-5 lg:grid-cols-3">
         <Card className="p-5">
-          <h2 className="mb-4 text-[14px] font-bold text-[#0b2c5e]">Pipeline (last 30 days)</h2>
+          <h2 className="mb-4 text-[14px] font-bold text-[#0f2a45]">Pipeline (last 30 days)</h2>
           <ul className="space-y-2.5">
             {funnel.map((f) => (
               <li key={f.value} className="grid grid-cols-[96px_1fr_32px] items-center gap-2 text-[12.5px]">
-                <span className="text-[#475569]">{f.label}</span>
-                <span className="h-2 overflow-hidden rounded-full bg-[#eef2f7]">
-                  <span className="block h-full rounded-full bg-[#2563eb]" style={{ width: `${(f.count / funnelMax) * 100}%` }} />
+                <span className="text-[#4a5d68]">{f.label}</span>
+                <span className="h-2 overflow-hidden rounded-full bg-[#e8f0ec]">
+                  <span className="block h-full rounded-full bg-[#0e7b5b]" style={{ width: `${(f.count / funnelMax) * 100}%` }} />
                 </span>
-                <span className="text-right font-semibold text-[#0f172a]">{f.count}</span>
+                <span className="text-right font-semibold text-[#0f2a45]">{f.count}</span>
               </li>
             ))}
           </ul>
@@ -249,16 +249,16 @@ async function CareersOverview({ staffId }: { staffId: string }) {
       </div>
       <div className="grid gap-5 lg:grid-cols-[1fr_2fr]">
         <Card className="p-5">
-          <h2 className="mb-4 text-[14px] font-bold text-[#0b2c5e]">Hiring pipeline</h2>
+          <h2 className="mb-4 text-[14px] font-bold text-[#0f2a45]">Hiring pipeline</h2>
           <ul className="space-y-2.5">
             {stages.map((s) => (
               <li key={s.value}>
                 <Link href={`/admin/careers/applications?status=${s.value}`} className="grid grid-cols-[88px_1fr_32px] items-center gap-2 text-[12.5px] hover:opacity-80">
-                  <span className="text-[#475569]">{s.label}</span>
-                  <span className="h-2 overflow-hidden rounded-full bg-[#eef2f7]">
-                    <span className="block h-full rounded-full bg-[#2563eb]" style={{ width: `${(s.count / stageMax) * 100}%` }} />
+                  <span className="text-[#4a5d68]">{s.label}</span>
+                  <span className="h-2 overflow-hidden rounded-full bg-[#e8f0ec]">
+                    <span className="block h-full rounded-full bg-[#0e7b5b]" style={{ width: `${(s.count / stageMax) * 100}%` }} />
                   </span>
-                  <span className="text-right font-semibold text-[#0f172a]">{s.count}</span>
+                  <span className="text-right font-semibold text-[#0f2a45]">{s.count}</span>
                 </Link>
               </li>
             ))}
@@ -273,17 +273,17 @@ async function CareersOverview({ staffId }: { staffId: string }) {
               action={<Link href="/admin/careers" className={buttonClass("primary", "sm")}>Manage jobs</Link>}
             />
           ) : (
-            <ul className="divide-y divide-[#eef2f7]">
+            <ul className="divide-y divide-[#e8f0ec]">
               {recent.map((a) => (
                 <li key={a.id}>
-                  <Link href={`/admin/careers/applications/${a.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f8fafc]">
+                  <Link href={`/admin/careers/applications/${a.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f3f7fa]">
                     <span className="min-w-0">
-                      <span className="block truncate text-[13.5px] font-semibold text-[#0f172a]">{a.full_name}</span>
-                      <span className="block truncate text-[12.5px] text-[#64748b]">{a.job?.title ?? "—"}</span>
+                      <span className="block truncate text-[13.5px] font-semibold text-[#0f2a45]">{a.full_name}</span>
+                      <span className="block truncate text-[12.5px] text-[#5b6e7a]">{a.job?.title ?? "—"}</span>
                     </span>
                     <span className="flex shrink-0 flex-col items-end gap-1">
                       <ApplicationStatusBadge status={a.status} />
-                      <span className="text-[11.5px] text-[#94a3b8]">{timeAgo(a.created_at)}</span>
+                      <span className="text-[11.5px] text-[#8a9ba6]">{timeAgo(a.created_at)}</span>
                     </span>
                   </Link>
                 </li>
@@ -326,13 +326,13 @@ async function BlogOverview() {
         {recent.length === 0 ? (
           <EmptyState title="No posts yet" action={<Link href="/admin/blog/new" className={buttonClass("primary", "sm")}>Write the first post</Link>} />
         ) : (
-          <ul className="divide-y divide-[#eef2f7]">
+          <ul className="divide-y divide-[#e8f0ec]">
             {recent.map((p) => (
               <li key={p.id}>
-                <Link href={`/admin/blog/${p.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f8fafc]">
+                <Link href={`/admin/blog/${p.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-[#f3f7fa]">
                   <span className="min-w-0">
-                    <span className="block truncate text-[13.5px] font-semibold text-[#0f172a]">{p.title}</span>
-                    <span className="text-[12px] text-[#94a3b8]">Edited {timeAgo(p.updated_at)}</span>
+                    <span className="block truncate text-[13.5px] font-semibold text-[#0f2a45]">{p.title}</span>
+                    <span className="text-[12px] text-[#8a9ba6]">Edited {timeAgo(p.updated_at)}</span>
                   </span>
                   <PostStatusBadge status={p.status} publishedAt={p.published_at} />
                 </Link>
@@ -361,12 +361,12 @@ function Kpi({
   alert?: boolean;
 }) {
   const body = (
-    <Card className={`h-full p-4 transition ${href ? "hover:border-[#bfdbfe]" : ""} ${alert ? "!border-[#fde68a] !bg-[#fffbeb]" : ""}`}>
-      <p className="text-[12px] font-semibold text-[#64748b]">{label}</p>
-      <p className={`mt-1 text-[26px] font-bold leading-none tracking-tight ${alert ? "text-[#b45309]" : "text-[#0b2c5e]"}`}>
+    <Card className={`h-full p-4 transition ${href ? "hover:border-[#c5e8dc]" : ""} ${alert ? "!border-[#fde68a] !bg-[#fffbeb]" : ""}`}>
+      <p className="text-[12px] font-semibold text-[#5b6e7a]">{label}</p>
+      <p className={`mt-1 text-[26px] font-bold leading-none tracking-tight ${alert ? "text-[#b45309]" : "text-[#0f2a45]"}`}>
         {typeof value === "number" ? value.toLocaleString("en-IN") : value}
       </p>
-      {hint && <p className={`mt-1.5 text-[11.5px] font-medium ${hintTone === "down" ? "text-[#b91c1c]" : "text-[#15803d]"}`}>{hint}</p>}
+      {hint && <p className={`mt-1.5 text-[11.5px] font-medium ${hintTone === "down" ? "text-[#b91c1c]" : "text-[#0b6550]"}`}>{hint}</p>}
     </Card>
   );
   return href ? <Link href={href} className="block">{body}</Link> : body;
@@ -374,9 +374,9 @@ function Kpi({
 
 function CardTitle({ title, href }: { title: string; href: string }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#eef2f7] px-5 py-3.5">
-      <h2 className="text-[14px] font-bold text-[#0b2c5e]">{title}</h2>
-      <Link href={href} className="text-[12.5px] font-semibold text-[#2563eb] hover:underline">View all</Link>
+    <div className="flex items-center justify-between border-b border-[#e8f0ec] px-5 py-3.5">
+      <h2 className="text-[14px] font-bold text-[#0f2a45]">{title}</h2>
+      <Link href={href} className="text-[12.5px] font-semibold text-[#0e7b5b] hover:underline">View all</Link>
     </div>
   );
 }
@@ -384,19 +384,19 @@ function CardTitle({ title, href }: { title: string; href: string }) {
 function Breakdown({ title, rows, total }: { title: string; rows: [string, number][]; total: number }) {
   return (
     <Card className="p-5">
-      <h2 className="mb-4 text-[14px] font-bold text-[#0b2c5e]">{title}</h2>
+      <h2 className="mb-4 text-[14px] font-bold text-[#0f2a45]">{title}</h2>
       {rows.length === 0 ? (
-        <p className="text-[13px] text-[#94a3b8]">No data yet.</p>
+        <p className="text-[13px] text-[#8a9ba6]">No data yet.</p>
       ) : (
         <ul className="space-y-2.5">
           {rows.map(([label, n]) => (
             <li key={label} className="text-[12.5px]">
               <div className="mb-1 flex justify-between gap-2">
-                <span className="truncate text-[#475569]">{label}</span>
-                <span className="shrink-0 font-semibold text-[#0f172a]">{n}</span>
+                <span className="truncate text-[#4a5d68]">{label}</span>
+                <span className="shrink-0 font-semibold text-[#0f2a45]">{n}</span>
               </div>
-              <span className="block h-1.5 overflow-hidden rounded-full bg-[#eef2f7]">
-                <span className="block h-full rounded-full bg-[#0b2c5e]" style={{ width: `${(n / Math.max(total, 1)) * 100}%` }} />
+              <span className="block h-1.5 overflow-hidden rounded-full bg-[#e8f0ec]">
+                <span className="block h-full rounded-full bg-[#0f2a45]" style={{ width: `${(n / Math.max(total, 1)) * 100}%` }} />
               </span>
             </li>
           ))}

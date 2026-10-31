@@ -1,11 +1,13 @@
 import "server-only";
-import { createHash } from "node:crypto";
 import { env, isSupabaseAdminConfigured } from "@/lib/env";
 import { sendEmail } from "@/lib/email/send";
+import { enforceRateLimits, hashIp } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { LeadConfirmationEmail } from "@/emails/LeadConfirmationEmail";
 import { NewLeadAlertEmail } from "@/emails/NewLeadAlertEmail";
 import type { Attribution, PublicLead } from "./schema";
+
+export { hashIp } from "@/lib/rate-limit";
 
 const DEDUPE_WINDOW_DAYS = 30;
 const MIN_FILL_MS = 2000;
@@ -15,11 +17,6 @@ export type CaptureMeta = { ip: string | null; userAgent: string | null };
 export type CaptureResult =
   | { ok: true; reference: string; leadId: string | null; repeat: boolean; notify: boolean }
   | { ok: false; status: number; error: string };
-
-export function hashIp(ip: string | null): string | null {
-  if (!ip) return null;
-  return createHash("sha256").update(`${env.ipHashSalt}:${ip}`).digest("hex").slice(0, 32);
-}
 
 function looksLikeBot(lead: PublicLead): boolean {
   if (lead.company_website) return true;
@@ -33,25 +30,17 @@ export async function captureLead(lead: PublicLead, meta: CaptureMeta): Promise<
   }
 
   if (!isSupabaseAdminConfigured()) {
-    console.error("[leads] Supabase is not configured; lead not stored:", lead.name, lead.phone);
+    console.error("[leads] Supabase is not configured; lead not stored");
     return { ok: false, status: 503, error: "We couldn't save your request right now. Please call us instead." };
   }
 
   const db = createAdminClient();
   const ipHash = hashIp(meta.ip);
-
-  const checks = [
-    ipHash ? db.rpc("check_rate_limit", { p_key: `lead:ip:${ipHash}`, p_limit: 6, p_window_seconds: 600 }) : null,
-    db.rpc("check_rate_limit", { p_key: `lead:phone:${lead.phone}`, p_limit: 4, p_window_seconds: 3600 }),
-  ];
-  for (const check of checks) {
-    if (!check) continue;
-    const { data: allowed, error } = await check;
-    if (error) console.error("[leads] rate limit check failed:", error.message);
-    else if (!allowed) {
-      return { ok: false, status: 429, error: "Too many requests. Please wait a few minutes or call us." };
-    }
-  }
+  const limited = await enforceRateLimits(db, [
+    ...(ipHash ? [{ key: `lead:ip:${ipHash}`, limit: 6, windowSeconds: 600 }] : []),
+    { key: `lead:phone:${lead.phone}`, limit: 4, windowSeconds: 3600 },
+  ]);
+  if (limited) return limited;
 
   const attribution: Attribution = lead.attribution ?? {};
   const since = new Date(Date.now() - DEDUPE_WINDOW_DAYS * 86_400_000).toISOString();

@@ -16,7 +16,7 @@ function Stars({ value }: { value: number }) {
   return (
     <span className="text-[#f59e0b]" aria-label={`${value} out of 5 stars`}>
       {"★".repeat(value)}
-      <span className="text-[#e2e8f0]">{"★".repeat(5 - value)}</span>
+      <span className="text-[#d7e4de]">{"★".repeat(5 - value)}</span>
     </span>
   );
 }
@@ -28,7 +28,7 @@ export default function ReviewsPage() {
   const sorted = [...reviews].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       {summary && (
         <JsonLd
           data={{
@@ -66,20 +66,20 @@ export default function ReviewsPage() {
 
       <section className={`${container} py-12`}>
         {sorted.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-[#cbd5e1] bg-white p-8 text-center">
-            <p className="text-[18px] font-bold text-[#0b2c5e]">Client reviews are being collected</p>
-            <p className="mx-auto mt-2 max-w-xl text-[15.5px] leading-relaxed text-[#475569]">
+          <div className="rounded-2xl border border-dashed border-[#bfd4cb] bg-white p-8 text-center">
+            <p className="text-[18px] font-bold text-[#0f2a45]">Client reviews are being collected</p>
+            <p className="mx-auto mt-2 max-w-xl text-[15.5px] leading-relaxed text-[#4a5d68]">
               We only publish genuine reviews, with the client&apos;s permission. If you&apos;ve worked with us, we&apos;d love to hear how it went.
             </p>
           </div>
         ) : (
           <ul className="columns-1 gap-5 md:columns-2 lg:columns-3">
             {sorted.map((r) => (
-              <li key={`${r.name}-${r.date}`} className="mb-5 break-inside-avoid rounded-2xl border border-[#e2e8f0] bg-white p-5">
+              <li key={`${r.name}-${r.date}`} className="mb-5 break-inside-avoid rounded-2xl border border-[#d7e4de] bg-white p-5">
                 <Stars value={r.rating} />
-                <p className="mt-3 text-[15.5px] leading-relaxed text-[#334155]">&ldquo;{r.text}&rdquo;</p>
-                <p className="mt-4 text-[15px] font-bold text-[#0b2c5e]">{r.name}</p>
-                <p className="text-[13.5px] text-[#64748b]">
+                <p className="mt-3 text-[15.5px] leading-relaxed text-[#2c3f4e]">&ldquo;{r.text}&rdquo;</p>
+                <p className="mt-4 text-[15px] font-bold text-[#0f2a45]">{r.name}</p>
+                <p className="text-[13.5px] text-[#5b6e7a]">
                   {[r.service, r.city, fmtDate(r.date), `via ${r.source}`].filter(Boolean).join(" · ")}
                 </p>
               </li>

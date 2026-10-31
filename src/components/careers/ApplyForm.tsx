@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { type ChangeEvent, type FormEvent, useId, useRef, useState } from "react";
+import { publicJsonHeaders } from "@/lib/api-headers";
 import {
   RESUME_ACCEPT,
   RESUME_MAX_BYTES,
@@ -21,7 +22,7 @@ type Upload =
 type Fields = Record<string, string | undefined>;
 
 const field = "field-lux";
-const label = "mb-1.5 block text-[14.5px] font-semibold text-[#0f172a]";
+const label = "mb-1.5 block text-[14.5px] font-semibold text-[#0f2a45]";
 
 function extensionType(file: File): string {
   if (file.type && RESUME_TYPES[file.type]) return file.type;
@@ -75,7 +76,7 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
     try {
       const res = await fetch("/api/careers/upload-url", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: publicJsonHeaders,
         body: JSON.stringify({ jobId, fileName: file.name, fileSize: file.size, fileType: type }),
       });
       const body = (await res.json().catch(() => ({}))) as { ok?: boolean; path?: string; uploadUrl?: string; error?: string };
@@ -106,7 +107,7 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
     try {
       const res = await fetch("/api/careers/apply", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: publicJsonHeaders,
         body: JSON.stringify({
           jobId,
           full_name: value("full_name"),
@@ -158,23 +159,23 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
 
   if (reference !== null) {
     return (
-      <div role="status" className="rounded-2xl border border-[#bbf7d0] bg-[#f0fdf4] px-6 py-10 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#16a34a] text-white">
+      <div role="status" className="rounded-2xl border border-[#c5e8dc] bg-[#e8f6f1] px-6 py-10 text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#0e7b5b] text-white">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
             <path d="m5 12.5 4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <p className="mt-4 text-[22px] font-bold tracking-tight text-[#14532d]">Application submitted</p>
-        <p className="mx-auto mt-2 max-w-md text-[15.5px] leading-relaxed text-[#166534]">
+        <p className="mt-4 text-[22px] font-bold tracking-tight text-[#0f3f32]">Application submitted</p>
+        <p className="mx-auto mt-2 max-w-md text-[15.5px] leading-relaxed text-[#145a45]">
           Thanks for applying for <strong>{jobTitle}</strong>. We&apos;ve emailed you a confirmation — our hiring team will be in
           touch if your profile is a match.
         </p>
         {reference && (
-          <p className="mt-3 text-[14.5px] text-[#166534]">
+          <p className="mt-3 text-[14.5px] text-[#145a45]">
             Your reference: <span className="font-bold">{reference}</span>
           </p>
         )}
-        <Link href="/careers" className="mt-6 inline-flex h-11 items-center rounded-xl bg-white px-5 text-[15px] font-semibold text-[#15803d] ring-1 ring-[#bbf7d0] hover:bg-[#dcfce7]">
+        <Link href="/careers" className="mt-6 inline-flex h-11 items-center rounded-xl bg-white px-5 text-[15px] font-semibold text-[#0b6550] ring-1 ring-[#c5e8dc] hover:bg-[#e3f2ed]">
           See other open roles
         </Link>
       </div>
@@ -200,7 +201,7 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
       </div>
 
       <fieldset className="space-y-4">
-        <legend className="mb-3 text-[17px] font-bold text-[#0b2c5e]">Your details</legend>
+        <legend className="mb-3 text-[17px] font-bold text-[#0f2a45]">Your details</legend>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor={`${uid}-name`} className={label}>Full name *</label>
@@ -225,7 +226,7 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
       </fieldset>
 
       <fieldset className="space-y-4">
-        <legend className="mb-3 text-[17px] font-bold text-[#0b2c5e]">Experience</legend>
+        <legend className="mb-3 text-[17px] font-bold text-[#0f2a45]">Experience</legend>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor={`${uid}-exp`} className={label}>Total experience (years)</label>
@@ -267,11 +268,11 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
       </fieldset>
 
       <fieldset>
-        <legend className="mb-3 text-[17px] font-bold text-[#0b2c5e]">Résumé *</legend>
+        <legend className="mb-3 text-[17px] font-bold text-[#0f2a45]">Résumé *</legend>
         <input ref={fileInput} type="file" accept={RESUME_ACCEPT} onChange={onFile} className="sr-only" id={`${uid}-resume`} aria-describedby={`${uid}-resume-help`} />
         <div
           className={`rounded-2xl border-2 border-dashed p-5 transition ${
-            fields.resume || upload.state === "error" ? "border-[#fca5a5] bg-[#fef2f2]" : upload.state === "done" ? "border-[#86efac] bg-[#f0fdf4]" : "border-[#cbd5e1] bg-[#f8fafc]"
+            fields.resume || upload.state === "error" ? "border-[#fca5a5] bg-[#fef2f2]" : upload.state === "done" ? "border-[#8ecfbc] bg-[#e8f6f1]" : "border-[#bfd4cb] bg-[#f3f7fa]"
           }`}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
@@ -282,18 +283,18 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
         >
           {upload.state === "uploading" ? (
             <div>
-              <p className="truncate text-[15px] font-semibold text-[#0f172a]">Uploading {upload.name}…</p>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#e2e8f0]" role="progressbar" aria-valuenow={upload.progress} aria-valuemin={0} aria-valuemax={100}>
-                <div className="h-full rounded-full bg-[#2563eb] transition-[width]" style={{ width: `${upload.progress}%` }} />
+              <p className="truncate text-[15px] font-semibold text-[#0f2a45]">Uploading {upload.name}…</p>
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#d7e4de]" role="progressbar" aria-valuenow={upload.progress} aria-valuemin={0} aria-valuemax={100}>
+                <div className="h-full rounded-full bg-[#0e7b5b] transition-[width]" style={{ width: `${upload.progress}%` }} />
               </div>
             </div>
           ) : upload.state === "done" ? (
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="min-w-0">
-                <p className="truncate text-[15px] font-semibold text-[#14532d]">✓ {upload.name}</p>
-                <p className="text-[13.5px] text-[#166534]">{(upload.size / 1024 / 1024).toFixed(2)} MB · uploaded securely</p>
+                <p className="truncate text-[15px] font-semibold text-[#0f3f32]">✓ {upload.name}</p>
+                <p className="text-[13.5px] text-[#145a45]">{(upload.size / 1024 / 1024).toFixed(2)} MB · uploaded securely</p>
               </div>
-              <button type="button" onClick={() => fileInput.current?.click()} className="text-[14.5px] font-semibold text-[#15803d] hover:underline">
+              <button type="button" onClick={() => fileInput.current?.click()} className="text-[14.5px] font-semibold text-[#0b6550] hover:underline">
                 Replace
               </button>
             </div>
@@ -302,11 +303,11 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
               <button
                 type="button"
                 onClick={() => fileInput.current?.click()}
-                className="inline-flex h-11 items-center rounded-xl bg-white px-5 text-[15px] font-semibold text-[#1d4ed8] shadow-sm ring-1 ring-[#bfdbfe] hover:bg-[#eff6ff]"
+                className="inline-flex h-11 items-center rounded-xl bg-white px-5 text-[15px] font-semibold text-[#0b6550] shadow-sm ring-1 ring-[#c5e8dc] hover:bg-[#e3f2ed]"
               >
                 Choose file
               </button>
-              <p id={`${uid}-resume-help`} className="text-[13.5px] text-[#64748b]">or drag it here · PDF, DOC or DOCX · max 5 MB</p>
+              <p id={`${uid}-resume-help`} className="text-[13.5px] text-[#5b6e7a]">or drag it here · PDF, DOC or DOCX · max 5 MB</p>
             </div>
           )}
           {upload.state === "error" && <p className="mt-3 text-[13.5px] font-medium text-[#dc2626]">{upload.message}</p>}
@@ -316,7 +317,7 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
 
       {questions.length > 0 && (
         <fieldset className="space-y-4">
-          <legend className="mb-3 text-[17px] font-bold text-[#0b2c5e]">A few questions</legend>
+          <legend className="mb-3 text-[17px] font-bold text-[#0f2a45]">A few questions</legend>
           {questions.map((q) => {
             const key = `answers.${q.id}`;
             const id = `${uid}-q-${q.id}`;
@@ -344,12 +345,12 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
       )}
 
       <div>
-        <label htmlFor={`${uid}-cover`} className={label}>Why are you a good fit? <span className="font-normal text-[#64748b]">(optional)</span></label>
+        <label htmlFor={`${uid}-cover`} className={label}>Why are you a good fit? <span className="font-normal text-[#5b6e7a]">(optional)</span></label>
         <textarea id={`${uid}-cover`} name="cover_letter" rows={5} maxLength={5000} className={`${field} resize-y`} placeholder="A few lines about your experience and why this role interests you." />
       </div>
 
-      <label className="flex items-start gap-3 text-[14.5px] leading-relaxed text-[#475569]">
-        <input type="checkbox" name="consent" required className="mt-1 h-4 w-4 shrink-0 accent-[#2563eb]" />
+      <label className="flex items-start gap-3 text-[14.5px] leading-relaxed text-[#4a5d68]">
+        <input type="checkbox" name="consent" required className="mt-1 h-4 w-4 shrink-0 accent-[#0e7b5b]" />
         <span>
           I consent to Filing360 storing and processing my application details and résumé for recruitment purposes, for up to
           12 months. I can ask for them to be deleted at any time.
@@ -366,7 +367,7 @@ export function ApplyForm({ jobId, jobTitle, questions }: Props) {
       <button
         type="submit"
         disabled={submitting || upload.state === "uploading"}
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0b2c5e] px-6 text-[16px] font-semibold text-white transition hover:bg-[#123a74] disabled:opacity-70 sm:w-auto"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0f2a45] px-6 text-[16px] font-semibold text-white transition hover:bg-[#173a58] disabled:opacity-70 sm:w-auto"
       >
         {submitting ? "Submitting…" : "Submit application"} <span aria-hidden>→</span>
       </button>

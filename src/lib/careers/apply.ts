@@ -4,7 +4,7 @@ import { ApplicationReceivedEmail } from "@/emails/ApplicationReceivedEmail";
 import { NewApplicationAlertEmail } from "@/emails/NewApplicationAlertEmail";
 import { sendEmail } from "@/lib/email/send";
 import { env, isSupabaseAdminConfigured } from "@/lib/env";
-import { hashIp } from "@/lib/leads/capture";
+import { enforceRateLimits, hashIp } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isAcceptingApplications, parseQuestions, type ScreeningAnswer } from "./constants";
 import { finalizeResume, removeResume, ResumeError } from "./resumes";
@@ -18,25 +18,6 @@ type Failure = { ok: false; status: number; error: string; fields?: Record<strin
 export type ApplyResult =
   | { ok: true; reference: string; applicationId: string | null; jobTitle: string }
   | Failure;
-
-type Db = ReturnType<typeof createAdminClient>;
-
-/** Returns a failure if any limit is exceeded; fails open if the limiter itself errors. */
-export async function enforceRateLimits(
-  db: Db,
-  limits: { key: string; limit: number; windowSeconds: number }[],
-): Promise<Failure | null> {
-  for (const { key, limit, windowSeconds } of limits) {
-    const { data: allowed, error } = await db.rpc("check_rate_limit", {
-      p_key: key,
-      p_limit: limit,
-      p_window_seconds: windowSeconds,
-    });
-    if (error) console.error("[careers] rate limit check failed:", error.message);
-    else if (!allowed) return { ok: false, status: 429, error: "Too many attempts. Please wait a few minutes and try again." };
-  }
-  return null;
-}
 
 export async function submitApplication(input: ApplicationInput, meta: Meta): Promise<ApplyResult> {
   if (input.company_website || (input.started_at && Date.now() - input.started_at < MIN_FILL_MS)) {

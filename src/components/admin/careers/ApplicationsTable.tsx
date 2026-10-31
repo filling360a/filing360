@@ -68,8 +68,8 @@ export function ApplicationsTable({ applications, recruiters, showJob }: Props) 
   return (
     <div>
       {selected.size > 0 && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-[#e3e8ef] bg-[#f8fafc] px-4 py-2.5">
-          <span className="text-[13px] font-semibold text-[#0f172a]">{selected.size} selected</span>
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#d7e4de] bg-[#f3f7fa] px-4 py-2.5">
+          <span className="text-[13px] font-semibold text-[#0f2a45]">{selected.size} selected</span>
           <select value={action} onChange={(e) => setAction(e.target.value)} className={`${inputClass} !w-auto !py-1.5`} aria-label="Bulk action">
             <optgroup label="Move to stage">
               {APPLICATION_STATUSES.map((s) => (
@@ -100,14 +100,14 @@ export function ApplicationsTable({ applications, recruiters, showJob }: Props) 
       <div className="overflow-x-auto">
         <table className="w-full min-w-[960px] text-left text-[13.5px]">
           <thead>
-            <tr className="border-b border-[#e3e8ef] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">
+            <tr className="border-b border-[#d7e4de] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">
               <th className="w-10 px-4 py-3">
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={() => setSelected(allSelected ? new Set() : new Set(applications.map((a) => a.id)))}
                   aria-label="Select all"
-                  className="h-4 w-4 accent-[#2563eb]"
+                  className="h-4 w-4 accent-[#0e7b5b]"
                 />
               </th>
               <th className="px-3 py-3">Candidate</th>
@@ -122,43 +122,43 @@ export function ApplicationsTable({ applications, recruiters, showJob }: Props) 
           </thead>
           <tbody>
             {applications.map((a) => (
-              <tr key={a.id} className={`border-b border-[#eef2f7] last:border-0 hover:bg-[#f8fafc] ${selected.has(a.id) ? "bg-[#eff6ff]" : ""}`}>
+              <tr key={a.id} className={`border-b border-[#e8f0ec] last:border-0 hover:bg-[#f3f7fa] ${selected.has(a.id) ? "bg-[#e3f2ed]" : ""}`}>
                 <td className="px-4 py-3 align-top">
                   <input
                     type="checkbox"
                     checked={selected.has(a.id)}
                     onChange={() => toggle(a.id)}
                     aria-label={`Select ${a.full_name}`}
-                    className="h-4 w-4 accent-[#2563eb]"
+                    className="h-4 w-4 accent-[#0e7b5b]"
                   />
                 </td>
                 <td className="px-3 py-3 align-top">
-                  <Link href={`/admin/careers/applications/${a.id}`} className="font-semibold text-[#0b2c5e] hover:text-[#2563eb]">
+                  <Link href={`/admin/careers/applications/${a.id}`} className="font-semibold text-[#0f2a45] hover:text-[#0e7b5b]">
                     {a.full_name}
                   </Link>
-                  <div className="mt-0.5 text-[12.5px] text-[#64748b]">
+                  <div className="mt-0.5 text-[12.5px] text-[#5b6e7a]">
                     <span className="break-all">{a.email}</span>
                     {a.current_city ? ` · ${a.current_city}` : ""}
                   </div>
-                  <div className="text-[11.5px] text-[#94a3b8]">{a.ref}</div>
+                  <div className="text-[11.5px] text-[#8a9ba6]">{a.ref}</div>
                 </td>
                 {showJob && (
-                  <td className="max-w-[220px] px-3 py-3 align-top text-[#334155]">
+                  <td className="max-w-[220px] px-3 py-3 align-top text-[#2c3f4e]">
                     {a.job ? (
                       <>
                         <span className="line-clamp-2">{a.job.title}</span>
-                        <span className="text-[12px] text-[#94a3b8]">{a.job.department}</span>
+                        <span className="text-[12px] text-[#8a9ba6]">{a.job.department}</span>
                       </>
                     ) : (
                       "—"
                     )}
                   </td>
                 )}
-                <td className="px-3 py-3 align-top text-[#334155]">
+                <td className="px-3 py-3 align-top text-[#2c3f4e]">
                   {a.total_experience !== null ? `${Number(a.total_experience)} yrs` : "—"}
-                  {notice(a.notice_period_days) && <div className="text-[12px] text-[#94a3b8]">{notice(a.notice_period_days)}</div>}
+                  {notice(a.notice_period_days) && <div className="text-[12px] text-[#8a9ba6]">{notice(a.notice_period_days)}</div>}
                 </td>
-                <td className="px-3 py-3 align-top text-[#334155]">
+                <td className="px-3 py-3 align-top text-[#2c3f4e]">
                   {lpa(a.current_ctc) || lpa(a.expected_ctc) ? `${lpa(a.current_ctc) ?? "—"} → ${lpa(a.expected_ctc) ?? "—"}` : "—"}
                 </td>
                 <td className="px-3 py-3 align-top">
@@ -167,10 +167,10 @@ export function ApplicationsTable({ applications, recruiters, showJob }: Props) 
                 <td className="px-3 py-3 align-top">
                   <Rating value={a.rating} />
                 </td>
-                <td className="px-3 py-3 align-top text-[#334155]">
-                  {a.assignee ? a.assignee.full_name || a.assignee.email : <span className="text-[#94a3b8]">Unassigned</span>}
+                <td className="px-3 py-3 align-top text-[#2c3f4e]">
+                  {a.assignee ? a.assignee.full_name || a.assignee.email : <span className="text-[#8a9ba6]">Unassigned</span>}
                 </td>
-                <td className="px-3 py-3 text-right align-top text-[12.5px] text-[#64748b]" title={formatDateTime(a.created_at)} suppressHydrationWarning>
+                <td className="px-3 py-3 text-right align-top text-[12.5px] text-[#5b6e7a]" title={formatDateTime(a.created_at)} suppressHydrationWarning>
                   {timeAgo(a.created_at)}
                 </td>
               </tr>

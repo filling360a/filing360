@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 
 export default function IndustriesHubPage() {
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <PageHero
         eyebrow="Who we help"
         title="Compliance that fits how you work"

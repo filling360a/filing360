@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b2c5e",
+  themeColor: "#0f2a45",
 };
 
 export default function RootLayout({
@@ -57,7 +57,7 @@ export default function RootLayout({
       lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-ink">
+      <body className="min-h-full flex flex-col bg-background text-ink">
         {children}
         <CookieBanner />
         <Analytics />

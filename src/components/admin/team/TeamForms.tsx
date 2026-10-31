@@ -14,7 +14,7 @@ function CredentialsBox({ email, password }: { email: string; password: string }
   return (
     <div className="rounded-lg border border-[#fde68a] bg-[#fffbeb] p-3 text-left text-[12.5px] text-[#78350f]">
       <p className="font-semibold">Shown only once — copy it now.</p>
-      <dl className="mt-2 space-y-1 font-mono text-[12.5px] text-[#0f172a]">
+      <dl className="mt-2 space-y-1 font-mono text-[12.5px] text-[#0f2a45]">
         <div className="flex gap-2"><dt className="w-[70px] shrink-0 text-[#92400e]">Email</dt><dd className="break-all">{email}</dd></div>
         <div className="flex gap-2"><dt className="w-[70px] shrink-0 text-[#92400e]">Password</dt><dd className="break-all">{password}</dd></div>
       </dl>
@@ -58,7 +58,7 @@ export function InviteMemberForm({ emailEnabled }: { emailEnabled: boolean }) {
       <Button type="submit" disabled={pending} className="w-full">
         {pending ? (emailEnabled ? "Sending…" : "Creating…") : emailEnabled ? "Send invite" : "Create account"}
       </Button>
-      <p className="text-[11.5px] text-[#94a3b8]">
+      <p className="text-[11.5px] text-[#8a9ba6]">
         {emailEnabled
           ? "They'll get an email to set their password."
           : "Email isn't set up yet, so you'll get a temporary password to share. They'll set their own on first sign-in."}
@@ -140,7 +140,7 @@ export function MemberControls({
           <CredentialsBox {...reset.credentials} />
         </div>
       ) : (
-        reset?.message && <span className="text-[12px] text-[#15803d]">{reset.message}</span>
+        reset?.message && <span className="text-[12px] text-[#0b6550]">{reset.message}</span>
       )}
     </div>
   );

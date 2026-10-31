@@ -31,7 +31,7 @@ export default function ReferPage() {
   ];
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <PageHero
         eyebrow="Refer & earn"
         title={`Recommend us. Earn ${reward}.`}
@@ -59,10 +59,10 @@ export default function ReferPage() {
         <SectionHeading title="How it works" />
         <ol className="mt-6 grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
-            <li key={s.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Step {i + 1}</span>
-              <p className="mt-1 text-[17px] font-bold text-[#0b2c5e]">{s.title}</p>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-[#475569]">{s.body}</p>
+            <li key={s.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Step {i + 1}</span>
+              <p className="mt-1 text-[17px] font-bold text-[#0f2a45]">{s.title}</p>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-[#4a5d68]">{s.body}</p>
             </li>
           ))}
         </ol>
@@ -70,7 +70,7 @@ export default function ReferPage() {
 
       <section className={`${container} pb-12`}>
         <SectionHeading title="Program terms" />
-        <ol className="article-body mt-5 list-decimal rounded-2xl border border-[#e2e8f0] bg-white p-6 pl-10">
+        <ol className="article-body mt-5 list-decimal rounded-2xl border border-[#d7e4de] bg-white p-6 pl-10">
           {terms.map((t) => (
             <li key={t}>{t}</li>
           ))}

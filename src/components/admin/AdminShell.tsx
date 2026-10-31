@@ -60,7 +60,7 @@ export function AdminShell({ nav, user, children }: Props) {
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[232px_1fr]">
-      <aside className="hidden flex-col bg-[#0b2c5e] px-3 py-5 lg:sticky lg:top-0 lg:flex lg:h-screen">
+      <aside className="hidden flex-col bg-[#0f2a45] px-3 py-5 lg:sticky lg:top-0 lg:flex lg:h-screen">
         <Link href="/admin" className="mb-6 flex items-center rounded-lg bg-white px-2 py-1" aria-label={`${siteConfig.brandName} admin`}>
           <Logo className="h-9 w-auto" />
         </Link>
@@ -83,7 +83,7 @@ export function AdminShell({ nav, user, children }: Props) {
         </div>
       </aside>
 
-      <header className="sticky top-0 z-30 bg-[#0b2c5e] lg:hidden">
+      <header className="sticky top-0 z-30 bg-[#0f2a45] lg:hidden">
         <div className="flex h-14 items-center justify-between px-4">
           <Link href="/admin" className="flex items-center rounded-md bg-white px-1.5 py-0.5" aria-label={`${siteConfig.brandName} admin`}>
             <Logo className="h-8 w-auto" />

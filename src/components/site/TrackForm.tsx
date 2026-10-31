@@ -1,12 +1,13 @@
 "use client";
 
 import { FormEvent, useId, useState } from "react";
+import { publicJsonHeaders } from "@/lib/api-headers";
 import type { TrackStatus } from "@/lib/track";
 
 const TONE = {
-  progress: "bg-[#eff6ff] text-[#1d4ed8]",
-  success: "bg-[#dcfce7] text-[#15803d]",
-  closed: "bg-[#f1f5f9] text-[#475569]",
+  progress: "bg-[#e3f2ed] text-[#0b6550]",
+  success: "bg-[#e3f2ed] text-[#0b6550]",
+  closed: "bg-[#eef4f1] text-[#4a5d68]",
 };
 
 const fmt = (iso: string) =>
@@ -28,7 +29,7 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
     try {
       const res = await fetch("/api/track", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: publicJsonHeaders,
         body: JSON.stringify({ ref: String(data.get("ref") ?? ""), phone: String(data.get("phone") ?? "") }),
       });
       const body = (await res.json().catch(() => ({}))) as {
@@ -53,10 +54,10 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={onSubmit} className="rounded-2xl border border-[#e2e8f0] bg-white p-5 shadow-[0_20px_50px_-24px_rgba(15,23,42,0.3)] md:p-6" noValidate>
+      <form onSubmit={onSubmit} className="rounded-2xl border border-[#d7e4de] bg-white p-5 shadow-[0_20px_50px_-24px_rgba(15,23,42,0.3)] md:p-6" noValidate>
         <div className="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end">
           <div>
-            <label htmlFor={`${uid}-ref`} className="text-[14px] font-semibold text-[#0b2c5e]">Reference number</label>
+            <label htmlFor={`${uid}-ref`} className="text-[14px] font-semibold text-[#0f2a45]">Reference number</label>
             <input
               id={`${uid}-ref`}
               name="ref"
@@ -72,7 +73,7 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
             {fields.ref && <p id={`${uid}-ref-error`} className="mt-1 text-[13.5px] font-medium text-[#dc2626]">{fields.ref}</p>}
           </div>
           <div>
-            <label htmlFor={`${uid}-phone`} className="text-[14px] font-semibold text-[#0b2c5e]">Mobile number</label>
+            <label htmlFor={`${uid}-phone`} className="text-[14px] font-semibold text-[#0f2a45]">Mobile number</label>
             <input
               id={`${uid}-phone`}
               name="phone"
@@ -90,7 +91,7 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
           <button
             type="submit"
             disabled={busy}
-            className="h-12 rounded-xl bg-[#0b2c5e] px-6 text-[15px] font-semibold text-white transition hover:bg-[#123a74] disabled:opacity-70"
+            className="h-12 rounded-xl bg-[#0f2a45] px-6 text-[15px] font-semibold text-white transition hover:bg-[#173a58] disabled:opacity-70"
           >
             {busy ? "Checking…" : "Check status"}
           </button>
@@ -99,17 +100,17 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
       </form>
 
       {status && (
-        <section aria-live="polite" className="rounded-2xl border border-[#e2e8f0] bg-white p-5 md:p-7">
+        <section aria-live="polite" className="rounded-2xl border border-[#d7e4de] bg-white p-5 md:p-7">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <p className="text-[14px] text-[#64748b]">
-                {status.firstName ? `Hi ${status.firstName}, here's the latest on` : "Latest status for"} <span className="font-mono font-semibold text-[#0b2c5e]">{status.ref}</span>
+              <p className="text-[14px] text-[#5b6e7a]">
+                {status.firstName ? `Hi ${status.firstName}, here's the latest on` : "Latest status for"} <span className="font-mono font-semibold text-[#0f2a45]">{status.ref}</span>
               </p>
-              <h2 className="mt-1 text-[22px] font-bold text-[#0b2c5e]">{status.subject}</h2>
+              <h2 className="mt-1 text-[22px] font-bold text-[#0f2a45]">{status.subject}</h2>
             </div>
             <span className={`rounded-full px-3 py-1 text-[14px] font-semibold ${TONE[status.tone]}`}>{status.stage}</span>
           </div>
-          <p className="mt-3 text-[16px] leading-relaxed text-[#334155]">{status.detail}</p>
+          <p className="mt-3 text-[16px] leading-relaxed text-[#2c3f4e]">{status.detail}</p>
 
           <ol className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {status.steps.map((s, i) => (
@@ -117,10 +118,10 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
                 key={s.label}
                 className={`rounded-xl border px-3 py-3 text-[14.5px] ${
                   s.state === "done"
-                    ? "border-[#bbf7d0] bg-[#f0fdf4] text-[#15803d]"
+                    ? "border-[#c5e8dc] bg-[#e8f6f1] text-[#0b6550]"
                     : s.state === "current"
-                      ? "border-[#93c5fd] bg-[#eff6ff] font-semibold text-[#1d4ed8]"
-                      : "border-[#e2e8f0] text-[#94a3b8]"
+                      ? "border-[#8ecfbc] bg-[#e3f2ed] font-semibold text-[#0b6550]"
+                      : "border-[#d7e4de] text-[#8a9ba6]"
                 }`}
               >
                 <span className="block text-[12px] uppercase tracking-[0.08em]">Step {i + 1}</span>
@@ -129,9 +130,9 @@ export function TrackForm({ initialRef = "" }: { initialRef?: string }) {
             ))}
           </ol>
 
-          <dl className="mt-6 grid gap-2 text-[14.5px] text-[#475569] sm:grid-cols-2">
-            <div><dt className="inline font-semibold text-[#334155]">Submitted: </dt><dd className="inline">{fmt(status.submittedAt)}</dd></div>
-            <div><dt className="inline font-semibold text-[#334155]">Last updated: </dt><dd className="inline">{fmt(status.updatedAt)}</dd></div>
+          <dl className="mt-6 grid gap-2 text-[14.5px] text-[#4a5d68] sm:grid-cols-2">
+            <div><dt className="inline font-semibold text-[#2c3f4e]">Submitted: </dt><dd className="inline">{fmt(status.submittedAt)}</dd></div>
+            <div><dt className="inline font-semibold text-[#2c3f4e]">Last updated: </dt><dd className="inline">{fmt(status.updatedAt)}</dd></div>
           </dl>
         </section>
       )}

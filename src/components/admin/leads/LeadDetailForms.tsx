@@ -76,7 +76,7 @@ export function ActivityComposer({ leadId }: { leadId: string }) {
         <Button type="submit" name="type" value="note" size="sm" disabled={pending}>Add note</Button>
         <Button type="submit" name="type" value="call" size="sm" variant="secondary" disabled={pending}>Log call</Button>
         {state?.error && <span className="text-[12.5px] font-medium text-[#b91c1c]">{state.error}</span>}
-        {state?.ok && <span className="text-[12.5px] font-medium text-[#15803d]">{state.message}</span>}
+        {state?.ok && <span className="text-[12.5px] font-medium text-[#0b6550]">{state.message}</span>}
       </div>
     </form>
   );
@@ -125,7 +125,7 @@ export function EmailComposer({ leadId, name, interest }: { leadId: string; name
               if (subjectRef.current) subjectRef.current.value = t.subject;
               if (bodyRef.current) bodyRef.current.value = t.body(forService);
             }}
-            className="rounded-full border border-[#d7dee8] px-2 py-0.5 text-[11.5px] font-medium text-[#475569] hover:bg-[#f8fafc]"
+            className="rounded-full border border-[#d0dcd6] px-2 py-0.5 text-[11.5px] font-medium text-[#4a5d68] hover:bg-[#f3f7fa]"
           >
             {t.label}
           </button>
@@ -136,7 +136,7 @@ export function EmailComposer({ leadId, name, interest }: { leadId: string; name
       {state?.error && <Alert>{state.error}</Alert>}
       {state?.ok && <Alert tone="green">{state.message}</Alert>}
       <Button type="submit" disabled={pending} className="w-full">{pending ? "Sending…" : "Send email"}</Button>
-      <p className="text-[11.5px] text-[#94a3b8]">Sent from the company address; replies come to your inbox.</p>
+      <p className="text-[11.5px] text-[#8a9ba6]">Sent from the company address; replies come to your inbox.</p>
     </form>
   );
 }

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useId, useRef, useState } from "react";
+import { FormEvent, useId, useRef, useState, type ReactNode } from "react";
+import { publicJsonHeaders } from "@/lib/api-headers";
 import { trackEvent } from "@/lib/consent";
 import { getAttribution } from "@/lib/leads/attribution-client";
 import { leadInterestOptions, siteConfig } from "@/lib/siteConfig";
@@ -27,6 +28,8 @@ type Props = {
   messagePlaceholder?: string;
   /** Sends the visitor to /thank-you after a successful submission. */
   redirect?: boolean;
+  /** Compact header pill, e.g. hero quote card. */
+  badge?: string;
 };
 
 type FieldErrors = Partial<Record<"name" | "phone" | "email" | "interest" | "city" | "message", string>>;
@@ -48,13 +51,14 @@ export function LeadForm({
   source,
   service,
   title = "Get a Free Quote",
-  subtitle = "Tell us your requirement and our experts will get back to you shortly.",
+  subtitle,
   submitLabel = "Get Free Quote",
   interestOptions: interestOverride,
   interestLabel = "Select Service",
   extra,
   messagePlaceholder = "Anything we should know? (optional)",
   redirect = true,
+  badge,
 }: Props) {
   const router = useRouter();
   const [reference, setReference] = useState<string | null>(null);
@@ -96,7 +100,7 @@ export function LeadForm({
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: publicJsonHeaders,
         body: JSON.stringify({
           salutation: value("title") || undefined,
           name: value("name"),
@@ -157,14 +161,21 @@ export function LeadForm({
   const shell =
     variant === "glass"
       ? "border-white/35 bg-white/20 shadow-[0_16px_40px_-18px_rgba(15,23,42,0.3)] backdrop-blur-md [&_.field-lux]:border-white/50 [&_.field-lux]:bg-white/45 [&_.field-lux]:backdrop-blur-sm"
-      : "border-[#e2e8f0] bg-white shadow-[0_20px_50px_-18px_rgba(15,23,42,0.28)]";
+      : "border-[#d7e4de] bg-white shadow-[0_20px_50px_-18px_rgba(15,23,42,0.28)]";
+
+  const resolvedSubtitle =
+    subtitle === undefined
+      ? compact
+        ? ""
+        : "Tell us your requirement and our experts will get back to you shortly."
+      : subtitle;
 
   if (reference !== null) {
     return (
       <div
         id={id}
         role="status"
-        className={`rounded-2xl border px-6 py-10 text-center text-ink ${shell} ${className}`}
+        className={`rounded-2xl border text-center text-ink ${compact ? "px-4 py-6" : "px-6 py-10"} ${shell} ${className}`}
       >
         <p className="text-2xl font-bold tracking-tight text-ink">
           Request received
@@ -199,151 +210,265 @@ export function LeadForm({
   return (
     <div
       id={id}
-      className={`rounded-2xl border p-5 text-ink md:p-6 ${shell} ${className}`}
+      className={`rounded-2xl border text-ink ${compact ? "flex flex-col px-4 py-4 md:px-5 md:py-5" : "p-5 md:p-6"} ${shell} ${className}`}
     >
-      <h2 className="text-xl font-bold tracking-tight text-ink md:text-[1.35rem]">
-        {title}
-      </h2>
-      <p className="mt-1.5 text-[15px] text-ink-muted">
-        {subtitle}
-      </p>
+      <div className={compact ? "flex items-center justify-between gap-3" : undefined}>
+        <h2 className={`font-bold tracking-tight text-ink ${compact ? "flex items-center gap-2 text-[17px] leading-tight md:text-[18px]" : "text-xl md:text-[1.35rem]"}`}>
+          {compact ? <SparkMark /> : null}
+          {title}
+        </h2>
+        {compact && badge ? (
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[#e8f6f1] px-2.5 py-1 text-[11.5px] font-semibold text-[#0e7b5b]">
+            <BoltMark />
+            {badge}
+          </span>
+        ) : null}
+      </div>
+      {resolvedSubtitle ? (
+        <p className={`text-ink-muted ${compact ? "mt-1 text-[13px] leading-snug" : "mt-1.5 text-[15px]"}`}>
+          {resolvedSubtitle}
+        </p>
+      ) : null}
 
-      <form onSubmit={onSubmit} onFocus={markStarted} className="mt-5 space-y-3">
+      <form onSubmit={onSubmit} onFocus={markStarted} className={compact ? "mt-2.5 flex flex-col gap-2" : "mt-5 space-y-3"}>
         <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
           <label htmlFor={`${uid}-website`}>Company website</label>
           <input id={`${uid}-website`} name="company_website" tabIndex={-1} autoComplete="off" />
         </div>
 
-        <div className="grid grid-cols-[4.75rem_1fr] gap-2">
-          <div>
-            <label htmlFor={`${uid}-title`} className="sr-only">
-              Title
-            </label>
-            <select
-              id={`${uid}-title`}
-              name="title"
-              defaultValue="Mr"
-              className="field-lux"
-            >
-              <option>Mr</option>
-              <option>Ms</option>
-              <option>Mrs</option>
-              <option>Dr</option>
-            </select>
+        {compact ? (
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label htmlFor={`${uid}-name`} className="sr-only">
+                Full name
+              </label>
+              <span className="relative block">
+                <FieldIcon>
+                  <PersonIcon />
+                </FieldIcon>
+                <input
+                  id={`${uid}-name`}
+                  name="name"
+                  required
+                  minLength={2}
+                  maxLength={120}
+                  placeholder="Full name"
+                  autoComplete="name"
+                  aria-invalid={Boolean(fieldErrors.name)}
+                  aria-describedby={fieldErrors.name ? `${uid}-name-error` : undefined}
+                  className="field-lux has-lead-icon"
+                />
+              </span>
+              {errorText("name")}
+            </div>
+            <div>
+              <label htmlFor={`${uid}-mobile`} className="sr-only">
+                Mobile number
+              </label>
+              <input type="hidden" name="countryCode" value="+91" />
+              <span className="relative block">
+                <FieldIcon>
+                  <PhoneIcon />
+                </FieldIcon>
+                <input
+                  id={`${uid}-mobile`}
+                  name="mobile"
+                  type="tel"
+                  required
+                  inputMode="tel"
+                  pattern="[0-9+\s-]{10,15}"
+                  placeholder="Mobile number"
+                  autoComplete="tel"
+                  aria-invalid={Boolean(fieldErrors.phone)}
+                  aria-describedby={fieldErrors.phone ? `${uid}-phone-error` : undefined}
+                  className="field-lux has-lead-icon"
+                />
+              </span>
+              {errorText("phone")}
+            </div>
+            <div>
+              <label htmlFor={`${uid}-email`} className="sr-only">
+                Email
+              </label>
+              <span className="relative block">
+                <FieldIcon>
+                  <MailIcon />
+                </FieldIcon>
+                <input
+                  id={`${uid}-email`}
+                  name="email"
+                  type="email"
+                  required
+                  maxLength={254}
+                  placeholder="Email"
+                  autoComplete="email"
+                  aria-invalid={Boolean(fieldErrors.email)}
+                  aria-describedby={fieldErrors.email ? `${uid}-email-error` : undefined}
+                  className="field-lux has-lead-icon"
+                />
+              </span>
+              {errorText("email")}
+            </div>
+            <div>
+              <label htmlFor={`${uid}-interest`} className="sr-only">
+                {interestLabel}
+              </label>
+              <span className="relative block">
+                <FieldIcon>
+                  <DocIcon />
+                </FieldIcon>
+                <select
+                  id={`${uid}-interest`}
+                  name="interest"
+                  required
+                  defaultValue={service?.name ?? ""}
+                  className="field-lux has-lead-icon"
+                >
+                  <option value="" disabled>
+                    {interestLabel}
+                  </option>
+                  {interestOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </span>
+              {errorText("interest")}
+            </div>
           </div>
-          <div>
-            <label htmlFor={`${uid}-name`} className="sr-only">
-              Full name
-            </label>
-            <input
-              id={`${uid}-name`}
-              name="name"
-              required
-              minLength={2}
-              maxLength={120}
-              placeholder="Full Name"
-              autoComplete="name"
-              aria-invalid={Boolean(fieldErrors.name)}
-              aria-describedby={fieldErrors.name ? `${uid}-name-error` : undefined}
-              className="field-lux"
-            />
-            {errorText("name")}
-          </div>
-        </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-[4.75rem_1fr] gap-2">
+              <div>
+                <label htmlFor={`${uid}-title`} className="sr-only">
+                  Title
+                </label>
+                <select
+                  id={`${uid}-title`}
+                  name="title"
+                  defaultValue="Mr"
+                  className="field-lux"
+                >
+                  <option>Mr</option>
+                  <option>Ms</option>
+                  <option>Mrs</option>
+                  <option>Dr</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor={`${uid}-name`} className="sr-only">
+                  Full name
+                </label>
+                <input
+                  id={`${uid}-name`}
+                  name="name"
+                  required
+                  minLength={2}
+                  maxLength={120}
+                  placeholder="Full Name"
+                  autoComplete="name"
+                  aria-invalid={Boolean(fieldErrors.name)}
+                  aria-describedby={fieldErrors.name ? `${uid}-name-error` : undefined}
+                  className="field-lux"
+                />
+                {errorText("name")}
+              </div>
+            </div>
 
-        <div className="grid grid-cols-[4.75rem_1fr] gap-2">
-          <div>
-            <label htmlFor={`${uid}-cc`} className="sr-only">
-              Country code
-            </label>
-            <select
-              id={`${uid}-cc`}
-              name="countryCode"
-              defaultValue="+91"
-              className="field-lux"
-            >
-              <option>+91</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor={`${uid}-mobile`} className="sr-only">
-              Mobile number
-            </label>
-            <input
-              id={`${uid}-mobile`}
-              name="mobile"
-              type="tel"
-              required
-              inputMode="tel"
-              pattern="[0-9+\s-]{10,15}"
-              placeholder="Mobile Number"
-              autoComplete="tel"
-              aria-invalid={Boolean(fieldErrors.phone)}
-              aria-describedby={fieldErrors.phone ? `${uid}-phone-error` : undefined}
-              className="field-lux"
-            />
-            {errorText("phone")}
-          </div>
-        </div>
+            <div className="grid grid-cols-[4.75rem_1fr] gap-2">
+              <div>
+                <label htmlFor={`${uid}-cc`} className="sr-only">
+                  Country code
+                </label>
+                <select
+                  id={`${uid}-cc`}
+                  name="countryCode"
+                  defaultValue="+91"
+                  className="field-lux"
+                >
+                  <option>+91</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor={`${uid}-mobile`} className="sr-only">
+                  Mobile number
+                </label>
+                <input
+                  id={`${uid}-mobile`}
+                  name="mobile"
+                  type="tel"
+                  required
+                  inputMode="tel"
+                  pattern="[0-9+\s-]{10,15}"
+                  placeholder="Mobile Number"
+                  autoComplete="tel"
+                  aria-invalid={Boolean(fieldErrors.phone)}
+                  aria-describedby={fieldErrors.phone ? `${uid}-phone-error` : undefined}
+                  className="field-lux"
+                />
+                {errorText("phone")}
+              </div>
+            </div>
 
-        <div>
-          <label htmlFor={`${uid}-email`} className="sr-only">
-            Email
-          </label>
-          <input
-            id={`${uid}-email`}
-            name="email"
-            type="email"
-            required
-            maxLength={254}
-            placeholder="E-mail Address"
-            autoComplete="email"
-            aria-invalid={Boolean(fieldErrors.email)}
-            aria-describedby={fieldErrors.email ? `${uid}-email-error` : undefined}
-            className="field-lux"
-          />
-          {errorText("email")}
-        </div>
+            <div>
+              <label htmlFor={`${uid}-email`} className="sr-only">
+                Email
+              </label>
+              <input
+                id={`${uid}-email`}
+                name="email"
+                type="email"
+                required
+                maxLength={254}
+                placeholder="E-mail Address"
+                autoComplete="email"
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={fieldErrors.email ? `${uid}-email-error` : undefined}
+                className="field-lux"
+              />
+              {errorText("email")}
+            </div>
 
-        <div>
-          <label htmlFor={`${uid}-interest`} className="sr-only">
-            {interestLabel}
-          </label>
-          <select
-            id={`${uid}-interest`}
-            name="interest"
-            required
-            defaultValue={service?.name ?? ""}
-            className="field-lux"
-          >
-            <option value="" disabled>
-              {interestLabel}
-            </option>
-            {interestOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-          {errorText("interest")}
-        </div>
+            <div>
+              <label htmlFor={`${uid}-interest`} className="sr-only">
+                {interestLabel}
+              </label>
+              <select
+                id={`${uid}-interest`}
+                name="interest"
+                required
+                defaultValue={service?.name ?? ""}
+                className="field-lux"
+              >
+                <option value="" disabled>
+                  {interestLabel}
+                </option>
+                {interestOptions.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+              {errorText("interest")}
+            </div>
 
-        {!compact && (
-          <div>
-            <label htmlFor={`${uid}-city`} className="sr-only">
-              City
-            </label>
-            <input
-              id={`${uid}-city`}
-              name="city"
-              required
-              maxLength={80}
-              placeholder="City"
-              autoComplete="address-level2"
-              className="field-lux"
-            />
-            {errorText("city")}
-          </div>
+            <div>
+              <label htmlFor={`${uid}-city`} className="sr-only">
+                City
+              </label>
+              <input
+                id={`${uid}-city`}
+                name="city"
+                required
+                maxLength={80}
+                placeholder="City"
+                autoComplete="address-level2"
+                className="field-lux"
+              />
+              {errorText("city")}
+            </div>
+          </>
         )}
 
         {extra === "booking" && (
@@ -398,17 +523,20 @@ export function LeadForm({
         <button
           type="submit"
           disabled={submitting}
-          className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-seal px-4 py-3.5 text-[15px] font-semibold text-white transition hover:bg-seal-deep disabled:opacity-70"
+          className={`flex w-full items-center justify-center gap-2 rounded-xl bg-seal px-4 font-semibold text-white transition hover:bg-seal-deep disabled:opacity-70 ${compact ? "py-3 text-[14.5px]" : "mt-1 py-3.5 text-[15px]"}`}
         >
           {submitting ? "Sending…" : submitLabel}
-          <span aria-hidden>→</span>
+          <svg viewBox="0 0 24 24" className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+            <path d="M5 12h12M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
       </form>
 
-      <p className="mt-3 flex items-center justify-center gap-1.5 text-[13.5px] text-ink-muted">
+      <div className={compact ? "mt-2.5" : undefined}>
+      <p className={`flex items-center justify-center gap-1.5 text-ink-muted ${compact ? "text-[12px]" : "mt-3 text-[13.5px]"}`}>
         <svg
           viewBox="0 0 24 24"
-          className="h-3.5 w-3.5 text-trust"
+          className={compact ? "h-3 w-3 text-trust" : "h-3.5 w-3.5 text-trust"}
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -419,12 +547,83 @@ export function LeadForm({
         </svg>
         100% Secure &amp; No Spam
       </p>
-      <p className="mt-1.5 text-center text-[13px] leading-snug text-ink-muted">
-        By submitting, you agree to be contacted by {siteConfig.brandName} by call, SMS, WhatsApp or email
-        about your request, and to our{" "}
-        <Link href="/terms" className="underline hover:text-ink">Terms</Link> and{" "}
-        <Link href="/privacy" className="underline hover:text-ink">Privacy Policy</Link>.
-      </p>
+      {compact ? (
+        <p className="mt-1 text-center text-[11.5px] leading-snug text-ink-muted">
+          You agree to our{" "}
+          <Link href="/terms" className="underline hover:text-ink">Terms</Link> and{" "}
+          <Link href="/privacy" className="underline hover:text-ink">Privacy Policy</Link>.
+        </p>
+      ) : (
+        <p className="mt-1.5 text-center text-[13px] leading-snug text-ink-muted">
+          By submitting, you agree to be contacted by {siteConfig.brandName} by call, SMS, WhatsApp or email
+          about your request, and to our{" "}
+          <Link href="/terms" className="underline hover:text-ink">Terms</Link> and{" "}
+          <Link href="/privacy" className="underline hover:text-ink">Privacy Policy</Link>.
+        </p>
+      )}
+      </div>
     </div>
+  );
+}
+
+function FieldIcon({ children }: { children: ReactNode }) {
+  return (
+    <span className="pointer-events-none absolute left-3.5 top-1/2 z-[1] -translate-y-1/2 text-[#5b6e7a]" aria-hidden>
+      {children}
+    </span>
+  );
+}
+
+function SparkMark() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#0e7b5b]" fill="currentColor" aria-hidden>
+      <path d="M12 2.5 13.6 9l6.4.2-5.1 4 1.8 6.3L12 16.2 7.3 19.5 9.1 13.2 4 9.2 10.4 9 12 2.5Z" />
+    </svg>
+  );
+}
+
+function BoltMark() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-3 w-3" fill="currentColor" aria-hidden>
+      <path d="M13 2 4 14h7l-1 8 10-14h-7l1-6Z" />
+    </svg>
+  );
+}
+
+function PersonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <circle cx="12" cy="8" r="3.2" />
+      <path d="M5.5 19c1.2-3.2 3.6-5 6.5-5s5.3 1.8 6.5 5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <path
+        d="M7.2 3.8h2.4l1.2 3-1.6 1.2a12 12 0 0 0 5.6 5.6l1.2-1.6 3 1.2v2.4c0 .7-.6 1.4-1.3 1.5-7 .9-13.5-5.6-12.6-12.6.1-.7.8-1.3 1.5-1.3Z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+      <path d="m4.5 7.5 7.5 6 7.5-6" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function DocIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <path d="M7 3.5h7l4.5 4.5V20a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 20V5A1.5 1.5 0 0 1 7 3.5Z" />
+      <path d="M14 3.5V9h5.5M8.5 13h7M8.5 16.5h5" strokeLinecap="round" />
+    </svg>
   );
 }

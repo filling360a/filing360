@@ -59,7 +59,7 @@ function check(raw: string, entity: Entity): Check[] {
 
 const ICON = { true: "✓", warn: "!", false: "✕" } as const;
 const TONE = {
-  true: "bg-[#dcfce7] text-[#15803d]",
+  true: "bg-[#e3f2ed] text-[#0b6550]",
   warn: "bg-[#fef3c7] text-[#92400e]",
   false: "bg-[#fee2e2] text-[#b91c1c]",
 } as const;
@@ -73,7 +73,7 @@ export function NameChecker() {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Panel>
-        <label htmlFor={id} className="text-[14px] font-semibold text-[#0b2c5e]">Proposed name</label>
+        <label htmlFor={id} className="text-[14px] font-semibold text-[#0f2a45]">Proposed name</label>
         <input
           id={id}
           value={name}
@@ -96,18 +96,18 @@ export function NameChecker() {
             onChange={setEntity}
           />
         </div>
-        <p className="mt-5 text-[13.5px] leading-relaxed text-[#64748b]">
+        <p className="mt-5 text-[13.5px] leading-relaxed text-[#5b6e7a]">
           This checks naming rules only. It doesn&apos;t search the MCA or trademark registers — we do that for you before filing.
         </p>
       </Panel>
       <Panel>
-        <h2 className="text-[18px] font-bold text-[#0b2c5e]">Checks</h2>
+        <h2 className="text-[18px] font-bold text-[#0f2a45]">Checks</h2>
         {results.length === 0 ? (
-          <p className="mt-3 text-[15px] text-[#64748b]">Type a name to see how it measures up against MCA naming rules.</p>
+          <p className="mt-3 text-[15px] text-[#5b6e7a]">Type a name to see how it measures up against MCA naming rules.</p>
         ) : (
           <ul className="mt-3 space-y-2.5" aria-live="polite">
             {results.map((r) => (
-              <li key={r.text} className="flex gap-3 text-[15px] text-[#334155]">
+              <li key={r.text} className="flex gap-3 text-[15px] text-[#2c3f4e]">
                 <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[13px] font-bold ${TONE[String(r.ok) as keyof typeof TONE]}`} aria-hidden>
                   {ICON[String(r.ok) as keyof typeof ICON]}
                 </span>
@@ -117,10 +117,10 @@ export function NameChecker() {
           </ul>
         )}
         <div className="mt-6 space-y-1.5 text-[14.5px]">
-          <a href="https://www.mca.gov.in" target="_blank" rel="noopener noreferrer" className="block font-semibold text-[#2563eb] hover:underline">
+          <a href="https://www.mca.gov.in" target="_blank" rel="noopener noreferrer" className="block font-semibold text-[#0e7b5b] hover:underline">
             Search existing company & LLP names on the MCA portal ↗
           </a>
-          <a href="https://ipindia.gov.in" target="_blank" rel="noopener noreferrer" className="block font-semibold text-[#2563eb] hover:underline">
+          <a href="https://ipindia.gov.in" target="_blank" rel="noopener noreferrer" className="block font-semibold text-[#0e7b5b] hover:underline">
             Search registered trademarks on IP India ↗
           </a>
         </div>

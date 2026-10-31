@@ -14,8 +14,8 @@ export default async function LoginPage({ searchParams }: PageProps<"/admin/logi
   const { next, error } = await searchParams;
   return (
     <>
-      <h1 className="text-xl font-bold text-[#0b2c5e]">Sign in</h1>
-      <p className="mb-6 mt-1 text-sm text-[#64748b]">Leads, blog and team management.</p>
+      <h1 className="text-xl font-bold text-[#0f2a45]">Sign in</h1>
+      <p className="mb-6 mt-1 text-sm text-[#5b6e7a]">Leads, blog and team management.</p>
       {!isSupabaseConfigured() && (
         <div className="mb-4">
           <Alert tone="amber">Supabase keys are missing. Copy .env.example to .env.local and fill them in.</Alert>

@@ -18,7 +18,16 @@ export const env = {
     .split(",")
     .map((e) => e.trim())
     .filter(Boolean),
-  ipHashSalt: read("IP_HASH_SALT") ?? "filing360-dev-salt",
+  get ipHashSalt() {
+    const salt = read("IP_HASH_SALT");
+    if (salt) return salt;
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "IP_HASH_SALT must be set in production. Generate one with: node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"",
+      );
+    }
+    return "filing360-dev-salt";
+  },
   /** Where new job applications are announced; falls back to the lead inboxes. */
   careersNotifyTo: (read("CAREERS_NOTIFY_EMAILS") ?? read("LEAD_NOTIFY_EMAILS") ?? "")
     .split(",")

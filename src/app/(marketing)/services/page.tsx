@@ -24,8 +24,8 @@ export default function ServicesHubPage() {
   }, [query]);
 
   return (
-    <div className="bg-[#f8fafc]">
-      <section className="border-b border-[#e2e8f0] bg-gradient-to-br from-[#062a5c] via-[#0b3d8a] to-[#1a56c4] text-white">
+    <div className="bg-[#f3f7fa]">
+      <section className="border-b border-[#d7e4de] bg-gradient-to-br from-[#0f2a45] via-[#0f2a45] to-[#0e7b5b] text-white">
         <div className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-20">
           <h1 className="text-[30px] font-bold tracking-tight md:text-[46px]">All services</h1>
           <p className="mt-2 max-w-xl text-[16px] text-white/75 md:mt-3 md:text-[16px]">
@@ -58,11 +58,11 @@ export default function ServicesHubPage() {
       <div className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 lg:py-16">
         {results ? (
           <>
-            <p className="mb-6 text-[15px] text-[#64748b]">
+            <p className="mb-6 text-[15px] text-[#5b6e7a]">
               {results.length} result{results.length === 1 ? "" : "s"} for “{query}”
             </p>
             {results.length === 0 ? (
-              <p className="rounded-2xl border border-[#e2e8f0] bg-white px-5 py-10 text-[#64748b]">
+              <p className="rounded-2xl border border-[#d7e4de] bg-white px-5 py-10 text-[#5b6e7a]">
                 No services match. Try “GST registration”, “ITR” or “private limited”.
               </p>
             ) : (
@@ -81,19 +81,19 @@ export default function ServicesHubPage() {
               <section key={pillar.slug} id={pillar.slug} className="scroll-mt-24">
                 <div className="flex items-end justify-between gap-3">
                   <div className="min-w-0">
-                    <h2 className="text-[20px] font-bold tracking-tight text-[#0b2c5e] md:text-[24px]">
+                    <h2 className="text-[20px] font-bold tracking-tight text-[#0f2a45] md:text-[24px]">
                       {pillar.name}
-                      <span className="ml-2 align-middle text-[13.5px] font-semibold text-[#94a3b8]">
+                      <span className="ml-2 align-middle text-[13.5px] font-semibold text-[#8a9ba6]">
                         {pillar.services.length}
                       </span>
                     </h2>
-                    <p className="mt-1 line-clamp-2 max-w-2xl text-[14.5px] text-[#64748b] md:text-[15px]">
+                    <p className="mt-1 line-clamp-2 max-w-2xl text-[14.5px] text-[#5b6e7a] md:text-[15px]">
                       {pillar.description}
                     </p>
                   </div>
                   <Link
                     href={`/services/${pillar.slug}`}
-                    className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-[#2563eb] hover:text-[#1d4ed8]"
+                    className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-[#0e7b5b] hover:text-[#0b6550]"
                   >
                     View all →
                   </Link>

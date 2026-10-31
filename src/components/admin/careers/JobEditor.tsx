@@ -148,10 +148,10 @@ export function JobEditor({ job, applicationCount, departments, canDelete }: Pro
     <div>
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <Link href="/admin/careers" className="text-[13px] font-medium text-[#64748b] hover:text-[#0f172a]">← All jobs</Link>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-[#64748b]">
+          <Link href="/admin/careers" className="text-[13px] font-medium text-[#5b6e7a] hover:text-[#0f2a45]">← All jobs</Link>
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-[#5b6e7a]">
             <JobStatusBadge status={status} />
-            <Link href={`/admin/careers/applications?job=${job.id}`} className="font-medium hover:text-[#2563eb]">
+            <Link href={`/admin/careers/applications?job=${job.id}`} className="font-medium hover:text-[#0e7b5b]">
               {applicationCount} application{applicationCount === 1 ? "" : "s"} →
             </Link>
             <span>{pending ? "Saving…" : dirty ? "Unsaved changes" : "All changes saved"}</span>
@@ -204,10 +204,10 @@ export function JobEditor({ job, applicationCount, departments, canDelete }: Pro
             </div>
             <div>
               <label htmlFor="summary" className={labelClass}>
-                Summary <span className="font-normal text-[#94a3b8]">— one or two lines shown on the jobs list and in search results</span>
+                Summary <span className="font-normal text-[#8a9ba6]">— one or two lines shown on the jobs list and in search results</span>
               </label>
               <textarea id="summary" rows={2} maxLength={300} value={form.summary} onChange={(e) => set("summary", e.target.value)} className={inputClass} />
-              <p className="mt-1 text-right text-[11.5px] text-[#94a3b8]">{form.summary.length}/300</p>
+              <p className="mt-1 text-right text-[11.5px] text-[#8a9ba6]">{form.summary.length}/300</p>
             </div>
             <div>
               <p className={labelClass}>About the role</p>
@@ -235,11 +235,11 @@ export function JobEditor({ job, applicationCount, departments, canDelete }: Pro
 
         <div className="space-y-5">
           <Card className="space-y-3 p-5">
-            <h2 className="text-[15px] font-bold text-[#0b2c5e]">Details</h2>
+            <h2 className="text-[15px] font-bold text-[#0f2a45]">Details</h2>
             <div>
               <label htmlFor="slug" className={labelClass}>URL</label>
-              <div className="flex items-center rounded-lg border border-[#d7dee8] bg-[#f8fafc] text-sm">
-                <span className="pl-3 text-[#94a3b8]">/careers/</span>
+              <div className="flex items-center rounded-lg border border-[#d0dcd6] bg-[#f3f7fa] text-sm">
+                <span className="pl-3 text-[#8a9ba6]">/careers/</span>
                 <input
                   id="slug"
                   value={form.slug}
@@ -286,32 +286,32 @@ export function JobEditor({ job, applicationCount, departments, canDelete }: Pro
             <div>
               <label htmlFor="skills" className={labelClass}>Key skills</label>
               <input id="skills" value={form.skills} onChange={(e) => set("skills", e.target.value)} placeholder="e.g. ROC filings, GST, Tally" className={inputClass} />
-              <p className="mt-1 text-[11.5px] text-[#94a3b8]">Comma separated</p>
+              <p className="mt-1 text-[11.5px] text-[#8a9ba6]">Comma separated</p>
             </div>
           </Card>
 
           <Card className="space-y-3 p-5">
-            <h2 className="text-[15px] font-bold text-[#0b2c5e]">Compensation</h2>
+            <h2 className="text-[15px] font-bold text-[#0f2a45]">Compensation</h2>
             <div className="grid grid-cols-2 gap-3">
               <NumberField id="salary_min" label="Min (₹ lakh / yr)" value={form.salary_min} onChange={(v) => set("salary_min", v)} step="0.1" />
               <NumberField id="salary_max" label="Max (₹ lakh / yr)" value={form.salary_max} onChange={(v) => set("salary_max", v)} step="0.1" />
             </div>
-            <label className="flex items-start gap-2 text-[13px] text-[#334155]">
-              <input type="checkbox" checked={form.show_salary} onChange={(e) => set("show_salary", e.target.checked)} className="mt-0.5 h-4 w-4 accent-[#2563eb]" />
-              <span>Show salary on the job page <span className="text-[#94a3b8]">(listings with pay get more applicants and rank better on Google Jobs)</span></span>
+            <label className="flex items-start gap-2 text-[13px] text-[#2c3f4e]">
+              <input type="checkbox" checked={form.show_salary} onChange={(e) => set("show_salary", e.target.checked)} className="mt-0.5 h-4 w-4 accent-[#0e7b5b]" />
+              <span>Show salary on the job page <span className="text-[#8a9ba6]">(listings with pay get more applicants and rank better on Google Jobs)</span></span>
             </label>
           </Card>
 
           <Card className="space-y-3 p-5">
-            <h2 className="text-[15px] font-bold text-[#0b2c5e]">Closing date</h2>
+            <h2 className="text-[15px] font-bold text-[#0f2a45]">Closing date</h2>
             <input type="date" value={form.closes_on} onChange={(e) => set("closes_on", e.target.value)} className={inputClass} aria-label="Closing date" />
-            <p className="text-[12px] text-[#64748b]">Applications stop automatically at 11:59 pm IST that day. Leave empty to keep it open until you close it.</p>
+            <p className="text-[12px] text-[#5b6e7a]">Applications stop automatically at 11:59 pm IST that day. Leave empty to keep it open until you close it.</p>
           </Card>
 
           {canDelete && (
             <Card className="p-5">
               <h2 className="mb-1 text-[15px] font-bold text-[#b91c1c]">Danger zone</h2>
-              <p className="mb-3 text-[12.5px] text-[#64748b]">
+              <p className="mb-3 text-[12.5px] text-[#5b6e7a]">
                 {applicationCount > 0 ? "Jobs with applications can't be deleted — close the job instead." : "Delete this job permanently."}
               </p>
               <DeleteJobButton jobId={job.id} disabled={applicationCount > 0} />
@@ -328,10 +328,10 @@ function ListField({ id, label, hint, value, onChange }: { id: string; label: st
   return (
     <div>
       <label htmlFor={id} className={labelClass}>
-        {label} <span className="font-normal text-[#94a3b8]">— {hint}</span>
+        {label} <span className="font-normal text-[#8a9ba6]">— {hint}</span>
       </label>
       <textarea id={id} rows={6} value={value} onChange={(e) => onChange(e.target.value)} placeholder="One point per line" className={inputClass} />
-      <p className="mt-1 text-[11.5px] text-[#94a3b8]">{count} point{count === 1 ? "" : "s"}</p>
+      <p className="mt-1 text-[11.5px] text-[#8a9ba6]">{count} point{count === 1 ? "" : "s"}</p>
     </div>
   );
 }
@@ -387,8 +387,8 @@ function QuestionsBuilder({ questions, onChange, locked }: { questions: Screenin
     <div>
       <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 className="text-[15px] font-bold text-[#0b2c5e]">Screening questions</h2>
-          <p className="text-[12.5px] text-[#64748b]">Asked on the application form. Keep them few and specific (max 8).</p>
+          <h2 className="text-[15px] font-bold text-[#0f2a45]">Screening questions</h2>
+          <p className="text-[12.5px] text-[#5b6e7a]">Asked on the application form. Keep them few and specific (max 8).</p>
         </div>
         {questions.length < 8 && (
           <Button type="button" variant="secondary" size="sm" onClick={() => add()}>+ Add question</Button>
@@ -400,15 +400,15 @@ function QuestionsBuilder({ questions, onChange, locked }: { questions: Screenin
         </p>
       )}
       {questions.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-[#d7dee8] p-4">
-          <p className="text-[13px] text-[#64748b]">No screening questions. Suggestions:</p>
+        <div className="rounded-lg border border-dashed border-[#d0dcd6] p-4">
+          <p className="text-[13px] text-[#5b6e7a]">No screening questions. Suggestions:</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {SUGGESTED_QUESTIONS.map((q) => (
               <button
                 key={q.label}
                 type="button"
                 onClick={() => add(q)}
-                className="rounded-full border border-[#d7dee8] px-2.5 py-1 text-left text-[12px] font-medium text-[#475569] hover:bg-[#f8fafc]"
+                className="rounded-full border border-[#d0dcd6] px-2.5 py-1 text-left text-[12px] font-medium text-[#4a5d68] hover:bg-[#f3f7fa]"
               >
                 + {q.label}
               </button>
@@ -418,9 +418,9 @@ function QuestionsBuilder({ questions, onChange, locked }: { questions: Screenin
       ) : (
         <ol className="space-y-2">
           {questions.map((q, i) => (
-            <li key={q.id} className="rounded-lg border border-[#e3e8ef] p-3">
+            <li key={q.id} className="rounded-lg border border-[#d7e4de] p-3">
               <div className="flex gap-2">
-                <span className="mt-2 text-[12px] font-bold text-[#94a3b8]">{i + 1}.</span>
+                <span className="mt-2 text-[12px] font-bold text-[#8a9ba6]">{i + 1}.</span>
                 <div className="min-w-0 flex-1 space-y-2">
                   <input
                     value={q.label}
@@ -439,8 +439,8 @@ function QuestionsBuilder({ questions, onChange, locked }: { questions: Screenin
                     >
                       {QUESTION_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
                     </select>
-                    <label className="flex items-center gap-1.5 text-[13px] text-[#334155]">
-                      <input type="checkbox" checked={q.required} onChange={(e) => update(q.id, { required: e.target.checked })} className="h-4 w-4 accent-[#2563eb]" />
+                    <label className="flex items-center gap-1.5 text-[13px] text-[#2c3f4e]">
+                      <input type="checkbox" checked={q.required} onChange={(e) => update(q.id, { required: e.target.checked })} className="h-4 w-4 accent-[#0e7b5b]" />
                       Required
                     </label>
                     <span className="ml-auto flex gap-1">

@@ -4,16 +4,16 @@ import { APPLICATION_STATUSES, JOB_STATUSES } from "@/lib/careers/constants";
 import type { ApplicationStatus, JobStatus, LeadPriority, LeadStatus, PostStatus } from "@/lib/supabase/database.types";
 
 export const inputClass =
-  "block w-full rounded-lg border border-[#d7dee8] bg-white px-3 py-2 text-sm text-[#0f172a] shadow-sm outline-none transition placeholder:text-[#94a3b8] focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/15 disabled:bg-[#f1f5f9]";
+  "block w-full rounded-lg border border-[#d0dcd6] bg-white px-3 py-2 text-sm text-[#0f2a45] shadow-sm outline-none transition placeholder:text-[#8a9ba6] focus:border-[#0e7b5b] focus:ring-2 focus:ring-[#0e7b5b]/15 disabled:bg-[#eef4f1]";
 
-export const labelClass = "mb-1 block text-[12.5px] font-semibold text-[#334155]";
+export const labelClass = "mb-1 block text-[12.5px] font-semibold text-[#2c3f4e]";
 
 const buttonVariants = {
-  primary: "bg-[#2563eb] text-white hover:bg-[#1d4ed8] shadow-sm",
-  secondary: "border border-[#d7dee8] bg-white text-[#0f172a] hover:bg-[#f8fafc]",
+  primary: "bg-[#0e7b5b] text-white hover:bg-[#0b6550] shadow-sm",
+  secondary: "border border-[#d0dcd6] bg-white text-[#0f2a45] hover:bg-[#f3f7fa]",
   danger: "border border-[#fecaca] bg-white text-[#b91c1c] hover:bg-[#fef2f2]",
-  ghost: "text-[#334155] hover:bg-[#eef2f7]",
-  dark: "bg-[#0b2c5e] text-white hover:bg-[#123a74]",
+  ghost: "text-[#2c3f4e] hover:bg-[#e8f0ec]",
+  dark: "bg-[#0f2a45] text-white hover:bg-[#173a58]",
 } as const;
 
 export type ButtonVariant = keyof typeof buttonVariants;
@@ -33,7 +33,7 @@ export function Button({
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`rounded-xl border border-[#e3e8ef] bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] ${className}`}>{children}</div>;
+  return <div className={`rounded-xl border border-[#d7e4de] bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] ${className}`}>{children}</div>;
 }
 
 export function PageHeader({
@@ -51,12 +51,12 @@ export function PageHeader({
     <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         {back && (
-          <Link href={back.href} className="mb-1 inline-flex items-center gap-1 text-[13px] font-medium text-[#64748b] hover:text-[#0f172a]">
+          <Link href={back.href} className="mb-1 inline-flex items-center gap-1 text-[13px] font-medium text-[#5b6e7a] hover:text-[#0f2a45]">
             ← {back.label}
           </Link>
         )}
-        <h1 className="truncate text-[22px] font-bold tracking-tight text-[#0b2c5e] md:text-[26px]">{title}</h1>
-        {description && <p className="mt-1 text-sm text-[#64748b]">{description}</p>}
+        <h1 className="truncate text-[22px] font-bold tracking-tight text-[#0f2a45] md:text-[26px]">{title}</h1>
+        {description && <p className="mt-1 text-sm text-[#5b6e7a]">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
     </div>
@@ -66,20 +66,20 @@ export function PageHeader({
 export function EmptyState({ title, description, action }: { title: string; description?: string; action?: ReactNode }) {
   return (
     <div className="flex flex-col items-center justify-center px-6 py-14 text-center">
-      <p className="text-[15px] font-semibold text-[#0f172a]">{title}</p>
-      {description && <p className="mt-1 max-w-sm text-sm text-[#64748b]">{description}</p>}
+      <p className="text-[15px] font-semibold text-[#0f2a45]">{title}</p>
+      {description && <p className="mt-1 max-w-sm text-sm text-[#5b6e7a]">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
     </div>
   );
 }
 
 const tones = {
-  slate: "bg-[#f1f5f9] text-[#475569] ring-[#e2e8f0]",
-  blue: "bg-[#eff6ff] text-[#1d4ed8] ring-[#bfdbfe]",
+  slate: "bg-[#eef4f1] text-[#4a5d68] ring-[#d7e4de]",
+  blue: "bg-[#e3f2ed] text-[#0f2a45] ring-[#c5e8dc]",
   indigo: "bg-[#eef2ff] text-[#4338ca] ring-[#c7d2fe]",
   amber: "bg-[#fffbeb] text-[#b45309] ring-[#fde68a]",
   violet: "bg-[#f5f3ff] text-[#6d28d9] ring-[#ddd6fe]",
-  green: "bg-[#f0fdf4] text-[#15803d] ring-[#bbf7d0]",
+  green: "bg-[#e8f6f1] text-[#0e7b5b] ring-[#8ecfbc]",
   red: "bg-[#fef2f2] text-[#b91c1c] ring-[#fecaca]",
   zinc: "bg-[#fafafa] text-[#71717a] ring-[#e4e4e7]",
 } as const;
@@ -145,11 +145,11 @@ export function ApplicationStatusBadge({ status }: { status: ApplicationStatus }
 }
 
 export function Rating({ value }: { value: number | null }) {
-  if (!value) return <span className="text-[#cbd5e1]">—</span>;
+  if (!value) return <span className="text-[#bfd4cb]">—</span>;
   return (
     <span className="whitespace-nowrap text-[#f59e0b]" aria-label={`${value} out of 5`} title={`${value} / 5`}>
       {"★".repeat(value)}
-      <span className="text-[#e2e8f0]">{"★".repeat(5 - value)}</span>
+      <span className="text-[#d7e4de]">{"★".repeat(5 - value)}</span>
     </span>
   );
 }
@@ -157,9 +157,9 @@ export function Rating({ value }: { value: number | null }) {
 export function Alert({ tone = "red", children }: { tone?: "red" | "green" | "amber" | "blue"; children: ReactNode }) {
   const styles = {
     red: "border-[#fecaca] bg-[#fef2f2] text-[#991b1b]",
-    green: "border-[#bbf7d0] bg-[#f0fdf4] text-[#166534]",
+    green: "border-[#c5e8dc] bg-[#e8f6f1] text-[#145a45]",
     amber: "border-[#fde68a] bg-[#fffbeb] text-[#92400e]",
-    blue: "border-[#bfdbfe] bg-[#eff6ff] text-[#1e40af]",
+    blue: "border-[#c5e8dc] bg-[#e3f2ed] text-[#0b6550]",
   }[tone];
   return <div role={tone === "red" ? "alert" : "status"} className={`rounded-lg border px-3 py-2 text-[13px] font-medium ${styles}`}>{children}</div>;
 }

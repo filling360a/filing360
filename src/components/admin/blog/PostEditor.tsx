@@ -174,14 +174,14 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
 
   const serpTitle = (form.seo_title || form.title || "Untitled").slice(0, 65);
   const serpDescription = (form.seo_description || form.excerpt || plainText).trim().slice(0, 160);
-  const scoreTone = seo.score >= 80 ? "text-[#15803d]" : seo.score >= 55 ? "text-[#b45309]" : "text-[#b91c1c]";
+  const scoreTone = seo.score >= 80 ? "text-[#0b6550]" : seo.score >= 55 ? "text-[#b45309]" : "text-[#b91c1c]";
 
   return (
     <div>
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <Link href="/admin/blog" className="text-[13px] font-medium text-[#64748b] hover:text-[#0f172a]">← All posts</Link>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-[#64748b]">
+          <Link href="/admin/blog" className="text-[13px] font-medium text-[#5b6e7a] hover:text-[#0f2a45]">← All posts</Link>
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-[#5b6e7a]">
             <PostStatusBadge status={status} publishedAt={publishedAt} />
             <span>{seo.words.toLocaleString("en-IN")} words · {Math.max(1, Math.round(seo.words / 220))} min read</span>
             <span suppressHydrationWarning>
@@ -223,7 +223,7 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
             maxLength={200}
             placeholder="Post title"
             aria-label="Title"
-            className="w-full resize-none bg-transparent text-[26px] font-bold leading-tight tracking-tight text-[#0b2c5e] outline-none placeholder:text-[#cbd5e1] md:text-[32px]"
+            className="w-full resize-none bg-transparent text-[26px] font-bold leading-tight tracking-tight text-[#0f2a45] outline-none placeholder:text-[#bfd4cb] md:text-[32px]"
           />
           <RichTextEditor
             postId={post.id}
@@ -237,7 +237,7 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
 
         <div className="space-y-4">
           <Card className="p-4">
-            <h2 className="mb-3 text-[14px] font-bold text-[#0b2c5e]">Publishing</h2>
+            <h2 className="mb-3 text-[14px] font-bold text-[#0f2a45]">Publishing</h2>
             {isScheduled && (
               <p className="mb-3 rounded-lg bg-[#fffbeb] px-3 py-2 text-[12.5px] font-medium text-[#92400e]">
                 Goes live automatically at the scheduled time.
@@ -256,7 +256,7 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
                 {isScheduled ? "Reschedule" : "Schedule"}
               </Button>
             </div>
-            <div className="mt-3 flex flex-wrap gap-2 border-t border-[#eef2f7] pt-3">
+            <div className="mt-3 flex flex-wrap gap-2 border-t border-[#e8f0ec] pt-3">
               {(status === "published" || status === "scheduled") && (
                 <>
                   {isScheduled && <Button type="button" size="sm" onClick={() => save("publish")} disabled={pending}>Publish now</Button>}
@@ -289,11 +289,11 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
           </Card>
 
           <Card className="p-4">
-            <h2 className="mb-3 text-[14px] font-bold text-[#0b2c5e]">Post settings</h2>
+            <h2 className="mb-3 text-[14px] font-bold text-[#0f2a45]">Post settings</h2>
             <div className="space-y-3">
               <div>
                 <label htmlFor="slug" className={labelClass}>URL</label>
-                <div className="flex items-center rounded-lg border border-[#d7dee8] bg-[#f8fafc] pl-3 text-[13px] text-[#64748b] focus-within:border-[#2563eb]">
+                <div className="flex items-center rounded-lg border border-[#d0dcd6] bg-[#f3f7fa] pl-3 text-[13px] text-[#5b6e7a] focus-within:border-[#0e7b5b]">
                   /blog/
                   <input
                     id="slug"
@@ -302,7 +302,7 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
                       setSlugTouched(true);
                       set("slug", e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "-"));
                     }}
-                    className="min-w-0 flex-1 rounded-r-lg bg-white px-2 py-2 text-[#0f172a] outline-none"
+                    className="min-w-0 flex-1 rounded-r-lg bg-white px-2 py-2 text-[#0f2a45] outline-none"
                   />
                 </div>
                 {isLive && form.slug !== post.slug && (
@@ -330,22 +330,22 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
                 <input id="tags" value={form.tags} onChange={(e) => set("tags", e.target.value)} placeholder="gst, startup, compliance" className={inputClass} />
               </div>
               <div>
-                <label htmlFor="excerpt" className={labelClass}>Excerpt <span className="font-normal text-[#94a3b8]">({form.excerpt.length}/300)</span></label>
+                <label htmlFor="excerpt" className={labelClass}>Excerpt <span className="font-normal text-[#8a9ba6]">({form.excerpt.length}/300)</span></label>
                 <textarea id="excerpt" rows={3} maxLength={300} value={form.excerpt} onChange={(e) => set("excerpt", e.target.value)} placeholder="Short summary shown on the blog listing" className={inputClass} />
               </div>
             </div>
           </Card>
 
           <Card className="p-4">
-            <h2 className="mb-3 text-[14px] font-bold text-[#0b2c5e]">Cover image</h2>
+            <h2 className="mb-3 text-[14px] font-bold text-[#0f2a45]">Cover image</h2>
             {form.cover_image_url ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={form.cover_image_url} alt={form.cover_image_alt} className="mb-3 aspect-[1.91/1] w-full rounded-lg border border-[#e3e8ef] object-cover" />
+              <img src={form.cover_image_url} alt={form.cover_image_alt} className="mb-3 aspect-[1.91/1] w-full rounded-lg border border-[#d7e4de] object-cover" />
             ) : (
               <button
                 type="button"
                 onClick={() => coverInput.current?.click()}
-                className="mb-3 flex aspect-[1.91/1] w-full items-center justify-center rounded-lg border-2 border-dashed border-[#d7dee8] text-[13px] font-semibold text-[#64748b] hover:border-[#2563eb] hover:text-[#2563eb]"
+                className="mb-3 flex aspect-[1.91/1] w-full items-center justify-center rounded-lg border-2 border-dashed border-[#d0dcd6] text-[13px] font-semibold text-[#5b6e7a] hover:border-[#0e7b5b] hover:text-[#0e7b5b]"
               >
                 {coverUploading ? "Uploading…" : "Upload cover (1200×630 recommended)"}
               </button>
@@ -365,10 +365,10 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
 
           <Card className="p-4">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-[14px] font-bold text-[#0b2c5e]">SEO</h2>
+              <h2 className="text-[14px] font-bold text-[#0f2a45]">SEO</h2>
               <span className={`text-[13px] font-bold ${scoreTone}`}>{seo.score}/100</span>
             </div>
-            <div className="mb-3 rounded-lg border border-[#e3e8ef] p-3">
+            <div className="mb-3 rounded-lg border border-[#d7e4de] p-3">
               <p className="truncate text-[12px] text-[#202124]">{siteUrl.replace(/^https?:\/\//, "")} › blog › {form.slug}</p>
               <p className="mt-0.5 line-clamp-1 text-[16px] leading-snug text-[#1a0dab]">{serpTitle} | Filing360</p>
               <p className="mt-0.5 line-clamp-2 text-[12.5px] leading-snug text-[#4d5156]">{serpDescription || "Add a meta description…"}</p>
@@ -379,37 +379,37 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
                 <input id="focus_keyword" value={form.focus_keyword} onChange={(e) => set("focus_keyword", e.target.value)} placeholder="e.g. private limited company registration" className={inputClass} />
               </div>
               <div>
-                <label htmlFor="seo_title" className={labelClass}>SEO title <span className="font-normal text-[#94a3b8]">({(form.seo_title || form.title).length}/60)</span></label>
+                <label htmlFor="seo_title" className={labelClass}>SEO title <span className="font-normal text-[#8a9ba6]">({(form.seo_title || form.title).length}/60)</span></label>
                 <input id="seo_title" value={form.seo_title} onChange={(e) => set("seo_title", e.target.value)} placeholder="Defaults to the post title" maxLength={120} className={inputClass} />
               </div>
               <div>
-                <label htmlFor="seo_description" className={labelClass}>Meta description <span className="font-normal text-[#94a3b8]">({(form.seo_description || form.excerpt).length}/160)</span></label>
+                <label htmlFor="seo_description" className={labelClass}>Meta description <span className="font-normal text-[#8a9ba6]">({(form.seo_description || form.excerpt).length}/160)</span></label>
                 <textarea id="seo_description" rows={3} value={form.seo_description} onChange={(e) => set("seo_description", e.target.value)} placeholder="Defaults to the excerpt" maxLength={320} className={inputClass} />
               </div>
               <details className="text-[13px]">
-                <summary className="cursor-pointer font-semibold text-[#334155]">Advanced</summary>
+                <summary className="cursor-pointer font-semibold text-[#2c3f4e]">Advanced</summary>
                 <div className="mt-3 space-y-3">
                   <div>
                     <label htmlFor="canonical_url" className={labelClass}>Canonical URL</label>
                     <input id="canonical_url" type="url" value={form.canonical_url} onChange={(e) => set("canonical_url", e.target.value)} placeholder="Only if this was first published elsewhere" className={inputClass} />
                   </div>
-                  <label className="flex items-center gap-2 text-[13px] text-[#334155]">
-                    <input type="checkbox" checked={form.noindex} onChange={(e) => set("noindex", e.target.checked)} className="h-4 w-4 accent-[#2563eb]" />
+                  <label className="flex items-center gap-2 text-[13px] text-[#2c3f4e]">
+                    <input type="checkbox" checked={form.noindex} onChange={(e) => set("noindex", e.target.checked)} className="h-4 w-4 accent-[#0e7b5b]" />
                     Hide from search engines (noindex)
                   </label>
                 </div>
               </details>
             </div>
-            <ul className="mt-4 space-y-1.5 border-t border-[#eef2f7] pt-3">
+            <ul className="mt-4 space-y-1.5 border-t border-[#e8f0ec] pt-3">
               {seo.checks.map((c) => (
                 <li key={c.label} className="flex gap-2 text-[12.5px]" title={c.tip}>
                   <span
-                    className={`mt-1 h-2 w-2 shrink-0 rounded-full ${c.status === "good" ? "bg-[#22c55e]" : c.status === "warn" ? "bg-[#f59e0b]" : "bg-[#ef4444]"}`}
+                    className={`mt-1 h-2 w-2 shrink-0 rounded-full ${c.status === "good" ? "bg-[#1a8f6c]" : c.status === "warn" ? "bg-[#f59e0b]" : "bg-[#ef4444]"}`}
                     aria-hidden
                   />
                   <span>
-                    <span className="text-[#334155]">{c.label}</span>
-                    {c.tip && c.status !== "good" && <span className="block text-[11.5px] text-[#94a3b8]">{c.tip}</span>}
+                    <span className="text-[#2c3f4e]">{c.label}</span>
+                    {c.tip && c.status !== "good" && <span className="block text-[11.5px] text-[#8a9ba6]">{c.tip}</span>}
                   </span>
                 </li>
               ))}
@@ -418,13 +418,13 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
 
           {revisions.length > 0 && (
             <Card className="p-4">
-              <h2 className="mb-2 text-[14px] font-bold text-[#0b2c5e]">Revision history</h2>
+              <h2 className="mb-2 text-[14px] font-bold text-[#0f2a45]">Revision history</h2>
               <ul className="max-h-64 space-y-2 overflow-y-auto">
                 {revisions.map((r) => (
                   <li key={r.id} className="flex items-center justify-between gap-2 text-[12.5px]">
                     <span className="min-w-0">
-                      <span className="block truncate text-[#334155]">{r.title}</span>
-                      <span className="text-[#94a3b8]">{timeAgo(r.created_at)}{r.editor ? ` · ${r.editor}` : ""}</span>
+                      <span className="block truncate text-[#2c3f4e]">{r.title}</span>
+                      <span className="text-[#8a9ba6]">{timeAgo(r.created_at)}{r.editor ? ` · ${r.editor}` : ""}</span>
                     </span>
                     <button
                       type="button"
@@ -437,7 +437,7 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
                           else setFeedback({ ok: false, text: res?.error ?? "Could not restore" });
                         });
                       }}
-                      className="shrink-0 font-semibold text-[#2563eb] hover:underline"
+                      className="shrink-0 font-semibold text-[#0e7b5b] hover:underline"
                     >
                       Restore
                     </button>

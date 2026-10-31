@@ -1,11 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { enforceRateLimits } from "@/lib/careers/apply";
+import { enforceRateLimits, hashIp } from "@/lib/rate-limit";
 import { isAcceptingApplications } from "@/lib/careers/constants";
 import { createResumeUploadUrl } from "@/lib/careers/resumes";
 import { uploadRequestSchema } from "@/lib/careers/schema";
 import { isSupabaseAdminConfigured } from "@/lib/env";
 import { clientIp, readJsonBody } from "@/lib/http";
-import { hashIp } from "@/lib/leads/capture";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 // Issues a one-time signed URL so the browser uploads the résumé straight to

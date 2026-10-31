@@ -38,7 +38,7 @@ export function GstCalculator() {
         </div>
       </Panel>
       <Panel>
-        <h2 className="text-[18px] font-bold text-[#0b2c5e]">Result</h2>
+        <h2 className="text-[18px] font-bold text-[#0f2a45]">Result</h2>
         <div className="mt-3" aria-live="polite">
           <Row label="Taxable value" value={inr(r.base)} />
           {supply === "intra" ? (

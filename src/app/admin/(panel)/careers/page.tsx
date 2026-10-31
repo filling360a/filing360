@@ -66,9 +66,9 @@ export default async function CareersAdminPage({ searchParams }: PageProps<"/adm
       <div className="mb-5 grid gap-3 sm:grid-cols-3">
         {stats.map((s) => (
           <Link key={s.label} href={s.href} className="group">
-            <Card className="p-4 transition group-hover:border-[#bfdbfe]">
-              <p className="text-[12.5px] font-semibold text-[#64748b]">{s.label}</p>
-              <p className="mt-1 text-[26px] font-bold tabular-nums text-[#0b2c5e]">{s.value.toLocaleString("en-IN")}</p>
+            <Card className="p-4 transition group-hover:border-[#c5e8dc]">
+              <p className="text-[12.5px] font-semibold text-[#5b6e7a]">{s.label}</p>
+              <p className="mt-1 text-[26px] font-bold tabular-nums text-[#0f2a45]">{s.value.toLocaleString("en-IN")}</p>
             </Card>
           </Link>
         ))}
@@ -83,11 +83,11 @@ export default async function CareersAdminPage({ searchParams }: PageProps<"/adm
               key={tab.label}
               href={tab.value ? `/admin/careers?status=${tab.value}` : "/admin/careers"}
               className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-semibold transition ${
-                active ? "bg-[#0b2c5e] text-white" : "text-[#475569] hover:bg-white"
+                active ? "bg-[#0f2a45] text-white" : "text-[#4a5d68] hover:bg-white"
               }`}
             >
               {tab.label}
-              <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20" : "bg-[#e2e8f0]"}`}>{count}</span>
+              <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20" : "bg-[#d7e4de]"}`}>{count}</span>
             </Link>
           );
         })}
@@ -112,7 +112,7 @@ export default async function CareersAdminPage({ searchParams }: PageProps<"/adm
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-[13.5px]">
               <thead>
-                <tr className="border-b border-[#e3e8ef] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">
+                <tr className="border-b border-[#d7e4de] text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">
                   <th className="px-4 py-3">Role</th>
                   <th className="px-3 py-3">Status</th>
                   <th className="px-3 py-3">Applications</th>
@@ -128,12 +128,12 @@ export default async function CareersAdminPage({ searchParams }: PageProps<"/adm
                   const total = job.applications[0]?.count ?? 0;
                   const fresh = newByJob.get(job.id) ?? 0;
                   return (
-                    <tr key={job.id} className="border-b border-[#eef2f7] last:border-0 hover:bg-[#f8fafc]">
+                    <tr key={job.id} className="border-b border-[#e8f0ec] last:border-0 hover:bg-[#f3f7fa]">
                       <td className="px-4 py-3 align-top">
-                        <Link href={`/admin/careers/${job.id}`} className="font-semibold text-[#0b2c5e] hover:text-[#2563eb]">
+                        <Link href={`/admin/careers/${job.id}`} className="font-semibold text-[#0f2a45] hover:text-[#0e7b5b]">
                           {job.title}
                         </Link>
-                        <div className="mt-0.5 text-[12.5px] text-[#64748b]">
+                        <div className="mt-0.5 text-[12.5px] text-[#5b6e7a]">
                           {job.department} · {job.location} · {WORKPLACE_TYPES[job.workplace_type]} · {EMPLOYMENT_TYPES[job.employment_type].label}
                           {job.openings > 1 ? ` · ${job.openings} openings` : ""}
                         </div>
@@ -142,15 +142,15 @@ export default async function CareersAdminPage({ searchParams }: PageProps<"/adm
                         <JobStatusBadge status={job.status} />
                       </td>
                       <td className="px-3 py-3 align-top">
-                        <Link href={`/admin/careers/applications?job=${job.id}`} className="font-semibold text-[#0f172a] hover:text-[#2563eb]">
+                        <Link href={`/admin/careers/applications?job=${job.id}`} className="font-semibold text-[#0f2a45] hover:text-[#0e7b5b]">
                           {total}
                         </Link>
                         {fresh > 0 && (
-                          <span className="ml-2 rounded-full bg-[#eff6ff] px-1.5 py-0.5 text-[11px] font-bold text-[#1d4ed8]">{fresh} new</span>
+                          <span className="ml-2 rounded-full bg-[#e3f2ed] px-1.5 py-0.5 text-[11px] font-bold text-[#0b6550]">{fresh} new</span>
                         )}
                       </td>
-                      <td className="px-3 py-3 align-top text-[12.5px] text-[#64748b]">{job.published_at ? formatDate(job.published_at) : "—"}</td>
-                      <td className="px-3 py-3 align-top text-[12.5px] text-[#64748b]">{job.closes_at ? formatDate(job.closes_at) : "—"}</td>
+                      <td className="px-3 py-3 align-top text-[12.5px] text-[#5b6e7a]">{job.published_at ? formatDate(job.published_at) : "—"}</td>
+                      <td className="px-3 py-3 align-top text-[12.5px] text-[#5b6e7a]">{job.closes_at ? formatDate(job.closes_at) : "—"}</td>
                       <td className="px-4 py-3 text-right align-top">
                         <div className="flex justify-end gap-1">
                           {(job.status === "open" || job.status === "closed") && (

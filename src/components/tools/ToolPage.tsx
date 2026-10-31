@@ -24,7 +24,7 @@ export function ToolPage({
   const others = tools.filter((t) => t.slug !== slug);
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       {interactive && (
         <JsonLd
           data={{
@@ -59,17 +59,17 @@ export function ToolPage({
         </section>
       )}
       <section className={`${container} pb-14`}>
-        <p className="text-[15px] font-semibold text-[#0b2c5e]">More free tools</p>
+        <p className="text-[15px] font-semibold text-[#0f2a45]">More free tools</p>
         <ul className="mt-3 flex flex-wrap gap-2.5">
           {others.map((t) => (
             <li key={t.slug}>
-              <Link href={toolHref(t)} className="inline-flex rounded-full border border-[#cbd5e1] bg-white px-4 py-2 text-[15px] font-medium text-[#0b2c5e] hover:border-[#2563eb]">
+              <Link href={toolHref(t)} className="inline-flex rounded-full border border-[#bfd4cb] bg-white px-4 py-2 text-[15px] font-medium text-[#0f2a45] hover:border-[#0e7b5b]">
                 {t.name}
               </Link>
             </li>
           ))}
         </ul>
-        <p className="mt-6 text-[13.5px] text-[#64748b]">
+        <p className="mt-6 text-[13.5px] text-[#5b6e7a]">
           Results are estimates for general guidance, not tax advice. See our <Link href="/disclaimer" className="underline">disclaimer</Link>.
         </p>
       </section>

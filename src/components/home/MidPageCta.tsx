@@ -5,13 +5,13 @@ import { siteConfig } from "@/lib/siteConfig";
 
 export function MidPageCta() {
   return (
-    <section className="relative overflow-hidden bg-[#0b2c5e]">
+    <section className="relative overflow-hidden bg-[#0f2a45]">
       <div
-        className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#2563eb]/30 blur-3xl"
+        className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#0e7b5b]/30 blur-3xl"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-[#14b8a6]/20 blur-3xl"
+        className="pointer-events-none absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-[#0e7b5b]/20 blur-3xl"
         aria-hidden
       />
 
@@ -26,7 +26,7 @@ export function MidPageCta() {
               sizes="420px"
             />
           </div>
-          <p className="text-[13.5px] font-semibold uppercase tracking-[0.16em] text-[#93c5fd]">
+          <p className="text-[13.5px] font-semibold uppercase tracking-[0.16em] text-[#8ecfbc]">
             {homeMidCta.eyebrow}
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">
@@ -38,7 +38,7 @@ export function MidPageCta() {
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="#mid-lead"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold text-[#0b2c5e] transition hover:bg-[#eff6ff]"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold text-[#0f2a45] transition hover:bg-[#e3f2ed]"
             >
               {siteConfig.cta.quote}
               <span aria-hidden>→</span>

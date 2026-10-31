@@ -82,7 +82,7 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
   ];
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       {pvt && (
         <JsonLd
           data={serviceJsonLd({
@@ -113,7 +113,7 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
         }
         aside={<LeadForm id="city-lead" source={`city-${city.slug}`} service={{ slug: "private-limited-company", name: "Private Limited Company" }} />}
       >
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[15px] font-medium text-[#334155]">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[15px] font-medium text-[#2c3f4e]">
           <li>✓ 100% online</li>
           <li>✓ Govt. fees shown separately</li>
           <li>✓ Milestone payments</li>
@@ -125,18 +125,18 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {entities.map((e) => (
             <li key={e.href}>
-              <Link href={e.href} className="group flex h-full flex-col rounded-2xl border border-[#e2e8f0] bg-white p-5 transition hover:border-[#93c5fd]">
-                <span className="text-[17px] font-bold text-[#0b2c5e] group-hover:text-[#2563eb]">{e.name}</span>
-                <span className="mt-1.5 text-[15px] leading-relaxed text-[#475569]">{e.tagline}</span>
-                <span className="mt-auto pt-3 text-[14.5px] font-semibold text-[#2563eb]">{e.priceLabel} →</span>
+              <Link href={e.href} className="group flex h-full flex-col rounded-2xl border border-[#d7e4de] bg-white p-5 transition hover:border-[#8ecfbc]">
+                <span className="text-[17px] font-bold text-[#0f2a45] group-hover:text-[#0e7b5b]">{e.name}</span>
+                <span className="mt-1.5 text-[15px] leading-relaxed text-[#4a5d68]">{e.tagline}</span>
+                <span className="mt-auto pt-3 text-[14.5px] font-semibold text-[#0e7b5b]">{e.priceLabel} →</span>
               </Link>
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-[15px] text-[#64748b]">
-          Not sure which one fits? Compare them in our <Link href="/guides/llp-vs-private-limited" className="font-semibold text-[#2563eb] hover:underline">LLP vs Pvt Ltd</Link> and{" "}
-          <Link href="/guides/opc-vs-private-limited" className="font-semibold text-[#2563eb] hover:underline">OPC vs Pvt Ltd</Link> guides, or try the{" "}
-          <Link href="/tools/business-structure-chooser" className="font-semibold text-[#2563eb] hover:underline">structure chooser</Link>.
+        <p className="mt-4 text-[15px] text-[#5b6e7a]">
+          Not sure which one fits? Compare them in our <Link href="/guides/llp-vs-private-limited" className="font-semibold text-[#0e7b5b] hover:underline">LLP vs Pvt Ltd</Link> and{" "}
+          <Link href="/guides/opc-vs-private-limited" className="font-semibold text-[#0e7b5b] hover:underline">OPC vs Pvt Ltd</Link> guides, or try the{" "}
+          <Link href="/tools/business-structure-chooser" className="font-semibold text-[#0e7b5b] hover:underline">structure chooser</Link>.
         </p>
       </section>
 
@@ -144,10 +144,10 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
         <SectionHeading title={`How company registration in ${city.name} works`} />
         <ol className="mt-6 grid gap-4 md:grid-cols-5">
           {STEPS.map((s, i) => (
-            <li key={s.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Step {i + 1}</span>
-              <p className="mt-1 text-[16px] font-bold text-[#0b2c5e]">{s.title}</p>
-              <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#475569]">{s.body}</p>
+            <li key={s.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Step {i + 1}</span>
+              <p className="mt-1 text-[16px] font-bold text-[#0f2a45]">{s.title}</p>
+              <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#4a5d68]">{s.body}</p>
             </li>
           ))}
         </ol>
@@ -158,39 +158,39 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
           <SectionHeading title="Documents required" />
           <ul className="mt-5 space-y-2.5">
             {DOCUMENTS.map((d) => (
-              <li key={d} className="flex gap-2.5 text-[15.5px] text-[#334155]">
-                <span className="text-[#16a34a]" aria-hidden>✓</span>
+              <li key={d} className="flex gap-2.5 text-[15.5px] text-[#2c3f4e]">
+                <span className="text-[#0e7b5b]" aria-hidden>✓</span>
                 {d}
               </li>
             ))}
           </ul>
-          <Link href="/documents/private-limited-company" className="mt-4 inline-block text-[15px] font-semibold text-[#2563eb] hover:underline">
+          <Link href="/documents/private-limited-company" className="mt-4 inline-block text-[15px] font-semibold text-[#0e7b5b] hover:underline">
             Full document checklist →
           </Link>
         </div>
         <div>
           <SectionHeading title="Fees" />
-          <div className="mt-5 overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white">
+          <div className="mt-5 overflow-hidden rounded-2xl border border-[#d7e4de] bg-white">
             <table className="w-full text-left text-[15px]">
-              <tbody className="divide-y divide-[#e2e8f0]">
+              <tbody className="divide-y divide-[#d7e4de]">
                 {offers.map((o) => (
                   <tr key={o.name}>
-                    <th scope="row" className="px-4 py-3 font-semibold text-[#0b2c5e]">{o.name} package</th>
-                    <td className="px-4 py-3 text-right font-semibold text-[#0b2c5e]">{formatInr(o.price)}</td>
+                    <th scope="row" className="px-4 py-3 font-semibold text-[#0f2a45]">{o.name} package</th>
+                    <td className="px-4 py-3 text-right font-semibold text-[#0f2a45]">{formatInr(o.price)}</td>
                   </tr>
                 ))}
                 {(pvt?.service.govtFees ?? []).map((f) => (
                   <tr key={f.label}>
-                    <th scope="row" className="px-4 py-3 font-normal text-[#475569]">{f.label}</th>
-                    <td className="px-4 py-3 text-right text-[#475569]">{f.amount}</td>
+                    <th scope="row" className="px-4 py-3 font-normal text-[#4a5d68]">{f.label}</th>
+                    <td className="px-4 py-3 text-right text-[#4a5d68]">{f.amount}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-[14px] text-[#64748b]">
+          <p className="mt-3 text-[14px] text-[#5b6e7a]">
             Professional fees exclude GST. Government fees and stamp duty for {city.state} are paid at actuals and depend on authorised capital. See{" "}
-            <Link href="/government-fees" className="font-semibold text-[#2563eb] hover:underline">government fees</Link>.
+            <Link href="/government-fees" className="font-semibold text-[#0e7b5b] hover:underline">government fees</Link>.
           </p>
         </div>
       </section>
@@ -198,28 +198,28 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
       <section className={`${container} pb-12`}>
         <SectionHeading title={`Local compliance in ${city.name}`} />
         <div className="mt-5 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Registrar of Companies</p>
-            <p className="mt-1.5 text-[16px] font-semibold text-[#0b2c5e]">{city.roc}</p>
-            <p className="mt-1 text-[14.5px] text-[#475569]">Handles annual filings, changes and compliance after incorporation.</p>
+          <div className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Registrar of Companies</p>
+            <p className="mt-1.5 text-[16px] font-semibold text-[#0f2a45]">{city.roc}</p>
+            <p className="mt-1 text-[14.5px] text-[#4a5d68]">Handles annual filings, changes and compliance after incorporation.</p>
           </div>
-          <div className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Professional tax</p>
-            <p className="mt-1.5 text-[16px] font-semibold text-[#0b2c5e]">{city.professionalTax ? `Applies in ${city.state}` : `Not levied in ${city.state}`}</p>
-            <p className="mt-1 text-[14.5px] text-[#475569]">
+          <div className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Professional tax</p>
+            <p className="mt-1.5 text-[16px] font-semibold text-[#0f2a45]">{city.professionalTax ? `Applies in ${city.state}` : `Not levied in ${city.state}`}</p>
+            <p className="mt-1 text-[14.5px] text-[#4a5d68]">
               {city.professionalTax ? "Employers register and deduct PT from eligible salaries." : "No state PT registration is needed for employers."}
             </p>
           </div>
-          <div className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">Shops & establishments</p>
-            <p className="mt-1.5 text-[16px] font-semibold text-[#0b2c5e]">{city.shopsAct}</p>
-            <p className="mt-1 text-[14.5px] text-[#475569]">Registration or intimation for your office or shop, depending on size.</p>
+          <div className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Shops & establishments</p>
+            <p className="mt-1.5 text-[16px] font-semibold text-[#0f2a45]">{city.shopsAct}</p>
+            <p className="mt-1 text-[14.5px] text-[#4a5d68]">Registration or intimation for your office or shop, depending on size.</p>
           </div>
         </div>
         <ul className="mt-5 space-y-2">
           {city.localNotes.map((n) => (
-            <li key={n} className="flex gap-2.5 text-[15.5px] text-[#334155]">
-              <span className="text-[#2563eb]" aria-hidden>•</span>
+            <li key={n} className="flex gap-2.5 text-[15.5px] text-[#2c3f4e]">
+              <span className="text-[#0e7b5b]" aria-hidden>•</span>
               {n}
             </li>
           ))}
@@ -230,12 +230,12 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
         <SectionHeading title={`Who we work with in ${city.name}`} />
         <div className="mt-5 grid gap-6 md:grid-cols-2">
           <div>
-            <p className="text-[15px] font-semibold text-[#0b2c5e]">Popular business areas</p>
-            <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#475569]">{city.hubs.join(" · ")}</p>
+            <p className="text-[15px] font-semibold text-[#0f2a45]">Popular business areas</p>
+            <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{city.hubs.join(" · ")}</p>
           </div>
           <div>
-            <p className="text-[15px] font-semibold text-[#0b2c5e]">Common sectors</p>
-            <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#475569]">{city.sectors.join(" · ")}</p>
+            <p className="text-[15px] font-semibold text-[#0f2a45]">Common sectors</p>
+            <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{city.sectors.join(" · ")}</p>
           </div>
         </div>
       </section>
@@ -245,7 +245,7 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
         <ul className="mt-5 flex flex-wrap gap-2.5">
           {related.map((r) => (
             <li key={r.href}>
-              <Link href={r.href} className="inline-flex rounded-full border border-[#cbd5e1] bg-white px-4 py-2 text-[15px] font-medium text-[#0b2c5e] hover:border-[#2563eb] hover:text-[#2563eb]">
+              <Link href={r.href} className="inline-flex rounded-full border border-[#bfd4cb] bg-white px-4 py-2 text-[15px] font-medium text-[#0f2a45] hover:border-[#0e7b5b] hover:text-[#0e7b5b]">
                 {r.name}
               </Link>
             </li>
@@ -260,11 +260,11 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
 
       {nearby.length > 0 && (
         <section className={`${container} pb-14`}>
-          <p className="text-[15px] font-semibold text-[#0b2c5e]">Company registration in nearby cities</p>
+          <p className="text-[15px] font-semibold text-[#0f2a45]">Company registration in nearby cities</p>
           <ul className="mt-3 flex flex-wrap gap-2.5">
             {nearby.map((c) => (
               <li key={c.slug}>
-                <Link href={cityHref(c)} className="text-[15px] font-semibold text-[#2563eb] hover:underline">
+                <Link href={cityHref(c)} className="text-[15px] font-semibold text-[#0e7b5b] hover:underline">
                   {c.name}
                 </Link>
               </li>

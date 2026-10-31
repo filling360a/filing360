@@ -26,12 +26,12 @@ export default async function CategoriesPage() {
               <details>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
                   <span className="min-w-0">
-                    <span className="block font-semibold text-[#0f172a]">{c.name}</span>
-                    <span className="block truncate text-[12.5px] text-[#64748b]">/blog/category/{c.slug} · {counts.get(c.id) ?? 0} posts</span>
+                    <span className="block font-semibold text-[#0f2a45]">{c.name}</span>
+                    <span className="block truncate text-[12.5px] text-[#5b6e7a]">/blog/category/{c.slug} · {counts.get(c.id) ?? 0} posts</span>
                   </span>
-                  <span className="text-[12.5px] font-semibold text-[#2563eb]">Edit</span>
+                  <span className="text-[12.5px] font-semibold text-[#0e7b5b]">Edit</span>
                 </summary>
-                <div className="mt-4 border-t border-[#eef2f7] pt-4">
+                <div className="mt-4 border-t border-[#e8f0ec] pt-4">
                   <CategoryForm category={c} />
                   <div className="mt-3">
                     <DeleteCategoryButton categoryId={c.id} postCount={counts.get(c.id) ?? 0} />
@@ -42,7 +42,7 @@ export default async function CategoriesPage() {
           ))}
         </div>
         <Card className="h-fit p-5">
-          <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Add category</h2>
+          <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Add category</h2>
           <CategoryForm />
         </Card>
       </div>

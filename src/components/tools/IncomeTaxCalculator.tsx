@@ -9,13 +9,13 @@ const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
 
 function ResultCard({ title, r, best }: { title: string; r: RegimeResult; best: boolean }) {
   return (
-    <Panel className={best ? "border-[#16a34a] ring-1 ring-[#16a34a]" : ""}>
+    <Panel className={best ? "border-[#0e7b5b] ring-1 ring-[#0e7b5b]" : ""}>
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[18px] font-bold text-[#0b2c5e]">{title}</h3>
-        {best && <span className="rounded-full bg-[#dcfce7] px-2.5 py-0.5 text-[13px] font-semibold text-[#15803d]">Lower tax</span>}
+        <h3 className="text-[18px] font-bold text-[#0f2a45]">{title}</h3>
+        {best && <span className="rounded-full bg-[#e3f2ed] px-2.5 py-0.5 text-[13px] font-semibold text-[#0b6550]">Lower tax</span>}
       </div>
-      <p className="mt-3 text-[30px] font-bold tracking-tight text-[#0b2c5e]">{inr(r.totalTax)}</p>
-      <p className="text-[14px] text-[#64748b]">Effective rate {pct(r.effectiveRate)} of gross income</p>
+      <p className="mt-3 text-[30px] font-bold tracking-tight text-[#0f2a45]">{inr(r.totalTax)}</p>
+      <p className="text-[14px] text-[#5b6e7a]">Effective rate {pct(r.effectiveRate)} of gross income</p>
       <div className="mt-4">
         <Row label="Deductions used" value={inr(r.deductions)} />
         <Row label="Taxable income" value={inr(r.taxableIncome)} />
@@ -51,7 +51,7 @@ export function IncomeTaxCalculator() {
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
       <Panel>
-        <h2 className="text-[18px] font-bold text-[#0b2c5e]">Your income</h2>
+        <h2 className="text-[18px] font-bold text-[#0f2a45]">Your income</h2>
         <div className="mt-4 space-y-4">
           <MoneyField label="Gross annual income" value={input.grossIncome} onChange={set("grossIncome")} hint="Salary (before deductions), business or professional income, interest, rent, etc." />
           <Toggle
@@ -75,7 +75,7 @@ export function IncomeTaxCalculator() {
           />
           <MoneyField label="Employer's NPS contribution" value={input.employerNps} onChange={set("employerNps")} hint="Deductible in both regimes, within limits." />
         </div>
-        <h2 className="mt-7 text-[18px] font-bold text-[#0b2c5e]">Deductions (old regime only)</h2>
+        <h2 className="mt-7 text-[18px] font-bold text-[#0f2a45]">Deductions (old regime only)</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <MoneyField label="80C investments" value={input.sec80C} onChange={set("sec80C")} hint="Max ₹1,50,000" />
           <MoneyField label="80D health insurance" value={input.sec80D} onChange={set("sec80D")} hint="Self, family and parents" />
@@ -87,7 +87,7 @@ export function IncomeTaxCalculator() {
       </Panel>
 
       <div className="space-y-4">
-        <div aria-live="polite" className={`rounded-2xl p-5 ${newBetter ? "bg-[#eff6ff] text-[#1d4ed8]" : "bg-[#f0fdf4] text-[#15803d]"}`}>
+        <div aria-live="polite" className={`rounded-2xl p-5 ${newBetter ? "bg-[#e3f2ed] text-[#0b6550]" : "bg-[#e8f6f1] text-[#0b6550]"}`}>
           <p className="text-[17px] font-bold">
             {diff === 0 ? "Both regimes give the same tax." : `The ${newBetter ? "new" : "old"} regime saves you ${inr(diff)}.`}
           </p>
@@ -99,11 +99,11 @@ export function IncomeTaxCalculator() {
           <ResultCard title="New regime" r={nr} best={newBetter && diff > 0} />
           <ResultCard title="Old regime" r={or} best={!newBetter} />
         </div>
-        <p className="text-[14px] text-[#64748b]">
+        <p className="text-[14px] text-[#5b6e7a]">
           Want an expert to file it?{" "}
-          <Link href="/services/income-tax/itr-filing-individual" className="font-semibold text-[#2563eb] hover:underline">ITR filing by a CA</Link>
+          <Link href="/services/income-tax/itr-filing-individual" className="font-semibold text-[#0e7b5b] hover:underline">ITR filing by a CA</Link>
           {" · "}
-          <Link href="/guides/old-vs-new-tax-regime" className="font-semibold text-[#2563eb] hover:underline">Old vs new regime guide</Link>
+          <Link href="/guides/old-vs-new-tax-regime" className="font-semibold text-[#0e7b5b] hover:underline">Old vs new regime guide</Link>
         </p>
       </div>
     </div>

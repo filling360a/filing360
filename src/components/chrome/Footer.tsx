@@ -52,7 +52,7 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 function FooterColumn({ title, links }: { title: string; links: readonly (readonly [string, string])[] }) {
   return (
     <div>
-      <p className="text-[13.5px] font-semibold uppercase tracking-[0.1em] text-[#93c5fd]">{title}</p>
+      <p className="text-[13.5px] font-semibold uppercase tracking-[0.1em] text-[#8ecfbc]">{title}</p>
       <ul className="mt-3 space-y-2">
         {links.map(([label, href]) => (
           <li key={href}>
@@ -70,7 +70,7 @@ export function Footer() {
   const socials = socialLinks();
 
   return (
-    <footer className="bg-[#071f42] pb-[4.25rem] text-white md:pb-0">
+    <footer className="bg-[#0a2036] pb-[4.25rem] text-white md:pb-0">
       <div className="mx-auto grid max-w-[1320px] gap-8 px-5 py-10 md:grid-cols-12 md:gap-10 md:px-8 md:py-14 lg:px-10">
         <div className="md:col-span-4">
           <Link href="/" className="inline-flex rounded-xl bg-white px-3 py-1.5" aria-label={`${siteConfig.brandName} home`}>
@@ -82,7 +82,7 @@ export function Footer() {
           <div className="mt-5 space-y-3 md:mt-6">
             <Link
               href="/book-consultation"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white px-5 text-[15px] font-semibold text-[#0b2c5e] transition hover:bg-[#eff6ff]"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white px-5 text-[15px] font-semibold text-[#0f2a45] transition hover:bg-[#e3f2ed]"
             >
               Book a free consultation
               <span aria-hidden>→</span>
@@ -124,7 +124,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:col-span-8 md:grid-cols-4">
           {pillars.slice(0, 4).map((pillar) => (
             <div key={pillar.slug}>
-              <p className="text-[13.5px] font-semibold uppercase tracking-[0.1em] text-[#93c5fd]">{pillar.name}</p>
+              <p className="text-[13.5px] font-semibold uppercase tracking-[0.1em] text-[#8ecfbc]">{pillar.name}</p>
               <ul className="mt-3 space-y-2">
                 {pillar.services.slice(0, 5).map((s) => (
                   <li key={s.slug}>
@@ -137,7 +137,7 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-              <Link href={`/services/${pillar.slug}`} className="mt-3 inline-block text-[13.5px] font-semibold text-[#93c5fd] hover:text-white">
+              <Link href={`/services/${pillar.slug}`} className="mt-3 inline-block text-[13.5px] font-semibold text-[#8ecfbc] hover:text-white">
                 View all →
               </Link>
             </div>

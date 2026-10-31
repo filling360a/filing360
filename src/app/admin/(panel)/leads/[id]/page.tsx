@@ -100,9 +100,9 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/leads
         <div className="min-w-0 space-y-5">
           <Card className="p-5">
             <dl className="grid gap-x-6 gap-y-4 text-[13.5px] sm:grid-cols-2">
-              <Field label="Phone"><a href={`tel:${lead.phone}`} className="text-[#2563eb] hover:underline">{lead.phone}</a></Field>
+              <Field label="Phone"><a href={`tel:${lead.phone}`} className="text-[#0e7b5b] hover:underline">{lead.phone}</a></Field>
               <Field label="Email">
-                {lead.email ? <a href={`mailto:${lead.email}`} className="break-all text-[#2563eb] hover:underline">{lead.email}</a> : "—"}
+                {lead.email ? <a href={`mailto:${lead.email}`} className="break-all text-[#0e7b5b] hover:underline">{lead.email}</a> : "—"}
               </Field>
               <Field label="Service">{lead.interest ?? "—"}</Field>
               <Field label="City">{lead.city ?? "—"}</Field>
@@ -118,13 +118,13 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/leads
               )}
             </dl>
             {lead.message && (
-              <div className="mt-4 rounded-lg bg-[#f8fafc] p-3 text-[13.5px] leading-relaxed text-[#334155] whitespace-pre-line">
+              <div className="mt-4 rounded-lg bg-[#f3f7fa] p-3 text-[13.5px] leading-relaxed text-[#2c3f4e] whitespace-pre-line">
                 {lead.message}
               </div>
             )}
             {utm.length > 0 && (
-              <div className="mt-4 border-t border-[#eef2f7] pt-3">
-                <p className="mb-2 text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">Campaign</p>
+              <div className="mt-4 border-t border-[#e8f0ec] pt-3">
+                <p className="mb-2 text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">Campaign</p>
                 <div className="flex flex-wrap gap-1.5">
                   {utm.map(([k, v]) => <Badge key={k} tone="indigo">{k}: {v}</Badge>)}
                 </div>
@@ -133,24 +133,24 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/leads
           </Card>
 
           <Card className="p-5">
-            <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Activity</h2>
+            <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Activity</h2>
             <ActivityComposer leadId={lead.id} />
-            <ol className="mt-5 space-y-4 border-l-2 border-[#eef2f7] pl-4">
+            <ol className="mt-5 space-y-4 border-l-2 border-[#e8f0ec] pl-4">
               {(activities ?? []).map((a) => {
                 const detail = describe(a.type, a.meta, people);
                 const actor = a.actor ? a.actor.full_name || a.actor.email : a.type === "created" || a.type === "resubmitted" ? "Website" : "System";
                 return (
                   <li key={a.id} className="relative">
-                    <span className="absolute -left-[23px] top-1 h-3 w-3 rounded-full border-2 border-white bg-[#cbd5e1]" aria-hidden />
+                    <span className="absolute -left-[23px] top-1 h-3 w-3 rounded-full border-2 border-white bg-[#bfd4cb]" aria-hidden />
                     <p className="text-[13px]">
-                      <span className="font-semibold text-[#0f172a]">{ACTIVITY_LABEL[a.type]}</span>
-                      {detail && <span className="text-[#475569]"> · {detail}</span>}
+                      <span className="font-semibold text-[#0f2a45]">{ACTIVITY_LABEL[a.type]}</span>
+                      {detail && <span className="text-[#4a5d68]"> · {detail}</span>}
                     </p>
-                    <p className="text-[12px] text-[#94a3b8]" title={formatDateTime(a.created_at)}>
+                    <p className="text-[12px] text-[#8a9ba6]" title={formatDateTime(a.created_at)}>
                       {actor} · {timeAgo(a.created_at)}
                     </p>
                     {a.body && (
-                      <p className="mt-1.5 rounded-lg bg-[#f8fafc] px-3 py-2 text-[13px] leading-relaxed text-[#334155] whitespace-pre-line">{a.body}</p>
+                      <p className="mt-1.5 rounded-lg bg-[#f3f7fa] px-3 py-2 text-[13px] leading-relaxed text-[#2c3f4e] whitespace-pre-line">{a.body}</p>
                     )}
                   </li>
                 );
@@ -161,24 +161,24 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/leads
 
         <div className="space-y-5">
           <Card className="p-5">
-            <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Pipeline</h2>
+            <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Pipeline</h2>
             <LeadControls lead={lead} team={team} />
           </Card>
 
           <Card className="p-5">
-            <h2 className="mb-3 text-[15px] font-bold text-[#0b2c5e]">Send email</h2>
+            <h2 className="mb-3 text-[15px] font-bold text-[#0f2a45]">Send email</h2>
             {lead.email ? (
               <EmailComposer leadId={lead.id} name={lead.name} interest={lead.interest} />
             ) : (
-              <p className="text-[13px] text-[#64748b]">No email address on this lead.</p>
+              <p className="text-[13px] text-[#5b6e7a]">No email address on this lead.</p>
             )}
             {emails && emails.length > 0 && (
-              <ul className="mt-4 space-y-2 border-t border-[#eef2f7] pt-3">
+              <ul className="mt-4 space-y-2 border-t border-[#e8f0ec] pt-3">
                 {emails.map((e) => (
                   <li key={e.id} className="flex items-start justify-between gap-2 text-[12.5px]">
                     <span className="min-w-0">
-                      <span className="block truncate font-medium text-[#334155]">{e.subject}</span>
-                      <span className="text-[#94a3b8]">{e.template} · {timeAgo(e.created_at)}</span>
+                      <span className="block truncate font-medium text-[#2c3f4e]">{e.subject}</span>
+                      <span className="text-[#8a9ba6]">{e.template} · {timeAgo(e.created_at)}</span>
                     </span>
                     <Badge tone={e.status === "sent" ? "green" : e.status === "failed" ? "red" : "zinc"}>{e.status}</Badge>
                   </li>
@@ -190,7 +190,7 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/leads
           {staff.role === "admin" && (
             <Card className="p-5">
               <h2 className="mb-1 text-[15px] font-bold text-[#b91c1c]">Danger zone</h2>
-              <p className="mb-3 text-[12.5px] text-[#64748b]">Prefer marking as Spam or Lost — deleting removes the history.</p>
+              <p className="mb-3 text-[12.5px] text-[#5b6e7a]">Prefer marking as Spam or Lost — deleting removes the history.</p>
               <DeleteLeadButton leadId={lead.id} />
             </Card>
           )}
@@ -203,8 +203,8 @@ export default async function LeadDetailPage({ params }: PageProps<"/admin/leads
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="min-w-0">
-      <dt className="text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#64748b]">{label}</dt>
-      <dd className="mt-0.5 text-[#0f172a]">{children}</dd>
+      <dt className="text-[11.5px] font-semibold uppercase tracking-[0.04em] text-[#5b6e7a]">{label}</dt>
+      <dd className="mt-0.5 text-[#0f2a45]">{children}</dd>
     </div>
   );
 }

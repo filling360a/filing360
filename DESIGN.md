@@ -1,15 +1,19 @@
 # Filing360 design system
 
 ## World
-Bright corporate plaza — navy glass, marble, gold arc. Clean white UI over sky-blue atmosphere.
+CA desk in daylight — mint paper, navy ink, forest-teal action. White cards over a cool mint field; dark navy bands for proof and chrome.
 
 ## Tokens
-- Ink navy `#0A2342`
-- Paper `#F5F8FC`
-- Accent navy (CTA) `#0C3D6E`
-- Gold `#C9A227`
+- Ink navy `#0F2A45`
+- Paper mint `#F3F7FA`
+- Card white `#FFFFFF`
+- Soft mint `#E3F2ED`
+- Action teal `#0E7B5B`
+- Teal hover `#0B6550`
 - Display: Fraunces
 - Body: Geist
 
-## Hero
-Full-bleed 3D key visual (`/images/image.png`) with built-in slogans. Lead form floats on the right; trust strip sits below.
+## Roles
+- Headlines sit in navy; emphasis and primary CTAs sit in teal.
+- Secondary CTAs, top bar, footer, and stat bands sit in navy.
+- Washes, pills, and icon wells use mint — never blue.

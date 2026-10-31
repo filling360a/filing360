@@ -38,7 +38,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <JsonLd data={localBusinessJsonLd()} />
       <PageHero
         eyebrow="Contact"
@@ -53,7 +53,7 @@ export default function ContactPage() {
             href={c.href}
             target={c.href.startsWith("http") ? "_blank" : undefined}
             rel="noopener noreferrer"
-            className="inline-flex h-11 items-center gap-2 rounded-xl border border-[#cbd5e1] bg-white px-4 text-[15px] font-semibold text-[#0b2c5e] hover:border-[#2563eb] hover:text-[#2563eb]"
+            className="inline-flex h-11 items-center gap-2 rounded-xl border border-[#bfd4cb] bg-white px-4 text-[15px] font-semibold text-[#0f2a45] hover:border-[#0e7b5b] hover:text-[#0e7b5b]"
           >
             {c.cta}
           </a>
@@ -67,11 +67,11 @@ export default function ContactPage() {
             href={c.href}
             target={c.href.startsWith("http") ? "_blank" : undefined}
             rel="noopener noreferrer"
-            className="rounded-2xl border border-[#e2e8f0] bg-white p-5 transition hover:border-[#93c5fd]"
+            className="rounded-2xl border border-[#d7e4de] bg-white p-5 transition hover:border-[#8ecfbc]"
           >
-            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#2563eb]">{c.title}</p>
-            <p className="mt-2 break-words text-[18px] font-bold text-[#0b2c5e]">{c.body}</p>
-            <p className="mt-1 text-[14.5px] text-[#64748b]">{company.hours.label}</p>
+            <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">{c.title}</p>
+            <p className="mt-2 break-words text-[18px] font-bold text-[#0f2a45]">{c.body}</p>
+            <p className="mt-1 text-[14.5px] text-[#5b6e7a]">{company.hours.label}</p>
           </a>
         ))}
       </section>
@@ -79,9 +79,9 @@ export default function ContactPage() {
       <section className={`${container} grid gap-8 pb-12 lg:grid-cols-2`}>
         <div>
           <SectionHeading title="Visit our office" intro={address ? undefined : `Our team works from ${company.address.city}. Visits are by appointment.`} />
-          {address && <p className="mt-3 text-[16px] leading-relaxed text-[#334155]">{address}</p>}
-          <p className="mt-2 text-[15px] text-[#64748b]">{company.hours.label} · visits by appointment</p>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-[#e2e8f0] bg-white">
+          {address && <p className="mt-3 text-[16px] leading-relaxed text-[#2c3f4e]">{address}</p>}
+          <p className="mt-2 text-[15px] text-[#5b6e7a]">{company.hours.label} · visits by appointment</p>
+          <div className="mt-4 overflow-hidden rounded-2xl border border-[#d7e4de] bg-white">
             <iframe
               title={`Map of ${mapQuery}`}
               src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}
@@ -91,18 +91,18 @@ export default function ContactPage() {
             />
           </div>
           {hasValue(company.mapsUrl) && (
-            <a href={company.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-[15px] font-semibold text-[#2563eb] hover:underline">
+            <a href={company.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-[15px] font-semibold text-[#0e7b5b] hover:underline">
               Get directions on Google Maps →
             </a>
           )}
         </div>
         <div>
           <SectionHeading title="Write to the right desk" />
-          <ul className="mt-4 divide-y divide-[#e2e8f0] rounded-2xl border border-[#e2e8f0] bg-white">
+          <ul className="mt-4 divide-y divide-[#d7e4de] rounded-2xl border border-[#d7e4de] bg-white">
             {DESKS.map((d) => (
               <li key={d.label} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3.5">
-                <span className="text-[15px] text-[#334155]">{d.label}</span>
-                <a href={`mailto:${d.email}`} className="text-[15px] font-semibold text-[#2563eb] hover:underline">{d.email}</a>
+                <span className="text-[15px] text-[#2c3f4e]">{d.label}</span>
+                <a href={`mailto:${d.email}`} className="text-[15px] font-semibold text-[#0e7b5b] hover:underline">{d.email}</a>
               </li>
             ))}
           </ul>

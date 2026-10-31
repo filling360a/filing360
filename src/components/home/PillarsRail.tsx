@@ -9,7 +9,7 @@ function Arrow({ dir, disabled, onClick }: { dir: -1 | 1; disabled: boolean; onC
       onClick={onClick}
       disabled={disabled}
       aria-label={dir === -1 ? "Previous services" : "Next services"}
-      className={`absolute top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#dbeafe] bg-white text-[#0b2c5e] shadow-[0_10px_24px_-12px_rgba(15,23,42,0.35)] transition hover:border-[#93c5fd] hover:bg-[#eff6ff] disabled:pointer-events-none disabled:opacity-0 lg:flex ${
+      className={`absolute top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4ede4] bg-white text-[#0f2a45] shadow-[0_10px_24px_-12px_rgba(15,23,42,0.35)] transition hover:border-[#8ecfbc] hover:bg-[#e3f2ed] disabled:pointer-events-none disabled:opacity-0 lg:flex ${
         dir === -1 ? "-left-5" : "-right-5"
       }`}
     >

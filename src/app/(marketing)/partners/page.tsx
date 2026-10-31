@@ -41,7 +41,7 @@ const FAQS = [
 
 export default function PartnersPage() {
   return (
-    <div className="bg-[#f8fafc]">
+    <div className="bg-[#f3f7fa]">
       <PageHero
         eyebrow="Partner program"
         title="Grow your practice with Filing360"
@@ -71,9 +71,9 @@ export default function PartnersPage() {
         <SectionHeading title="Why professionals partner with us" />
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {BENEFITS.map((b) => (
-            <div key={b.title} className="rounded-2xl border border-[#e2e8f0] bg-white p-5">
-              <h3 className="text-[17px] font-bold text-[#0b2c5e]">{b.title}</h3>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#475569]">{b.body}</p>
+            <div key={b.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <h3 className="text-[17px] font-bold text-[#0f2a45]">{b.title}</h3>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{b.body}</p>
             </div>
           ))}
         </div>
@@ -84,8 +84,8 @@ export default function PartnersPage() {
           <SectionHeading title="Who can apply" />
           <ul className="mt-5 space-y-2.5">
             {WHO.map((w) => (
-              <li key={w} className="flex gap-2.5 text-[16px] text-[#334155]">
-                <span className="text-[#16a34a]" aria-hidden>✓</span>
+              <li key={w} className="flex gap-2.5 text-[16px] text-[#2c3f4e]">
+                <span className="text-[#0e7b5b]" aria-hidden>✓</span>
                 {w}
               </li>
             ))}
@@ -95,9 +95,9 @@ export default function PartnersPage() {
           <SectionHeading title="How it works" />
           <ol className="mt-5 space-y-3">
             {STEPS.map((s, i) => (
-              <li key={s.title} className="rounded-xl border border-[#e2e8f0] bg-white p-4">
-                <p className="text-[15.5px] font-bold text-[#0b2c5e]">{i + 1}. {s.title}</p>
-                <p className="mt-1 text-[15px] text-[#475569]">{s.body}</p>
+              <li key={s.title} className="rounded-xl border border-[#d7e4de] bg-white p-4">
+                <p className="text-[15.5px] font-bold text-[#0f2a45]">{i + 1}. {s.title}</p>
+                <p className="mt-1 text-[15px] text-[#4a5d68]">{s.body}</p>
               </li>
             ))}
           </ol>
@@ -107,8 +107,8 @@ export default function PartnersPage() {
       <section className={`${container} pb-14`}>
         <SectionHeading title="Partner FAQs" />
         <div className="mt-5"><FaqList items={FAQS} /></div>
-        <p className="mt-6 text-[15px] text-[#64748b]">
-          Questions? Write to <a href={`mailto:${company.contact.partnersEmail}`} className="font-semibold text-[#2563eb] hover:underline">{company.contact.partnersEmail}</a>.
+        <p className="mt-6 text-[15px] text-[#5b6e7a]">
+          Questions? Write to <a href={`mailto:${company.contact.partnersEmail}`} className="font-semibold text-[#0e7b5b] hover:underline">{company.contact.partnersEmail}</a>.
         </p>
       </section>
     </div>
