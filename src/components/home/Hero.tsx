@@ -60,7 +60,7 @@ export function Hero() {
   const [toggledPaused, setToggledPaused] = useState(false);
   const [offscreen, setOffscreen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const regionRef = useRef<HTMLElement>(null);
+  const regionRef = useRef<HTMLDivElement>(null);
   const remainingRef = useRef(INTERVAL_MS);
   const lastTickRef = useRef<number | null>(null);
   const slide = slides[index];

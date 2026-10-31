@@ -139,13 +139,7 @@ export function BannerCarousel() {
                 priority={i === 0}
               />
               {active ? (
-                <div
-                  className={
-                    banner.align === "left"
-                      ? "absolute inset-y-0 left-[5%] z-10 hidden w-[32%] min-w-[13rem] max-w-[320px] flex-col justify-center md:flex lg:left-[6%]"
-                      : "absolute inset-y-0 right-[3.5%] z-10 hidden w-[32%] min-w-[13rem] max-w-[320px] flex-col justify-center md:flex lg:right-[5%]"
-                  }
-                >
+                <div className="absolute inset-y-0 right-[3.5%] z-10 hidden w-[32%] min-w-[13rem] max-w-[320px] flex-col justify-center md:flex lg:right-[5%]">
                   <h3
                     className="text-balance text-[22px] font-bold leading-[1.18] tracking-[-0.03em] lg:text-[28px]"
                     style={{ color: banner.color }}
