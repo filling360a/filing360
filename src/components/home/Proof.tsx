@@ -92,11 +92,11 @@ export function Proof() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-[1180px] px-5 py-10 md:px-8 lg:py-16">
+      <div className="relative mx-auto max-w-[1180px] px-5 py-8 md:px-8 lg:py-12">
         {/* Reviews header — no eyebrow */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
           <div className="max-w-xl">
-            <h2 className="text-[24px] font-bold leading-[1.2] tracking-tight text-[#0f2a45] md:text-[34px]">
+            <h2 className="text-[26px] font-bold leading-[1.2] tracking-tight text-[#0f2a45] md:text-[34px]">
               {homeReviews.titleLead}{" "}
               <span className="relative inline-block text-[#0e7b5b]">
                 {homeReviews.titleAccent}

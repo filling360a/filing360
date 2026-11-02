@@ -212,11 +212,11 @@ export function LeadForm({
       id={id}
       className={`rounded-2xl border text-ink ${compact ? "flex flex-col px-4 py-4 md:px-5 md:py-5" : "p-5 md:p-6"} ${shell} ${className}`}
     >
-      <div className={compact ? "flex items-center justify-between gap-3" : undefined}>
-        <h2 className={`font-bold tracking-tight text-ink ${compact ? "flex items-center gap-2 text-[17px] leading-tight md:text-[18px]" : "text-xl md:text-[1.35rem]"}`}>
+      <div className={compact ? "flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3" : undefined}>
+        <p className={`font-bold tracking-tight text-ink ${compact ? "flex items-center gap-2 text-[17px] leading-tight md:text-[18px]" : "text-xl md:text-[1.35rem]"}`}>
           {compact ? <SparkMark /> : null}
           {title}
-        </h2>
+        </p>
         {compact && badge ? (
           <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[#e8f6f1] px-2.5 py-1 text-[11.5px] font-semibold text-[#0e7b5b]">
             <BoltMark />
@@ -237,7 +237,7 @@ export function LeadForm({
         </div>
 
         {compact ? (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
             <div>
               <label htmlFor={`${uid}-name`} className="sr-only">
                 Full name
@@ -523,7 +523,7 @@ export function LeadForm({
         <button
           type="submit"
           disabled={submitting}
-          className={`flex w-full items-center justify-center gap-2 rounded-xl bg-seal px-4 font-semibold text-white transition hover:bg-seal-deep disabled:opacity-70 ${compact ? "py-3 text-[14.5px]" : "mt-1 py-3.5 text-[15px]"}`}
+          className={`flex w-full items-center justify-center gap-2 rounded-xl bg-seal px-4 font-semibold text-white transition hover:bg-seal-deep disabled:opacity-70 ${compact ? "min-h-12 py-3 text-[15px]" : "mt-1 py-3.5 text-[15px]"}`}
         >
           {submitting ? "Sending…" : submitLabel}
           <svg viewBox="0 0 24 24" className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>

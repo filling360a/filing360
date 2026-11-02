@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { pillars } from "@/content/services";
 import { ServiceCard } from "@/components/services/ServiceCard";
+import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
+import { bannerForPath } from "@/content/pageBanners";
 
 export default function ServicesHubPage() {
   const [query, setQuery] = useState("");
@@ -25,35 +27,67 @@ export default function ServicesHubPage() {
 
   return (
     <div className="bg-[#f3f7fa]">
-      <section className="border-b border-[#d7e4de] bg-gradient-to-br from-[#0f2a45] via-[#0f2a45] to-[#0e7b5b] text-white">
-        <div className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-20">
-          <h1 className="text-[30px] font-bold tracking-tight md:text-[46px]">All services</h1>
-          <p className="mt-2 max-w-xl text-[16px] text-white/75 md:mt-3 md:text-[16px]">
+      <InnerHero
+        art={bannerForPath("/services")}
+        title="Every filing,"
+        accent="one place."
+        body={
+          <p>
             Income tax, GST, startup registration, MCA compliance and more — every package listed with its price.
           </p>
-          <label className="mt-6 block max-w-lg md:mt-8">
-            <span className="sr-only">Search services</span>
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search GST return, ITR, Private Limited…"
-              className="w-full rounded-xl border border-white/25 bg-white/10 px-4 py-3 text-[15px] text-white placeholder:text-white/55 focus:border-white/60 focus:outline-none"
-            />
-          </label>
-          <ul className="-mx-5 mt-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:mt-6 md:flex-wrap md:overflow-visible md:px-0">
-            {pillars.map((p) => (
-              <li key={p.slug} className="shrink-0">
-                <a
-                  href={`#${p.slug}`}
-                  className="inline-block whitespace-nowrap rounded-full border border-white/25 px-3 py-1.5 text-[14.5px] font-medium text-white/85 hover:bg-white/10"
-                >
-                  {p.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        }
+        crumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services" },
+        ]}
+        marks={[
+          {
+            label: "Income tax",
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.rupee,
+          },
+          {
+            label: "GST filings",
+            well: "bg-[#e8f2ee] text-[#0f2a45]",
+            icon: bannerMarks.doc,
+          },
+          {
+            label: "Registrations",
+            well: "bg-[#d4ede4] text-[#0b6550]",
+            icon: bannerMarks.building,
+          },
+          {
+            label: "100% online",
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.check,
+          },
+        ]}
+        actions={
+          <div className="w-full max-w-lg">
+            <label className="block">
+              <span className="sr-only">Search services</span>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search GST return, ITR, Private Limited…"
+                className="w-full rounded-xl border border-[#bfd4cb] bg-white px-4 py-3 text-[15px] text-[#0f2a45] placeholder:text-[#8a9ba6] shadow-[0_10px_24px_-18px_rgba(15,42,69,0.45)] focus:border-[#0e7b5b] focus:outline-none"
+              />
+            </label>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {pillars.map((p) => (
+                <li key={p.slug}>
+                  <a
+                    href={`#${p.slug}`}
+                    className="inline-block whitespace-nowrap rounded-full border border-[#c5e8dc] bg-white/80 px-3 py-1.5 text-[13.5px] font-semibold text-[#0b6550] hover:border-[#0e7b5b]"
+                  >
+                    {p.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        }
+      />
 
       <div className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 lg:py-16">
         {results ? (

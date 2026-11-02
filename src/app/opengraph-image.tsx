@@ -16,7 +16,7 @@ export default async function OpengraphImage() {
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", background: "#f3f7fa" }}>
         <div style={{ display: "flex", flexDirection: "column", flex: 1, padding: "64px 72px 40px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} alt="" width={391} height={90} />
+          <img src={logoSrc} alt="" width={409} height={90} />
           <div style={{ display: "flex", marginTop: 48, fontSize: 60, fontWeight: 700, lineHeight: 1.12, color: "#0f2a45", letterSpacing: -1.5, maxWidth: 980 }}>
             Company registration, GST & income tax — done by experts
           </div>

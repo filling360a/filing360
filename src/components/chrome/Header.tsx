@@ -67,6 +67,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [heroLight, setHeroLight] = useState(false);
   const reduce = useReducedMotion();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onHome = pathname === "/";
@@ -81,6 +82,19 @@ export function Header() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sync = (event?: Event) => {
+      const light =
+        event instanceof CustomEvent
+          ? Boolean(event.detail?.light)
+          : document.documentElement.dataset.heroLight === "1";
+      setHeroLight(light);
+    };
+    sync();
+    window.addEventListener("hero-slide", sync);
+    return () => window.removeEventListener("hero-slide", sync);
   }, []);
 
   useEffect(() => {
@@ -122,12 +136,18 @@ export function Header() {
       }`}
     >
       <div className="relative mx-auto flex h-[72px] max-w-[1320px] items-center gap-3 px-4 md:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center" aria-label={`${siteConfig.brandName} home`}>
+        <Link
+          href="/"
+          className={`flex shrink-0 items-center rounded-lg px-1.5 py-0.5 transition ${
+            overHero && heroLight ? "bg-white/40" : ""
+          }`}
+          aria-label={`${siteConfig.brandName} home`}
+        >
           <Logo priority className="h-10 w-auto" />
         </Link>
 
         <nav
-          className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
+          className="hidden min-w-0 flex-1 items-center justify-center xl:flex"
           aria-label="Primary"
           onMouseLeave={scheduleClose}
         >
@@ -176,7 +196,7 @@ export function Header() {
           <div
             role="region"
             aria-label={`${active.name} services`}
-            className="absolute left-1/2 top-full z-50 hidden w-[min(92vw,680px)] -translate-x-1/2 pt-2 lg:block"
+            className="absolute left-1/2 top-full z-50 hidden w-[min(92vw,680px)] -translate-x-1/2 pt-2 xl:block"
             onMouseEnter={() => openMenu(active.slug)}
             onMouseLeave={scheduleClose}
           >
@@ -228,10 +248,10 @@ export function Header() {
           </div>
         )}
 
-        <div className="ml-auto flex items-center gap-2 lg:ml-0">
+        <div className="ml-auto flex items-center gap-2 xl:ml-0">
           <Link
             href={startHref}
-            className="hidden h-10 items-center rounded-full bg-[#0f2a45] px-5 text-[14.5px] font-semibold text-white transition hover:bg-[#0a2036] lg:inline-flex"
+            className="hidden h-10 items-center rounded-full bg-[#0f2a45] px-5 text-[14.5px] font-semibold text-white transition hover:bg-[#0a2036] xl:inline-flex"
           >
             Get Started
             <span aria-hidden className="ml-1">
@@ -240,7 +260,7 @@ export function Header() {
           </Link>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#d7e4de] lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#d7e4de] xl:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -262,7 +282,7 @@ export function Header() {
             initial={reduce ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={reduce ? undefined : { height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-[#d7e4de] bg-white lg:hidden"
+            className="overflow-hidden border-t border-[#d7e4de] bg-white xl:hidden"
           >
             <div className="max-h-[80vh] overflow-auto px-5 py-2">
               <ul>

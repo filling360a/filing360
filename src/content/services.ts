@@ -677,7 +677,7 @@ export const pillars: Pillar[] = [
     slug: "gst",
     name: "GST",
     description:
-      "GST applicability checks, registration, return filing by professionals, LUT, amendments, revocation and closure.",
+      "Apply for a GST number online and get your GSTIN in 3–7 working days, then never miss a return. Registration, monthly filing, LUT, amendment, cancellation and revocation at fixed prices.",
     groups: [
       {
         name: "GST registration",
@@ -713,8 +713,9 @@ export const pillars: Pillar[] = [
           {
             slug: "gst-registration",
             name: "GST Registration",
-            heading: "Need a GST Number? Filing360's Got You Covered",
-            tagline: "Your GSTIN, done in no time. Leave the paperwork to Filing360.",
+            heading: "GST Registration Online",
+            tagline:
+              "Get your GST number without visiting any office. CAs prepare REG-01, handle Aadhaar authentication and officer queries, and deliver your GST certificate in 3–7 working days.",
             about: {
               title: "Get GST-registered without the headache",
               body: "Starting a business is hard enough, and your GST registration shouldn't add to the stress. At Filing360, our team handles the paperwork so you can get back to running your business. It's 100% online and works from anywhere in India. Here's what we take care of:",
@@ -734,6 +735,43 @@ export const pillars: Pillar[] = [
               gstYearAnnualItrPkg,
             ],
             timeline: "3–7 business days",
+            featured: true,
+          },
+          {
+            slug: "gst-composition-scheme",
+            name: "GST Composition Scheme",
+            shortName: "Composition Scheme",
+            heading: "GST Composition Scheme Registration",
+            tagline:
+              "Pay a low, fixed tax on turnover and file returns only four times a year plus one annual return. We check eligibility, file your option, and handle CMP-08 and GSTR-4.",
+            packages: [
+              {
+                name: "Composition opt-in",
+                description: "Eligibility check and CMP-02 / REG-01 composition option filing.",
+                price: 999,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Eligibility and tax comparison",
+                  "CMP-02 or REG-01 composition option",
+                  "Bill of supply format guidance",
+                ],
+              },
+              {
+                name: "Yearly Filing",
+                description: "All four CMP-08 returns plus the annual GSTR-4.",
+                price: 5999,
+                per: "year",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Dedicated Accountant",
+                  "CMP-08 filing — 4 quarters",
+                  "GSTR-4 annual return",
+                ],
+                popular: true,
+              },
+            ],
+            timeline: "Same week",
             featured: true,
           },
         ],
@@ -766,8 +804,9 @@ export const pillars: Pillar[] = [
             slug: "gst-return-filing-regular",
             name: "Return Filing — Regular",
             shortName: "Regular Return Filing",
-            heading: "Monthly GST Filing by Accountants",
-            tagline: "GST return filing by accountants, covering GSTR-1 and GSTR-3B filings.",
+            heading: "GST Return Filing Online",
+            tagline:
+              "Monthly GST compliance, fully handled. We reconcile GSTR-2B, prepare GSTR-1 and GSTR-3B, share the challan and file on time so you keep ITC and avoid late fees.",
             about: monthlyReturnAbout,
             packages: [gstMonthlyPkg, gstYearPkg, gstYearAnnualPkg, gstYearAnnualItrPkg],
             scope: RETURN_SCOPE,
@@ -934,7 +973,7 @@ export const pillars: Pillar[] = [
             slug: "gst-annual-return-filing",
             name: "Return Filing — Annual Return & GST Reconciliation",
             shortName: "Annual Return (GSTR-9)",
-            heading: "GST (GSTR-9) Annual Return Filing",
+            heading: "GST Annual Return Filing (GSTR-9 and GSTR-9C)",
             tagline:
               "GSTR-9 is the annual return that eligible regular GST-registered taxpayers must file. It consolidates all monthly/quarterly returns filed during the financial year. File GSTR-9 online easily and avoid penalties.",
             about: {
@@ -986,7 +1025,7 @@ export const pillars: Pillar[] = [
           {
             slug: "gst-lut-filing",
             name: "GST LUT Filing",
-            heading: "Export Without IGST — GST LUT Filing",
+            heading: "LUT Filing Online for Exporters",
             tagline:
               "GST LUT allows exporters to supply goods or services without payment of IGST by submitting a Letter of Undertaking on the GST portal. Apply online easily and stay compliant with GST export regulations.",
             about: {
@@ -1066,7 +1105,7 @@ export const pillars: Pillar[] = [
             slug: "gst-revocation",
             name: "GST Registration Revocation",
             shortName: "GST Revocation",
-            heading: "GST Revocation in India",
+            heading: "Restore Your Cancelled GST Registration",
             tagline:
               "GST revocation allows taxpayers to restore a cancelled GST number. If your GST was cancelled due to non-filing, errors or notices, apply for revocation online and restart your business legally.",
             about: {
@@ -1106,7 +1145,7 @@ export const pillars: Pillar[] = [
           {
             slug: "gst-amendment",
             name: "GST Amendment",
-            heading: "GST Amendment in India",
+            heading: "GST Registration Amendment",
             tagline:
               "GST amendment lets you update your GST registration details such as business name, address, partners, authorised signatory, bank details and more. File your amendment online quickly and stay compliant.",
             about: {
@@ -1141,6 +1180,48 @@ export const pillars: Pillar[] = [
               gstYearAnnualItrPkg,
             ],
             terms: ["The amendment fee is charged for each change request."],
+          },
+          {
+            slug: "gst-cancellation",
+            name: "GST Cancellation",
+            heading: "GST Cancellation Online",
+            tagline:
+              "Close your GSTIN the right way — Form REG-16, stock reversal and the final return GSTR-10 — so you avoid late fees and future notices.",
+            packages: [
+              {
+                name: "GST Cancellation",
+                description: "REG-16 filing, stock reversal computation, cancellation order follow-up and GSTR-10.",
+                price: 999,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Pending-return review",
+                  "ITC reversal on closing stock",
+                  "REG-16 filing",
+                  "GSTR-10 final return",
+                  "Support until REG-19",
+                ],
+              },
+            ],
+            timeline: "About 30 days",
+          },
+          {
+            slug: "gst-notice-reply",
+            name: "GST Notice Reply",
+            heading: "GST Notice Reply Service",
+            tagline:
+              "A CA reviews your GST notice within 24 hours, reconciles the period and drafts a point-by-point reply — ASMT-10, DRC-01, DRC-01B, DRC-01C, REG-17 or GSTR-3A.",
+            packages: [],
+            timeline: "Review in 24 hours",
+          },
+          {
+            slug: "gst-refund",
+            name: "GST Refund",
+            heading: "GST Refund Application Online",
+            tagline:
+              "Identify every refund you are eligible for, file Form RFD-01 with statements, and follow up until the amount reaches your bank.",
+            packages: [],
+            timeline: "Follow-up till credit",
           },
           {
             slug: "virtual-office-gstin",

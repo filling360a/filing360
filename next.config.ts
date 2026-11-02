@@ -79,6 +79,18 @@ const nextConfig: NextConfig = {
       { source: "/refund", destination: "/refund-policy", permanent: true },
       { source: "/cancellation-policy", destination: "/refund-policy", permanent: true },
       { source: "/login", destination: "/track", permanent: false },
+      { source: "/gst-registration-return-filing", destination: "/services/gst", permanent: true },
+      { source: "/gst", destination: "/services/gst", permanent: true },
+      { source: "/gst/registration", destination: "/services/gst/gst-registration", permanent: true },
+      { source: "/gst/return-filing", destination: "/services/gst/gst-return-filing-regular", permanent: true },
+      { source: "/gst/annual-return", destination: "/services/gst/gst-annual-return-filing", permanent: true },
+      { source: "/gst/composition-scheme", destination: "/services/gst/gst-composition-scheme", permanent: true },
+      { source: "/gst/amendment", destination: "/services/gst/gst-amendment", permanent: true },
+      { source: "/gst/cancellation", destination: "/services/gst/gst-cancellation", permanent: true },
+      { source: "/gst/revocation", destination: "/services/gst/gst-revocation", permanent: true },
+      { source: "/gst/lut-filing", destination: "/services/gst/gst-lut-filing", permanent: true },
+      { source: "/gst/notice-reply", destination: "/services/gst/gst-notice-reply", permanent: true },
+      { source: "/gst/refund", destination: "/services/gst/gst-refund", permanent: true },
     ];
   },
   async headers() {

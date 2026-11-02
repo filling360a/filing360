@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArticleView } from "@/components/blog/ArticleView";
 import { JsonLd } from "@/components/blog/JsonLd";
 import { getPostBySlug, getRelatedPosts, listPosts } from "@/lib/blog/queries";
+import { extractFaqs, extractHowTo } from "@/lib/blog/structured-data";
 import { env } from "@/lib/env";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -50,6 +51,9 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
   const related = await getRelatedPosts(post);
   const url = `${env.siteUrl}/blog/${post.slug}`;
+  const faqs = extractFaqs(post.content_html);
+  const howTo = extractHowTo(post.content_html);
+  const logoUrl = `${env.siteUrl}${siteConfig.logo.src}`;
 
   const structuredData = [
     {
@@ -61,13 +65,19 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
       datePublished: post.published_at,
       dateModified: post.updated_at,
       wordCount: post.word_count,
+      inLanguage: "en-IN",
       articleSection: post.category?.name,
-      keywords: post.tags.join(", ") || undefined,
+      keywords: post.tags.join(", ") || post.focus_keyword || undefined,
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
       author: post.author?.full_name
         ? { "@type": "Person", name: post.author.full_name, jobTitle: post.author.job_title ?? undefined }
         : { "@type": "Organization", name: siteConfig.brandName, url: env.siteUrl },
-      publisher: { "@type": "Organization", name: siteConfig.brandName, url: env.siteUrl },
+      publisher: {
+        "@type": "Organization",
+        name: siteConfig.brandName,
+        url: env.siteUrl,
+        logo: { "@type": "ImageObject", url: logoUrl },
+      },
     },
     {
       "@context": "https://schema.org",
@@ -81,6 +91,34 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
         { "@type": "ListItem", position: post.category ? 4 : 3, name: post.title, item: url },
       ],
     },
+    ...(faqs.length
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: { "@type": "Answer", text: faq.answer },
+            })),
+          },
+        ]
+      : []),
+    ...(howTo
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: howTo.name,
+            step: howTo.steps.map((text, i) => ({
+              "@type": "HowToStep",
+              position: i + 1,
+              name: `Step ${i + 1}`,
+              text,
+            })),
+          },
+        ]
+      : []),
   ];
 
   return (

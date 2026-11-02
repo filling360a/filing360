@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/blog/JsonLd";
-import { HeroAssurance } from "@/components/site/HeroAssurance";
+import { InnerHero } from "@/components/site/InnerHero";
+import { bannerForPath, splitHeading } from "@/content/pageBanners";
 import { whatsappLink } from "@/content/company";
 import { breadcrumbJsonLd, faqJsonLd, type Crumb } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
@@ -32,12 +33,12 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
 }
 
 export function PageHero({
-  eyebrow,
   title,
   intro,
   crumbs,
   children,
   aside,
+  imageKey,
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -45,23 +46,27 @@ export function PageHero({
   crumbs?: Crumb[];
   children?: ReactNode;
   aside?: ReactNode;
+  imageKey?: string;
 }) {
+  const path = imageKey ?? crumbs?.at(-1)?.path ?? (typeof title === "string" ? title : "/");
+  const heading = typeof title === "string" ? splitHeading(title) : null;
   return (
-    <section className="border-b border-[#d7e4de] bg-gradient-to-br from-[#e3f2ed] via-white to-[#f3f7fa]">
-      <div className={`${container} py-8 md:py-14`}>
-        {crumbs && <Breadcrumbs crumbs={crumbs} />}
-        <div className={`${crumbs ? "mt-5" : ""} ${aside ? "grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start" : ""}`}>
-          <div>
-            {eyebrow && <p className="text-[13.5px] font-bold uppercase tracking-[0.12em] text-[#0e7b5b]">{eyebrow}</p>}
-            <h1 className="mt-2 max-w-3xl text-balance text-[30px] font-bold leading-tight tracking-tight text-[#0f2a45] md:text-[42px]">{title}</h1>
-            {intro && <div className="mt-4 max-w-2xl text-[16px] leading-relaxed text-[#4a5d68] md:text-[17px]">{intro}</div>}
-            {children && <div className="mt-6 flex flex-wrap items-center gap-3">{children}</div>}
-            {aside && <HeroAssurance className="mt-8 hidden lg:block" />}
-          </div>
-          {aside}
-        </div>
-      </div>
-    </section>
+    <>
+      {crumbs ? <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, ...crumbs])} /> : null}
+      <InnerHero
+        art={bannerForPath(path)}
+        title={heading ? heading.title : title}
+        accent={heading?.accent}
+        body={intro}
+        crumbs={
+          crumbs
+            ? [{ name: "Home", href: "/" }, ...crumbs.map((c) => ({ name: c.name, href: c.path }))]
+            : undefined
+        }
+        form={aside}
+        actions={children}
+      />
+    </>
   );
 }
 

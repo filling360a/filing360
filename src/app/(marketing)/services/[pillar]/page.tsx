@@ -1,9 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPillar, pillars } from "@/content/services";
+import { JsonLd } from "@/components/blog/JsonLd";
+import { GstHub } from "@/components/gst/GstHub";
 import { ServiceCard } from "@/components/services/ServiceCard";
-import { siteConfig } from "@/lib/siteConfig";
+import { LeadForm } from "@/components/leads/LeadForm";
+import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
+import { PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
+import { GST, GST_HUB_PATH, gstFaqs, gstHubMeta, gstPrices } from "@/content/gstHub";
+import { bannerForPillar, splitHeading } from "@/content/pageBanners";
+import { formatInr, getPillar, pillars } from "@/content/services";
+import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ pillar: string }> };
 
@@ -15,48 +22,149 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar: slug } = await params;
   const pillar = getPillar(slug);
   if (!pillar) return {};
-  return {
+  if (slug === "gst") {
+    return pageMetadata({
+      title: gstHubMeta.title,
+      description: gstHubMeta.description,
+      path: GST_HUB_PATH,
+      absoluteTitle: true,
+      keywords: gstHubMeta.keywords,
+    });
+  }
+  return pageMetadata({
     title: `${pillar.name} services`,
     description: pillar.description,
-  };
+    path: `/services/${pillar.slug}`,
+  });
+}
+
+function GstPillar({ pillar }: { pillar: NonNullable<ReturnType<typeof getPillar>> }) {
+  return (
+    <div className="bg-[#f3f7fa]">
+      <JsonLd
+        data={[
+          serviceJsonLd({
+            name: "GST Registration and Return Filing",
+            description: gstHubMeta.description,
+            path: GST_HUB_PATH,
+            category: "GST Registration, GST Return Filing, LUT, Amendment, Cancellation, Revocation",
+            offers: [
+              { name: "GST Registration", price: gstPrices.registration, description: "Application, ARN tracking, query replies, GST certificate" },
+              { name: "GST Return Filing – Monthly", price: gstPrices.monthly, description: "GSTR-1, GSTR-3B, GSTR-2B reconciliation" },
+              { name: "GST Return Filing – Composition", price: gstPrices.compositionYear, description: "CMP-08 for 4 quarters + GSTR-4" },
+              { name: "GST Annual Return", price: gstPrices.annual, description: "GSTR-9 (+ GSTR-9C if applicable)" },
+              { name: "LUT Filing", price: gstPrices.lut, description: "RFD-11 filing for one financial year" },
+              { name: "GST Amendment", price: gstPrices.amendment, description: "REG-14 with documentation" },
+              { name: "GST Cancellation (GSTR-10)", price: gstPrices.cancellation, description: "REG-16 / GSTR-10" },
+              { name: "GST Revocation", price: gstPrices.revocation, description: "REG-21 with documentation" },
+            ],
+          }),
+          faqJsonLd(gstFaqs),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "GST", path: GST_HUB_PATH },
+          ]),
+        ]}
+      />
+      <InnerHero
+        art={bannerForPillar("gst")}
+        title={gstHubMeta.h1}
+        imageAlt="GST registration process by Filing360"
+        body={
+          <p>
+            Apply for a GST number online and get your GSTIN in 3–7 working days, then never miss a return again. Filing360’s Chartered Accountants handle new GST registration, monthly and quarterly return filing, LUT, amendments, cancellation and revocation, all at transparent, fixed prices.
+          </p>
+        }
+        crumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: "GST" },
+        ]}
+        marks={[
+          { label: "100% online process", well: "bg-[#e3f2ed] text-[#0e7b5b]", icon: bannerMarks.check },
+          { label: "Dedicated CA for your business", well: "bg-[#e8f2ee] text-[#0f2a45]", icon: bannerMarks.shield },
+          { label: "Due-date reminders on WhatsApp", well: "bg-[#d4ede4] text-[#0b6550]", icon: bannerMarks.doc },
+          { label: `Plans starting at ${formatInr(gstPrices.from)}`, well: "bg-[#e3f2ed] text-[#0e7b5b]", icon: bannerMarks.rupee },
+        ]}
+        actions={
+          <>
+            <PrimaryButton href={GST.reg}>Get GST Registration</PrimaryButton>
+            <SecondaryButton href="#pillar-lead">Talk to a CA Free</SecondaryButton>
+          </>
+        }
+        form={
+          <LeadForm
+            id="pillar-lead"
+            compact
+            source="pillar-gst"
+            service={{ slug: "gst-registration", name: "GST Registration" }}
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            interestLabel="Service"
+            badge="15-min CA call · No obligation"
+          />
+        }
+      />
+      <GstHub pillar={pillar} />
+    </div>
+  );
 }
 
 export default async function PillarPage({ params }: Props) {
   const { pillar: slug } = await params;
   const pillar = getPillar(slug);
   if (!pillar) notFound();
+  if (slug === "gst") return <GstPillar pillar={pillar} />;
+
+  const heading = splitHeading(`${pillar.name} services`);
 
   return (
     <div className="bg-[#f3f7fa]">
-      <section className="relative overflow-hidden border-b border-[#d7e4de] bg-gradient-to-br from-[#e3f2ed] via-white to-[#f3f7fa]">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#c5e8dc]/50 blur-3xl" aria-hidden />
-        <div className="relative mx-auto max-w-[1240px] px-5 py-9 md:px-8 lg:py-16">
-          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[14.5px] text-[#5b6e7a]">
-            <Link href="/" className="hover:text-[#0f2a45]">Home</Link>
-            <span aria-hidden>/</span>
-            <Link href="/services" className="hover:text-[#0f2a45]">Services</Link>
-            <span aria-hidden>/</span>
-            <span className="text-[#0f2a45]">{pillar.name}</span>
-          </nav>
-          <h1 className="mt-4 text-[28px] font-bold tracking-tight text-[#0f2a45] md:mt-5 md:text-[44px]">
-            {pillar.name}
-          </h1>
-          <p className="mt-2 max-w-2xl text-[15.5px] leading-relaxed text-[#4a5d68] md:mt-3 md:text-[16px]">
-            {pillar.description}
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3 md:mt-7">
-            <Link
-              href="/#hero-lead"
-              className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#0e7b5b] px-5 text-[15px] font-semibold text-white transition hover:bg-[#0b6550]"
-            >
-              {siteConfig.cta.quote} <span aria-hidden>→</span>
-            </Link>
-            <span className="inline-flex h-11 items-center rounded-xl border border-[#d4ede4] bg-white px-4 text-[15px] font-medium text-[#4a5d68]">
-              {pillar.services.length} services
-            </span>
-          </div>
-        </div>
-      </section>
+      <InnerHero
+        art={bannerForPillar(pillar.slug)}
+        title={heading.title}
+        accent={heading.accent}
+        body={<p>{pillar.description}</p>}
+        crumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: pillar.name },
+        ]}
+        marks={[
+          {
+            label: `${pillar.services.length} services`,
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.doc,
+          },
+          {
+            label: "100% online",
+            well: "bg-[#e8f2ee] text-[#0f2a45]",
+            icon: bannerMarks.check,
+          },
+          {
+            label: "Expert filed",
+            well: "bg-[#d4ede4] text-[#0b6550]",
+            icon: bannerMarks.shield,
+          },
+          {
+            label: "Pan-India",
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.building,
+          },
+        ]}
+        form={
+          <LeadForm
+            id="pillar-lead"
+            compact
+            source={`pillar-${pillar.slug}`}
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            interestLabel="Service"
+            badge="Fast · Easy · No Obligation"
+          />
+        }
+      />
 
       <div className="mx-auto max-w-[1240px] space-y-9 px-5 py-8 md:px-8 lg:space-y-12 lg:py-16">
         {pillar.groups.map((group, gi) => (

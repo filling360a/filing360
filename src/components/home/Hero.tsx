@@ -19,6 +19,7 @@ type Slide = {
   title: string;
   accent: string;
   body: string;
+  lightNav?: boolean;
 };
 
 const slides: Slide[] = [
@@ -37,6 +38,7 @@ const slides: Slide[] = [
     title: "GST, ITR and ROC —",
     accent: "filed in one place.",
     body: "Returns and annual filings with transparent professional fees plus government charges.",
+    lightNav: true,
   },
   {
     src: "/images/hero/advisor.png",
@@ -101,6 +103,15 @@ export function Hero() {
   }, [index]);
 
   useEffect(() => {
+    const light = Boolean(slide.lightNav);
+    document.documentElement.dataset.heroLight = light ? "1" : "0";
+    window.dispatchEvent(new CustomEvent("hero-slide", { detail: { light } }));
+    return () => {
+      delete document.documentElement.dataset.heroLight;
+    };
+  }, [slide.lightNav]);
+
+  useEffect(() => {
     if (paused) {
       lastTickRef.current = null;
       return;
@@ -142,17 +153,21 @@ export function Hero() {
         aria-roledescription="carousel"
         aria-label="Filing360 highlights"
         onKeyDown={onKeyDown}
-        onMouseEnter={() => setHoverPaused(true)}
+        onMouseEnter={() => {
+          if (window.matchMedia("(min-width: 1280px)").matches) setHoverPaused(true);
+        }}
         onMouseLeave={() => setHoverPaused(false)}
-        onFocus={() => setHoverPaused(true)}
+        onFocus={() => {
+          if (window.matchMedia("(min-width: 1280px)").matches) setHoverPaused(true);
+        }}
         onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
             setHoverPaused(false);
           }
         }}
-        className="relative outline-none md:h-[min(85vh,760px)] md:min-h-[720px]"
+        className="relative outline-none md:h-[min(78vh,680px)] md:min-h-[580px] lg:h-[min(85vh,760px)] lg:min-h-[720px]"
       >
-        <div className="relative h-[278px] overflow-hidden sm:h-[318px] md:absolute md:inset-0 md:h-auto">
+        <div className="relative h-[232px] overflow-hidden sm:h-[280px] md:absolute md:inset-0 md:h-auto">
           <AnimatePresence initial={false}>
             <motion.div
               key={slide.src}
@@ -190,6 +205,10 @@ export function Hero() {
           </AnimatePresence>
           <div
             aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#f3f7fa] md:hidden"
+          />
+          <div
+            aria-hidden
             className={`pointer-events-none absolute inset-y-0 hidden w-[48%] md:block ${
               slide.align === "left"
                 ? "left-0 bg-gradient-to-r from-[#f3f7fa]/55 via-[#f3f7fa]/12 to-transparent"
@@ -198,11 +217,11 @@ export function Hero() {
           />
         </div>
 
-        <div className="relative z-[1] mx-auto flex max-w-[1320px] px-5 pb-4 pt-[84px] md:h-[min(85vh,760px)] md:min-h-[720px] md:px-6 md:pb-6 md:pt-[96px] lg:px-8">
+        <div className="relative z-[1] mx-auto flex max-w-[1320px] px-5 pb-3 pt-4 md:h-[min(78vh,680px)] md:min-h-[580px] md:px-6 md:pb-6 md:pt-[88px] lg:h-[min(85vh,760px)] lg:min-h-[720px] lg:px-8 lg:pt-[96px]">
           <motion.div
             layout
             transition={{ duration: reduce ? 0 : 0.7, ease: easeArrival }}
-            className={`flex w-full max-w-[40rem] flex-col md:h-full md:w-[40rem] ${
+            className={`flex w-full max-w-[40rem] flex-col md:h-full md:w-[min(40rem,100%)] ${
               slide.align === "right" ? "md:ml-auto" : "md:mr-auto"
             }`}
           >
@@ -228,37 +247,37 @@ export function Hero() {
               >
                 <motion.h1
                   variants={copyVariants(slide.align, reduce)}
-                  className="max-w-[22ch] text-[32px] font-bold leading-[1.12] tracking-[-0.03em] text-[#0f2a45] sm:text-[42px] lg:text-[48px]"
+                  className="max-w-[22ch] text-[28px] font-bold leading-[1.14] tracking-[-0.03em] text-[#0f2a45] sm:text-[36px] md:text-[42px] lg:text-[48px]"
                 >
                   {slide.title}{" "}
                   <Accent text={slide.accent} />
                 </motion.h1>
                 <motion.p
                   variants={copyVariants(slide.align, reduce)}
-                  className="mt-3 max-w-[46ch] text-[16px] leading-[1.55] text-[#2c3f4e] lg:text-[17.5px]"
+                  className="mt-2.5 max-w-[46ch] text-[15.5px] leading-[1.5] text-[#2c3f4e] sm:mt-3 sm:text-[16px] lg:text-[17.5px]"
                 >
                   {slide.body}
                 </motion.p>
               </motion.div>
             </AnimatePresence>
 
-            <ul className="mt-5 grid grid-cols-4">
+            <ul className="mt-4 grid grid-cols-2 gap-y-3 sm:mt-5 sm:grid-cols-4 sm:gap-y-0">
               {heroMarks.map((item) => (
                 <li
                   key={item.label}
-                  className="flex flex-col items-center gap-1.5 border-r border-[#d7e4de] px-1 text-center last:border-r-0"
+                  className="flex items-center gap-2.5 border-[#d7e4de] px-1 sm:flex-col sm:items-center sm:gap-1.5 sm:border-r sm:text-center sm:last:border-r-0"
                 >
-                  <span className={`flex h-10 w-10 items-center justify-center rounded-full ${item.well}`}>
+                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 ${item.well}`}>
                     {item.icon}
                   </span>
-                  <span className="max-w-[9ch] text-[11.5px] font-semibold leading-tight text-[#0f2a45] md:max-w-none md:text-[12.5px]">
+                  <span className="text-[13.5px] font-semibold leading-tight text-[#0f2a45] sm:max-w-[9ch] sm:text-[12px] md:max-w-none md:text-[12.5px]">
                     {item.label}
                   </span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-8 w-full md:mt-10">
+            <div className="mt-5 w-full md:mt-8">
               <LeadForm
                 id="hero-lead"
                 compact
@@ -272,11 +291,11 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <div className="relative z-[2] flex items-center justify-center gap-3 px-5 py-3 md:absolute md:inset-x-0 md:bottom-5 md:py-0">
+        <div className="relative z-[2] flex items-center justify-center gap-3 px-5 py-2 md:absolute md:inset-x-0 md:bottom-5 md:py-0">
           <button
             type="button"
             onClick={() => go(-1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0f2a45]/90 text-white transition hover:bg-[#0f2a45]"
+            className="hidden h-9 w-9 items-center justify-center rounded-full bg-[#0f2a45]/90 text-white transition hover:bg-[#0f2a45] xl:flex"
             aria-label="Previous banner"
           >
             <Chevron dir="left" />
@@ -305,7 +324,7 @@ export function Hero() {
           <button
             type="button"
             onClick={() => go(1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0f2a45]/90 text-white transition hover:bg-[#0f2a45]"
+            className="hidden h-9 w-9 items-center justify-center rounded-full bg-[#0f2a45]/90 text-white transition hover:bg-[#0f2a45] xl:flex"
             aria-label="Next banner"
           >
             <Chevron dir="right" />
@@ -313,7 +332,7 @@ export function Hero() {
           <button
             type="button"
             onClick={() => setToggledPaused((value) => !value)}
-            className="ml-1 text-[12px] font-semibold tracking-wide text-[#0f2a45]/70 underline-offset-2 hover:text-[#0f2a45] hover:underline"
+            className="ml-1 hidden text-[12px] font-semibold tracking-wide text-[#0f2a45]/70 underline-offset-2 hover:text-[#0f2a45] hover:underline xl:inline"
             aria-label={toggledPaused ? "Play banners" : "Pause banners"}
           >
             {toggledPaused ? "Play" : "Pause"}

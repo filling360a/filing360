@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 import { useReducedMotion } from "motion/react";
 import { homeBanners } from "@/content/home";
+import { BannerCopy } from "./BannerCopy";
 
 const INTERVAL_MS = 5500;
 const COUNT = homeBanners.length;
@@ -87,12 +87,12 @@ export function BannerCarousel() {
   return (
     <section
       ref={regionRef}
-      className="relative overflow-x-clip bg-[#f3f7fa] pb-10 pt-1 md:pb-14"
+      className="relative overflow-x-clip bg-[#f3f7fa] pb-7 pt-1 md:pb-10"
       aria-roledescription="carousel"
       aria-label="Filing highlights"
     >
       <div
-        className="relative mx-auto h-[138px] w-full max-w-[1320px] touch-pan-y select-none sm:h-[196px] md:h-[280px] lg:h-[348px]"
+        className="relative mx-auto h-[200px] w-full max-w-[1320px] touch-pan-y select-none sm:h-[230px] md:h-[260px] lg:h-[320px] xl:h-[348px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onPointerDown={onPointerDown}
@@ -110,7 +110,7 @@ export function BannerCarousel() {
               key={banner.src}
               aria-hidden={!active}
               aria-label={active ? banner.title : `Show: ${banner.title}`}
-              className={`absolute top-0 h-full w-[min(1140px,86%)] origin-center overflow-hidden rounded-[22px] md:rounded-[28px] ${
+              className={`absolute top-0 h-full w-[min(1140px,94%)] origin-center overflow-hidden rounded-[18px] sm:w-[min(1140px,90%)] md:w-[min(1140px,86%)] md:rounded-[28px] ${
                 active
                   ? "z-[3] shadow-[0_22px_50px_-24px_rgba(15,42,69,0.45)]"
                   : "z-[1] cursor-pointer shadow-[0_10px_28px_-20px_rgba(15,42,69,0.35)]"
@@ -139,41 +139,26 @@ export function BannerCarousel() {
                 priority={i === 0}
               />
               {active ? (
-                <div className="absolute inset-y-0 right-[3.5%] z-10 hidden w-[32%] min-w-[13rem] max-w-[320px] flex-col justify-center md:flex lg:right-[5%]">
-                  <h3
-                    className="text-balance text-[22px] font-bold leading-[1.18] tracking-[-0.03em] lg:text-[28px]"
-                    style={{ color: banner.color }}
-                  >
-                    {banner.title}
-                  </h3>
-                  <p
-                    className="mt-1.5 max-w-[22ch] text-[13.5px] leading-snug lg:mt-2 lg:text-[15px]"
-                    style={{ color: banner.muted }}
-                  >
-                    {banner.line}
-                  </p>
-                  <Link
-                    href={banner.href}
-                    className="mt-3 inline-flex h-10 w-fit items-center rounded-full px-4 text-[13.5px] font-semibold text-white shadow-[0_10px_22px_-12px_rgba(15,42,69,0.55)] transition duration-200 hover:translate-y-[-1px] hover:brightness-110 hover:shadow-[0_14px_26px_-12px_rgba(15,42,69,0.5)] lg:mt-4 lg:h-11 lg:px-5 lg:text-[14.5px]"
-                    style={{ backgroundColor: banner.button }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {banner.cta}
-                    <span aria-hidden className="ml-1.5">
-                      →
-                    </span>
-                  </Link>
-                </div>
+                <BannerCopy
+                  title={banner.title}
+                  line={banner.line}
+                  href={banner.href}
+                  cta={banner.cta}
+                  color={banner.color}
+                  muted={banner.muted}
+                  button={banner.button}
+                  side="right"
+                />
               ) : null}
             </article>
           );
         })}
       </div>
 
-      <div className="mt-5 flex items-center justify-center gap-3 md:mt-6">
+      <div className="mt-4 flex items-center justify-center gap-3 md:mt-6">
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d7e4de] bg-white text-[#0f2a45] shadow-[0_8px_18px_-12px_rgba(15,42,69,0.45)] transition hover:border-[#0e7b5b] hover:bg-[#0e7b5b] hover:text-white"
+          className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#d7e4de] bg-white text-[#0f2a45] shadow-[0_8px_18px_-12px_rgba(15,42,69,0.45)] transition hover:border-[#0e7b5b] hover:bg-[#0e7b5b] hover:text-white xl:flex"
           aria-label="Previous banner"
           onClick={() => go(-1)}
         >
@@ -199,7 +184,7 @@ export function BannerCarousel() {
         </div>
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d7e4de] bg-white text-[#0f2a45] shadow-[0_8px_18px_-12px_rgba(15,42,69,0.45)] transition hover:border-[#0e7b5b] hover:bg-[#0e7b5b] hover:text-white"
+          className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#d7e4de] bg-white text-[#0f2a45] shadow-[0_8px_18px_-12px_rgba(15,42,69,0.45)] transition hover:border-[#0e7b5b] hover:bg-[#0e7b5b] hover:text-white xl:flex"
           aria-label="Next banner"
           onClick={() => go(1)}
         >

@@ -11,11 +11,16 @@ import {
   servicePriceFrom,
 } from "@/content/services";
 import { JsonLd } from "@/components/blog/JsonLd";
+import { GstServiceArticle, GstServiceFaqs } from "@/components/gst/GstServiceArticle";
 import { CheckList, PackageCard, ServiceCard } from "@/components/services/ServiceCard";
 import { LeadForm } from "@/components/leads/LeadForm";
-import { HeroAssurance } from "@/components/site/HeroAssurance";
+import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
+import { PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
+import { whatsappLink } from "@/content/company";
+import { getGstServicePage } from "@/content/gstServicePages";
+import { bannerForService, splitHeading } from "@/content/pageBanners";
 import { serviceResources } from "@/content/links";
-import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
 type Props = {
@@ -32,8 +37,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar, slug } = await params;
   const result = getService(pillar, slug);
   if (!result) return {};
+  const gstPage = getGstServicePage(slug);
   const from = servicePriceFrom(result.service);
   const priced = from !== null ? ` Starting at ${formatInr(from)}.` : "";
+  if (gstPage) {
+    return pageMetadata({
+      title: gstPage.metaTitle,
+      description: gstPage.metaDescription,
+      path: serviceHref(result.pillar, result.service),
+      absoluteTitle: true,
+      keywords: gstPage.keywords,
+    });
+  }
   return pageMetadata({
     title: result.service.heading,
     description: `${result.service.tagline}${priced}`.slice(0, 300),
@@ -98,107 +113,101 @@ export default async function ServiceDetailPage({ params }: Props) {
   const offers = service.packages
     .filter((p) => typeof p.price === "number")
     .map((p) => ({ name: p.name, price: p.price as number, description: p.description ?? p.bestFor }));
+  const gstPage = getGstServicePage(service.slug);
+  const heading = gstPage ? { title: gstPage.h1, accent: undefined } : splitHeading(service.heading);
+  const chips = gstPage?.highlights ?? service.highlights;
 
   return (
     <div className="bg-[#f3f7fa]">
       <JsonLd
         data={[
-          serviceJsonLd({ name: service.name, description: service.tagline, path: href, category: pillar.name, offers }),
+          serviceJsonLd({
+            name: gstPage?.h1 ?? service.name,
+            description: gstPage?.metaDescription ?? service.tagline,
+            path: href,
+            category: pillar.name,
+            offers,
+          }),
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Services", path: "/services" },
             { name: pillar.name, path: `/services/${pillar.slug}` },
             { name: service.shortName ?? service.name, path: href },
           ]),
+          ...(gstPage ? [faqJsonLd(gstPage.faqs)] : []),
         ]}
       />
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[#d7e4de] bg-gradient-to-br from-[#e3f2ed] via-white to-[#f3f7fa]">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[#c5e8dc]/50 blur-3xl" aria-hidden />
-        <div className="relative mx-auto grid max-w-[1240px] gap-8 px-5 py-8 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-10 lg:py-16">
-          <div className="min-w-0">
-            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[14.5px] text-[#5b6e7a]">
-              <Link href="/" className="hover:text-[#0f2a45]">Home</Link>
-              <span aria-hidden>/</span>
-              <Link href="/services" className="hover:text-[#0f2a45]">Services</Link>
-              <span aria-hidden>/</span>
-              <Link href={`/services/${pillar.slug}`} className="hover:text-[#0f2a45]">{pillar.name}</Link>
-              <span aria-hidden>/</span>
-              <span className="text-[#0f2a45]">{service.shortName ?? service.name}</span>
-            </nav>
-            <h1 className="mt-4 text-[26px] font-bold leading-[1.15] tracking-tight text-[#0f2a45] sm:text-[32px] md:mt-5 lg:text-[44px]">
-              {service.heading}
-            </h1>
-            <p className="mt-3 line-clamp-4 max-w-2xl text-[15.5px] leading-relaxed text-[#4a5d68] md:mt-4 md:line-clamp-none md:text-[16px] lg:text-[17px]">
-              {service.tagline}
-            </p>
-            {service.highlights && (
-              <ul className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:mt-5 md:flex-wrap md:overflow-visible md:px-0">
-                {service.highlights.map((h) => (
+      <InnerHero
+        art={bannerForService(pillar.slug, service.slug)}
+        title={heading.title}
+        accent={heading.accent}
+        imageAlt={gstPage?.imageAlt}
+        body={
+          <>
+            <p>{gstPage?.lead ?? service.tagline}</p>
+            {chips ? (
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {chips.map((h) => (
                   <li
                     key={h}
-                    className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[#c5e8dc] bg-white px-3 py-1 text-[14px] font-semibold text-[#0b6550]"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#c5e8dc] bg-white/80 px-3 py-1 text-[13.5px] font-semibold text-[#0b6550]"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1a8f6c]" aria-hidden />
                     {h}
                   </li>
                 ))}
               </ul>
-            )}
-
-            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
-              <a
-                href={service.packages.length ? "#packages" : "#service-lead"}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#0e7b5b] px-4 text-[15px] font-semibold text-white shadow-[0_12px_24px_-12px_rgba(14,123,91,0.7)] transition hover:bg-[#0b6550] sm:px-6"
-              >
-                {service.packages.length ? "View packages" : siteConfig.cta.quote}
-                <span aria-hidden>→</span>
-              </a>
-              <a
-                href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-[#bfd4cb] bg-white px-4 text-[15px] font-semibold text-[#0f2a45] transition hover:border-[#8a9ba6] sm:px-6"
-              >
-                <span className="sm:hidden">Call us</span>
-                <span className="hidden sm:inline">Call {siteConfig.contact.phone}</span>
-              </a>
-            </div>
-
-            <div className="mt-5 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3 md:mt-8">
-              <div className="rounded-xl border border-[#d4ede4] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#5b6e7a] sm:text-[13px]">
-                  {from !== null ? "Starting at" : "Pricing"}
-                </p>
-                <p className="mt-0.5 text-[16px] font-bold text-[#0f2a45] sm:text-[20px]">
-                  {from !== null ? formatInr(from) : "On request"}
-                </p>
-              </div>
-              {service.timeline && (
-                <div className="rounded-xl border border-[#d4ede4] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#5b6e7a] sm:text-[13px]">Timeline</p>
-                  <p className="mt-0.5 text-[16px] font-bold text-[#0f2a45] sm:text-[20px]">{service.timeline}</p>
-                </div>
-              )}
-              <div className="rounded-xl border border-[#d4ede4] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#5b6e7a] sm:text-[13px]">Process</p>
-                <p className="mt-0.5 text-[16px] font-bold text-[#0f2a45] sm:text-[20px]">100% online</p>
-              </div>
-            </div>
-
-            <HeroAssurance className="mt-8 hidden md:block" />
-          </div>
-
-          <div className="min-w-0 lg:pt-2">
-            <div className="md:sticky md:top-24">
-              <LeadForm
-                id="service-lead"
-                compact
-                source="service-page"
-                service={{ slug: `${pillar.slug}/${service.slug}`, name: service.name }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+            ) : null}
+          </>
+        }
+        crumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: pillar.name, href: `/services/${pillar.slug}` },
+          { name: service.shortName ?? service.name },
+        ]}
+        marks={[
+          {
+            label: from !== null ? `From ${formatInr(from)}` : "On request",
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.rupee,
+          },
+          {
+            label: service.timeline ?? "On time",
+            well: "bg-[#e8f2ee] text-[#0f2a45]",
+            icon: bannerMarks.clock,
+          },
+          {
+            label: "100% online",
+            well: "bg-[#d4ede4] text-[#0b6550]",
+            icon: bannerMarks.check,
+          },
+          {
+            label: "Expert filed",
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.shield,
+          },
+        ]}
+        actions={
+          gstPage ? (
+            <>
+              <PrimaryButton href="#service-lead">{gstPage.cta}</PrimaryButton>
+              <SecondaryButton href={whatsappLink(`Hi Filing360, I need help with ${service.name}.`)}>WhatsApp a CA</SecondaryButton>
+            </>
+          ) : undefined
+        }
+        form={
+          <LeadForm
+            id="service-lead"
+            compact
+            source="service-page"
+            service={{ slug: `${pillar.slug}/${service.slug}`, name: service.name }}
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            interestLabel="Service"
+            badge="Fast · Easy · No Obligation"
+          />
+        }
+      />
 
       <div className="mx-auto max-w-[1240px] space-y-9 px-5 py-9 md:space-y-12 md:px-8 md:py-12 lg:space-y-16 lg:py-16">
         {service.tool && (
@@ -219,7 +228,9 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
-        {(service.about || service.scope) && (
+        {gstPage ? <GstServiceArticle page={gstPage} /> : null}
+
+        {!gstPage && (service.about || service.scope) && (
           <section className="grid gap-5 rounded-2xl border border-[#d7e4de] bg-white p-5 md:grid-cols-2 md:gap-8 md:p-8 lg:p-10">
             <div className="min-w-0">
               <SectionTitle>{service.about?.title ?? "Scope"}</SectionTitle>
@@ -240,7 +251,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
-        {service.usps && (
+        {!gstPage && service.usps && (
           <section>
             <SectionTitle>Why founders choose Filing360</SectionTitle>
             {service.positioning && (
@@ -274,7 +285,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
-        {service.why && (
+        {!gstPage && service.why && (
           <section className="rounded-2xl border border-[#d7e4de] bg-white p-5 md:p-10">
             <SectionTitle>{service.why.title}</SectionTitle>
             {service.why.intro && (
@@ -332,7 +343,9 @@ export default async function ServiceDetailPage({ params }: Props) {
           )}
         </section>
 
-        {service.coverage && (
+        {gstPage ? <GstServiceFaqs page={gstPage} /> : null}
+
+        {!gstPage && service.coverage && (
           <section>
             <SectionTitle>{service.coverage.title ?? "What each plan covers"}</SectionTitle>
             <div className="mt-5 max-h-[70vh] overflow-auto overscroll-contain rounded-2xl border border-[#d7e4de] bg-white md:mt-6 lg:max-h-none">
@@ -378,7 +391,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
-        {service.tables?.map((table) => (
+        {!gstPage && service.tables?.map((table) => (
           <section key={table.title}>
             <SectionTitle>{table.title}</SectionTitle>
             {table.intro && <p className="mt-2 text-[15px] text-[#5b6e7a] md:text-[15px]">{table.intro}</p>}

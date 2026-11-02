@@ -49,7 +49,7 @@ export function organizationJsonLd() {
     name: siteConfig.brandName,
     legalName: hasValue(company.legalName) ? company.legalName : undefined,
     url: SITE_URL,
-    logo: absoluteUrl("/icon.png"),
+    logo: absoluteUrl(siteConfig.logo.src),
     description: siteConfig.description,
     email: company.contact.email,
     telephone: company.contact.phone,

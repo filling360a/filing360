@@ -139,51 +139,51 @@ export function NextSteps() {
         <circle cx="760" cy="48" r="9" fill="#1a8f6c" opacity="0.15" />
       </svg>
 
-      <div className="relative mx-auto max-w-[1180px] px-5 py-10 md:px-8 lg:py-16">
+      <div className="relative mx-auto max-w-[1180px] px-5 py-8 md:px-8 lg:py-12">
         <div className="grid items-start gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 xl:gap-16">
           {/* Left column */}
           <div className="min-w-0 max-w-xl">
             <h2
               id="next-heading"
-              className="text-[24px] font-bold leading-[1.2] tracking-tight text-[#0f2a45] md:text-[34px] lg:text-[38px]"
+              className="text-[26px] font-bold leading-[1.22] tracking-tight text-[#0f2a45] sm:text-[30px] md:text-[34px] lg:text-[38px]"
             >
               {homeNext.title}
             </h2>
 
-            <p className="mt-3 text-[15px] leading-relaxed text-[#5b6e7a] md:mt-4 md:text-[16px]">
+            <p className="mt-3 text-[15.5px] leading-relaxed text-[#5b6e7a] md:mt-4 md:text-[16px]">
               {homeNext.subtitle}
             </p>
 
-            <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-7">
+            <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-7">
               <a
                 href="#hero-lead"
-                className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl bg-[#0f2a45] px-5 text-[15px] font-semibold text-white transition hover:bg-[#0a2036]"
+                className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-[#0f2a45] px-5 text-[15px] font-semibold text-white transition hover:bg-[#0a2036] sm:h-11"
               >
                 {siteConfig.cta.quote}
                 <span aria-hidden>→</span>
               </a>
               <Link
                 href={homeNext.secondaryHref}
-                className="inline-flex h-11 items-center justify-center rounded-xl border border-[#8ecfbc] bg-white px-5 text-[15px] font-semibold text-[#0f2a45] transition hover:border-[#0e7b5b] hover:bg-[#f3f7fa]"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-[#8ecfbc] bg-white px-5 text-[15px] font-semibold text-[#0f2a45] transition hover:border-[#0e7b5b] hover:bg-[#f3f7fa] sm:h-11"
               >
                 {homeNext.secondaryCta}
               </Link>
             </div>
 
             {/* Mini highlight bar */}
-            <ul className="mt-6 grid grid-cols-3 gap-2 rounded-2xl border border-[#d7e4de] bg-white/80 px-3 py-3.5 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.12)] md:mt-8">
+            <ul className="mt-6 grid grid-cols-1 gap-3 rounded-2xl border border-[#d7e4de] bg-white/80 px-3 py-3.5 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.12)] sm:grid-cols-3 sm:gap-2 md:mt-8">
               {homeNext.highlights.map((item) => (
-                <li key={item.title} className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2.5">
+                <li key={item.title} className="flex items-center gap-2.5 sm:flex-col sm:items-start sm:gap-1.5 md:flex-row md:items-center md:gap-2.5">
                   <span
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${iconWrap[item.tone]}`}
                   >
                     {highlightIcons[item.tone]}
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-[14px] font-bold text-[#0f2a45]">
+                    <span className="block text-[15px] font-bold text-[#0f2a45] sm:text-[14px]">
                       {item.title}
                     </span>
-                    <span className="block text-[13px] leading-snug text-[#5b6e7a]">
+                    <span className="block text-[14px] leading-snug text-[#5b6e7a] sm:text-[13px]">
                       {item.body}
                     </span>
                   </span>
@@ -199,12 +199,12 @@ export function NextSteps() {
           </div>
 
           {/* Right column — stacked cards */}
-          <ul className="rail rail-bleed flex min-w-0 flex-col gap-4 [--rail-item:84%] [--rail-item-sm:46%]">
+          <ul className="flex min-w-0 flex-col gap-3 sm:gap-4">
             {homeNext.items.map((item) => (
               <li key={item.title} className="flex">
                 <Link
                   href={item.href}
-                  className="group relative flex w-full gap-4 rounded-2xl border border-[#e8f0ec] bg-white p-4 shadow-[0_12px_32px_-16px_rgba(15,23,42,0.16)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-14px_rgba(14,123,91,0.2)] sm:p-5"
+                  className="group relative flex w-full gap-3.5 rounded-2xl border border-[#e8f0ec] bg-white p-4 shadow-[0_12px_32px_-16px_rgba(15,23,42,0.16)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-14px_rgba(14,123,91,0.2)] sm:gap-4 sm:p-5"
                 >
                   <span
                     className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${iconWrap[item.tone]}`}
@@ -213,7 +213,7 @@ export function NextSteps() {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-start justify-between gap-2">
-                      <span className="text-[16px] font-bold leading-snug text-[#0f2a45]">
+                      <span className="text-[17px] font-bold leading-snug text-[#0f2a45] sm:text-[16px]">
                         {item.title}
                       </span>
                       <span

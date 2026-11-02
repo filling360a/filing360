@@ -45,7 +45,16 @@ export default function ContactPage() {
         title="Talk to a registration & tax expert"
         crumbs={[{ name: "Contact", path: "/contact" }]}
         intro={<p>Call, WhatsApp or write to us — or leave your number and an expert will call you back. {company.hours.label}.</p>}
-        aside={<LeadForm id="contact-lead" source="contact-page" />}
+        aside={
+          <LeadForm
+            id="contact-lead"
+            compact
+            source="contact-page"
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            badge="Fast · Easy · No Obligation"
+          />
+        }
       >
         {channels.map((c) => (
           <a

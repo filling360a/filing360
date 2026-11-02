@@ -19,10 +19,10 @@ export function Faq() {
   return (
     <section className="border-t border-[#d7e4de] bg-[#eef4fb]" id="faq">
       <JsonLd data={jsonLd} />
-      <div className="mx-auto max-w-[1320px] px-5 py-10 md:px-8 lg:px-10 lg:py-20">
+      <div className="mx-auto max-w-[1320px] px-5 py-8 md:px-8 lg:px-10 lg:py-16">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
           <div>
-            <h2 className="text-[24px] font-bold leading-tight tracking-tight text-[#0f2a45] md:text-4xl">
+            <h2 className="text-[26px] font-bold leading-tight tracking-tight text-[#0f2a45] md:text-4xl">
               Frequently asked questions about company registration in India
             </h2>
             <p className="mt-2 max-w-xl text-[15px] text-[#5b6e7a] md:mt-3 md:text-[16px]">
@@ -33,7 +33,7 @@ export function Faq() {
           </div>
           <a
             href="#hero-lead"
-            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0f2a45] px-6 text-[15px] font-semibold text-white transition hover:bg-[#0a2036]"
+            className="inline-flex h-12 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0f2a45] px-6 text-[15px] font-semibold text-white transition hover:bg-[#0a2036] md:w-auto"
           >
             {siteConfig.cta.quote}
             <span aria-hidden>→</span>

@@ -3,9 +3,9 @@ export const siteConfig = {
   brandName: "Filing360",
   tagline: "Your business. Our priority.",
   logo: {
-    src: "/images/Filingedge360_Primary_logo_transparent.png",
-    width: 1357,
-    height: 312,
+    src: "/images/Filingedge360_logo_v2_transparent.png",
+    width: 1319,
+    height: 290,
   },
   description:
     "Income tax, GST, startup registration and MCA compliance in India — Private Limited, LLP, OPC, GST returns and ITR filing with transparent professional fees + government charges.",

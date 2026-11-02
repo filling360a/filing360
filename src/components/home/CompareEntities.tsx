@@ -40,11 +40,11 @@ export function CompareEntities() {
       id="compare-entities"
       aria-labelledby="compare-heading"
     >
-      <div className="relative mx-auto max-w-[1180px] px-5 pb-4 pt-3 md:px-8 md:pt-4 lg:pb-6 lg:pt-5">
+      <div className="relative mx-auto max-w-[1180px] px-5 pb-3 pt-2 md:px-8 md:pt-3 lg:pb-5 lg:pt-4">
         <div className="mx-auto max-w-4xl text-center">
           <h2
             id="compare-heading"
-            className="text-balance text-[24px] font-bold leading-[1.2] tracking-[-0.03em] text-[#0f2a45] md:text-[32px]"
+            className="text-balance text-[26px] font-bold leading-[1.22] tracking-[-0.03em] text-[#0f2a45] sm:text-[28px] md:text-[32px]"
           >
             Not sure whether to choose{" "}
             <span className="relative inline-block whitespace-nowrap">
@@ -56,12 +56,12 @@ export function CompareEntities() {
             </span>
             ?
           </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-pretty text-[14px] leading-snug text-[#2c3f4e] md:text-[15.5px]">
+          <p className="mx-auto mt-2 max-w-2xl text-pretty text-[15px] leading-snug text-[#2c3f4e] md:text-[15.5px]">
             {homeCompare.subtitle}
           </p>
         </div>
 
-        <div className="mt-7 overflow-hidden rounded-[18px] border border-[#d7e4de] bg-white shadow-[0_18px_40px_-28px_rgba(15,42,69,0.3)]">
+        <div className="mt-5 overflow-hidden rounded-[18px] border border-[#d7e4de] bg-white shadow-[0_18px_40px_-28px_rgba(15,42,69,0.3)] md:mt-7">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] table-fixed border-collapse text-left">
               <colgroup>
@@ -134,9 +134,12 @@ export function CompareEntities() {
               </tbody>
             </table>
           </div>
-          <p className="flex items-start gap-2 border-t border-[#e8f0ec] bg-[#f7fbf9] px-5 py-3 text-[13px] leading-snug text-[#1e3d56]">
+          <p className="flex items-start gap-2 border-t border-[#e8f0ec] bg-[#f7fbf9] px-4 py-3 text-[13px] leading-snug text-[#1e3d56] sm:px-5">
             <InfoMark />
-            {homeCompare.feeNote}
+            <span>
+              <span className="md:hidden">Swipe the table to compare. </span>
+              {homeCompare.feeNote}
+            </span>
           </p>
         </div>
       </div>

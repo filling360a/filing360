@@ -38,7 +38,16 @@ export default async function IndustryPage({ params }: PageProps<"/for/[industry
           { name: ind.name, path: industryHref(ind) },
         ]}
         intro={<p>{ind.intro}</p>}
-        aside={<LeadForm id="industry-lead" source={`industry-${ind.slug}`} />}
+        aside={
+          <LeadForm
+            id="industry-lead"
+            compact
+            source={`industry-${ind.slug}`}
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            badge="Fast · Easy · No Obligation"
+          />
+        }
       />
 
       <section className={`${container} py-12`}>

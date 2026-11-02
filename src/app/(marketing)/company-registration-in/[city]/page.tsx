@@ -111,7 +111,17 @@ export default async function CityPage({ params }: PageProps<"/company-registrat
             </p>
           </>
         }
-        aside={<LeadForm id="city-lead" source={`city-${city.slug}`} service={{ slug: "private-limited-company", name: "Private Limited Company" }} />}
+        aside={
+          <LeadForm
+            id="city-lead"
+            compact
+            source={`city-${city.slug}`}
+            service={{ slug: "private-limited-company", name: "Private Limited Company" }}
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            badge="Fast · Easy · No Obligation"
+          />
+        }
       >
         <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[15px] font-medium text-[#2c3f4e]">
           <li>✓ 100% online</li>
