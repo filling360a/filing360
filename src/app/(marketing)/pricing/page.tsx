@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import {
   formatInr,
   formatPer,
@@ -8,13 +7,17 @@ import {
   serviceHref,
   type Service,
 } from "@/content/services";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
-export const metadata: Metadata = {
-  title: "Pricing",
+export const metadata = pageMetadata({
+  title: "Pricing — Company Registration, GST & Tax Filing Fees",
   description:
-    "Filing360 price list — income tax, GST, startup registration and MCA compliance packages with transparent professional fees.",
-};
+    "Transparent Filing360 professional fees for company registration, GST returns, ITR filing and MCA compliance. Government charges shown separately.",
+  path: "/pricing",
+  absoluteTitle: true,
+  keywords: ["company registration fees", "GST return filing price", "ITR filing charges"],
+});
 
 function cheapest(service: Service) {
   const priced = service.packages.filter((p) => typeof p.price === "number");

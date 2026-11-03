@@ -52,11 +52,9 @@ const pillarIcons: Record<string, ReactNode> = {
       <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
-  consultation: (
+  funds: (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-      <circle cx="9" cy="9" r="3" />
-      <circle cx="16" cy="10" r="2.2" />
-      <path d="M3 19c.8-2.8 3-4.5 6-4.5s5.2 1.7 6 4.5M14 14.5c1.7.2 3.2 1.2 4 3" />
+      <path d="M12 3v18M8 8h5.5a2.5 2.5 0 0 1 0 5H8.5a2.5 2.5 0 0 0 0 5H14" strokeLinecap="round" />
     </svg>
   ),
   accounting: (

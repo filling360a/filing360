@@ -35,7 +35,8 @@ export function EmailLayout({ preview, children }: { preview: string; children: 
           <Hr style={{ borderColor: "#d7e4de", margin: "0 28px 20px" }} />
           <Section style={styles.footer}>
             <Text style={styles.muted}>
-              {siteConfig.brandName} · {siteConfig.contact.phone} · {siteConfig.contact.email}
+              {siteConfig.brandName} · Call {siteConfig.contact.phone} · WhatsApp {siteConfig.contact.whatsappDisplay} ·{" "}
+              {siteConfig.contact.email}
             </Text>
             <Text style={styles.muted}>
               {siteConfig.brandName} is a private facilitation platform, not a government website.

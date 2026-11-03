@@ -8,7 +8,8 @@ function rows() {
     { label: "GSTIN", value: company.gstin },
     { label: "Registered office", value: address },
     { label: "Email", value: company.contact.email, href: `mailto:${company.contact.email}` },
-    { label: "Phone", value: company.contact.phoneDisplay, href: `tel:${company.contact.phone.replace(/\s/g, "")}` },
+    { label: "Phone", value: company.contact.phoneDisplay, href: `tel:${company.contact.phoneTel}` },
+    { label: "WhatsApp", value: company.contact.whatsappDisplay, href: `https://wa.me/${company.contact.whatsapp}` },
     { label: "Grievance Officer", value: company.grievanceOfficer.email, href: `mailto:${company.grievanceOfficer.email}` },
   ].filter((r) => hasValue(r.value));
 }

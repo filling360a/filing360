@@ -116,7 +116,7 @@ export async function sendLeadEmails(lead: PublicLead, result: Extract<CaptureRe
   if (!result.notify || !result.leadId) return;
   const jobs: Promise<unknown>[] = [];
 
-  if (lead.email && !result.repeat) {
+  if (lead.email) {
     jobs.push(
       sendEmail({
         to: lead.email,
@@ -124,7 +124,7 @@ export async function sendLeadEmails(lead: PublicLead, result: Extract<CaptureRe
         react: LeadConfirmationEmail({ name: lead.name, reference: result.reference, interest: lead.interest }),
         template: "lead-confirmation",
         leadId: result.leadId,
-        idempotencyKey: `lead-confirmation/${result.leadId}`,
+        idempotencyKey: result.repeat ? undefined : `lead-confirmation/${result.leadId}`,
       }),
     );
   }

@@ -2,8 +2,10 @@ import { JsonLd } from "@/components/blog/JsonLd";
 import { Footer } from "@/components/chrome/Footer";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { Header, TopBar } from "@/components/chrome/Header";
+import { FloatingContactButtons } from "@/components/chrome/FloatingContactButtons";
 import { StickyLeadBar } from "@/components/chrome/StickyLeadBar";
 import { AttributionCapture } from "@/components/leads/AttributionCapture";
+import { WelcomeLeadPopup } from "@/components/leads/WelcomeLeadPopup";
 
 export default function MarketingLayout({
   children,
@@ -26,6 +28,8 @@ export default function MarketingLayout({
       </main>
       <Footer />
       <StickyLeadBar />
+      <FloatingContactButtons />
+      <WelcomeLeadPopup />
       <AttributionCapture />
     </>
   );

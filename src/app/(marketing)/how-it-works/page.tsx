@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/Button";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "How it works",
+export const metadata = pageMetadata({
+  title: "How Company Registration Works Online in India",
   description:
-    "From DSC and name approval through SPICe+ filing to your certificate of incorporation.",
-};
+    "Step-by-step Filing360 process: DSC, name approval, SPICe+ filing and certificate of incorporation — with clear timelines and documents.",
+  path: "/how-it-works",
+  absoluteTitle: true,
+});
 
 const steps = [
   {

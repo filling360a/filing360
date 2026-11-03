@@ -23,7 +23,7 @@ const DESKS = [
 
 const FAQS = [
   { q: "How quickly will someone call me back?", a: `During office hours (${company.hours.label}) we usually call back within 10 minutes of an enquiry. Requests received after hours are answered first thing the next working day.` },
-  { q: "Is the first consultation free?", a: "Yes. A short call to understand your requirement, recommend the right registration or filing, and share a written quote is free. Detailed advisory sessions are charged as listed on the consultation page." },
+  { q: "Is the first consultation free?", a: "Yes. A short call to understand your requirement, recommend the right registration or filing, and share a written quote is free. Detailed advisory sessions are quoted upfront before booking." },
   { q: "Do I need to visit your office?", a: "No. Everything — documents, signatures and payments — is handled online. You are welcome to visit by appointment if you prefer to meet in person." },
   { q: "Can you help clients outside my city?", a: "Yes. We serve clients across India. Company, LLP and GST registrations are filed online, so your location does not matter." },
 ];
@@ -32,8 +32,8 @@ export default function ContactPage() {
   const address = fullAddress();
   const mapQuery = address || `${company.address.city}, ${company.address.state}`;
   const channels = [
-    { title: "Call us", body: company.contact.phoneDisplay, href: `tel:${company.contact.phone.replace(/\s/g, "")}`, cta: "Call now" },
-    { title: "WhatsApp", body: "Chat with an expert — share documents securely", href: whatsappLink(), cta: "Open WhatsApp" },
+    { title: "Call us", body: company.contact.phoneDisplay, href: `tel:${company.contact.phoneTel}`, cta: "Call now" },
+    { title: "WhatsApp", body: company.contact.whatsappDisplay, href: whatsappLink(), cta: "Open WhatsApp" },
     { title: "Email", body: company.contact.email, href: `mailto:${company.contact.email}`, cta: "Send email" },
   ];
 

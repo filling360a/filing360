@@ -4,9 +4,10 @@ import { commercialRules, company, hasValue, legalEntity } from "@/content/compa
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Terms of Use",
+  title: "Terms of Use — Filing360 Website & Services",
   description: "Terms that govern the use of the Filing360 website and its registration, tax and compliance services in India.",
   path: "/terms",
+  absoluteTitle: true,
 });
 
 export default function TermsPage() {
@@ -14,7 +15,7 @@ export default function TermsPage() {
   return (
     <LegalDocument
       path="/terms"
-      intro={`These Terms of Use form a binding agreement between you and ${entity} ("Filing360", "we", "us") for using filing360.in and any service you buy from us. Please read them together with our Privacy Policy, Refund Policy and Payment Terms.`}
+      intro={`These Terms of Use form a binding agreement between you and ${entity} ("Filing360", "we", "us") for using filingedge360.com and any service you buy from us. Please read them together with our Privacy Policy, Refund Policy and Payment Terms.`}
       sections={[
         {
           id: "about",

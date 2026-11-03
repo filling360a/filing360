@@ -2176,21 +2176,39 @@ export const pillars: Pillar[] = [
   }),
 
   pillar({
-    slug: "consultation",
-    name: "Consultation",
+    slug: "funds",
+    name: "Funds",
     description:
-      "Talk to a tax and compliance expert about structure, GST, income tax or MCA questions before you decide.",
+      "Bankable CMA reports, TEV studies and investor-ready pitch decks for loans, project finance and fundraising.",
     groups: [
       {
         services: [
           {
-            slug: "expert-consultation",
-            name: "Expert Consultation",
-            heading: "Talk to a Filing360 Expert",
+            slug: "cma-report",
+            name: "CMA Report",
+            heading: "CMA Report",
             tagline:
-              "A one-on-one session with a tax and compliance expert — on business structure, GST, income tax or MCA filings — with clear next steps.",
+              "Credit Monitoring Arrangement (CMA) data prepared for bank loans, working-capital limits and project finance.",
             packages: [],
             featured: true,
+          },
+          {
+            slug: "tev-report",
+            name: "TEV Report",
+            shortName: "TEV Report",
+            heading: "TEV Report",
+            tagline:
+              "Techno-Economic Viability (TEV) study for lenders and institutions evaluating your project’s commercial feasibility.",
+            packages: [],
+          },
+          {
+            slug: "pitch-deck-for-startup",
+            name: "Pitch Deck for Startup",
+            shortName: "Pitch Deck",
+            heading: "Pitch Deck for Startup",
+            tagline:
+              "Investor-ready pitch decks covering problem, market, traction, financials and ask — built with CA-backed numbers.",
+            packages: [],
           },
         ],
       },
@@ -2199,11 +2217,12 @@ export const pillars: Pillar[] = [
 
   pillar({
     slug: "accounting",
-    name: "Accounting",
+    name: "Accounting / CFO",
     description:
-      "Bookkeeping, financial statements and month-end accounting handled by a dedicated accountant.",
+      "Bookkeeping, Virtual CFO, Ind AS / IFRS, consolidation, MIS and finance SOPs — for growing businesses.",
     groups: [
       {
+        name: "Accounting & CFO",
         services: [
           {
             slug: "accounting-bookkeeping",
@@ -2212,26 +2231,7 @@ export const pillars: Pillar[] = [
             tagline:
               "Monthly bookkeeping, reconciliations and financial statements maintained by a dedicated Filing360 accountant.",
             packages: [],
-          },
-        ],
-      },
-    ],
-  }),
-
-  pillar({
-    slug: "other-services",
-    name: "Other Services",
-    description:
-      "Logo design, SOPs, Ind AS and IFRS conversion, consolidation and MIS dashboards for growing businesses.",
-    groups: [
-      {
-        services: [
-          {
-            slug: "logo-designing",
-            name: "Logo Designing",
-            heading: "Logo Designing",
-            tagline: "A professional logo for your new business, designed to work across print and digital.",
-            packages: [],
+            featured: true,
           },
           {
             slug: "rcm-preparation",
@@ -2280,6 +2280,59 @@ export const pillars: Pillar[] = [
             heading: "MIS Dashboard for Startups",
             tagline:
               "Monthly MIS dashboards that show founders and investors revenue, burn, runway and key metrics at a glance.",
+            packages: [],
+          },
+        ],
+      },
+    ],
+  }),
+
+  pillar({
+    slug: "other-services",
+    name: "Other Services",
+    description:
+      "Website, logo, SEO, performance marketing and ads — digital presence that supports your brand and growth.",
+    groups: [
+      {
+        services: [
+          {
+            slug: "website-designing",
+            name: "Website Designing",
+            heading: "Website Designing",
+            tagline:
+              "Clean, conversion-focused websites for startups and professional firms — built to load fast and look credible.",
+            packages: [],
+            featured: true,
+          },
+          {
+            slug: "logo-designing",
+            name: "Logo Designing",
+            heading: "Logo Designing",
+            tagline: "A professional logo for your new business, designed to work across print and digital.",
+            packages: [],
+          },
+          {
+            slug: "seo",
+            name: "SEO",
+            heading: "Search Engine Optimisation (SEO)",
+            tagline:
+              "Technical and content SEO so your service pages and blogs rank for the queries your customers actually search.",
+            packages: [],
+          },
+          {
+            slug: "performance-marketing",
+            name: "Performance Marketing",
+            heading: "Performance Marketing",
+            tagline:
+              "Paid acquisition programmes measured on leads and ROAS — not vanity clicks — across search and social.",
+            packages: [],
+          },
+          {
+            slug: "ads",
+            name: "Ads",
+            heading: "Ads",
+            tagline:
+              "Google, Meta and LinkedIn ad creatives and campaigns tuned for compliance and professional-service leads.",
             packages: [],
           },
         ],

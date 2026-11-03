@@ -22,7 +22,7 @@ export function runSeoChecks(input: SeoInput): { checks: SeoCheck[]; score: numb
   const h2Count = (input.html.match(/<h2[\s>]/g) ?? []).length;
   const images = input.html.match(/<img[^>]*>/g) ?? [];
   const missingAlt = images.filter((img) => !/alt="[^"]+"/.test(img)).length;
-  const internalLinks = (input.html.match(/href="(\/|https?:\/\/(www\.)?filing360\.in)/g) ?? []).length;
+  const internalLinks = (input.html.match(/href="(\/|https?:\/\/(www\.)?filingedge360\.com|https?:\/\/(www\.)?filing360\.in)/g) ?? []).length;
   const slugKw = kw.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
   const checks: SeoCheck[] = [

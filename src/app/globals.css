@@ -344,3 +344,282 @@ select.field-lux.has-lead-icon {
   pointer-events: none;
 }
 .article-body .ProseMirror-selectednode { outline: 2px solid var(--seal); }
+
+/* Floating call / WhatsApp — Filing360 ink + seal */
+.fab-stack {
+  animation: fab-bob 3.6s ease-in-out infinite;
+}
+
+.fab-btn {
+  position: relative;
+  display: flex;
+  height: 54px;
+  width: 54px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: white;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.fab-btn:hover,
+.fab-btn:focus-visible {
+  transform: translateY(-3px) scale(1.06);
+  filter: brightness(1.05);
+}
+
+.fab-btn:focus-visible {
+  outline: none;
+}
+
+.fab-btn-face {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  border: 1.5px solid color-mix(in srgb, white 28%, transparent);
+}
+
+.fab-btn-call {
+  background: linear-gradient(145deg, #1e3d56 0%, #0f2a45 55%, #0b1f33 100%);
+  box-shadow:
+    0 12px 28px -10px color-mix(in srgb, #0f2a45 70%, transparent),
+    0 0 0 1px color-mix(in srgb, #0f2a45 35%, transparent);
+}
+
+.fab-btn-call .fab-btn-face {
+  background: linear-gradient(160deg, #243f58 0%, #0f2a45 100%);
+}
+
+.fab-btn-wa {
+  height: 58px;
+  width: 58px;
+  background: linear-gradient(145deg, #1a8f6c 0%, #0e7b5b 52%, #0b6550 100%);
+  box-shadow:
+    0 12px 28px -10px color-mix(in srgb, #0e7b5b 72%, transparent),
+    0 0 0 1px color-mix(in srgb, #0e7b5b 30%, transparent);
+}
+
+.fab-btn-wa .fab-btn-face {
+  background: linear-gradient(160deg, #14986c 0%, #0e7b5b 100%);
+}
+
+.fab-btn-call:focus-visible {
+  box-shadow: 0 0 0 3px white, 0 0 0 6px #0f2a45;
+}
+
+.fab-btn-wa:focus-visible {
+  box-shadow: 0 0 0 3px white, 0 0 0 6px #0e7b5b;
+}
+
+.fab-ring {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  border: 2px solid currentColor;
+  opacity: 0;
+  animation: fab-ring 2.4s cubic-bezier(0.22, 0.8, 0.28, 1) infinite;
+}
+
+.fab-btn-call .fab-ring {
+  color: #1e3d56;
+}
+
+.fab-btn-wa .fab-ring {
+  color: #0e7b5b;
+}
+
+.fab-ring-b {
+  animation-delay: 1.2s;
+}
+
+.fab-badge {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  z-index: 3;
+  display: flex;
+  height: 18px;
+  min-width: 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #e25555 0%, #c53030 100%);
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: white;
+  box-shadow: 0 4px 10px -4px rgba(197, 48, 48, 0.7);
+  animation: fab-badge 1.8s ease-in-out infinite;
+}
+
+@keyframes fab-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes fab-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes fab-badge {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab-stack,
+  .fab-ring,
+  .fab-badge {
+    animation: none;
+  }
+  .fab-ring {
+    opacity: 0.28;
+    transform: scale(1.2);
+  }
+}
+
+/* Mobile bottom lead bar */
+.sticky-lead-btn {
+  display: flex;
+  min-height: 2.85rem;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, filter 160ms ease;
+}
+
+.sticky-lead-btn:active {
+  transform: scale(0.97);
+}
+
+.sticky-lead-icon {
+  position: relative;
+  display: inline-flex;
+  height: 1.55rem;
+  width: 1.55rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: white;
+}
+
+.sticky-lead-icon-call {
+  background: linear-gradient(160deg, #243f58 0%, #0f2a45 100%);
+  box-shadow: 0 4px 10px -4px color-mix(in srgb, #0f2a45 65%, transparent);
+}
+
+.sticky-lead-icon-wa {
+  background: linear-gradient(160deg, #14986c 0%, #0e7b5b 100%);
+  box-shadow: 0 4px 10px -4px color-mix(in srgb, #0e7b5b 65%, transparent);
+}
+
+.sticky-lead-call {
+  border: 1px solid #d2e2db;
+  background: linear-gradient(180deg, #ffffff 0%, #f4faf7 100%);
+  color: #0f2a45;
+  box-shadow: 0 1px 0 color-mix(in srgb, white 80%, transparent) inset;
+}
+
+.sticky-lead-wa {
+  border: 1px solid #c5e8dc;
+  background: linear-gradient(180deg, #f3fbf7 0%, #e7f5ef 100%);
+  color: #0b6550;
+  box-shadow: 0 1px 0 color-mix(in srgb, white 80%, transparent) inset;
+}
+
+.sticky-lead-quote {
+  flex: 1.55;
+  gap: 0.35rem;
+  border: 1px solid color-mix(in srgb, #0b6550 35%, transparent);
+  background: linear-gradient(145deg, #14986c 0%, #0e7b5b 55%, #0b6550 100%);
+  color: white;
+  box-shadow:
+    0 10px 20px -12px color-mix(in srgb, #0e7b5b 80%, transparent),
+    0 1px 0 color-mix(in srgb, white 25%, transparent) inset;
+  animation: sticky-quote-glow 2.8s ease-in-out infinite;
+}
+
+.sticky-lead-quote:active {
+  filter: brightness(0.96);
+}
+
+.sticky-lead-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  height: 8px;
+  width: 8px;
+  border-radius: 9999px;
+  background: #e25555;
+  box-shadow: 0 0 0 2px white;
+  animation: sticky-dot-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes sticky-quote-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 20px -12px color-mix(in srgb, #0e7b5b 80%, transparent),
+      0 1px 0 color-mix(in srgb, white 25%, transparent) inset;
+  }
+  50% {
+    box-shadow:
+      0 12px 26px -10px color-mix(in srgb, #0e7b5b 95%, transparent),
+      0 0 0 3px color-mix(in srgb, #0e7b5b 16%, transparent),
+      0 1px 0 color-mix(in srgb, white 25%, transparent) inset;
+  }
+}
+
+@keyframes sticky-dot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-lead-quote,
+  .sticky-lead-dot {
+    animation: none;
+  }
+}

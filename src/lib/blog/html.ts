@@ -2,7 +2,11 @@ import "server-only";
 import sanitizeHtml from "sanitize-html";
 import { slugify } from "@/lib/slug";
 
-const SITE_HOSTS = new Set(["filing360.in", "www.filing360.in", "localhost"]);
+const SITE_HOSTS = new Set([
+  "filingedge360.com",
+  "www.filingedge360.com",
+  "localhost",
+]);
 
 /** Allowlist sanitiser for editor output. Runs on every save. */
 export function sanitizePostHtml(html: string): string {
@@ -31,7 +35,7 @@ export function sanitizePostHtml(html: string): string {
         const href = attribs.href ?? "";
         let external = false;
         try {
-          const url = new URL(href, "https://filing360.in");
+          const url = new URL(href, "https://filingedge360.com");
           external = /^https?:$/.test(url.protocol) && !SITE_HOSTS.has(url.hostname);
         } catch {
           external = false;

@@ -91,6 +91,16 @@ const nextConfig: NextConfig = {
       { source: "/gst/lut-filing", destination: "/services/gst/gst-lut-filing", permanent: true },
       { source: "/gst/notice-reply", destination: "/services/gst/gst-notice-reply", permanent: true },
       { source: "/gst/refund", destination: "/services/gst/gst-refund", permanent: true },
+      // Consultation → Funds
+      { source: "/services/consultation", destination: "/services/funds", permanent: true },
+      { source: "/services/consultation/expert-consultation", destination: "/services/funds/cma-report", permanent: true },
+      // Former Other Services finance items → Accounting / CFO
+      { source: "/services/other-services/rcm-preparation", destination: "/services/accounting/rcm-preparation", permanent: true },
+      { source: "/services/other-services/sop-designing", destination: "/services/accounting/sop-designing", permanent: true },
+      { source: "/services/other-services/ind-as-conversion", destination: "/services/accounting/ind-as-conversion", permanent: true },
+      { source: "/services/other-services/ifrs", destination: "/services/accounting/ifrs", permanent: true },
+      { source: "/services/other-services/consolidation", destination: "/services/accounting/consolidation", permanent: true },
+      { source: "/services/other-services/mis-dashboard-for-startups", destination: "/services/accounting/mis-dashboard-for-startups", permanent: true },
     ];
   },
   async headers() {

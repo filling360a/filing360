@@ -30,7 +30,7 @@ const PILLAR_POOL: Record<string, BannerArt[]> = {
   gst: [ART.gstPhoto, ART.gstIllu, ART.phone],
   startup: [ART.womanStand, ART.mca, ART.coupleIllu],
   mca: [ART.mca, ART.desk, ART.womanStand],
-  consultation: [ART.headset, ART.couple, ART.coupleIllu],
+  funds: [ART.headset, ART.couple, ART.coupleIllu],
   accounting: [ART.tablet, ART.gstPhoto, ART.phone],
   "other-services": [ART.desk, ART.think, ART.headset],
 };
@@ -48,7 +48,9 @@ function pick(pool: BannerArt[], key: string) {
 const SLUG_ART: Record<string, BannerArt> = {
   "income-tax/income-tax-e-filing": ART.itr,
   "income-tax/tax-planning": ART.think,
-  "consultation/book-consultation": ART.headset,
+  "funds/cma-report": ART.headset,
+  "funds/tev-report": ART.tablet,
+  "funds/pitch-deck-for-startup": ART.coupleIllu,
 };
 
 export function bannerForService(pillar: string, slug: string): BannerArt {

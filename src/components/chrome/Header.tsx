@@ -9,7 +9,10 @@ import { siteConfig } from "@/lib/siteConfig";
 import { Logo } from "./Logo";
 import { ServiceIcon } from "./NavIcons";
 
-const extraLinks = [{ href: "/blog", label: "Articles" }] as const;
+const extraLinks = [
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Articles" },
+] as const;
 
 function Chevron({ open }: { open: boolean }) {
   return (

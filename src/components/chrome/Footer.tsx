@@ -89,13 +89,17 @@ export function Footer() {
             </Link>
             <ul className="space-y-1.5 text-[15px] text-white/65">
               <li>
-                <a className="hover:text-white" href={`tel:${company.contact.phone.replace(/\s/g, "")}`}>{company.contact.phoneDisplay}</a>
+                <a className="hover:text-white" href={`tel:${company.contact.phoneTel}`}>
+                  Call {company.contact.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-white" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+                  WhatsApp {company.contact.whatsappDisplay}
+                </a>
               </li>
               <li>
                 <a className="hover:text-white" href={`mailto:${company.contact.email}`}>{company.contact.email}</a>
-              </li>
-              <li>
-                <a className="hover:text-white" href={whatsappLink()} target="_blank" rel="noopener noreferrer">WhatsApp us</a>
               </li>
               <li className="text-white/45">{company.hours.label}</li>
             </ul>

@@ -4,10 +4,11 @@ import { legalEntity } from "@/content/company";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Disclaimer",
+  title: "Disclaimer — Private Facilitation Platform Notice",
   description:
     "Filing360 is a private facilitation platform, not a government website or law firm. Read about information accuracy, outcomes and professional services.",
   path: "/disclaimer",
+  absoluteTitle: true,
 });
 
 export default function DisclaimerPage() {
@@ -21,7 +22,7 @@ export default function DisclaimerPage() {
           title: "Not a government website",
           body: (
             <p>
-              filing360.in is owned and operated by {legalEntity()}, a private organisation. It is <strong>not</strong> a government website and is
+              filingedge360.com is owned and operated by {legalEntity()}, a private organisation. It is <strong>not</strong> a government website and is
               not affiliated with, endorsed by or acting for the Ministry of Corporate Affairs, GSTN, the Income Tax Department, DPIIT, the Ministry
               of MSME or any other government body. Registrations, licences and certificates are issued only by the relevant authority. You can
               also apply directly on the official government portals, often for the government fee alone.

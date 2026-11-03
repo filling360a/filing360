@@ -30,7 +30,7 @@ export function NewLeadForm({ team, currentUserId, services }: Props) {
       </div>
       <div>
         <label htmlFor="phone" className={labelClass}>Mobile *</label>
-        <input id="phone" name="phone" type="tel" required inputMode="tel" className={inputClass} placeholder="98765 43210" />
+        <input id="phone" name="phone" type="tel" required inputMode="tel" className={inputClass} placeholder="73032 57128" />
       </div>
       <div>
         <label htmlFor="email" className={labelClass}>Email</label>

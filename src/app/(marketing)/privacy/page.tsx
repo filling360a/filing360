@@ -59,7 +59,7 @@ export default function PrivacyPage() {
   return (
     <LegalDocument
       path="/privacy"
-      intro={`${entity} is the Data Fiduciary for personal data processed through filing360.in and our services. This policy explains, in plain language, what we collect, why, who we share it with, how long we keep it and how you can exercise your rights under the Digital Personal Data Protection Act, 2023 ("DPDP Act").`}
+      intro={`${entity} is the Data Fiduciary for personal data processed through filingedge360.com and our services. This policy explains, in plain language, what we collect, why, who we share it with, how long we keep it and how you can exercise your rights under the Digital Personal Data Protection Act, 2023 ("DPDP Act").`}
       sections={[
         {
           id: "scope",

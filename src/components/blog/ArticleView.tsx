@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LeadForm } from "@/components/leads/LeadForm";
+import { ReviewedBy } from "@/components/site/ReviewedBy";
 import { withHeadingIds } from "@/lib/blog/html";
 import type { PostCard as PostCardData } from "@/lib/blog/queries";
 import { formatDate } from "@/lib/format";
@@ -117,7 +118,9 @@ export function ArticleView({ post, related = [], shareUrl }: { post: ArticleDat
               </div>
             </section>
 
-            <p className="mt-6 text-[13.5px] leading-relaxed text-[#8a9ba6]">
+            <ReviewedBy className="mt-6 text-[14px] text-[#5b6e7a]" />
+
+            <p className="mt-4 text-[13.5px] leading-relaxed text-[#8a9ba6]">
               This article is for general information and is not legal or tax advice. Rules change often — speak to an expert before acting on it.
             </p>
           </div>

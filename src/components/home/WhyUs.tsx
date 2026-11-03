@@ -322,7 +322,7 @@ export function WhyUs() {
 
             <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                href={`tel:${siteConfig.contact.phoneTel}`}
                 className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#0e7b5b] px-6 text-[14.5px] font-semibold text-white transition hover:bg-[#0b6550]"
               >
                 {homeWhy.cta}
@@ -376,7 +376,7 @@ export function WhyUs() {
                   <span aria-hidden>→</span>
                 </a>
                 <a
-                  href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                  href={`tel:${siteConfig.contact.phoneTel}`}
                   className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-[#8ecfbc] bg-white px-4 text-[14.5px] font-semibold text-[#0e7b5b] transition hover:border-[#0e7b5b]"
                 >
                   <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>

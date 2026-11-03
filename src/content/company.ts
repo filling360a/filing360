@@ -29,15 +29,20 @@ export const company = {
   geo: null as { lat: number; lng: number } | null,
 
   contact: {
-    phone: "+91 98765 43210",
-    phoneDisplay: "+91 98765 43210",
-    whatsapp: "919876543210",
-    email: "hello@filing360.in",
-    supportEmail: "support@filing360.in",
-    billingEmail: "accounts@filing360.in",
-    privacyEmail: "privacy@filing360.in",
-    careersEmail: "careers@filing360.in",
-    partnersEmail: "partners@filing360.in",
+    /** Primary call number (shown on site, tel: links, SEO). */
+    phone: "+91 73032 57128",
+    phoneDisplay: "+91 73032 57128",
+    /** Digits-only for tel: hrefs. */
+    phoneTel: "+917303257128",
+    /** WhatsApp Business number — digits only for wa.me (country code + number). */
+    whatsapp: "919205707889",
+    whatsappDisplay: "+91 92057 07889",
+    email: "support@filingedge360.com",
+    supportEmail: "support@filingedge360.com",
+    billingEmail: "accounts@filingedge360.com",
+    privacyEmail: "privacy@filingedge360.com",
+    careersEmail: "careers@filingedge360.com",
+    partnersEmail: "partners@filingedge360.com",
   },
   hours: {
     label: "Monday to Saturday, 9:00 am – 7:00 pm IST",
@@ -48,7 +53,7 @@ export const company = {
   grievanceOfficer: {
     name: "",
     designation: "Grievance Officer",
-    email: "grievance@filing360.in",
+    email: "grievance@filingedge360.com",
     phone: "",
     acknowledgeWithinHours: 24,
     resolveWithinDays: 15,

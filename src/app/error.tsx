@@ -15,7 +15,7 @@ export default function Error({ error, retry }: { error: Error & { digest?: stri
       <h1 className="mt-4 font-display text-3xl text-ink">Something went wrong</h1>
       <p className="mt-2 max-w-md text-ink-muted">
         A temporary problem stopped this page from loading. Please try again — if it keeps happening, call us on{" "}
-        <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="font-semibold text-ink underline">
+        <a href={`tel:${siteConfig.contact.phoneTel}`} className="font-semibold text-ink underline">
           {siteConfig.contact.phone}
         </a>
         .

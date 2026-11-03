@@ -306,7 +306,7 @@ export function HumanOverview() {
                     <span aria-hidden>→</span>
                   </a>
                   <a
-                    href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                    href={`tel:${siteConfig.contact.phoneTel}`}
                     className="inline-flex h-11 items-center justify-center rounded-lg border border-[#d1d5db] bg-white px-5 text-[14.5px] font-semibold text-[#0f2a45] transition hover:border-[#0f2a45]/40"
                   >
                     {siteConfig.cta.expert}

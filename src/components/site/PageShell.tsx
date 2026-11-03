@@ -131,7 +131,7 @@ export function CtaBand({
             WhatsApp us
           </a>
           <a
-            href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+            href={`tel:${siteConfig.contact.phoneTel}`}
             className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/30 px-5 text-[15px] font-semibold text-white transition hover:bg-white/10"
           >
             Call {siteConfig.contact.phone}

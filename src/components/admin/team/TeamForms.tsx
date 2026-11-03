@@ -1,7 +1,13 @@
 "use client";
 
 import { useActionState, useRef, useState, useTransition } from "react";
-import { inviteMember, resetMemberPassword, updateMember, updateOwnProfile } from "@/app/admin/(panel)/team/actions";
+import {
+  inviteMember,
+  resendInvite,
+  resetMemberPassword,
+  updateMember,
+  updateOwnProfile,
+} from "@/app/admin/(panel)/team/actions";
 import { Alert, Button, inputClass, labelClass } from "@/components/admin/ui";
 import type { AppRole, Tables } from "@/lib/supabase/database.types";
 
@@ -60,7 +66,7 @@ export function InviteMemberForm({ emailEnabled }: { emailEnabled: boolean }) {
       </Button>
       <p className="text-[11.5px] text-[#8a9ba6]">
         {emailEnabled
-          ? "They'll get an email to set their password."
+          ? "They'll get an email to set their password. The invite link expires in 15 minutes — use Resend invite if it lapses."
           : "Email isn't set up yet, so you'll get a temporary password to share. They'll set their own on first sign-in."}
       </p>
     </form>
@@ -72,15 +78,18 @@ export function MemberControls({
   role,
   active,
   emailEnabled,
+  invitePending = false,
 }: {
   userId: string;
   role: AppRole | null;
   active: boolean;
   emailEnabled: boolean;
+  /** True when the member was invited but has never signed in. */
+  invitePending?: boolean;
 }) {
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [reset, setReset] = useState<Awaited<ReturnType<typeof resetMemberPassword>>>(undefined);
+  const [notice, setNotice] = useState<Awaited<ReturnType<typeof resetMemberPassword>>>(undefined);
 
   const run = (input: { role?: string; active?: boolean }) =>
     start(async () => {
@@ -98,13 +107,23 @@ export function MemberControls({
       setError(null);
       const res = await resetMemberPassword(userId);
       if (res?.error) setError(res.error);
-      setReset(res?.ok ? res : undefined);
+      setNotice(res?.ok ? res : undefined);
+    });
+  };
+
+  const resend = () => {
+    if (!window.confirm("Send a fresh invite email? The new link expires in 15 minutes.")) return;
+    start(async () => {
+      setError(null);
+      const res = await resendInvite(userId);
+      if (res?.error) setError(res.error);
+      setNotice(res?.ok ? res : undefined);
     });
   };
 
   return (
     <div className="flex flex-col items-end gap-1">
-      <div className="flex items-center justify-end gap-2">
+      <div className="flex flex-wrap items-center justify-end gap-2">
         <select
           aria-label="Role"
           defaultValue={role ?? ""}
@@ -130,17 +149,23 @@ export function MemberControls({
         >
           {active ? "Deactivate" : "Reactivate"}
         </Button>
-        <Button type="button" size="sm" variant="secondary" disabled={pending || !active} onClick={resetPassword}>
-          Reset password
-        </Button>
+        {invitePending && emailEnabled ? (
+          <Button type="button" size="sm" variant="secondary" disabled={pending || !active} onClick={resend}>
+            Resend invite
+          </Button>
+        ) : (
+          <Button type="button" size="sm" variant="secondary" disabled={pending || !active} onClick={resetPassword}>
+            Reset password
+          </Button>
+        )}
       </div>
       {error && <span className="text-[12px] text-[#b91c1c]">{error}</span>}
-      {reset?.credentials ? (
+      {notice?.credentials ? (
         <div className="mt-1 w-[300px]">
-          <CredentialsBox {...reset.credentials} />
+          <CredentialsBox {...notice.credentials} />
         </div>
       ) : (
-        reset?.message && <span className="text-[12px] text-[#0b6550]">{reset.message}</span>
+        notice?.message && <span className="text-[12px] text-[#0b6550]">{notice.message}</span>
       )}
     </div>
   );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { CtaBand, PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
+import { ReviewedBy } from "@/components/site/ReviewedBy";
 import { whatsappLink } from "@/content/company";
 import {
   GST,
@@ -152,9 +153,7 @@ export function GstHub({ pillar }: { pillar: Pillar }) {
   return (
     <>
       <div className="mx-auto max-w-[1240px] px-5 pt-6 md:px-8 md:pt-8">
-        <p className="text-[13.5px] text-[#5b6e7a]">
-          Reviewed by Filing360 Chartered Accountants · Updated {updated} · Fees exclusive of GST
-        </p>
+        <ReviewedBy className="text-[13.5px] text-[#5b6e7a]" suffix={`· Updated ${updated} · Fees exclusive of GST`} />
 
         <nav aria-label="On this page" className="mt-4 overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white p-4 md:p-5">
           <p className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">On this page</p>

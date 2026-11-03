@@ -1,4 +1,6 @@
-/** Central brand config */
+import { company } from "@/content/company";
+
+/** Central brand config — phone/WhatsApp stay in sync with `company.contact`. */
 export const siteConfig = {
   brandName: "Filing360",
   tagline: "Your business. Our priority.",
@@ -8,13 +10,17 @@ export const siteConfig = {
     height: 290,
   },
   description:
-    "Income tax, GST, startup registration and MCA compliance in India — Private Limited, LLP, OPC, GST returns and ITR filing with transparent professional fees + government charges.",
-  url: "https://filing360.in",
+    "Online company registration, GST, ITR filing and MCA compliance in India — transparent CA-backed fees for Private Limited, LLP, OPC and more.",
+  url: "https://filingedge360.com",
   contact: {
-    email: "hello@filing360.in",
-    phone: "+91 98765 43210",
-    phoneAlt: "+91 98765 43211",
-    phoneDisplay: "98765 43210 · 98765 43211",
+    email: company.contact.email,
+    phone: company.contact.phone,
+    /** WhatsApp number (display). */
+    phoneAlt: company.contact.whatsappDisplay,
+    phoneDisplay: company.contact.phoneDisplay,
+    phoneTel: company.contact.phoneTel,
+    whatsapp: company.contact.whatsapp,
+    whatsappDisplay: company.contact.whatsappDisplay,
   },
   socialProof: {
     rating: "4.8",
@@ -41,5 +47,13 @@ export const leadInterestOptions = [
   "Tax Planning",
   "Annual MCA Compliance",
   "Accounting & Bookkeeping",
+  "CMA Report",
+  "TEV Report",
+  "Pitch Deck for Startup",
+  "Website Designing",
+  "Logo Designing",
+  "SEO",
+  "Performance Marketing",
+  "Ads",
   "Not sure — advise me",
 ] as const;

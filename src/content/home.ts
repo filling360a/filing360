@@ -471,19 +471,19 @@ export const homeMarketplace = {
       highlights: ["Company · LLP · OPC compliance", "Director & DIN filings", "MOA / AOA / capital changes"],
       tone: "sky",
     },
-    consultation: {
-      blurb: "Talk to an expert before you decide.",
-      highlights: ["Business structure", "GST & income tax", "MCA questions"],
+    funds: {
+      blurb: "CMA, TEV and pitch decks for loans and fundraising.",
+      highlights: ["CMA reports", "TEV studies", "Startup pitch decks"],
       tone: "indigo",
     },
     accounting: {
-      blurb: "Bookkeeping and financial statements, done for you.",
-      highlights: ["Monthly bookkeeping", "Reconciliations", "Financial statements"],
+      blurb: "Bookkeeping, Virtual CFO, Ind AS, MIS and finance SOPs.",
+      highlights: ["Bookkeeping & CFO", "Ind AS · IFRS · consolidation", "MIS dashboards"],
       tone: "teal",
     },
     "other-services": {
-      blurb: "Specialist finance and brand services for growing teams.",
-      highlights: ["Logo · SOP designing", "Ind AS · IFRS · consolidation", "MIS dashboards"],
+      blurb: "Website, brand and digital growth for your business.",
+      highlights: ["Website · logo", "SEO", "Performance marketing · ads"],
       tone: "amber",
     },
   } as Record<

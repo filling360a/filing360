@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { InviteMemberForm, MemberControls } from "@/components/admin/team/TeamForms";
 import { Badge, Card, PageHeader } from "@/components/admin/ui";
 import { requireStaff, ROLE_LABELS } from "@/lib/auth/dal";
+import { isInvitePending } from "@/lib/auth/staffAccess";
 import { isEmailConfigured } from "@/lib/env";
 import { timeAgo } from "@/lib/format";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Team" };
@@ -20,6 +22,15 @@ export default async function TeamPage() {
   const db = await createClient();
   const { data: members } = await db.from("profiles").select("*").order("created_at");
   const emailEnabled = isEmailConfigured();
+
+  const pendingInviteIds = new Set<string>();
+  if (emailEnabled && (members?.length ?? 0) > 0) {
+    const admin = createAdminClient();
+    const { data: authUsers } = await admin.auth.admin.listUsers({ perPage: 200 });
+    for (const user of authUsers?.users ?? []) {
+      if (isInvitePending(user)) pendingInviteIds.add(user.id);
+    }
+  }
 
   return (
     <>
@@ -38,24 +49,41 @@ export default async function TeamPage() {
                 </tr>
               </thead>
               <tbody>
-                {(members ?? []).map((m) => (
-                  <tr key={m.id} className="border-b border-[#e8f0ec] last:border-0">
-                    <td className="px-5 py-3">
-                      <p className="font-semibold text-[#0f2a45]">
-                        {m.full_name || "—"} {m.id === me.id && <span className="text-[12px] font-medium text-[#8a9ba6]">(you)</span>}
-                      </p>
-                      <p className="text-[12.5px] text-[#5b6e7a]">{m.email}</p>
-                    </td>
-                    <td className="px-3 py-3">{m.role ? <Badge tone="blue">{ROLE_LABELS[m.role]}</Badge> : <Badge tone="amber">No access</Badge>}</td>
-                    <td className="px-3 py-3">{m.is_active ? <Badge tone="green">Active</Badge> : <Badge tone="zinc">Deactivated</Badge>}</td>
-                    <td className="px-3 py-3 text-[12.5px] text-[#5b6e7a]">{timeAgo(m.created_at)}</td>
-                    <td className="px-5 py-3 text-right">
-                      {m.id !== me.id && (
-                        <MemberControls userId={m.id} role={m.role} active={m.is_active} emailEnabled={emailEnabled} />
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                {(members ?? []).map((m) => {
+                  const invitePending = pendingInviteIds.has(m.id);
+                  return (
+                    <tr key={m.id} className="border-b border-[#e8f0ec] last:border-0">
+                      <td className="px-5 py-3">
+                        <p className="font-semibold text-[#0f2a45]">
+                          {m.full_name || "—"} {m.id === me.id && <span className="text-[12px] font-medium text-[#8a9ba6]">(you)</span>}
+                        </p>
+                        <p className="text-[12.5px] text-[#5b6e7a]">{m.email}</p>
+                      </td>
+                      <td className="px-3 py-3">{m.role ? <Badge tone="blue">{ROLE_LABELS[m.role]}</Badge> : <Badge tone="amber">No access</Badge>}</td>
+                      <td className="px-3 py-3">
+                        {!m.is_active ? (
+                          <Badge tone="zinc">Deactivated</Badge>
+                        ) : invitePending ? (
+                          <Badge tone="amber">Invite pending</Badge>
+                        ) : (
+                          <Badge tone="green">Active</Badge>
+                        )}
+                      </td>
+                      <td className="px-3 py-3 text-[12.5px] text-[#5b6e7a]">{timeAgo(m.created_at)}</td>
+                      <td className="px-5 py-3 text-right">
+                        {m.id !== me.id && (
+                          <MemberControls
+                            userId={m.id}
+                            role={m.role}
+                            active={m.is_active}
+                            emailEnabled={emailEnabled}
+                            invitePending={invitePending}
+                          />
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

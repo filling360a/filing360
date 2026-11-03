@@ -76,7 +76,41 @@ export async function inviteMember(_: TeamActionState, formData: FormData): Prom
         message: `Account created for ${full_name}. Share these sign-in details privately — they'll be asked to set their own password on first sign-in.`,
       };
     }
-    return { ok: true, message: `Invite sent to ${email}.` };
+    return { ok: true, message: `Invite sent to ${email}. The link expires in 15 minutes.` };
+  } catch (err) {
+    return fail(err);
+  }
+}
+
+/** Resend a 15-minute invite when the previous link expired or was never opened. */
+export async function resendInvite(userId: string): Promise<TeamActionState> {
+  try {
+    const me = await assertStaff("team");
+    if (!z.uuid().safeParse(userId).success) return { error: "Invalid request" };
+    if (!isEmailConfigured()) return { error: "Email isn't configured — set RESEND_API_KEY first." };
+
+    const admin = createAdminClient();
+    const { data: target } = await admin.from("profiles").select("email, full_name, is_active").eq("id", userId).single();
+    if (!target) return { error: "Team member not found" };
+    if (!target.is_active) return { error: "Reactivate this member before resending an invite." };
+
+    const { data: authUser, error: authError } = await admin.auth.admin.getUserById(userId);
+    if (authError || !authUser.user) return { error: authError?.message ?? "Auth user not found." };
+    if (authUser.user.last_sign_in_at) {
+      return { error: "This member has already signed in. Use Reset password instead." };
+    }
+
+    const sent = await sendStaffAccessEmail({
+      kind: "invite",
+      email: target.email,
+      name: target.full_name,
+      invitedBy: me.full_name,
+      sentBy: me.id,
+      existingUserId: userId,
+    });
+    if (!sent.ok) return { error: `Couldn't resend the invite: ${sent.error}` };
+    revalidatePath("/admin/team");
+    return { ok: true, message: `Invite resent to ${target.email}. The new link expires in 15 minutes.` };
   } catch (err) {
     return fail(err);
   }

@@ -1,18 +1,21 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import {
   featureComparison,
   positioningVs,
   pricingComparison,
   type CompareTable,
 } from "@/content/compare";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
-export const metadata: Metadata = {
-  title: "Filing360 vs IndiaFilings, Startupwala, Vakilsearch & Razorpay Rize",
+export const metadata = pageMetadata({
+  title: "Filing360 vs IndiaFilings, Vakilsearch, RegisterKaro & Rize",
   description:
-    "How Filing360 company registration compares on price, GST, government fees, dedicated RM, CA backing and Year 1 compliance.",
-};
+    "Compare Filing360 company registration on price, GST inclusion, government fees, dedicated RM, CA backing and Year-1 compliance versus major competitors.",
+  path: "/compare",
+  absoluteTitle: true,
+  keywords: ["Filing360 vs IndiaFilings", "RegisterKaro alternative", "company registration comparison"],
+});
 
 const PVT_LTD_HREF = "/services/startup/private-limited-company";
 

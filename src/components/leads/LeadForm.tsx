@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FormEvent, useId, useRef, useState, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { FormEvent, useId, useMemo, useRef, useState, type ReactNode } from "react";
+import { getPillar, getService } from "@/content/services";
 import { publicJsonHeaders } from "@/lib/api-headers";
 import { trackEvent } from "@/lib/consent";
 import { getAttribution } from "@/lib/leads/attribution-client";
@@ -37,10 +38,44 @@ type FieldErrors = Partial<Record<"name" | "phone" | "email" | "interest" | "cit
 const SLOTS = ["Morning (9 am – 12 pm)", "Afternoon (12 – 4 pm)", "Evening (4 – 7 pm)"];
 const MODES = ["Phone call", "Google Meet / video", "WhatsApp call"];
 
+/** Default interest shown on pillar landing pages (`/services/[pillar]`). */
+const PILLAR_DEFAULT_INTEREST: Record<string, string> = {
+  "income-tax": "Income Tax Return (ITR) Filing",
+  gst: "GST Registration",
+  startup: "Private Limited Company Registration",
+  mca: "Annual MCA Compliance",
+  accounting: "Accounting & Bookkeeping",
+  funds: "CMA Report",
+  "other-services": "Website Designing",
+};
+
 function todayIso() {
   const d = new Date();
   d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
   return d.toISOString().slice(0, 10);
+}
+
+/** Infer the service to preselect from the current URL when the parent doesn't pass one. */
+function serviceFromPath(pathname: string | null): { slug: string; name: string } | undefined {
+  if (!pathname) return undefined;
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts[0] !== "services" || !parts[1]) return undefined;
+
+  const pillarSlug = parts[1];
+  const serviceSlug = parts[2];
+
+  if (serviceSlug) {
+    const hit = getService(pillarSlug, serviceSlug);
+    if (hit) {
+      return { slug: `${hit.pillar.slug}/${hit.service.slug}`, name: hit.service.name };
+    }
+  }
+
+  const pillar = getPillar(pillarSlug);
+  if (!pillar) return undefined;
+  const name = PILLAR_DEFAULT_INTEREST[pillar.slug];
+  if (!name) return undefined;
+  return { slug: pillar.slug, name };
 }
 
 export function LeadForm({
@@ -49,7 +84,7 @@ export function LeadForm({
   compact,
   variant = "solid",
   source,
-  service,
+  service: serviceProp,
   title = "Get a Free Quote",
   subtitle,
   submitLabel = "Get Free Quote",
@@ -61,12 +96,20 @@ export function LeadForm({
   badge,
 }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   const [reference, setReference] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const startedAt = useRef<number>(0);
   const uid = useId();
+
+  const service = useMemo(
+    () => serviceProp ?? (interestOverride ? undefined : serviceFromPath(pathname)),
+    [serviceProp, interestOverride, pathname],
+  );
+  const selectedInterest = service?.name ?? "";
+  const formKey = `${id}:${service?.slug ?? "general"}`;
 
   const interestOptions: readonly string[] =
     interestOverride ??
@@ -230,7 +273,12 @@ export function LeadForm({
         </p>
       ) : null}
 
-      <form onSubmit={onSubmit} onFocus={markStarted} className={compact ? "mt-2.5 flex flex-col gap-2" : "mt-5 space-y-3"}>
+      <form
+        key={formKey}
+        onSubmit={onSubmit}
+        onFocus={markStarted}
+        className={compact ? "mt-2.5 flex flex-col gap-2" : "mt-5 space-y-3"}
+      >
         <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
           <label htmlFor={`${uid}-website`}>Company website</label>
           <input id={`${uid}-website`} name="company_website" tabIndex={-1} autoComplete="off" />
@@ -318,10 +366,11 @@ export function LeadForm({
                   <DocIcon />
                 </FieldIcon>
                 <select
+                  key={formKey}
                   id={`${uid}-interest`}
                   name="interest"
                   required
-                  defaultValue={service?.name ?? ""}
+                  defaultValue={selectedInterest}
                   className="field-lux has-lead-icon"
                 >
                   <option value="" disabled>
@@ -435,10 +484,11 @@ export function LeadForm({
                 {interestLabel}
               </label>
               <select
+                key={formKey}
                 id={`${uid}-interest`}
                 name="interest"
                 required
-                defaultValue={service?.name ?? ""}
+                defaultValue={selectedInterest}
                 className="field-lux"
               >
                 <option value="" disabled>
@@ -514,7 +564,7 @@ export function LeadForm({
         {error && (
           <p role="alert" className="rounded-lg bg-[#fef2f2] px-3 py-2 text-[13.5px] font-medium text-[#b91c1c]">
             {error}{" "}
-            <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="underline">
+            <a href={`tel:${siteConfig.contact.phoneTel}`} className="underline">
               Call {siteConfig.contact.phone}
             </a>
           </p>

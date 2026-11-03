@@ -7,18 +7,22 @@ import { PopularServices } from "@/components/home/PopularServices";
 import { Process } from "@/components/home/Process";
 import { Proof } from "@/components/home/Proof";
 import { SpotlightBanner } from "@/components/home/SpotlightBanner";
-import type { Metadata } from "next";
-import { siteConfig } from "@/lib/siteConfig";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `${siteConfig.brandName} — Online Company Registration & Compliance in India`,
-  description: siteConfig.description,
-  openGraph: {
-    title: `${siteConfig.brandName} — Register your company online in India`,
-    description: siteConfig.description,
-    type: "website",
-  },
-};
+export const metadata = pageMetadata({
+  title: "Online Company Registration, GST & ITR Filing in India | Filing360",
+  description:
+    "Register a Private Limited, LLP or OPC online. File GST and ITR with CA experts, transparent fees and pan-India support — from Filing360.",
+  path: "/",
+  absoluteTitle: true,
+  keywords: [
+    "company registration India",
+    "private limited company registration",
+    "GST registration",
+    "ITR filing",
+    "MCA compliance",
+  ],
+});
 
 /**
  * Post-hero order researched to beat RegisterKaro, IndiaFilings, Zolvit, Rize:

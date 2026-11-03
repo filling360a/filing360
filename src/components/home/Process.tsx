@@ -452,7 +452,7 @@ export function Process() {
             <span aria-hidden>→</span>
           </a>
           <a
-            href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+            href={`tel:${siteConfig.contact.phoneTel}`}
             className="inline-flex h-12 items-center justify-center rounded-lg border border-[#8ecfbc] bg-white px-5 text-[15px] font-semibold text-[#0e7b5b] transition hover:border-[#0e7b5b] sm:h-10 sm:text-[14.5px]"
           >
             Talk to an Expert

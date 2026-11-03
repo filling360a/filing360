@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/blog/JsonLd";
 import { container, CtaBand, FaqList, PageHero, SectionHeading } from "@/components/site/PageShell";
+import { ReviewedBy } from "@/components/site/ReviewedBy";
 import { getGuide, guideHref, guides } from "@/content/guides";
 import { serviceLinks } from "@/content/links";
 import { absoluteUrl, pageMetadata, SITE_URL } from "@/lib/seo";
@@ -55,7 +56,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
         intro={
           <>
             <p>{guide.intro}</p>
-            <p className="mt-3 text-[14px] text-[#5b6e7a]">Updated {fmt(guide.updated)} · Reviewed by the Filing360 tax & compliance team</p>
+            <ReviewedBy className="mt-3 text-[14px] text-[#5b6e7a]" suffix={`· Updated ${fmt(guide.updated)}`} />
           </>
         }
       />

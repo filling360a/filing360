@@ -8,6 +8,7 @@ export const metadata: Metadata = { title: "Sign in" };
 const NOTICES: Record<string, string> = {
   "no-access": "Your account doesn't have admin access. Ask an admin to assign you a role.",
   "link-expired": "That link has expired or was already used. Request a new one.",
+  "invite-expired": "That invite link expired (links are valid for 15 minutes). Ask an admin to resend your invite from Team.",
 };
 
 export default async function LoginPage({ searchParams }: PageProps<"/admin/login">) {

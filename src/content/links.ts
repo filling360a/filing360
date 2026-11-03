@@ -128,5 +128,10 @@ export const KEY = {
   opcCompliance: "mca/opc-compliance",
   inc20a: "mca/commencement-inc-20a",
   accounting: "accounting/accounting-bookkeeping",
-  consultation: "consultation/expert-consultation",
+  funds: "funds/cma-report",
+  cmaReport: "funds/cma-report",
+  tevReport: "funds/tev-report",
+  pitchDeck: "funds/pitch-deck-for-startup",
+  /** @deprecated Use `funds` — kept for older call sites. */
+  consultation: "funds/cma-report",
 } as const;

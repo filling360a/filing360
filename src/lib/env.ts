@@ -12,12 +12,18 @@ export const env = {
     read("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY") ?? read("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
   supabaseSecretKey: read("SUPABASE_SECRET_KEY") ?? read("SUPABASE_SERVICE_ROLE_KEY"),
   resendApiKey: read("RESEND_API_KEY"),
-  emailFrom: read("EMAIL_FROM") ?? "Filing360 <hello@filing360.in>",
-  emailReplyTo: read("EMAIL_REPLY_TO"),
-  leadNotifyTo: (read("LEAD_NOTIFY_EMAILS") ?? "")
-    .split(",")
-    .map((e) => e.trim())
-    .filter(Boolean),
+  emailFrom: read("EMAIL_FROM") ?? "Filingedge360 <noreply@filingedge360.com>",
+  emailReplyTo: read("EMAIL_REPLY_TO") ?? "support@filingedge360.com",
+  /** Admin inboxes for new-lead alerts. Falls back to support@ so alerts still send. */
+  leadNotifyTo: (() => {
+    const listed = (read("LEAD_NOTIFY_EMAILS") ?? "")
+      .split(",")
+      .map((e) => e.trim())
+      .filter(Boolean);
+    if (listed.length) return listed;
+    const fallback = read("EMAIL_REPLY_TO") ?? "support@filingedge360.com";
+    return [fallback];
+  })(),
   get ipHashSalt() {
     const salt = read("IP_HASH_SALT");
     if (salt) return salt;

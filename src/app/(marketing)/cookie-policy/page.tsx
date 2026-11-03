@@ -4,9 +4,10 @@ import { company } from "@/content/company";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Cookie Policy",
+  title: "Cookie Policy — How Filing360 Uses Cookies",
   description: "The cookies and similar technologies Filing360 uses, what each one does, how long it lasts, and how to change your choice.",
   path: "/cookie-policy",
+  absoluteTitle: true,
 });
 
 const COOKIES = [

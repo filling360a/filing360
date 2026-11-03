@@ -267,7 +267,7 @@ export function Proof() {
                 <span aria-hidden>→</span>
               </a>
               <a
-                href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                href={`tel:${siteConfig.contact.phoneTel}`}
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/50 bg-transparent px-6 text-[15px] font-semibold text-white transition hover:border-white hover:bg-white/10"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ReviewedBy } from "@/components/site/ReviewedBy";
 import type { GstBlock, GstServicePage } from "@/content/gstServicePages";
 
 function H2({ children }: { children: string }) {
@@ -122,7 +123,7 @@ export function GstServiceFaqs({ page }: { page: GstServicePage }) {
           </details>
         ))}
       </div>
-      <p className="mt-4 text-[13.5px] text-[#5b6e7a]">Reviewed by Filing360 Chartered Accountants · Updated 2 November 2026</p>
+      <ReviewedBy suffix="· Updated 2 November 2026" />
     </section>
   );
 }

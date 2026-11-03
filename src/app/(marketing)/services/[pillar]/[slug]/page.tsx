@@ -50,9 +50,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
   }
   return pageMetadata({
-    title: result.service.heading,
-    description: `${result.service.tagline}${priced}`.slice(0, 300),
+    title: `${result.service.heading} Online in India | Filing360`,
+    description: `${result.service.tagline}${priced}`.slice(0, 155),
     path: serviceHref(result.pillar, result.service),
+    absoluteTitle: true,
+    keywords: [result.service.name, result.pillar.name, "Filing360", "online India"],
   });
 }
 
