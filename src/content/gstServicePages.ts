@@ -1,26 +1,9 @@
 import { GST, GST_HUB_PATH } from "./gstHub";
+import type { SeoBlock, SeoServicePage } from "./seoTypes";
 import { formatInr } from "./services";
 
-export type GstBlock =
-  | { type: "p"; title?: string; body: string }
-  | { type: "list"; title: string; items: string[] }
-  | { type: "steps"; title: string; items: { title: string; body: string }[] }
-  | { type: "table"; title: string; columns: string[]; rows: string[][]; note?: string };
-
-export type GstServicePage = {
-  slug: string;
-  metaTitle: string;
-  metaDescription: string;
-  keywords: string[];
-  h1: string;
-  lead: string;
-  highlights: string[];
-  cta: string;
-  imageAlt: string;
-  related: { href: string; label: string }[];
-  sections: GstBlock[];
-  faqs: { q: string; a: string }[];
-};
+export type GstBlock = SeoBlock;
+export type GstServicePage = SeoServicePage;
 
 const rupee = (n: number) => formatInr(n);
 

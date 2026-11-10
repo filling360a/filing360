@@ -5,6 +5,7 @@ import { withHeadingIds } from "@/lib/blog/html";
 import type { PostCard as PostCardData } from "@/lib/blog/queries";
 import { formatDate } from "@/lib/format";
 import { siteConfig } from "@/lib/siteConfig";
+import { ArticleToc } from "./ArticleToc";
 import { CoverImage } from "./CoverImage";
 import { PostCard } from "./PostCard";
 
@@ -31,6 +32,7 @@ export function ArticleView({ post, related = [], shareUrl }: { post: ArticleDat
   const share = encodeURIComponent(shareUrl);
   const shareText = encodeURIComponent(post.title);
   const authorName = post.author?.full_name ?? `${siteConfig.brandName} Editorial Team`;
+  const showToc = toc.length >= 2;
 
   return (
     <article className="bg-white">
@@ -80,12 +82,7 @@ export function ArticleView({ post, related = [], shareUrl }: { post: ArticleDat
               </div>
             )}
 
-            {toc.length >= 3 && (
-              <details className="mb-8 rounded-xl border border-[#d7e4de] bg-[#f3f7fa] p-4 lg:hidden" open>
-                <summary className="cursor-pointer text-[15px] font-bold text-[#0f2a45]">In this article</summary>
-                <TocList toc={toc} />
-              </details>
-            )}
+            {showToc && <ArticleToc toc={toc} placement="top" />}
 
             <div className="article-body" dangerouslySetInnerHTML={{ __html: body }} />
 
@@ -127,11 +124,10 @@ export function ArticleView({ post, related = [], shareUrl }: { post: ArticleDat
 
           <aside className="mt-10 lg:mt-0">
             <div className="space-y-6 lg:sticky lg:top-24">
-              {toc.length >= 3 && (
-                <nav className="hidden rounded-xl border border-[#d7e4de] p-4 lg:block" aria-label="Table of contents">
-                  <p className="text-[14.5px] font-bold text-[#0f2a45]">In this article</p>
-                  <TocList toc={toc} />
-                </nav>
+              {showToc && (
+                <div className="hidden lg:block">
+                  <ArticleToc toc={toc} placement="aside" />
+                </div>
               )}
               <LeadForm id="blog-lead" compact source="blog" />
             </div>
@@ -148,18 +144,6 @@ export function ArticleView({ post, related = [], shareUrl }: { post: ArticleDat
         )}
       </div>
     </article>
-  );
-}
-
-function TocList({ toc }: { toc: { id: string; text: string; level: 2 | 3 }[] }) {
-  return (
-    <ol className="mt-2 space-y-1.5 text-[15px]">
-      {toc.map((item) => (
-        <li key={item.id} className={item.level === 3 ? "pl-3" : ""}>
-          <a href={`#${item.id}`} className="text-[#4a5d68] hover:text-[#0e7b5b]">{item.text}</a>
-        </li>
-      ))}
-    </ol>
   );
 }
 

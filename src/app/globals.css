@@ -333,9 +333,38 @@ select.field-lux.has-lead-icon {
 .article-body pre code { background: none; padding: 0; color: inherit; }
 .article-body hr { border: 0; border-top: 1px solid var(--line); margin: 2.2em 0; }
 .article-body img { border-radius: 0.75rem; height: auto; max-width: 100%; }
-.article-body table { border-collapse: collapse; display: block; overflow-x: auto; width: 100%; font-size: 0.95em; }
-.article-body th, .article-body td { border: 1px solid var(--line); padding: 0.5em 0.75em; text-align: left; }
-.article-body th { background: var(--background); color: var(--ink); }
+.article-body table {
+  border-collapse: collapse;
+  font-size: 0.95em;
+  margin: 0.4em 0;
+  max-width: 100%;
+  overflow: hidden;
+  table-layout: fixed;
+  width: 100%;
+}
+.article-body th,
+.article-body td {
+  border: 1px solid var(--line);
+  min-width: 3.5em;
+  padding: 0.5em 0.75em;
+  position: relative;
+  text-align: left;
+  vertical-align: top;
+}
+.article-body th { background: var(--background); color: var(--ink); font-weight: 650; }
+.article-body th > *,
+.article-body td > * { margin-top: 0; }
+.article-body .selectedCell::after {
+  background: color-mix(in srgb, var(--seal) 14%, transparent);
+  bottom: 0;
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
 .article-body p.is-editor-empty:first-child::before {
   color: #8a9ba6;
   content: attr(data-placeholder);

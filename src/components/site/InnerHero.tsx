@@ -11,6 +11,25 @@ type Mark = {
   icon: ReactNode;
 };
 
+function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
+  return (
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[13.5px] text-[#5b6e7a]">
+      {crumbs.map((crumb, i) => (
+        <span key={`${crumb.name}-${i}`} className="flex items-center gap-1.5">
+          {i > 0 ? <span aria-hidden>/</span> : null}
+          {crumb.href && i < crumbs.length - 1 ? (
+            <Link href={crumb.href} className="hover:text-[#0f2a45]">
+              {crumb.name}
+            </Link>
+          ) : (
+            <span className={i === crumbs.length - 1 ? "text-[#0f2a45]" : undefined}>{crumb.name}</span>
+          )}
+        </span>
+      ))}
+    </nav>
+  );
+}
+
 export function InnerHero({
   title,
   accent,
@@ -32,6 +51,40 @@ export function InnerHero({
   actions?: ReactNode;
   imageAlt?: string;
 }) {
+  if (art.layout === "campaign") {
+    return (
+      <section className="relative overflow-hidden bg-[#f3f7fa]">
+        <div className="mx-auto max-w-[1320px] px-5 pt-4 md:px-6 md:pt-5 lg:px-8">
+          {crumbs && crumbs.length > 0 ? <Breadcrumbs crumbs={crumbs} /> : null}
+          <h1 className="sr-only">
+            {title}
+            {accent ? ` ${accent}` : null}
+          </h1>
+        </div>
+        <div className="relative mx-auto mt-3 max-w-[1320px] overflow-hidden md:mt-4 lg:rounded-2xl lg:px-8">
+          <div className="relative aspect-[1920/630] w-full overflow-hidden bg-[#e8eef3] lg:rounded-2xl">
+            <Image
+              src={art.src}
+              alt={imageAlt || (typeof title === "string" ? title : "")}
+              fill
+              priority
+              sizes="(max-width: 1320px) 100vw, 1320px"
+              className={`object-cover ${art.object}`}
+            />
+          </div>
+        </div>
+        {(actions || form) && (
+          <div className="mx-auto max-w-[1320px] px-5 pb-5 pt-4 md:px-6 md:pb-8 md:pt-5 lg:px-8">
+            <div className="mx-auto w-full max-w-[40rem]">
+              {actions ? <div className="flex flex-wrap items-center gap-3">{actions}</div> : null}
+              {form ? <div className={actions ? "mt-5 w-full md:mt-7" : "w-full"}>{form}</div> : null}
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  }
+
   const tall = Boolean(form);
   const height = tall ? "lg:min-h-[620px]" : "lg:min-h-[400px]";
 
@@ -67,22 +120,7 @@ export function InnerHero({
               art.align === "right" ? "lg:ml-auto" : "lg:mr-auto"
             }`}
           >
-            {crumbs && crumbs.length > 0 ? (
-              <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[13.5px] text-[#5b6e7a]">
-                {crumbs.map((crumb, i) => (
-                  <span key={`${crumb.name}-${i}`} className="flex items-center gap-1.5">
-                    {i > 0 ? <span aria-hidden>/</span> : null}
-                    {crumb.href && i < crumbs.length - 1 ? (
-                      <Link href={crumb.href} className="hover:text-[#0f2a45]">
-                        {crumb.name}
-                      </Link>
-                    ) : (
-                      <span className={i === crumbs.length - 1 ? "text-[#0f2a45]" : undefined}>{crumb.name}</span>
-                    )}
-                  </span>
-                ))}
-              </nav>
-            ) : null}
+            {crumbs && crumbs.length > 0 ? <Breadcrumbs crumbs={crumbs} /> : null}
 
             <h1 className="mt-3 max-w-[22ch] text-[28px] font-bold leading-[1.14] tracking-[-0.03em] text-[#0f2a45] sm:text-[36px] md:mt-4 md:text-[42px] lg:text-[48px]">
               {title}

@@ -35,8 +35,8 @@ export const company = {
     /** Digits-only for tel: hrefs. */
     phoneTel: "+917303257128",
     /** WhatsApp Business number — digits only for wa.me (country code + number). */
-    whatsapp: "919205707889",
-    whatsappDisplay: "+91 92057 07889",
+    whatsapp: "917303257128",
+    whatsappDisplay: "+91 73032 57128",
     email: "support@filingedge360.com",
     supportEmail: "support@filingedge360.com",
     billingEmail: "accounts@filingedge360.com",

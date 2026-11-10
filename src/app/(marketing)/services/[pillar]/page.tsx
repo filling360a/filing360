@@ -4,13 +4,17 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/blog/JsonLd";
 import { GstHub } from "@/components/gst/GstHub";
 import { ServiceCard } from "@/components/services/ServiceCard";
+import { PillarSeoHub } from "@/components/services/seo/PillarSeoHub";
 import { LeadForm } from "@/components/leads/LeadForm";
 import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
 import { PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
 import { GST, GST_HUB_PATH, gstFaqs, gstHubMeta, gstPrices } from "@/content/gstHub";
+import { getPillarHub } from "@/content/hubRegistry";
 import { bannerForPillar, splitHeading } from "@/content/pageBanners";
-import { formatInr, getPillar, pillars } from "@/content/services";
+import { formatInr, getPillar, pillars, type Pillar } from "@/content/services";
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
+
+import "@/content/seoLookups";
 
 type Props = { params: Promise<{ pillar: string }> };
 
@@ -31,6 +35,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       keywords: gstHubMeta.keywords,
     });
   }
+  const hub = getPillarHub(slug);
+  if (hub) {
+    return pageMetadata({
+      title: hub.meta.title,
+      description: hub.meta.description,
+      path: hub.path,
+      absoluteTitle: true,
+      keywords: hub.meta.keywords,
+    });
+  }
   return pageMetadata({
     title: `${pillar.name} Services Online in India | Filing360`,
     description: pillar.description.slice(0, 155),
@@ -40,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-function GstPillar({ pillar }: { pillar: NonNullable<ReturnType<typeof getPillar>> }) {
+function GstPillar({ pillar }: { pillar: Pillar }) {
   return (
     <div className="bg-[#f3f7fa]">
       <JsonLd
@@ -113,11 +127,104 @@ function GstPillar({ pillar }: { pillar: NonNullable<ReturnType<typeof getPillar
   );
 }
 
+function SeoPillar({ pillar, hub }: { pillar: Pillar; hub: NonNullable<ReturnType<typeof getPillarHub>> }) {
+  const updated = new Date(`${hub.updated}T00:00:00+05:30`).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  return (
+    <div className="bg-[#f3f7fa]">
+      <JsonLd
+        data={[
+          serviceJsonLd({
+            name: hub.meta.h1,
+            description: hub.meta.description,
+            path: hub.path,
+            category: pillar.name,
+            offers: hub.packages
+              .map((row) => {
+                const digits = row.price.replace(/[^\d]/g, "");
+                const price = digits ? Number(digits) : NaN;
+                return Number.isFinite(price) && price > 0
+                  ? { name: row.name, price, description: row.includes }
+                  : null;
+              })
+              .filter((o): o is { name: string; price: number; description: string } => o !== null),
+          }),
+          faqJsonLd(hub.faqs),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: pillar.name, path: hub.path },
+          ]),
+        ]}
+      />
+      <InnerHero
+        art={bannerForPillar(pillar.slug)}
+        title={hub.meta.h1}
+        imageAlt={hub.imageAlt}
+        body={<p>{hub.heroLead}</p>}
+        crumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: pillar.name },
+        ]}
+        marks={[
+          { label: "100% online process", well: "bg-[#e3f2ed] text-[#0e7b5b]", icon: bannerMarks.check },
+          { label: "CA-backed filings", well: "bg-[#e8f2ee] text-[#0f2a45]", icon: bannerMarks.shield },
+          { label: "Due-date reminders", well: "bg-[#d4ede4] text-[#0b6550]", icon: bannerMarks.doc },
+          {
+            label: hub.priceFromLabel ?? `${pillar.services.length} services`,
+            well: "bg-[#e3f2ed] text-[#0e7b5b]",
+            icon: bannerMarks.rupee,
+          },
+        ]}
+        actions={
+          <>
+            <PrimaryButton href={hub.primaryHref}>{hub.primaryLabel}</PrimaryButton>
+            <SecondaryButton href="#pillar-lead">Talk to a CA Free</SecondaryButton>
+          </>
+        }
+        form={
+          <LeadForm
+            id="pillar-lead"
+            compact
+            source={`pillar-${pillar.slug}`}
+            title="Get a free quote"
+            submitLabel="Get free quote"
+            interestLabel="Service"
+            badge="15-min CA call · No obligation"
+          />
+        }
+      />
+      <PillarSeoHub
+        pillar={pillar}
+        updatedLabel={updated}
+        toc={hub.toc}
+        packages={hub.packages}
+        packageTitle={hub.packageTitle}
+        articleSections={hub.article}
+        faqs={hub.faqs}
+        ctaTitle={hub.ctaTitle}
+        ctaBody={hub.ctaBody}
+        ctaPrimaryHref={hub.primaryHref}
+        ctaPrimaryLabel={hub.primaryLabel}
+        whatsappMessage={hub.whatsappMessage}
+      />
+    </div>
+  );
+}
+
 export default async function PillarPage({ params }: Props) {
   const { pillar: slug } = await params;
   const pillar = getPillar(slug);
   if (!pillar) notFound();
   if (slug === "gst") return <GstPillar pillar={pillar} />;
+
+  const hub = getPillarHub(slug);
+  if (hub) return <SeoPillar pillar={pillar} hub={hub} />;
 
   const heading = splitHeading(`${pillar.name} services`);
 

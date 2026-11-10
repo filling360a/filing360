@@ -169,6 +169,62 @@ export function GstHub({ pillar }: { pillar: Pillar }) {
         </nav>
       </div>
 
+      <section id="gst-packages" className="scroll-mt-28 mx-auto max-w-[1240px] space-y-9 px-5 py-8 md:px-8 lg:space-y-12 lg:py-12">
+        <div>
+          <H2 id="packages-heading">Our GST packages</H2>
+          <P>Transparent professional fees. Government charges, where applicable, are always extra.</P>
+          <div className="mt-4 overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white">
+            <table className="w-full min-w-[640px] text-left text-[14.5px]">
+              <thead className="bg-[#eef4f1] text-[#0f2a45]">
+                <tr>
+                  <th scope="col" className="px-4 py-3 font-semibold">Package</th>
+                  <th scope="col" className="px-4 py-3 font-semibold">Includes</th>
+                  <th scope="col" className="px-4 py-3 font-semibold">Price</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#d7e4de]">
+                {packages.map((row) => (
+                  <tr key={row.name}>
+                    <td className="px-4 py-3 font-semibold text-[#0f2a45]">
+                      <Link href={row.href} className="hover:text-[#0e7b5b]">
+                        {row.name}
+                      </Link>
+                    </td>
+                    <td className="px-4 py-3 text-[#2c3f4e]">{row.includes}</td>
+                    <td className="whitespace-nowrap px-4 py-3 font-semibold text-[#0e7b5b]">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-[15.5px] leading-relaxed text-[#2c3f4e]">
+            Start your GST registration today. Talk to a Chartered Accountant free for 15 minutes.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <PrimaryButton href={GST.reg}>Get started</PrimaryButton>
+            <SecondaryButton href={whatsappLink("Hi Filing360, I need help with GST.")}>WhatsApp us</SecondaryButton>
+          </div>
+        </div>
+
+        {pillar.groups.map((group, gi) => (
+          <section key={group.name ?? gi}>
+            {group.name && (
+              <h3 className="mb-4 text-[18px] font-bold tracking-tight text-[#0f2a45] md:mb-5 md:text-[20px]">
+                {group.name}
+                <span className="ml-2 align-middle text-[13.5px] font-semibold text-[#8a9ba6]">{group.services.length}</span>
+              </h3>
+            )}
+            <ul className="rail rail-bleed grid gap-4 [--rail-item:72%] [--rail-item-sm:40%] lg:grid-cols-3 xl:grid-cols-4">
+              {group.services.map((service) => (
+                <li key={service.slug}>
+                  <ServiceCard pillar={pillar} service={service} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </section>
+
       <article className="mx-auto max-w-[800px] px-5 py-8 md:px-8 md:py-12">
         <H2 id="what-is-gst">What is GST?</H2>
         <P>
@@ -533,62 +589,6 @@ export function GstHub({ pillar }: { pillar: Pillar }) {
           Filing360 serves businesses across India online and works directly with clients in {GST_HUB_CITY} and nearby areas such as {GST_HUB_AREAS[0]} and {GST_HUB_AREAS[1]}. Whether you need GST registration in {GST_HUB_CITY}, monthly GST return filing or help with a notice from your local GST office, you get the same CA-led service, with in-person meetings available on request.
         </P>
       </article>
-
-      <section id="gst-packages" className="scroll-mt-28 mx-auto max-w-[1240px] space-y-9 px-5 pb-8 md:px-8 lg:space-y-12 lg:pb-16">
-        <div>
-          <H2 id="packages-heading">Our GST packages</H2>
-          <P>Transparent professional fees. Government charges, where applicable, are always extra.</P>
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-[#d7e4de] bg-white">
-            <table className="w-full min-w-[640px] text-left text-[14.5px]">
-              <thead className="bg-[#eef4f1] text-[#0f2a45]">
-                <tr>
-                  <th scope="col" className="px-4 py-3 font-semibold">Package</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Includes</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Price</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#d7e4de]">
-                {packages.map((row) => (
-                  <tr key={row.name}>
-                    <td className="px-4 py-3 font-semibold text-[#0f2a45]">
-                      <Link href={row.href} className="hover:text-[#0e7b5b]">
-                        {row.name}
-                      </Link>
-                    </td>
-                    <td className="px-4 py-3 text-[#2c3f4e]">{row.includes}</td>
-                    <td className="whitespace-nowrap px-4 py-3 font-semibold text-[#0e7b5b]">{row.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-4 text-[15.5px] leading-relaxed text-[#2c3f4e]">
-            Start your GST registration today. Talk to a Chartered Accountant free for 15 minutes.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <PrimaryButton href={GST.reg}>Get started</PrimaryButton>
-            <SecondaryButton href={whatsappLink("Hi Filing360, I need help with GST.")}>WhatsApp us</SecondaryButton>
-          </div>
-        </div>
-
-        {pillar.groups.map((group, gi) => (
-          <section key={group.name ?? gi}>
-            {group.name && (
-              <h3 className="mb-4 text-[18px] font-bold tracking-tight text-[#0f2a45] md:mb-5 md:text-[20px]">
-                {group.name}
-                <span className="ml-2 align-middle text-[13.5px] font-semibold text-[#8a9ba6]">{group.services.length}</span>
-              </h3>
-            )}
-            <ul className="rail rail-bleed grid gap-4 [--rail-item:72%] [--rail-item-sm:40%] lg:grid-cols-3 xl:grid-cols-4">
-              {group.services.map((service) => (
-                <li key={service.slug}>
-                  <ServiceCard pillar={pillar} service={service} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </section>
 
       <section id="gst-faqs" className="scroll-mt-28 border-t border-[#d7e4de] bg-[#eef4fb]">
         <div className="mx-auto max-w-[800px] px-5 py-10 md:px-8 md:py-14">

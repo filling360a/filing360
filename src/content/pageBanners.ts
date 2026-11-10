@@ -4,6 +4,8 @@ export type BannerArt = {
   src: string;
   align: BannerAlign;
   object: string;
+  /** Full campaign creative with copy baked in — no text overlay */
+  layout?: "campaign";
 };
 
 const DIR = "/images/otherpageshero";
@@ -21,6 +23,30 @@ const ART = {
   headset: { src: `${DIR}/fffdd1c9-200d-4f62-8b2d-8454f0a4a506.png`, align: "right", object: "object-[14%_center]" },
   tablet: { src: `${DIR}/45e07ea5-214a-48b7-8cfb-891ea07bd319.png`, align: "left", object: "object-[82%_center]" },
   desk: { src: `${DIR}/67335ffa-063b-4d92-bd37-8f1c6d5f5021.png`, align: "left", object: "object-[82%_center]" },
+  advanceTax: {
+    src: `${DIR}/advance-tax-banner.png`,
+    align: "right",
+    object: "object-center",
+    layout: "campaign",
+  },
+  taxNotice: {
+    src: `${DIR}/income-tax-notice-banner.png`,
+    align: "right",
+    object: "object-center",
+    layout: "campaign",
+  },
+  revisedReturn: {
+    src: `${DIR}/revised-return-banner.png`,
+    align: "left",
+    object: "object-center",
+    layout: "campaign",
+  },
+  updatedReturn: {
+    src: `${DIR}/updated-return-banner.png`,
+    align: "right",
+    object: "object-center",
+    layout: "campaign",
+  },
 } as const satisfies Record<string, BannerArt>;
 
 const ALL: BannerArt[] = Object.values(ART);
@@ -48,6 +74,10 @@ function pick(pool: BannerArt[], key: string) {
 const SLUG_ART: Record<string, BannerArt> = {
   "income-tax/income-tax-e-filing": ART.itr,
   "income-tax/tax-planning": ART.think,
+  "income-tax/advance-tax-calculation": ART.advanceTax,
+  "income-tax/revised-return": ART.revisedReturn,
+  "income-tax/updated-return": ART.updatedReturn,
+  "income-tax/income-tax-notice": ART.taxNotice,
   "funds/cma-report": ART.headset,
   "funds/tev-report": ART.tablet,
   "funds/pitch-deck-for-startup": ART.coupleIllu,

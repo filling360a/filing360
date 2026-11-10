@@ -2,6 +2,10 @@
 
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
+import { Table } from "@tiptap/extension-table";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableRow } from "@tiptap/extension-table-row";
 import { EditorContent, useEditor, useEditorState, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useRef, useState, type ReactNode } from "react";
@@ -33,6 +37,13 @@ export function RichTextEditor({
         link: { openOnClick: false, autolink: true, defaultProtocol: "https" },
       }),
       Image,
+      Table.configure({
+        resizable: false,
+        HTMLAttributes: { class: "blog-table" },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       Placeholder.configure({ placeholder }),
     ],
     content: initialHtml,
@@ -71,6 +82,7 @@ function Toolbar({ editor, postId }: { editor: Editor; postId?: string }) {
       ordered: e.isActive("orderedList"),
       quote: e.isActive("blockquote"),
       code: e.isActive("codeBlock"),
+      table: e.isActive("table"),
       canUndo: e.can().undo(),
       canRedo: e.can().redo(),
     }),
@@ -85,6 +97,19 @@ function Toolbar({ editor, postId }: { editor: Editor; postId?: string }) {
       return;
     }
     editor.chain().focus().extendMarkRange("link").setLink({ href: url.trim() }).run();
+  }
+
+  function insertTable() {
+    const raw = window.prompt("Table size as rows × columns (e.g. 3x3)", "3x3");
+    if (raw === null) return;
+    const match = raw.trim().toLowerCase().match(/^(\d+)\s*[x×,]\s*(\d+)$/);
+    if (!match) {
+      window.alert("Enter size like 3x3 (rows × columns).");
+      return;
+    }
+    const rows = Math.min(20, Math.max(1, Number(match[1])));
+    const cols = Math.min(10, Math.max(1, Number(match[2])));
+    editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
   }
 
   async function onImage(file: File | undefined) {
@@ -122,6 +147,18 @@ function Toolbar({ editor, postId }: { editor: Editor; postId?: string }) {
       <Tool label="Quote" active={state.quote} onClick={() => chain().toggleBlockquote().run()}>❝</Tool>
       <Tool label="Code block" active={state.code} onClick={() => chain().toggleCodeBlock().run()}>{"</>"}</Tool>
       <Tool label="Divider line" onClick={() => chain().setHorizontalRule().run()}>―</Tool>
+      <Divider />
+      <Tool label="Insert table" active={state.table} onClick={insertTable}>▦ Table</Tool>
+      {state.table && (
+        <>
+          <Tool label="Add row below" onClick={() => chain().addRowAfter().run()}>+ Row</Tool>
+          <Tool label="Add column after" onClick={() => chain().addColumnAfter().run()}>+ Col</Tool>
+          <Tool label="Delete row" onClick={() => chain().deleteRow().run()}>− Row</Tool>
+          <Tool label="Delete column" onClick={() => chain().deleteColumn().run()}>− Col</Tool>
+          <Tool label="Toggle header row" onClick={() => chain().toggleHeaderRow().run()}>Header</Tool>
+          <Tool label="Delete table" onClick={() => chain().deleteTable().run()}>✕ Table</Tool>
+        </>
+      )}
       {postId && (
         <>
           <Divider />

@@ -1,5 +1,9 @@
 /** Full GST hub page — copy from the GST launch brief, branded Filing360. */
 
+import type { HubTable, HubTocItem } from "./seoTypes";
+
+export type { HubTable, HubTocItem };
+
 export const GST_HUB_PATH = "/services/gst";
 export const GST_HUB_ALIAS = "/gst-registration-return-filing";
 export const GST_HUB_UPDATED = "2026-11-02";
@@ -85,9 +89,8 @@ export const gstPrices = {
   notice: null as number | null,
 };
 
-export type HubTocItem = { id: string; label: string };
-
 export const gstToc: HubTocItem[] = [
+  { id: "gst-packages", label: "Packages & pricing" },
   { id: "what-is-gst", label: "What is GST?" },
   { id: "gst-registration-online", label: "GST registration online" },
   { id: "gst-schemes", label: "Schemes for small businesses" },
@@ -102,11 +105,8 @@ export const gstToc: HubTocItem[] = [
   { id: "gst-compliance-tips", label: "Compliance tips" },
   { id: "why-filing360", label: "Why Filing360" },
   { id: "gst-services-in-delhi", label: "GST in Delhi" },
-  { id: "gst-packages", label: "Packages" },
   { id: "gst-faqs", label: "FAQs" },
 ];
-
-export type HubTable = { columns: string[]; rows: string[][]; note?: string };
 
 export const gstTypesTable: HubTable = {
   columns: ["Type", "Levied by", "Applies to"],

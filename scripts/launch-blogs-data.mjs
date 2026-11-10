@@ -15,6 +15,18 @@ const CONSULT = "/book-consultation";
 const PORTAL = "https://www.gst.gov.in/";
 const ITR_PORTAL = "https://www.incometax.gov.in/";
 
+
+const MCA_COMPANY = "/services/mca/company-compliance";
+const MCA_DIN = "/services/mca/din-ekyc-filing";
+const TAX_PLAN = "/services/income-tax/tax-planning";
+const TAX_IND = "/services/income-tax/itr-filing-individual";
+const ACC_BOOKS = "/services/accounting/accounting-bookkeeping";
+const ACC_MIS = "/services/accounting/mis-dashboard-for-startups";
+const ACC_IFRS = "/services/accounting/ifrs";
+const FUNDS_CMA = "/services/funds/cma-report";
+const SEC8 = "/services/startup/section-8-company";
+const TRUST = "/services/startup/trust-registration";
+
 function p(t) {
   return `<p>${t}</p>`;
 }
@@ -49,7 +61,7 @@ function cta(lead, href, label) {
 }
 
 export const posts = [
-  {
+{
     slug: "how-to-get-gst-number-online",
     title: "How to Get GST Number Online in 2026 (Step-by-Step)",
     seoTitle: "How to Get GST Number Online in 2026 (Step-by-Step)",
@@ -132,7 +144,7 @@ export const posts = [
         "File GSTR-1 and GSTR-3B every month or quarter, even if there are no sales — see " +
           a("/blog/gstr-1-vs-gstr-3b", "GSTR-1 vs GSTR-3B") +
           ".",
-        "Choose the composition scheme if eligible — read " + a("/blog/gst-composition-scheme", "GST composition scheme 2026") + ".",
+        "Choose the composition scheme if eligible — read " + a("/services/gst/gst-composition-scheme", "GST composition scheme 2026") + ".",
       ]),
       h2("A simple example"),
       p(
@@ -159,7 +171,7 @@ export const posts = [
         ["Is there any fee to get a GST number?", "No. GST registration is free on the government portal. You only pay a professional fee if you hire a consultant."],
         ["Can I apply for a GST number without a shop?", "Yes. You can use your home address with a utility bill and an NOC from the owner."],
         ["Can I have more than one GST number?", "Yes. You need a separate GSTIN in each state where you have a place of business."],
-        ["Do freelancers follow the same process?", "Yes, with the services threshold of ₹20 lakh. See " + a("/blog/gst-registration-for-freelancers", "GST for freelancers") + "."],
+        ["Do freelancers follow the same process?", "Yes, with the services threshold of ₹20 lakh. See " + a("/services/gst/gst-return-filing-freelancer", "GST for freelancers") + "."],
       ]),
       cta(
         "Need a GST number quickly?",
@@ -168,232 +180,7 @@ export const posts = [
       ),
     ].join(""),
   },
-  {
-    slug: "gst-registration-for-freelancers",
-    title: "GST for Freelancers in India 2026: Is It Mandatory?",
-    seoTitle: "GST for Freelancers in India 2026: Is It Mandatory?",
-    seoDescription:
-      "Do freelancers need GST registration? Learn the ₹20 lakh limit, GST on foreign clients, LUT, GST rate for freelancers and how to invoice correctly.",
-    excerpt:
-      "When GST for freelancers becomes mandatory, how export of services and LUT work, and what to put on Indian versus foreign invoices.",
-    focusKeyword: "GST for freelancers",
-    tags: ["gst for freelancers", "export of services", "lut", "consultants", "freelancer gst limit"],
-    category: "gst",
-    cover: "otherpageshero/thinking.png",
-    inline: "otherpageshero/f477d466-898a-47a9-ad61-3a41c70eddd6.png",
-    coverAlt: "Freelancer planning GST registration and invoices at a desk",
-    html: [
-      p(
-        "GST for freelancers is one of the most searched questions among developers, designers, writers and consultants — especially when clients sit abroad. The answer depends on your turnover and the kind of clients you serve, not on whether you call yourself a freelancer or a consultant.",
-      ),
-      h2("Key takeaways"),
-      ul([
-        "Service providers register once aggregate turnover crosses ₹20 lakh (₹10 lakh in some states).",
-        "Foreign receipts count towards that turnover.",
-        "Inter-state services do not force registration below the limit.",
-        "Once registered, an LUT lets you export without charging IGST.",
-      ]),
-      img("INLINE", "Consultant and freelancer reviewing GST invoices together"),
-      h2("The GST registration limit for freelancers"),
-      p(
-        "Freelancers supply services, so registration becomes mandatory once aggregate turnover crosses ₹20 lakh in a financial year (₹10 lakh in certain special category states). Aggregate turnover includes fees from Indian clients, receipts from foreign clients (export of services) and exempt services, if any. It excludes GST itself.",
-      ),
-      p(
-        "So a freelancer earning ₹15 lakh from foreign clients and ₹8 lakh from Indian clients has a turnover of ₹23 lakh and must register. Apply through " +
-          a(GST_REG, "GST registration") +
-          " before the 30-day clock runs out.",
-      ),
-      h2("Do inter-state clients force registration?"),
-      p(
-        "No. Unlike suppliers of goods, service providers making inter-state supplies are exempt from registration until they cross the ₹20 lakh limit. A freelancer in Pune billing a client in Delhi does not need GST below the limit.",
-      ),
-      h2("When is registration required regardless of turnover?"),
-      ul([
-        "If you supply services through an e-commerce operator that is required to collect TCS (with exemptions for small service providers under the threshold).",
-        "If you supply OIDAR services from outside India to Indian consumers.",
-      ]),
-      p(
-        "Most platforms such as Upwork or Fiverr do not by themselves make registration compulsory for Indian freelancers below the threshold, but they may ask for a GSTIN for their own compliance.",
-      ),
-      h2("GST rate for freelancers"),
-      p(
-        "Most professional services, including IT, design, consulting and marketing, attract GST at 18%. On an invoice of ₹1,00,000 to an Indian client, you would charge ₹18,000 GST (CGST + SGST for the same state, IGST for another state).",
-      ),
-      h2("GST on foreign clients: export of services"),
-      p("Services to foreign clients are zero-rated when all of these conditions are met:"),
-      ul([
-        "You are located in India and the client is outside India.",
-        "The place of supply is outside India.",
-        "Payment is received in convertible foreign exchange (or in INR where RBI permits).",
-        "You and the client are not merely establishments of the same person.",
-      ]),
-      p(
-        "You can export either by paying IGST and claiming a refund, or, more practically, by filing a Letter of Undertaking and exporting without paying GST. Read " +
-          a("/blog/lut-under-gst-export-of-services", "LUT under GST for export of services") +
-          " and " +
-          a(GST_LUT, "LUT filing") +
-          ".",
-      ),
-      h2("Benefits of GST registration for freelancers"),
-      ul([
-        "Claim input tax credit on laptops, software subscriptions, co-working rent and phone bills.",
-        "Work with large Indian companies that prefer GST-registered vendors.",
-        "Get refunds of accumulated credit on exports.",
-      ]),
-      h2("Compliance after registration"),
-      ul([
-        "Issue a tax invoice for Indian clients and an export invoice (with the LUT declaration) for foreign clients.",
-        "File GSTR-1 and GSTR-3B monthly, or quarterly under QRMP if turnover is up to ₹5 crore — " +
-          a(GST_FREELANCER, "freelancer GST return filing") +
-          " covers this.",
-        "Renew your LUT every financial year.",
-      ]),
-      h2("Invoicing Indian versus foreign clients"),
-      p(
-        "Indian clients: show GSTIN, place of supply, HSN/SAC and 18% CGST+SGST or IGST. Foreign clients under LUT: no IGST line, the LUT declaration on the invoice, and the foreign currency and equivalent INR. Raise the export invoice when the work is done, not when PayPal settles — the receipt in convertible foreign exchange is a separate condition you track in the bank advice.",
-      ),
-      h2("Place of supply for consultants"),
-      p(
-        "For B2B services to a registered Indian client, place of supply is generally the client’s location. That decides CGST+SGST versus IGST. For an unregistered Indian client, it is usually the supplier’s location. Getting this wrong is how freelancers pay the same tax twice under the other head. Keep the client’s GSTIN on file before you invoice.",
-      ),
-      h2("When optional registration still makes sense"),
-      p(
-        "Below the threshold, register if you buy laptops and software with GST and want that credit, if enterprise procurement teams refuse unregistered vendors, or if you are two or three invoices away from ₹20 lakh and do not want to scramble mid-month. Voluntary registration means the same GSTR-1 and GSTR-3B discipline as a mandatory one.",
-      ),
-      h2("What to do this week"),
-      ol([
-        "Add Indian fees and foreign receipts from 1 April. If you are over ₹20 lakh, apply now.",
-        "If you export and are already registered, file this year’s LUT before the next foreign invoice.",
-        "Standardise two invoice templates: domestic tax invoice and export invoice.",
-      ]),
-      h2("Worked scenario"),
-      p(
-        "A designer in Jaipur invoices Indian startups ₹11 lakh and US clients ₹10 lakh in a year. Aggregate turnover is ₹21 lakh, so GST for freelancers is mandatory even though more than half the work is export. She registers, files an LUT, charges 18% on Indian invoices and nil IGST on US invoices, and claims credit on Adobe and Figma. A writer in Kochi with only ₹9 lakh of foreign fees stays unregistered unless a large Indian client insists on a GSTIN.",
-      ),
-      p(
-        "Related reading: " +
-          a("/blog/how-to-get-gst-number-online", "how to get GST number online") +
-          " and " +
-          a("/blog/lut-under-gst-export-of-services", "LUT for export of services") +
-          ".",
-      ),
-      faqs([
-        ["I earn ₹12 lakh only from foreign clients. Do I need GST?", "No. Your turnover is below ₹20 lakh, so registration is optional."],
-        ["Can freelancers opt for the composition scheme?", "Service providers with turnover up to ₹50 lakh can pay 6% under Section 10(2A), but exports are not allowed under composition, so most export-focused freelancers avoid it."],
-        ["Is GST charged on payments received through PayPal?", "If the conditions for export are met and you have an LUT, you charge no GST on the invoice."],
-      ]),
-      cta("Freelancer with growing income?", CONSULT, "Talk to a Filing360 CA about GST, LUT and monthly returns"),
-    ].join(""),
-  },
-  {
-    slug: "gst-composition-scheme",
-    title: "GST Composition Scheme 2026: Eligibility, Rates, Pros & Cons",
-    seoTitle: "GST Composition Scheme 2026: Eligibility, Rates, Pros & Cons",
-    seoDescription:
-      "Complete guide to the GST composition scheme: ₹1.5 crore limit, 1%, 5% and 6% rates, who can opt, CMP-02, CMP-08, GSTR-4, and pros and cons.",
-    excerpt:
-      "Who can opt for the GST composition scheme, the 1%, 5% and 6% rates, CMP-08 and GSTR-4 due dates, and when the regular scheme is better.",
-    focusKeyword: "GST composition scheme",
-    tags: ["composition scheme", "cmp-08", "gstr-4", "composition dealer", "gst rates"],
-    category: "gst",
-    cover: "otherpageshero/45e07ea5-214a-48b7-8cfb-891ea07bd319.png",
-    inline: "otherpageshero/bfe4f45b-e65b-41db-a592-8fce7b9ea822.png",
-    coverAlt: "Small business owner comparing GST composition scheme tax on a tablet",
-    html: [
-      p(
-        "The GST composition scheme is designed for small businesses that want lower tax and simpler compliance. Instead of charging GST on every invoice and filing monthly returns, a composition dealer pays a small fixed percentage of turnover and files one statement every quarter.",
-      ),
-      h2("Key takeaways"),
-      ul([
-        "Manufacturers, traders and restaurants can opt up to ₹1.5 crore turnover; service providers up to ₹50 lakh.",
-        "You issue a bill of supply, not a tax invoice, and cannot collect GST from customers.",
-        "No input tax credit, and generally no inter-state sale of goods.",
-        "CMP-08 is due on the 18th after each quarter; GSTR-4 is due 30 April.",
-      ]),
-      img("INLINE", "Illustration of GST returns and rupee filings on a laptop"),
-      h2("Who can opt for the GST composition scheme?"),
-      table(
-        ["Category", "Turnover limit (previous FY)", "Tax rate (CGST + SGST)"],
-        [
-          ["Manufacturers", "₹1.5 crore (₹75 lakh in special category states)", "1%"],
-          ["Traders", "₹1.5 crore (₹75 lakh in special category states)", "1% of taxable turnover"],
-          ["Restaurants not serving alcohol", "₹1.5 crore (₹75 lakh in special category states)", "5%"],
-          ["Service providers and mixed suppliers", "₹50 lakh", "6%"],
-        ],
-      ),
-      h2("Who cannot opt?"),
-      ul([
-        "Businesses making inter-state supplies of goods",
-        "Manufacturers of notified goods such as ice cream, pan masala and tobacco products",
-        "Casual taxable persons and non-resident taxable persons",
-        "Suppliers of goods through e-commerce operators that collect TCS (limited relaxations exist for small suppliers)",
-        "Suppliers of goods not taxable under GST",
-      ]),
-      h2("Example: how much tax will you save?"),
-      p(
-        "A kirana store with annual sales of ₹1 crore pays 1% = ₹1,00,000 under composition. Under the regular scheme it would charge 5% or 18% depending on items and pay tax after input credit, plus spend more on monthly compliance. For B2C retailers with thin margins, composition often works out cheaper. B2B sellers usually stay regular so their buyers can claim credit.",
-      ),
-      h2("Rules every composition dealer must follow"),
-      ul([
-        "Issue a bill of supply, not a tax invoice, and do not collect GST from customers.",
-        "Write “Composition taxable person, not eligible to collect tax on supplies” on bills and the signboard.",
-        "No input tax credit on purchases.",
-        "Pay tax under reverse charge where applicable, at normal rates.",
-      ]),
-      h2("Returns under the composition scheme"),
-      table(
-        ["Return", "Purpose", "Due date"],
-        [
-          ["CMP-08", "Quarterly statement and tax payment", "18th of the month after the quarter"],
-          ["GSTR-4", "Annual return", "30 April after the financial year"],
-        ],
-      ),
-      p("Filing360 files these on " + a(GST_COMPOSITION, "composition GST return filing") + " if you would rather not track the calendar yourself."),
-      h2("How to opt in and out"),
-      ul([
-        "Existing taxpayers: file Form GST CMP-02 before the start of the financial year.",
-        "New registrants: select composition in Form GST REG-01 when you " + a(GST_REG, "apply for GST registration") + ".",
-        "To leave voluntarily: file Form GST CMP-04. You must leave automatically once turnover crosses the limit, and file CMP-04 within 7 days.",
-      ]),
-      h2("Pros and cons"),
-      table(
-        ["Pros", "Cons"],
-        [
-          ["Low tax rate on turnover", "No input tax credit"],
-          ["Quarterly instead of monthly returns", "No inter-state sale of goods"],
-          ["Simpler accounts", "B2B buyers cannot claim credit, so you may lose business customers"],
-        ],
-      ),
-      p("Compare this with regular " + a("/blog/gstr-1-vs-gstr-3b", "GSTR-1 and GSTR-3B") + " before you opt in."),
-      h2("When composition is a bad fit"),
-      p(
-        "Skip composition if more than a slice of your sales is B2B — your buyer cannot take credit, so they will ask for a discount equal to the GST they just lost. Skip it if you will sell to another state, list goods on a TCS marketplace, or already hold large GST on purchases (rent, stock, equipment) that you would rather credit. A restaurant at 5% can still be right; a growing D2C brand usually is not.",
-      ),
-      h2("Bill of supply, in practice"),
-      p(
-        "The bill of supply shows value but not GST. Print the composition declaration on every copy and on the signboard. If you accidentally issue a tax invoice and collect GST, you still have to deposit that tax and you can create a mismatch for the buyer. Train whoever raises bills before the first sale of the year.",
-      ),
-      h2("What to do this week"),
-      ol([
-        "Estimate last year’s turnover and this year’s mix of B2C versus B2B.",
-        "If you want composition from 1 April, CMP-02 has to be in before the year starts.",
-        "If you are already in and approaching the limit, plan CMP-04 and stock-credit before you cross it.",
-      ]),
-      h2("Worked scenario"),
-      p(
-        "Two partners run a neighbourhood bakery at ₹90 lakh turnover, almost all walk-in. Composition at 5% (restaurant) or 1% (if classified as traders of goods) is the conversation to have with a CA using actual HSN and whether they serve from the premises. If they start supplying other cities through a TCS marketplace, composition usually ends. Meanwhile a B2B packaging supplier at the same turnover stays on the regular GST composition scheme alternative — regular GSTR-1 and GSTR-3B — because their buyers need credit.",
-      ),
-      p("Related reading: " + a("/blog/how-to-get-gst-number-online", "how to get GST number online") + " and " + a("/blog/gstr-1-vs-gstr-3b", "GSTR-1 vs GSTR-3B") + "."),
-      faqs([
-        ["Can a composition dealer sell on Amazon?", "Generally no, because suppliers of goods through e-commerce operators collecting TCS cannot opt for composition, subject to the limited relaxations notified for small suppliers."],
-        ["Can I switch back to the regular scheme mid-year?", "Yes, by filing CMP-04. You can then claim credit on stock held on that date."],
-        ["What if I miss the CMP-08 due date?", "Interest at 18% applies on late tax, plus late fee for GSTR-4."],
-        ["Can I claim ITC on stock when I leave composition?", "Yes, on stock, semi-finished and finished goods held on the day you switch to the regular scheme, subject to the conditions in the GST rules."],
-      ]),
-      cta("Not sure composition suits you?", CONSULT, "Book a free consultation and we will compare both schemes"),
-    ].join(""),
-  },
-  {
+{
     slug: "gstr-1-vs-gstr-3b",
     title: "GSTR-1 vs GSTR-3B: Difference, Due Dates & Mistakes",
     seoTitle: "GSTR-1 vs GSTR-3B: Difference, Due Dates & Mistakes",
@@ -477,7 +264,7 @@ export const posts = [
           a("/blog/how-to-reply-gst-notice", "GST notice reply") +
           ".",
       ),
-      p("Related reading: " + a("/blog/gstr-9-gstr-9c-annual-return", "GSTR-9 due date for FY 2025-26") + " and " + a("/blog/gst-composition-scheme", "GST composition scheme") + "."),
+      p("Related reading: " + a("/blog/gstr-9-gstr-9c-annual-return", "GSTR-9 due date for FY 2025-26") + " and " + a("/services/gst/gst-composition-scheme", "GST composition scheme") + "."),
       p(
         "If you want the 11th and 20th off your plate, Filing360 reconciles books to GSTR-1 and GSTR-2B, files both returns, and pings you on WhatsApp before each due date. That is the practical way to keep GSTR-1 vs GSTR-3B from becoming a notice. See " +
           a(GST_RETURNS, "GST return filing") +
@@ -492,7 +279,7 @@ export const posts = [
       cta("Tired of tracking due dates?", GST_RETURNS, "Start GST return filing with Filing360"),
     ].join(""),
   },
-  {
+{
     slug: "gstr-9-gstr-9c-annual-return",
     title: "GSTR-9 Due Date for FY 2025-26: GSTR-9C, Late Fee",
     seoTitle: "GSTR-9 Due Date for FY 2025-26: GSTR-9C, Late Fee",
@@ -594,7 +381,7 @@ export const posts = [
       cta("Deadline is 31 December 2026.", GST_ANNUAL, "Get GSTR-9 and GSTR-9C filed with Filing360"),
     ].join(""),
   },
-  {
+{
     slug: "how-to-reply-gst-notice",
     title: "How to Reply to a GST Notice: Types & Time Limits",
     seoTitle: "How to Reply to a GST Notice: Types & Time Limits",
@@ -653,7 +440,7 @@ export const posts = [
       h2("What if the order goes against you?"),
       p(
         "You can file an appeal before the Appellate Authority within 3 months of the order, with a pre-deposit of 10% of the disputed tax. Further appeals lie with the GST Appellate Tribunal. If registration was cancelled, see " +
-          a("/blog/gst-revocation-of-cancelled-registration", "how to revoke a cancelled GST registration") +
+          a("/services/gst/gst-revocation", "how to revoke a cancelled GST registration") +
           ".",
       ),
       h2("Tips from our CAs"),
@@ -673,7 +460,7 @@ export const posts = [
         "Do not pay under protest without saying so in the reply — you may lose the chance to contest.",
         "Do not file a one-line “we will look into it”. That is not a reply in law.",
         "Do not miss REG-18 if the notice is REG-17; cancellation follows quickly, and then you need " +
-          a("/blog/gst-revocation-of-cancelled-registration", "GST revocation") +
+          a("/services/gst/gst-revocation", "GST revocation") +
           ".",
       ]),
       h2("What to do today"),
@@ -685,7 +472,7 @@ export const posts = [
       h2("Worked scenario"),
       p(
         "A manufacturer gets DRC-01C because March GSTR-3B claimed a ₹4 lakh invoice the supplier filed only in April’s GSTR-1. The GST notice reply is: here is the invoice, here is April 2B where it appeared, we will not claim it twice. Paying first and explaining later is optional if the credit was simply early; paying is mandatory if the invoice is fake or blocked. A REG-17 for six months of non-filing is a different letter — file the returns, then REG-18, or you will be on the " +
-          a("/blog/gst-revocation-of-cancelled-registration", "GST revocation") +
+          a("/services/gst/gst-revocation", "GST revocation") +
           " path.",
       ),
       p("Related reading: " + a("/blog/gstr-1-vs-gstr-3b", "GSTR-1 vs GSTR-3B") + "."),
@@ -697,221 +484,7 @@ export const posts = [
       cta("Received a GST notice?", CONSULT, "Share it with Filing360 — we review it and draft a complete GST notice reply"),
     ].join(""),
   },
-  {
-    slug: "gst-revocation-of-cancelled-registration",
-    title: "GST Revocation of Cancelled Registration (REG-21)",
-    seoTitle: "GST Revocation of Cancelled Registration (REG-21)",
-    seoDescription:
-      "If your GST registration was cancelled, learn GST revocation in Form REG-21, the 90-day time limit, documents, pending returns and next steps.",
-    excerpt:
-      "Why GSTINs get cancelled, how GST revocation in REG-21 restores the same number, and what to do if the 90-day window has closed.",
-    focusKeyword: "GST revocation",
-    tags: ["gst revocation", "reg-21", "gst cancellation", "restore gstin", "suo motu cancellation"],
-    category: "gst",
-    cover: "otherpageshero/aac5bb7c-91ab-4304-ac87-9e4596a835c6.png",
-    inline: "otherpageshero/67335ffa-063b-4d92-bd37-8f1c6d5f5021.png",
-    coverAlt: "Professional holding documents after a successful GST revocation",
-    html: [
-      p(
-        "GST revocation is how you restore a GSTIN the officer cancelled — usually because returns were not filed for a few months. A cancelled registration stops tax invoices, blocks e-way bills and can suspend marketplace listings. A registration cancelled by the officer can usually be restored.",
-      ),
-      h2("Key takeaways"),
-      ul([
-        "Revocation keeps the same GSTIN; a fresh registration issues a new one.",
-        "Apply in Form GST REG-21 within 90 days of the cancellation order (extendable).",
-        "File all pending returns, with tax, interest and late fees, before you apply.",
-        "Revocation is not available if you applied for cancellation yourself.",
-      ]),
-      img("INLINE", "Deadline reminder for GST revocation within 90 days"),
-      h2("Why GST registrations get cancelled"),
-      ul([
-        "Returns not filed for six consecutive months (two quarters for composition dealers)",
-        "Business not found at the registered address during verification",
-        "Invoices issued without actual supply of goods or services",
-        "ITC claimed in excess of GSTR-2B",
-        "Registration obtained by fraud or misstatement",
-      ]),
-      h2("Revocation vs fresh registration"),
-      table(
-        ["Point", "Revocation", "Fresh registration"],
-        [
-          ["GSTIN", "Same GSTIN restored", "New GSTIN issued"],
-          ["Pending returns", "Must be filed first", "Old liabilities still remain"],
-          ["Business continuity", "Customers, marketplaces and ITC chain unaffected", "Contracts and listings need updating"],
-        ],
-      ),
-      p(
-        "If you applied for cancellation yourself, you take a fresh registration instead, and may still need " +
-          a(GST_GSTR10, "GSTR-10") +
-          " for closure. Officer-led cancellation is the case for " +
-          a(GST_REVOKE, "GST revocation") +
-          ".",
-      ),
-      h2("Time limit"),
-      p(
-        "Apply in Form GST REG-21 within 90 days from the date the cancellation order was served. This can be extended by up to 180 more days by senior officers on showing sufficient cause.",
-      ),
-      h2("Step-by-step GST revocation process"),
-      ol([
-        "File all pending returns up to the date of cancellation, with tax, interest and late fees.",
-        "Log in to the GST portal and go to Services → Registration → Application for Revocation of Cancelled Registration.",
-        "Fill Form REG-21 with the reason for revocation and upload supporting documents.",
-        "Submit with DSC or EVC.",
-        "If satisfied, the officer restores the GSTIN in Form REG-22.",
-        "If a notice is issued in REG-23, reply in REG-24 within 7 working days — the same discipline as a " +
-          a("/blog/how-to-reply-gst-notice", "GST notice reply") +
-          ".",
-      ]),
-      h2("If revocation is rejected or time has run out"),
-      ul([
-        "File an appeal before the Appellate Authority within 3 months of the rejection or cancellation order.",
-        "If no remedy remains, apply for a fresh registration, but old liabilities still have to be cleared.",
-      ]),
-      h2("What to attach with REG-21"),
-      p(
-        "Officers want to see that the defect is cured. Attach challans and filed-return acknowledgements for every pending period, a short letter explaining why returns slipped (illness, accountant change, portal issues — with dates), and proof that the business still exists at the registered address (utility bill, rent agreement, photographs). If cancellation followed a REG-17 you never answered, say so and attach the " +
-          a("/blog/how-to-reply-gst-notice", "GST notice reply") +
-          " you should have filed.",
-      ),
-      h2("Marketplace and banking fallout"),
-      p(
-        "Amazon, Flipkart and many payment aggregators freeze GSTIN-based listings when the portal shows cancelled. Restoration of the same GSTIN is why revocation beats a new number: you are not renegotiating every vendor code. Tell marketplaces the ARN as soon as REG-21 is filed, then send REG-22 when it comes through.",
-      ),
-      h2("What to do this week"),
-      ol([
-        "Read the cancellation order: officer-initiated versus your own application.",
-        "If it is officer-initiated and you are inside 90 days, file every pending return first, then REG-21.",
-        "If the window has closed, speak to a CA the same day about appeal versus a fresh GST registration so you do not lose more trading days.",
-      ]),
-      h2("Worked scenario"),
-      p(
-        "A seller misses two quarters of composition returns. The officer cancels the GSTIN. Listings freeze. Because the order is suo motu, GST revocation in REG-21 is available for 90 days. They file the pending CMP-08s with late fee, attach rent proof, and get REG-22. A second seller who themselves filed cancellation cannot revoke — they take a new GSTIN and update every marketplace, which is why you should not cancel in a panic if you still trade.",
-      ),
-      p("Related reading: " + a("/blog/how-to-reply-gst-notice", "how to reply to a GST notice") + " and " + a(GST_GSTR10, "GSTR-10 filing") + "."),
-      h2("How Filing360 handles revocation"),
-      p(
-        "We list every pending period, compute tax, interest and late fee, file the returns, draft REG-21 with address proof and a dated explanation, submit with DSC/EVC, and watch for REG-23. If the officer asks for more, we reply in REG-24 inside 7 working days. The aim is REG-22 and the same GSTIN, not a scramble for a new number. Start at " +
-          a(GST_REVOKE, "GST revocation") +
-          ". Do not issue tax invoices on a cancelled GSTIN while you wait — that creates a second problem on top of the first.",
-      ),
-      faqs([
-        ["Can I do business while my GSTIN is cancelled?", "You cannot issue tax invoices or collect GST until the registration is restored."],
-        ["Will I lose ITC during cancellation?", "ITC on supplies during the cancellation period can be a problem; restore the registration as early as possible."],
-        ["Do I need to file GSTR-10 if I am applying for revocation?", "No. GSTR-10 applies when you are closing the registration, not restoring it."],
-        ["Does revocation restore e-way bills and e-invoicing immediately?", "Once REG-22 is issued the GSTIN is active again. Marketplaces and e-invoicing IRPs can take a day to refresh. Keep the REG-22 PDF ready for their support teams."],
-        ["What if cancellation was for fraud?", "Revocation is harder. Officers can reject REG-21 if they believe registration was obtained by fraud or used to pass fake credit. Get a CA on the file before you apply, and do not keep trading on the cancelled GSTIN."],
-      ]),
-      cta("GSTIN cancelled?", GST_REVOKE, "Restore GST registration with Filing360"),
-    ].join(""),
-  },
-  {
-    slug: "lut-under-gst-export-of-services",
-    title: "LUT for Export of Services under GST: Steps & Validity",
-    seoTitle: "LUT for Export of Services under GST: Steps & Validity",
-    seoDescription:
-      "File a Letter of Undertaking (LUT) for export of services in Form RFD-11 to export without paying IGST. Eligibility, documents, steps and validity.",
-    excerpt:
-      "Who can file an LUT for export of services, RFD-11 steps on the GST portal, validity for the financial year, and what to print on the invoice.",
-    focusKeyword: "LUT for export of services",
-    tags: ["lut", "rfd-11", "export of services", "zero rated", "igst refund"],
-    category: "gst",
-    cover: "otherpageshero/db8c4e37-e4a2-4c8b-b9f3-8b2c718df8f5.png",
-    inline: "otherpageshero/aac5bb7c-91ab-4304-ac87-9e4596a835c6.png",
-    coverAlt: "Exporter preparing an LUT for export of services on a laptop",
-    html: [
-      p(
-        "An LUT for export of services lets you invoice foreign clients without paying IGST upfront, so working capital is not stuck in refunds. Exports are zero-rated under GST. A Letter of Undertaking is the practical way most IT companies, agencies and freelancers use that benefit.",
-      ),
-      h2("Key takeaways"),
-      ul([
-        "File Form GST RFD-11 on the GST portal; it is usually accepted immediately.",
-        "An LUT is valid for one financial year — file the next one before the first export of that year.",
-        "For services, foreign exchange (or RBI-permitted INR) must arrive within RBI timelines.",
-        "Without an LUT you pay IGST first and wait for a refund.",
-      ]),
-      img("INLINE", "Professional ready to file LUT and export invoices"),
-      h2("What is an LUT?"),
-      p(
-        "An LUT is an undertaking filed in Form GST RFD-11 in which the exporter promises to fulfil export conditions. In return, the exporter can supply goods or services abroad, or to SEZ units, without paying IGST. Filing360 files this as " +
-          a(GST_LUT, "GST LUT filing") +
-          ".",
-      ),
-      h2("Who can file an LUT for export of services?"),
-      p(
-        "Any GST-registered exporter of goods or services can file an LUT, except a person who has been prosecuted for tax evasion of more than ₹2.5 crore. This covers IT companies, freelancers, consultants, digital agencies, manufacturers and traders. Freelancers should also read " +
-          a("/blog/gst-registration-for-freelancers", "GST for freelancers") +
-          ".",
-      ),
-      h2("Two ways to export under GST"),
-      table(
-        ["Option", "How it works", "Cash flow impact"],
-        [
-          ["With LUT", "No IGST charged on export invoice", "No blocked funds"],
-          ["Without LUT", "Pay IGST on export, then claim a refund", "Funds blocked until refund"],
-        ],
-      ),
-      h2("Documents needed"),
-      ul([
-        "GSTIN and PAN",
-        "Authorised signatory details and DSC or EVC",
-        "Import Export Code (IEC) for exporters of goods",
-        "Name, address and occupation of two independent witnesses",
-      ]),
-      h2("Step-by-step: how to file an LUT online"),
-      ol([
-        "Log in to the " + a(PORTAL, "GST portal") + ".",
-        "Go to Services → User Services → Furnish Letter of Undertaking (LUT).",
-        "Select the financial year for which the LUT is being filed.",
-        "Answer the declaration questions and enter witness details.",
-        "Sign with DSC or EVC and submit. The LUT is generally accepted immediately and an ARN is generated.",
-      ]),
-      h2("Validity and conditions"),
-      ul([
-        "An LUT is valid for one financial year. File the next year’s LUT before the first export of that year, ideally by 31 March.",
-        "Goods must be exported within 3 months of the invoice date.",
-        "For services, payment must be received in convertible foreign exchange (or INR where RBI permits) within RBI timelines.",
-        "If conditions are not met, IGST becomes payable with interest.",
-      ]),
-      h2("What to write on the export invoice"),
-      p(
-        "“Supply meant for export / supply to SEZ unit or SEZ developer for authorised operations under Letter of Undertaking without payment of IGST”, along with the LUT ARN.",
-      ),
-      h2("Refund of unutilised ITC"),
-      p("Exporters under LUT can claim a refund of accumulated input tax credit through Form GST RFD-01."),
-      h2("LUT versus paying IGST — a cash example"),
-      p(
-        "An agency invoices a US client ₹10 lakh in a month. With an LUT, the invoice carries nil IGST and the ₹1.8 lakh that would have been tax stays in the current account. Without an LUT, ₹1.8 lakh goes out as IGST and comes back only after an RFD-01 refund — weeks or months later. That is why an LUT for export of services is the default once you are registered and the export tests are met.",
-      ),
-      h2("Conditions that trip people up"),
-      p(
-        "Payment must land in convertible foreign exchange (or RBI-permitted INR). A friend’s NRE account, a crypto wallet or an Indian-company group recharge does not magically make it an export. The client must not be merely your own foreign branch. File the next year’s LUT before 1 April if you will invoice in April — an LUT is not automatic.",
-      ),
-      h2("What to do this week"),
-      ol([
-        "If you are GST-registered and already exporting, confirm this FY’s LUT ARN exists.",
-        "Put the LUT declaration and ARN on every export invoice template.",
-        "If you are not registered yet but foreign receipts plus Indian fees will cross ₹20 lakh, register first, then file the LUT — see " +
-          a("/blog/gst-registration-for-freelancers", "GST for freelancers") +
-          ".",
-      ]),
-      h2("Worked scenario"),
-      p(
-        "A Pune SaaS firm invoices Ireland on the 5th of each month. They file the LUT on 28 March so 1 April invoices are covered. The invoice quotes the ARN and the zero-rated declaration. Bank advice in USD hits within RBI time. A freelancer who files the LUT in August cannot cover April–July exports with that LUT — those months need IGST-and-refund or a harder conversation if they already issued nil-tax invoices. That is the operational meaning of LUT for export of services.",
-      ),
-      p("Related reading: " + a("/blog/gst-registration-for-freelancers", "GST for freelancers") + " and " + a(GST_LUT, "LUT filing") + "."),
-      p(
-        "Filing360 files Form RFD-11 the same day we have GSTIN, signatory and two witnesses, then puts the ARN on your export invoice template. If you also have unutilised ITC, we line up RFD-01. That is the full LUT for export of services workflow, not just a portal click.",
-      ),
-      faqs([
-        ["Is LUT mandatory for exporters?", "No, but without it you must pay IGST first and wait for a refund."],
-        ["Can an LUT be filed after exports have started?", "Yes, it can be filed later in the year, but exports made before filing will not be covered."],
-        ["Do freelancers on Upwork need an LUT?", "If you are GST-registered and export services, an LUT lets you invoice foreign clients without GST."],
-        ["Do I need IEC to file an LUT for services?", "IEC is essential for goods exporters. Pure service exporters file LUT with GSTIN, signatory and witnesses. Keep bank FIRCs; they prove the foreign-exchange condition."],
-      ]),
-      cta("Exporting services or goods?", GST_LUT, "File your LUT with Filing360"),
-    ].join(""),
-  },
-  {
+{
     slug: "belated-revised-updated-itr",
     title: "Belated ITR for FY 2025-26: Revised & ITR-U Options",
     seoTitle: "Belated ITR for FY 2025-26: Revised & ITR-U Options",
@@ -1018,118 +591,289 @@ export const posts = [
     ].join(""),
   },
   {
-    slug: "proprietorship-vs-partnership-vs-llp-vs-private-limited",
-    title: "Best Business Structure in India: Pvt Ltd vs LLP vs Others",
-    seoTitle: "Best Business Structure in India: Pvt Ltd vs LLP vs Others",
-    seoDescription:
-      "Compare the best business structure in India — proprietorship, partnership, LLP and private limited company: liability, tax, compliance, cost and funding.",
-    excerpt:
-      "Side-by-side look at proprietorship, partnership, LLP and private limited company so you pick the best business structure in India before you incorporate.",
-    focusKeyword: "best business structure in India",
-    tags: ["private limited", "llp", "proprietorship", "partnership", "company registration"],
-    category: "company-registration",
-    cover: "hero/start.png",
-    inline: "otherpageshero/150b9957-9a1d-4b30-925b-e321393e110d.png",
-    coverAlt: "Founders choosing the best business structure in India",
+    slug: "advance-tax-due-dates",
+    title: "Advance Tax Due Dates, Calculation and Interest (with Example)",
+    seoTitle: "Advance Tax Due Dates, Calculation & Interest (with Example)",
+    seoDescription: "Advance tax due dates for 15 June, 15 September, 15 December and 15 March, how to calculate instalments, and interest under Sections 234B and 234C.",
+    excerpt: "Pay tax as you earn: instalment calendar, calculation steps, exemptions and interest for shortfall — explained by CAs.",
+    focusKeyword: "advance tax due dates",
+    tags: ["advance tax", "234B", "234C", "tax planning", "instalments"],
+    category: "income-tax",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Advance tax calendar and calculation worksheet",
     html: [
-      p(
-        "The best business structure in India at the start decides your liability, tax rate, compliance cost and ability to raise funds. Many founders pick the cheapest option and later spend more converting. This guide compares proprietorship, partnership, LLP and private limited company.",
-      ),
-      h2("Key takeaways"),
-      ul([
-        "Proprietorship is cheapest to start but has unlimited personal liability.",
-        "LLP gives limited liability with lighter MCA filings than a company.",
-        "Private limited is the default if you want investors or ESOPs.",
-        "GST registration is separate from company or LLP incorporation.",
-      ]),
-      img("INLINE", "Founders comparing LLP and private limited company options"),
-      h2("Quick comparison"),
-      table(
-        ["Feature", "Proprietorship", "Partnership", "LLP", "Private Limited Company"],
-        [
-          ["Governing law", "No specific law", "Indian Partnership Act, 1932", "LLP Act, 2008", "Companies Act, 2013"],
-          ["Minimum members", "1", "2", "2 designated partners", "2 directors and 2 shareholders"],
-          ["Liability", "Unlimited", "Unlimited", "Limited", "Limited"],
-          ["Separate legal entity", "No", "No", "Yes", "Yes"],
-          ["Income tax", "Slab rates of owner", "30% flat", "30% flat", "22% or 25% (plus surcharge and cess)"],
-          ["Annual compliance", "Low", "Low", "Moderate", "High"],
-          ["Fundraising from investors", "Not possible", "Difficult", "Limited", "Easiest"],
-          ["Statutory audit", "Only if tax audit limits apply", "Only if tax audit limits apply", "If turnover above ₹40 lakh or contribution above ₹25 lakh", "Mandatory every year"],
-        ],
-      ),
-      h2("Sole proprietorship"),
-      p(
-        "Best for freelancers, small traders and local service businesses starting out. Registration is done through GST, Udyam (MSME) or a shop and establishment licence. It is cheap and simple, but the owner is personally liable for all business debts. See " +
-          a(PROP, "proprietorship registration") +
-          ".",
-      ),
-      h2("Partnership firm"),
-      p(
-        "Best for small family businesses with two or more owners. A partnership deed is drafted and registered with the Registrar of Firms. It is easy to form, but all partners have unlimited liability and changes in partners can be disruptive. See " +
-          a(PARTNER, "partnership registration") +
-          ".",
-      ),
-      h2("Limited Liability Partnership (LLP)"),
-      p(
-        "Best for professionals, consultancies and small businesses that want limited liability with lighter compliance. An LLP is registered with the Ministry of Corporate Affairs. Annual filings include Form 8 (statement of accounts) and Form 11 (annual return). It cannot issue shares, which limits investor funding. See " +
-          a(LLP, "LLP registration") +
-          ".",
-      ),
-      h2("Private limited company"),
-      p(
-        "Best for startups planning to scale, raise funds or offer ESOPs. A company is incorporated through the SPICe+ form on the MCA portal. It needs a board, a statutory audit and annual filings such as AOC-4 and MGT-7, but offers the strongest credibility with banks, investors and large clients. See " +
-          a(PVT, "private limited company registration") +
-          ".",
-      ),
-      h2("How to choose the best business structure in India"),
-      table(
-        ["If you…", "Choose"],
-        [
-          ["Are testing an idea alone with low risk", "Proprietorship"],
-          ["Run a family or friends business with low risk", "Partnership"],
-          ["Want limited liability and low compliance", "LLP"],
-          ["Plan to raise funds or grow fast", "Private limited company"],
-        ],
-      ),
-      p(
-        "Once the entity exists you still apply separately for GST — start with " +
-          a("/blog/how-to-get-gst-number-online", "how to get GST number online") +
-          ".",
-      ),
-      h2("Cost and time, roughly"),
-      p(
-        "A proprietorship can be trading with GST and Udyam in days. A partnership needs a deed and Registrar of Firms. An LLP or private limited company goes through SPICe+/FiLLiP on MCA, DSCs, name approval and PAN/TAN — typically a couple of weeks when documents are clean, longer if the name is rejected. Professional fees and government fees are separate; Filing360 shows both before you pay.",
-      ),
-      h2("Funding, ESOPs and banks"),
-      p(
-        "Angel and VC term sheets almost always require a private limited company. ESOPs need company shares. Current-account and merchant underwriting is smoother with a CIN than with a proprietorship PAN. An LLP is a strong middle path for a profitable services firm that will not raise institutional capital. Do not incorporate a company “just in case” if you will not run board minutes and annual ROC filings — that is how strike-off starts.",
-      ),
-      h2("What to do this week"),
-      ol([
-        "Write down: solo or partners, funding in 24 months, and expected profit this year.",
-        "If funding or ESOPs are on the table, shortlist a private limited company.",
-        "If not, compare proprietorship versus LLP on liability and tax with a CA, then register GST.",
-      ]),
-      h2("Worked scenario"),
-      p(
-        "Two classmates build a SaaS tool. They start as a proprietorship in one person’s PAN to “move fast”. Six months later an angel wants a cap table. They now convert: new private limited company, asset transfer, GST amendment or fresh GSTIN, customer contract assignment. Starting with the best business structure in India — here, a private limited company — would have cost more in year one and saved the conversion. A husband-wife tuition practice with no investors is the opposite case: proprietorship or partnership is enough, with GST if they cross the limit.",
-      ),
-      p(
-        "Related reading: " +
-          a(PVT, "private limited company") +
-          ", " +
-          a(LLP, "LLP registration") +
-          " and " +
-          a("/blog/how-to-get-gst-number-online", "how to get GST number") +
-          ".",
-      ),
-      faqs([
-        ["Can I convert a proprietorship into a company later?", "Yes, but it involves transferring assets, contracts and registrations, so it is easier to start with the right structure."],
-        ["Which structure pays the least tax?", "It depends on profit levels. Low profits often favour a proprietorship taxed at slab rates; higher profits often favour a company at 22% or 25%. A CA can model both."],
-        ["Is GST registration separate from company registration?", "Yes. You need to apply for GST separately once the business is set up and becomes liable."],
-        ["How many directors does a private limited company need?", "At least two directors and two shareholders. One person can be both a director and a shareholder. A single founder who wants limited liability without a second person should look at OPC instead of stretching a fake co-founder."],
-      ]),
-      cta("Starting a business?", CONSULT, "Talk to a Filing360 CA about the right structure, GST and filings"),
+      p("Advance tax means paying income tax during the year as you earn, instead of one lump sum at the end. If you skip instalments, interest under Sections 234B and 234C adds up quickly. Start with Filing360’s " + a(TAX_PLAN, "tax planning service") + " to project income and lock each due date."),
+      h2("When advance tax applies"),
+      ul(["Tax payable for the year is ₹10,000 or more after TDS and TCS.", "Resident senior citizens without business income are exempt.", "Presumptive taxpayers can pay 100% by 15 March."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("Instalment calendar"),
+      ul(["15 June — 15% of estimated tax", "15 September — 45% cumulative", "15 December — 75% cumulative", "15 March — 100%"]),
+      h2("Interest for shortfall"),
+      p("Section 234C charges interest for deferment of instalments. Section 234B applies when advance tax paid is less than 90% of assessed tax. Both are avoidable with a mid-year review."),
+      h2("Who must pay advance tax?"),
+      p("Anyone whose tax liability for the year, after TDS and TCS, is ₹10,000 or more. Common cases: business owners, professionals, freelancers, landlords, investors with capital gains, and salaried people with large other income. Resident senior citizens (60+) without business or professional income are exempt."),
+      h2("Worked example"),
+      p("Estimated tax for the year after TDS: ₹2,00,000. Pay ₹30,000 by 15 June, ₹90,000 cumulative by 15 September, ₹1,50,000 by 15 December and ₹2,00,000 by 15 March. Capital gains that arise late in the year can be covered in remaining instalments without deferment interest for earlier instalments."),
+      h2("How to pay"),
+      p("Pay through the e-filing portal’s e-Pay Tax service using Challan No. 280 with “Advance tax” as the type of payment, and keep the challan details for your return."),
+      faqs([["Can I revise estimates mid-year?", "Yes. Recalculate before each due date if income changes."], ["Does salary TDS count?", "Yes. Advance tax is only on the balance after TDS/TCS credit."]]),
+      cta("Need help with advance tax?", TAX_PLAN, "Plan my taxes with Filing360")
     ].join(""),
   },
+  {
+    slug: "old-vs-new-tax-regime",
+    title: "Old vs New Tax Regime: Which Is Better for You?",
+    seoTitle: "Old vs New Tax Regime: Which Is Better for You? (With Examples)",
+    seoDescription: "Compare old vs new tax regime for salaried taxpayers: rates, rebate, deductions, and how Filing360 picks the lower tax option every year.",
+    excerpt: "Lower slab rates versus deductions like 80C and HRA — a practical CA comparison before you file.",
+    focusKeyword: "old vs new tax regime",
+    tags: ["old tax regime", "new tax regime", "tax rebate", "80C", "ITR filing"],
+    category: "income-tax",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Old versus new tax regime comparison chart",
+    html: [
+      p("Choosing the wrong tax regime can cost thousands. Filing360’s " + a(TAX_IND, "ITR filing for individuals") + " compares both regimes on your Form 16, investments and housing numbers before we file."),
+      h2("New regime in brief"),
+      ul(["Lower slab rates and a higher rebate for resident individuals.", "Most deductions (80C, 80D, HRA, home-loan interest on self-occupied property) are not available.", "Standard deduction continues for salaried taxpayers."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("Old regime in brief"),
+      ul(["Higher rates, but Chapter VI-A deductions and many exemptions remain.", "Often better if you claim large 80C, 80D, HRA and home-loan interest."]),
+      h2("How we decide"),
+      ol(["Pull AIS, Form 16 and investment proofs.", "Compute tax under both regimes.", "File under the lower option when you are eligible to choose."]),
+      faqs([["Can salaried people switch every year?", "Yes, if they have no business income and file on time."], ["Is the new regime always better after the rebate?", "No. High deduction claimants often still win on the old regime — run both numbers."]]),
+      cta("Want both regimes calculated?", TAX_IND, "File my ITR with Filing360")
+    ].join(""),
+  },
+  {
+    slug: "income-tax-act-2025",
+    title: "Income-tax Act, 2025: What Changes for Taxpayers from April 2026",
+    seoTitle: "Income-tax Act, 2025: What Changes for Taxpayers from April 2026",
+    seoDescription: "The Income-tax Act, 2025 replaces the 1961 Act from tax year 2026-27: tax year concept, renumbered sections, and what stays the same for returns.",
+    excerpt: "A plain-English briefing on the new Act — which years still follow 1961 law, and how Filing360 files under both.",
+    focusKeyword: "Income-tax Act 2025",
+    tags: ["Income-tax Act 2025", "tax year", "ITR", "tax law India"],
+    category: "income-tax",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Income-tax Act 2025 explainer graphic",
+    html: [
+      p("From 1 April 2026, the Income-tax Act, 2025 applies for tax year 2026-27 onwards. Earlier years — including FY 2025-26 returns filed in 2026 — still follow the Income-tax Act, 1961. Filing360’s " + a(TAX_IND, "income tax team") + " applies the correct law for each year."),
+      h2("What changes"),
+      ul(["“Tax year” replaces previous year / assessment year language.", "Most sections are reorganised and renumbered.", "Rates and many concepts continue, with updates as notified in the Budget."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("What you should do"),
+      ol(["Keep FY 2025-26 records labelled under the 1961 Act.", "Expect new section references on notices for later years.", "Ask your CA which Act applies before replying to any notice."]),
+      faqs([["Do I need a new PAN?", "No. PAN and the e-filing portal continue; forms and section citations update over time."], ["Are old FAQs and articles still valid?", "For FY 2025-26 and earlier, yes. For tax year 2026-27+, check updated references."]]),
+      cta("Filing across both Acts?", TAX_IND, "Talk to a Filing360 CA")
+    ].join(""),
+  },
+  {
+    slug: "aoc-4-mgt-7-filing",
+    title: "AOC-4 and MGT-7 for FY 2025-26: Due Dates, Late Fees and Penalties",
+    seoTitle: "AOC-4 & MGT-7 Due Date for FY 2025-26, Late Fee and Penalty",
+    seoDescription: "AOC-4 is due within 30 days and MGT-7 within 60 days of the AGM. Due dates, attachments, late fees and penalties for FY 2025-26.",
+    excerpt: "The two core ROC annual filings every company must get right — timelines, forms and what Filing360 files for you.",
+    focusKeyword: "AOC-4 due date",
+    tags: ["AOC-4", "MGT-7", "ROC filing", "annual compliance", "MCA"],
+    category: "compliance",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "AOC-4 and MGT-7 ROC filing checklist",
+    html: [
+      p("AOC-4 and MGT-7 are the two main annual filings every company makes with the ROC. Filing360’s " + a(MCA_COMPANY, "company compliance plan") + " prepares financials, files both forms and tracks additional fees if anything slips."),
+      h2("Due dates"),
+      ul(["AOC-4 — within 30 days of the AGM", "MGT-7 / MGT-7A — within 60 days of the AGM", "AGM for FY 2025-26 — generally by 30 September 2026"]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("Late fees"),
+      p("MCA charges additional fees of ₹100 per day of delay on most e-forms, with no upper cap on many filings. Persistent non-filing risks penalties on officers and even strike-off."),
+      faqs([["Who files MGT-7A?", "Small companies and OPCs use MGT-7A; other companies use MGT-7."], ["Do dormant companies file?", "Dormant status has its own forms; ask before skipping AOC-4/MGT-7."]]),
+      cta("Need AOC-4 and MGT-7 filed?", MCA_COMPANY, "Get ROC compliance with Filing360")
+    ].join(""),
+  },
+  {
+    slug: "post-incorporation-compliance",
+    title: "Compliances After Incorporation of a Private Limited Company",
+    seoTitle: "Compliances After Incorporation of a Private Limited Company",
+    seoDescription: "First filings after incorporating a private limited company: INC-20A, bank account, GST, auditor, share certificates and first-year ROC calendar.",
+    excerpt: "What to do in the first 180 days after incorporation so your company stays compliant from day one.",
+    focusKeyword: "post incorporation compliance",
+    tags: ["post incorporation", "INC-20A", "private limited company", "ROC", "startup compliance"],
+    category: "compliance",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Post-incorporation compliance checklist for private limited companies",
+    html: [
+      p("Incorporation is step one. Within months you need commencement of business, share certificates, auditor appointment and a filing calendar. Filing360’s " + a(MCA_COMPANY, "MCA compliance service") + " and " + a(PVT, "private limited company registration") + " teams hand you a first-year checklist on day one."),
+      h2("First 180 days"),
+      ol(["File INC-20A (commencement of business) after depositing share capital.", "Open a current account and issue share certificates.", "Appoint the first auditor and file ADT-1 where required.", "Register for GST, PF/ESI or MSME if applicable.", "Hold board meetings and maintain minutes and registers."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("First annual cycle"),
+      ul(["Board meetings and AGM calendar", "AOC-4 and MGT-7 after the AGM", "DIR-3 KYC for every director", "Income-tax return (ITR-6) and tax audit if applicable"]),
+      faqs([["What if INC-20A is late?", "Additional fees apply and the company cannot borrow or commence business properly until filed."], ["Can Filing360 handle GST and ROC together?", "Yes — registration and ongoing compliance can sit with one CA team."]]),
+      cta("Just incorporated?", MCA_COMPANY, "Get a first-year compliance plan")
+    ].join(""),
+  },
+  {
+    slug: "dir-3-kyc",
+    title: "DIR-3 KYC: Who Must File, Late Fee and DIN Deactivation",
+    seoTitle: "DIR-3 KYC: Who Must File, Due Date, Late Fee & DIN Deactivation",
+    seoDescription: "DIR-3 KYC keeps your DIN active. Who must file, DIR-3 KYC vs KYC-Web, late fees and how to reactivate a deactivated DIN.",
+    excerpt: "Miss DIR-3 KYC and your DIN can be deactivated — here’s the filing path Filing360 uses for directors.",
+    focusKeyword: "DIR-3 KYC",
+    tags: ["DIR-3 KYC", "DIN", "director KYC", "MCA", "DIN deactivated"],
+    category: "compliance",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "DIR-3 KYC filing on the MCA portal",
+    html: [
+      p("Every director with a DIN must complete DIR-3 KYC as per MCA’s KYC cycle and whenever mobile, email or address changes. Filing360 files " + a(MCA_DIN, "DIN eKYC") + " and helps reactivate deactivated DINs."),
+      h2("DIR-3 KYC vs DIR-3 KYC-Web"),
+      ul(["DIR-3 KYC (e-form) — typically for first-time KYC or when details change.", "DIR-3 KYC-Web — web-based confirmation when personal details are unchanged, as notified by MCA."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("If DIN is deactivated"),
+      p("File the KYC form with the prescribed late fee to reactivate. Until then, the director cannot sign most MCA forms."),
+      faqs([["Is KYC needed every year?", "Follow the current MCA KYC cycle and update immediately on any contact-detail change."], ["Do LLP designated partners need it?", "Yes, DIN holders who are designated partners also complete KYC."]]),
+      cta("Need DIR-3 KYC filed?", MCA_DIN, "File DIN eKYC with Filing360")
+    ].join(""),
+  },
+  {
+    slug: "what-is-a-virtual-cfo",
+    title: "What Is a Virtual CFO? Role, Cost and When You Need One",
+    seoTitle: "What Is a Virtual CFO? Role, Cost and When You Need One",
+    seoDescription: "A Virtual CFO is a part-time finance leader for budgets, cash flow, fundraising and board reporting — without a full-time CFO salary.",
+    excerpt: "When bookkeeping is not enough: what a Virtual CFO does, how fees work, and how Filing360 layers it on clean books.",
+    focusKeyword: "what is a Virtual CFO",
+    tags: ["virtual CFO", "outsourced CFO", "cash flow", "fundraising", "MIS"],
+    category: "compliance",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Virtual CFO reviewing startup financial dashboard",
+    html: [
+      p("A Virtual CFO is an experienced finance leader who works with your business part-time for a fixed monthly fee. Filing360 pairs " + a(ACC_BOOKS, "bookkeeping") + " and " + a(ACC_MIS, "MIS dashboards") + " with CFO-level planning for growing teams."),
+      h2("What a Virtual CFO does"),
+      ul(["Budgets, forecasts and cash-flow planning", "Board and investor reporting packs", "Bank loan and fundraising support", "Control reviews and SOP guidance"]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("When you need one"),
+      ul(["Revenue is growing but cash surprises keep happening", "You are raising a round or taking a term loan", "Founders spend too much time in spreadsheets"]),
+      faqs([["Is a Virtual CFO the same as an accountant?", "No. Accountants keep books accurate. A Virtual CFO uses those numbers to plan and decide."], ["How are fees structured?", "Usually a monthly retainer based on scope — quote after a discovery call."]]),
+      cta("Curious about Virtual CFO?", ACC_BOOKS, "Talk to Filing360 about finance leadership")
+    ].join(""),
+  },
+  {
+    slug: "what-is-mis-reporting",
+    title: "What Is MIS Reporting? Monthly Packs Founders Actually Use",
+    seoTitle: "What Is MIS Reporting? Monthly Packs Founders Actually Use",
+    seoDescription: "MIS reporting turns books into decisions: P&L vs budget, cash, receivables ageing and KPIs — built monthly by Filing360 CAs.",
+    excerpt: "Stop flying blind: what belongs in a monthly MIS pack and how dashboards keep owners aligned.",
+    focusKeyword: "what is MIS reporting",
+    tags: ["MIS reporting", "management information system", "KPI dashboard", "cash flow"],
+    category: "compliance",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Monthly MIS reporting pack for business owners",
+    html: [
+      p("MIS reporting turns your books into decisions. Filing360 builds monthly packs and " + a(ACC_MIS, "live dashboards") + " so owners see profit, cash and ageing before problems grow."),
+      h2("Typical monthly MIS pack"),
+      ul(["Profit and loss with budget vs actual", "Cash flow and bank position", "Receivables and payables ageing", "Product or customer profitability", "Key ratios and KPIs"]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("MIS vs bookkeeping"),
+      p("Bookkeeping records transactions. MIS summarises them for action. You need both — messy books make useless dashboards."),
+      faqs([["How often should MIS run?", "Monthly for most SMEs; weekly flash metrics for high-growth startups."], ["Which tools do you use?", "Excel, Power BI, Zoho Analytics or Looker Studio — matched to your stack."]]),
+      cta("Want a founder-ready MIS?", ACC_MIS, "Build my MIS with Filing360")
+    ].join(""),
+  },
+  {
+    slug: "private-limited-company-registration-process",
+    title: "Private Limited Company Registration Process in India (2026)",
+    seoTitle: "Private Limited Company Registration Process in India (2026)",
+    seoDescription: "Step-by-step private limited company registration: DSC, DIN, name approval, SPICe+, MOA/AOA, PAN/TAN and post-incorporation filings.",
+    excerpt: "From name reservation to Certificate of Incorporation — the Filing360 checklist founders follow.",
+    focusKeyword: "private limited company registration process",
+    tags: ["private limited company", "SPICe+", "company registration", "MCA", "startup"],
+    category: "company-registration",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Private limited company registration process in India",
+    html: [
+      p("A private limited company is the default structure for startups that want limited liability and funding readiness. Filing360’s " + a(PVT, "private limited company registration") + " handles DSC, SPICe+ and the first compliance hand-off."),
+      h2("Step-by-step process"),
+      ol(["Obtain DSC and DIN for proposed directors.", "Reserve the company name.", "File SPICe+ with MOA, AOA, registered office proof and declarations.", "Receive Certificate of Incorporation with PAN and TAN.", "Open a bank account, issue shares and file INC-20A."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("Why founders choose Pvt Ltd"),
+      ul(["Limited liability and separate legal entity", "Easier to raise equity and ESOP talent", "Clear governance versus proprietorships"]),
+      faqs([["How long does registration take?", "Often a few working days after documents are clean; name issues are the usual delay."], ["Is GST included?", "GST is separate — we can register GST right after incorporation if you need it."]]),
+      cta("Ready to incorporate?", PVT, "Register a private limited company")
+    ].join(""),
+  },
+  {
+    slug: "section-8-vs-trust-vs-society",
+    title: "Section 8 Company vs Trust vs Society: Which Structure Fits?",
+    seoTitle: "Section 8 Company vs Trust vs Society: Which Structure Fits?",
+    seoDescription: "Compare Section 8 company, trust and society for non-profits: registration, governance, funding and compliance — choose with a CA.",
+    excerpt: "Three ways to run a non-profit in India, compared on control, funding and filings.",
+    focusKeyword: "Section 8 vs trust vs society",
+    tags: ["Section 8 company", "trust registration", "society registration", "NGO", "non profit"],
+    category: "company-registration",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Section 8 company versus trust versus society comparison",
+    html: [
+      p("Non-profits in India usually choose a Section 8 company, a public trust or a society. Filing360 registers " + a(SEC8, "Section 8 companies") + " and " + a(TRUST, "trusts") + " and explains the compliance load before you decide."),
+      h2("Quick comparison"),
+      ul(["Section 8 company — Companies Act entity, strong governance, preferred by many donors and CSR teams.", "Trust — settlor-driven, common for charitable and religious purposes; state trust laws apply.", "Society — member-based under the Societies Registration Act; democratic but paperwork-heavy in some states."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("How to choose"),
+      ol(["List funding sources (FCRA, CSR, grants, crowdfunding).", "Decide how centralised control should be.", "Check state rules and 12A/80G plans with a CA."]),
+      faqs([["Can a Section 8 pay dividends?", "No. Profits must be applied to the charitable objects."], ["Which is fastest to register?", "It depends on the state and documents; Section 8 via MCA is often predictable nationwide."]]),
+      cta("Registering a non-profit?", SEC8, "Talk to Filing360 about the right structure")
+    ].join(""),
+  },
+  {
+    slug: "what-is-a-cma-report",
+    title: "What Is a CMA Report? Bank Format Explained for Borrowers",
+    seoTitle: "What Is a CMA Report? Bank Format Explained for Borrowers",
+    seoDescription: "A CMA report presents past and projected financials in the format banks use for working capital and term loans — prepared by Filing360 CAs.",
+    excerpt: "Why lenders ask for CMA data, what Forms I–VI cover, and how we prepare bank-ready packs.",
+    focusKeyword: "what is a CMA report",
+    tags: ["CMA report", "bank loan", "working capital", "MPBF", "project finance"],
+    category: "startup",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "CMA report for bank loan assessment",
+    html: [
+      p("Banks assess working capital and term loans using CMA data. Filing360 prepares " + a(FUNDS_CMA, "CMA reports") + " in your bank’s format with projections, ratios and MPBF workings."),
+      h2("What CMA includes"),
+      ul(["Operating statements and projected P&L", "Balance sheet and ratio analysis", "Current assets / liabilities assessment", "Fund flow and assessed bank finance"]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("CMA vs DPR vs TEV"),
+      p("CMA is the financial template. A DPR is the full project story. A TEV is an independent viability opinion. Many proposals need more than one."),
+      faqs([["How long does CMA preparation take?", "Typically 7–15 working days after complete data is shared."], ["Do you guarantee sanction?", "No — we make the file bank-ready and support queries until the credit decision."]]),
+      cta("Need CMA for a loan?", FUNDS_CMA, "Get my CMA ready")
+    ].join(""),
+  },
+  {
+    slug: "ind-as-116-lease-accounting-example",
+    title: "Ind AS 116 Lease Accounting with Example & Journal Entries",
+    seoTitle: "Ind AS 116 Lease Accounting with Example & Journal Entries",
+    seoDescription: "Ind AS 116 brings most leases on balance sheet. Worked example with ROU asset, lease liability and P&L impact — by Filing360 CAs.",
+    excerpt: "A practical lease example: initial recognition, monthly entries and how EBITDA changes.",
+    focusKeyword: "Ind AS 116 example",
+    tags: ["Ind AS 116", "lease accounting", "ROU asset", "lease liability", "IFRS 16"],
+    category: "compliance",
+    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
+    coverAlt: "Ind AS 116 lease accounting example illustration",
+    html: [
+      p("Ind AS 116 requires lessees to recognise a right-of-use asset and lease liability for most leases. Filing360’s " + a(ACC_IFRS, "Ind AS / IFRS advisory") + " builds lease registers and journal entries your auditors accept."),
+      h2("Simple example"),
+      ul(["3-year office lease, annual rent ₹12 lakh paid in advance, incremental borrowing rate 10%.", "Recognise lease liability at present value of unpaid rentals; ROU asset includes initial liability and prepaid rent.", "Each period: interest on liability + depreciation on ROU (instead of straight rent expense)."]),
+      img("INLINE", "Filing360 Chartered Accountant reviewing compliance documents"),
+      h2("Why finance teams care"),
+      p("EBITDA usually rises (rent removed), while depreciation and interest increase. Debt-like lease liabilities can affect covenants — model this before signing long leases."),
+      faqs([["Are short-term leases exempt?", "Short-term and low-value leases may use practical expedients — document the policy."], ["Do we need a lease register?", "Yes. Auditors expect a complete register of contracts, terms, rates and measurements."]]),
+      cta("Need Ind AS 116 help?", ACC_IFRS, "Talk to an Ind AS expert")
+    ].join(""),
+  }
 ];

@@ -83,6 +83,9 @@ export type Pillar = {
 const EXCL_GST = "*exclusive of GST";
 const EXCL_GST_GOVT = "*exclusive of GST & govt. fees";
 const EXCL_TAXES = "*exclusive of taxes";
+const EXCL_GOVT_FEE = "*excluding Government fee";
+const EVENT_PRICE_NOTE =
+  "*final amount will be finalised after discussion with our expert and nature & size of business";
 
 /** Terms that apply to every package on the site */
 export const generalTerms = [
@@ -637,28 +640,163 @@ export const pillars: Pillar[] = [
         name: "Other income tax services",
         services: [
           {
-            slug: "tds-return-filing",
-            name: "TDS Return Filing",
-            heading: "TDS Return Filing",
+            slug: "updated-return",
+            name: "Updated Return",
+            shortName: "Updated Return (ITR-U)",
+            heading: "Updated Return Filing",
             tagline:
-              "Quarterly TDS returns prepared and filed on time, with challan reconciliation and Form 16 / 16A generation.",
-            packages: [],
+              "Missed filing your return or under-reported income? Our expert-assisted Updated Return (ITR-U) Filing Services help you voluntarily disclose omitted income, correct earlier filings, compute the additional tax payable, and file under Section 139(8A).",
+            about: {
+              title: "Missed Something in Your ITR? File an Updated Return with Confidence!",
+              body: "Whether you missed filing your return or left out income, an updated return (ITR-U) lets you put things right within the permitted time limit.",
+            },
+            packages: [
+              {
+                name: "Updated Return Filing",
+                price: 2899,
+                per: "year",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: ["Updated Filed Return", "Assisted ITR Filing", "Tax Expert Support"],
+              },
+            ],
+            notes: [
+              "*Fees vary based on the type of income you earn and the complexity of your tax situation.",
+            ],
+            featured: true,
+          },
+          {
+            slug: "revised-return",
+            name: "Revised Return",
+            heading: "Revised Return Filing",
+            tagline:
+              "Correct errors and update your tax details with ease through our expert-assisted Revised Income Tax Return (Revised ITR) Filing Services.",
+            about: {
+              title: "Filed an Incorrect ITR? Let Our Experts Make It Right!",
+              body: "Avoid unnecessary tax complications and ensure your revised return is filed accurately within the applicable due date.",
+            },
+            packages: [
+              {
+                name: "Revised Return Filing",
+                price: 2899,
+                per: "year",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: ["Revise Filed Return", "Assisted ITR Filing", "Tax Expert Support"],
+              },
+            ],
+            notes: [
+              "*Fees vary based on the type of income you earn and the complexity of your tax situation.",
+            ],
+            featured: true,
           },
           {
             slug: "income-tax-notice",
             name: "Income Tax Notice",
-            heading: "Income Tax Notice Response",
+            heading: "Tax Notice Consultation",
             tagline:
-              "Received a notice from the Income Tax Department? Our experts review it, draft the reply and file it on the e-filing portal.",
-            packages: [],
+              "Tax Notices may arise due to discrepancies, non-compliance, non-filing, defective returns, or verification requirements. Our professionals provide end-to-end assistance.",
+            about: {
+              title: "Resolve Your Tax Notice",
+              body: "Received an Income Tax Notice? Our experts analyze your notice, identify the issue, and prepare an accurate response to help you resolve it quickly and avoid penalties.",
+              points: [
+                "Expert Review of Tax Notice",
+                "Drafting & Filing Reply to IT Department",
+                "Deadline Tracking & Timely Response",
+              ],
+            },
+            packages: [
+              {
+                name: "Tax Notice Consultation",
+                price: 1999,
+                per: "year",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Expert Review of Tax Notice",
+                  "Drafting & Filing Reply to IT Department",
+                  "Deadline Tracking & Timely Response",
+                ],
+              },
+            ],
+            notes: [
+              "*Professional fee depends on the nature of the notice, the assessment year involved, and the complexity of the response required.",
+            ],
+            featured: true,
+          },
+          {
+            slug: "advance-tax-calculation",
+            name: "Advance Tax Calculation",
+            shortName: "Advance Tax",
+            heading: "Advance Tax Calculation / Planning",
+            tagline:
+              "Stay ahead of your tax liability with our expert-assisted Advance Tax Calculation and Planning Services — estimate income, compute each instalment and avoid interest under Sections 234B and 234C.",
+            about: {
+              title: "Missed Advance Tax Deadlines? Plan Smarter, Pay Right!",
+              body: "Avoid interest under Sections 234B and 234C and keep your cash flow predictable with accurate advance tax estimates.",
+            },
+            packages: [
+              {
+                name: "Advance Tax Calculation / Planning",
+                price: 999,
+                per: "year",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: ["Advance Tax Calculation / Planning", "Tax Expert Support"],
+              },
+            ],
+            notes: [
+              "*Fees vary based on the type of income you earn and the complexity of your tax situation.",
+            ],
+            featured: true,
+          },
+          {
+            slug: "tds-return-filing",
+            name: "TDS Return Filing",
+            heading: "TDS Return Filing",
+            tagline:
+              "TDS Return Filing is a statutory obligation for deductors to report tax deducted at source (TDS) to the Income Tax Department. Our experts ensure seamless compliance through accurate TDS computation, challan reconciliation and timely quarterly return submissions.",
+            about: {
+              title: "File Your TDS Return",
+              body: "File your TDS Return online with expert assistance. We handle data validation, challan reconciliation, and quarterly return filing to ensure complete compliance with Income Tax regulations.",
+              points: [
+                "Preparation & Validation of TDS Returns",
+                "Quarterly Filing (24Q, 26Q, 27Q)",
+                "Timely Filing & Compliance",
+              ],
+            },
+            packages: [
+              {
+                name: "TDS Return Filing",
+                price: 999,
+                per: "quarter",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Form 24Q, 26Q, 27Q & 27EQ",
+                  "Challan Reconciliation",
+                  "TRACES Correction Support",
+                ],
+              },
+            ],
+            notes: [
+              "*Fees vary depending on the number of deductees, sections applicable, and quarters covered.",
+            ],
           },
           {
             slug: "pan-tan-registration",
             name: "PAN / TAN Registration",
-            heading: "PAN & TAN Registration",
+            heading: "PAN / TAN Registration",
             tagline:
-              "Apply for PAN or TAN for your business, firm, trust or yourself — application, documents and tracking handled for you.",
-            packages: [],
+              "Tax Deduction and Collection Account Number (TAN) is a unique 10-digit alphanumeric identification number issued by the Income Tax Department. Get professional assistance with PAN or TAN registration.",
+            about: {
+              title: "Need a TAN for your business?",
+              body: "Get professional assistance with TAN registration to ensure a smooth application process and hassle-free statutory compliance.",
+            },
+            packages: [
+              {
+                name: "PAN / TAN Registration",
+                price: 149,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: ["PAN or TAN application filing", "Document checklist & tracking"],
+              },
+            ],
           },
           {
             slug: "tax-audit",
@@ -1924,6 +2062,8 @@ export const pillars: Pillar[] = [
                 name: "MCA Compliance — 2 Years",
                 description:
                   "Two years of accounts, MCA and income tax compliance with a dedicated Filing360 accountant.",
+                price: 38798,
+                per: "2 years",
                 priceNote: EXCL_GST_GOVT,
                 inclusions: [
                   "MCA Annual Filing (AOC-4 & MGT-7)",
@@ -1939,6 +2079,8 @@ export const pillars: Pillar[] = [
                 name: "MCA Compliance — 3 Years",
                 description:
                   "Three years of accounts, MCA and income tax compliance with a dedicated Filing360 accountant.",
+                price: 54697,
+                per: "3 years",
                 priceNote: EXCL_GST_GOVT,
                 inclusions: [
                   "MCA Annual Filing (AOC-4 & MGT-7)",
@@ -1969,19 +2111,54 @@ export const pillars: Pillar[] = [
                 "Automated bookkeeping & filing",
               ],
             },
-            packages: ["Basic", "2 Years", "3 Years"].map((name) => ({
-              name,
-              description:
-                "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
-              priceNote: EXCL_GST_GOVT,
-              inclusions: [
-                "Financial Statements",
-                "DIN E-KYC for 2 Directors",
-                "Income Tax Filing",
-                "Annual Return Filing",
-                "Online Compliance Dashboard",
-              ],
-            })),
+            packages: [
+              {
+                name: "Basic",
+                description:
+                  "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
+                price: 17899,
+                per: "year",
+                priceNote: EXCL_GST_GOVT,
+                inclusions: [
+                  "Financial Statements",
+                  "DIN E-KYC for 2 Directors",
+                  "Income Tax Filing",
+                  "Annual Return Filing",
+                  "Online Compliance Dashboard",
+                ],
+                popular: true,
+              },
+              {
+                name: "2 Years",
+                description:
+                  "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
+                price: 36798,
+                per: "2 years",
+                priceNote: EXCL_GST_GOVT,
+                inclusions: [
+                  "Financial Statements",
+                  "DIN E-KYC for 2 Directors",
+                  "Income Tax Filing",
+                  "Annual Return Filing",
+                  "Online Compliance Dashboard",
+                ],
+              },
+              {
+                name: "3 Years",
+                description:
+                  "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
+                price: 52697,
+                per: "3 years",
+                priceNote: EXCL_GST_GOVT,
+                inclusions: [
+                  "Financial Statements",
+                  "DIN E-KYC for 2 Directors",
+                  "Income Tax Filing",
+                  "Annual Return Filing",
+                  "Online Compliance Dashboard",
+                ],
+              },
+            ],
             terms: ["Audit fees, if applicable, are payable directly to the auditor."],
           },
           {
@@ -2000,26 +2177,65 @@ export const pillars: Pillar[] = [
               ],
             },
             packages: [
-              "MCA Compliance — 1 Year",
-              "MCA Compliance — 2 Years",
-              "MCA Compliance — 3 Years",
-            ].map((name) => ({
-              name,
-              description:
-                "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
-              priceNote: EXCL_GST_GOVT,
-              inclusions: [
-                "Accounting Software — 1 Year",
-                "Online Compliance Dashboard",
-                "Dedicated Accountant",
-                "Dedicated Compliance Advisor",
-                "MCA Annual Filing (AOC-4 & MGT-7A for OPC)",
-                "Annual Bookkeeping",
-                "Financial Statement Preparation",
-                "ITR-6 Return Filing",
-                "DIN KYC for 1 Director",
-              ],
-            })),
+              {
+                name: "OPC Compliance — 1 Year",
+                description:
+                  "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
+                price: 17899,
+                per: "year",
+                priceNote: EXCL_GST_GOVT,
+                inclusions: [
+                  "Accounting Software — 1 Year",
+                  "Online Compliance Dashboard",
+                  "Dedicated Accountant",
+                  "Dedicated Compliance Advisor",
+                  "MCA Annual Filing (AOC-4 & MGT-7A for OPC)",
+                  "Annual Bookkeeping",
+                  "Financial Statement Preparation",
+                  "ITR-6 Return Filing",
+                  "DIN KYC for 1 Director",
+                ],
+                popular: true,
+              },
+              {
+                name: "OPC Compliance — 2 Years",
+                description:
+                  "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
+                price: 36798,
+                per: "2 years",
+                priceNote: EXCL_GST_GOVT,
+                inclusions: [
+                  "Accounting Software — 1 Year",
+                  "Online Compliance Dashboard",
+                  "Dedicated Accountant",
+                  "Dedicated Compliance Advisor",
+                  "MCA Annual Filing (AOC-4 & MGT-7A for OPC)",
+                  "Annual Bookkeeping",
+                  "Financial Statement Preparation",
+                  "ITR-6 Return Filing",
+                  "DIN KYC for 1 Director",
+                ],
+              },
+              {
+                name: "OPC Compliance — 3 Years",
+                description:
+                  "File your business tax returns and stay compliant with a dedicated Filing360 accountant and online compliance dashboard.",
+                price: 52697,
+                per: "3 years",
+                priceNote: EXCL_GST_GOVT,
+                inclusions: [
+                  "Accounting Software — 1 Year",
+                  "Online Compliance Dashboard",
+                  "Dedicated Accountant",
+                  "Dedicated Compliance Advisor",
+                  "MCA Annual Filing (AOC-4 & MGT-7A for OPC)",
+                  "Annual Bookkeeping",
+                  "Financial Statement Preparation",
+                  "ITR-6 Return Filing",
+                  "DIN KYC for 1 Director",
+                ],
+              },
+            ],
           },
         ],
       },
@@ -2033,142 +2249,455 @@ export const pillars: Pillar[] = [
             heading: "Change Company Name Online",
             tagline:
               "Easily change your company name with Filing360. We handle the MCA filing, board resolution and MOA/AOA updates, so you get your fresh Certificate of Incorporation quickly and legally.",
-            packages: [],
+            packages: [
+              {
+                name: "Name Change — Company",
+                description:
+                  "Apply for company name change online with complete MCA filing support, including name approval, MGT-14 & INC-24 filing, and issuance of a new Certificate of Incorporation.",
+                price: 2999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Secretarial services relating to company name change",
+                  "Name Change filing in MGT-14 and INC-24",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "registered-office-change",
             name: "Registered Office Change",
-            heading: "Change of Registered Office",
+            heading: "Change Company Registered Office Online",
             tagline:
-              "Shift your registered office within the city, to another ROC or to another state — with resolutions and MCA forms filed for you.",
-            packages: [],
+              "Relocate your company’s registered office with a streamlined process. We provide end-to-end support, including INC-22 filing, resolutions and ROC coordination.",
+            packages: [
+              {
+                name: "Registered Office Change",
+                description:
+                  "Update your company’s registered office address on the MCA portal through INC-22 filing, supported by expert guidance.",
+                price: 2999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "End-to-End INC-22 / INC-23 Filing",
+                  "Guidance on Board Resolution & Documentation",
+                  "Expert Review of Jurisdiction & Compliance Impact",
+                  "Seamless Coordination with ROC & Professionals",
+                  "Support With Post-Change Statutory Updates",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "din-ekyc-filing",
             name: "DIN eKYC Filing",
-            heading: "DIN eKYC (DIR-3 KYC) Filing",
+            heading: "DIN eKYC (DIR-3 KYC) Filing Online",
             tagline:
-              "Annual DIR-3 KYC for every director holding a DIN — file on time and keep your DIN active.",
-            packages: [],
+              "File your DIN eKYC (DIR-3 KYC) online with the MCA to keep your Director Identification Number active and compliant.",
+            packages: [
+              {
+                name: "DIN eKYC Filing",
+                description:
+                  "Complete your DIR-3 KYC filing on time. Our CA/CS/CMA experts prepare, certify and submit your filing on the MCA V3 portal.",
+                price: 1499,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "DIR-3 KYC / DIR-3 KYC Web Route Assessment",
+                  "Routine & Change-Based Filings Handled",
+                  "Three-Year Cycle Tracking & Deadline Reminders",
+                  "Foreign National & NRI KYC with Apostille Support",
+                  "DIN Reactivation for Deactivated DINs",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "din-reactivation",
             name: "DIN Reactivation",
-            heading: "DIN Reactivation",
+            heading: "Reactivate DIN Online",
             tagline:
-              "DIN deactivated for a missed KYC? We file DIR-3 KYC with the late fee and get your DIN reactivated.",
-            packages: [],
+              "Restore your deactivated DIN efficiently through DIR-3 KYC filing with the MCA.",
+            packages: [
+              {
+                name: "DIN Reactivation",
+                description:
+                  "Reactivate your DIN through DIR-3 KYC filing with MCA. We manage verification and certification to restore your DIN.",
+                price: 1499,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "DIN active again quickly",
+                  "Penalty calculated for you",
+                  "Pending KYC filed",
+                  "Director can sign filings again",
+                  "Simple OTP-based process",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "director-change",
-            name: "Director Change",
-            heading: "Appointment of Director",
+            name: "Director Appointment",
+            shortName: "Add Director",
+            heading: "Add Director to Company",
             tagline:
-              "Appoint a new director with consent, board resolutions and DIR-12 filed with the ROC.",
-            packages: [],
+              "The appointment of a director is required when a company inducts a new individual to its Board. We handle DIN, consent, resolutions and DIR-12.",
+            packages: [
+              {
+                name: "Director Appointment",
+                description:
+                  "Adding a new director needs the person's DIN and DSC, their consent, a board resolution and Form DIR-12 filed with the ROC within 30 days.",
+                price: 1499,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Add directors legally",
+                  "DIN & DSC arranged",
+                  "Consent & resolutions drafted",
+                  "DIR-12 filed on time",
+                  "Updated MCA records",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "remove-director",
             name: "Remove Director",
-            heading: "Resignation / Removal of Director",
+            heading: "Remove Directors from Company",
             tagline:
-              "Record a director's resignation or removal with the required resolutions and DIR-11 / DIR-12 filings.",
-            packages: [],
+              "A company must formally effect the removal of a director when the director’s tenure on the Board is to be brought to an end — with resolutions and DIR-11 / DIR-12 filings.",
+            packages: [
+              {
+                name: "Remove Director",
+                description:
+                  "The removal of a director becomes necessary when a company needs to discontinue a director’s association with its Board.",
+                price: 1999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Clean legal exit",
+                  "Resolutions drafted",
+                  "DIR-12 / DIR-11 filed",
+                  "Name removed from MCA records",
+                  "Avoid future liability",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "adt-1-filing",
             name: "ADT-1 Filing",
-            heading: "Auditor Appointment — ADT-1 Filing",
+            heading: "ADT-1 Filing",
             tagline:
-              "Intimate the ROC about your auditor's appointment in Form ADT-1 within 15 days of the meeting.",
-            packages: [],
+              "Under the Companies Act, 2013, every company is required to intimate the Registrar of Companies of the appointment or reappointment of an auditor in Form ADT-1.",
+            packages: [
+              {
+                name: "ADT-1 Filing",
+                description:
+                  "File ADT-1 online with MCA for auditor appointment or reappointment. We manage documentation, resolutions and timely filing.",
+                price: 1499,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Mandatory for every company",
+                  "Avoids late fees and penalties",
+                  "Resolution drafted for you",
+                  "Filed within the due date",
+                  "Works for first & AGM appointments",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "dpt-3-filing",
             name: "DPT-3 Filing",
-            heading: "DPT-3 Filing",
+            heading: "DPT-3 Filing – Return of Deposits",
             tagline:
-              "Annual return of deposits and outstanding loans in Form DPT-3, due by 30 June every year.",
-            packages: [],
+              "Under the Companies Act, 2013, every company is required to furnish particulars of outstanding money received, including deposits and loans, in Form DPT-3.",
+            packages: [
+              {
+                name: "DPT-3 Filing",
+                description:
+                  "File DPT-3 with MCA to report outstanding loans and deposits. We ensure proper classification and timely filing.",
+                price: 1999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "DPT-3 – Mandatory Compliance for Companies",
+                  "Mandatory filing for applicable companies",
+                  "Avoids additional fees and penalties",
+                  "Preparation and filing of DPT-3 return",
+                  "Filed within the prescribed due date",
+                  "Ensures compliance with MCA requirements",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "llp-form-11-filing",
             name: "LLP Form 11 Filing",
-            heading: "LLP Form 11 Filing",
+            heading: "Form 11 Filing – LLP Annual Return",
             tagline:
-              "Annual return of an LLP in Form 11, due by 30 May, with partner and contribution details.",
-            packages: [],
+              "Form 11 is a mandatory annual return to be filed with the MCA by all registered Limited Liability Partnerships.",
+            packages: [
+              {
+                name: "LLP Form 11 Filing",
+                description:
+                  "Form 11 is a mandatory annual return to be filed with the Ministry of Corporate Affairs (MCA) by all registered LLPs.",
+                price: 1999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Mandatory annual filing for every LLP",
+                  "Avoids additional fees and penalties",
+                  "Financial details and disclosures prepared",
+                  "Filed within the prescribed due date",
+                  "Applicable to all registered LLPs",
+                  "Hassle-free filing with expert assistance",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "dormant-status-filing",
             name: "Dormant Status Filing",
-            heading: "Dormant Company Status (MSC-1)",
+            heading: "Dormant Company Status",
             tagline:
-              "Apply for dormant status for a company with no significant transactions, and reduce your ongoing compliance.",
-            packages: [],
+              "A dormant company is a registered company that has no significant accounting transactions and has applied for dormant status under the Companies Act, 2013.",
+            packages: [
+              {
+                name: "Dormant Status Filing",
+                description:
+                  "Apply for dormant company status with resolution and documentation support, filed within the prescribed due date.",
+                price: 1999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Mandatory ROC compliance filing",
+                  "Ensures accurate company status with MCA",
+                  "Resolution and documentation support",
+                  "Filed within the prescribed due date",
+                  "Helps avoid additional fees and penalties",
+                  "End-to-end filing assistance",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "moa-amendment",
             name: "MOA Amendment",
-            heading: "MOA Amendment",
+            heading: "MOA Amendment – Name, Object & Capital",
             tagline:
-              "Change your company's objects, name or capital clause with a special resolution and MGT-14 filing.",
-            packages: [],
+              "MOA Amendment is required when a company changes its name, business objects, registered office state, or authorised share capital.",
+            packages: [
+              {
+                name: "MOA Amendment",
+                description:
+                  "Amend your MOA online for changes in name, object clause, or authorised capital. We manage resolutions and MCA filings.",
+                price: 3999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Add new business activities",
+                  "Objects clause drafted",
+                  "Special resolution prepared",
+                  "MGT-14 filing handled",
+                  "Updated MOA for records",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "aoa-amendment",
             name: "AOA Amendment",
-            heading: "AOA Amendment",
+            heading: "AOA Amendment – Alter Articles with MCA Online",
             tagline:
-              "Alter your Articles of Association with a special resolution and MGT-14 filed with the ROC.",
-            packages: [],
+              "An amendment to the Articles of Association (AOA) is required when a company wishes to modify its Articles, including shareholding and governance rules.",
+            packages: [
+              {
+                name: "AOA Amendment",
+                description:
+                  "File your AOA amendment online for changes in shareholding, director rights, or governance.",
+                price: 3999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Update company rules legally",
+                  "Add investor-friendly clauses",
+                  "Special resolution drafted",
+                  "MGT-14 filing handled",
+                  "Updated AOA copy for records",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "authorized-capital-increase",
             name: "Authorized Capital Increase",
-            heading: "Increase Authorised Capital",
+            heading: "Authorized Capital Increase",
             tagline:
-              "Increase your company's authorised share capital with SH-7 filing, resolutions and an updated MOA.",
-            packages: [],
+              "An increase in a company’s authorised share capital enables it to issue additional shares and raise funds.",
+            packages: [
+              {
+                name: "Authorized Capital Increase",
+                description:
+                  "Increase your company’s authorised share capital with seamless MCA compliance. Our experts manage board resolutions, shareholder approvals and filings.",
+                price: 4999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Issue new shares to investors",
+                  "MOA capital clause updated",
+                  "Stamp duty calculated for you",
+                  "SH-7 filing handled",
+                  "Updated MOA for records",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "share-transfer",
             name: "Share Transfer",
-            heading: "Share Transfer",
+            heading: "Share Transfer for Private Companies",
             tagline:
-              "Transfer shares between shareholders with the SH-4 transfer deed, stamp duty guidance and register updates.",
-            packages: [],
+              "Share transfer is the legal process of transferring ownership of a company’s shares from one person to another.",
+            packages: [
+              {
+                name: "Share Transfer",
+                description:
+                  "File your share transfer online with ease. We handle documentation and MCA filings to ensure compliance with the Companies Act, 2013.",
+                price: 4999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Ensures smooth transfer of shares between parties",
+                  "Mandatory documentation and compliance support",
+                  "Share transfer forms (SH-4) prepared for you",
+                  "Board resolution drafted and documentation handled",
+                  "Timely filing and statutory register updates",
+                  "Ensures compliance with Companies Act, 2013",
+                  "Suitable for private limited companies",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "demat-of-shares",
             name: "Demat of Shares",
             heading: "Dematerialisation of Shares",
             tagline:
-              "Convert physical share certificates to demat form, with ISIN and depository coordination.",
-            packages: [],
+              "Dematerialise your physical share certificates into electronic form through a depository participant (DP).",
+            packages: [
+              {
+                name: "Demat of Shares",
+                description:
+                  "Convert your physical share certificates into electronic form through dematerialisation, enabling easier trading, transfer and management.",
+                price: 1999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Demat of Shares mandatory for applicable companies",
+                  "Avoids late fees and penalties",
+                  "Board Resolution for Demat of Shares drafted for you",
+                  "Demat of Shares process handled end-to-end",
+                  "Demat of Shares for first-time and subsequent compliance",
+                  "Demat of Shares completed within the prescribed timeline",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "winding-up-llp",
             name: "Winding Up — LLP",
-            heading: "Close an LLP",
-            tagline: "Close an inactive LLP with Form 24 strike-off filing and the required statements.",
-            packages: [],
+            heading: "LLP Winding Up",
+            tagline:
+              "Initiate the winding up of your LLP with end-to-end support covering liquidation, dissolution and closure formalities.",
+            packages: [
+              {
+                name: "Winding Up — LLP",
+                description:
+                  "Commence the orderly winding up of your Limited Liability Partnership through a structured process encompassing liquidation, dissolution and formal closure.",
+                price: 6999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Ensures legal closure of your LLP",
+                  "Compliance as per LLP Act, 2008",
+                  "Application and documentation drafted for you",
+                  "Filing with MCA within applicable timelines",
+                  "Assistance with partner consent and declarations",
+                  "Hassle-free LLP closure process",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "winding-up-company",
             name: "Winding Up — Company",
-            heading: "Close a Company",
+            heading: "Company Windup / Voluntary Closure",
             tagline:
-              "Strike off a defunct company with STK-2 filing, indemnity bond and statement of accounts.",
-            packages: [],
+              "Close your company legally and efficiently. Our experts provide complete documentation support for striking off.",
+            packages: [
+              {
+                name: "Winding Up — Company",
+                description:
+                  "Facilitate the lawful closure of your company through a streamlined strike-off process with end-to-end documentation support.",
+                price: 6999,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Ensures compliance with applicable legal requirements",
+                  "Complete documentation and resolutions drafted for you",
+                  "Assistance with ROC filings and statutory procedures",
+                  "Ensures timely completion of winding-up formalities",
+                  "Avoids future compliance burdens and unnecessary penalties",
+                  "End-to-end support from documentation to closure",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
           {
             slug: "commencement-inc-20a",
             name: "Commencement (INC-20A)",
-            heading: "Commencement of Business — INC-20A",
+            heading: "Commencement of Business in India",
             tagline:
-              "File the declaration for commencement of business (INC-20A) within 180 days of incorporation.",
-            packages: [],
+              "Launch your business on a sound legal footing by completing all required regulatory formalities, including INC-20A.",
+            packages: [
+              {
+                name: "Commencement (INC-20A)",
+                description:
+                  "File the declaration for commencement of business (INC-20A) with bank proof and CA/CS certification.",
+                price: 1499,
+                per: "one-time",
+                priceNote: EXCL_GOVT_FEE,
+                inclusions: [
+                  "Mandatory after incorporation",
+                  "Avoid heavy penalties",
+                  "Bank proof prepared",
+                  "Filed with CA / CS certification",
+                  "Business can start legally",
+                ],
+              },
+            ],
+            notes: [EVENT_PRICE_NOTE],
           },
         ],
       },
@@ -2230,7 +2759,43 @@ export const pillars: Pillar[] = [
             heading: "Accounting & Bookkeeping",
             tagline:
               "Monthly bookkeeping, reconciliations and financial statements maintained by a dedicated Filing360 accountant.",
-            packages: [],
+            about: {
+              title: "Outsourced accounting for growing businesses",
+              body: "Professional Accounting and Bookkeeping support for startups, small businesses, and growing companies. Our outsourced accounting services take care of compliance regulations, transaction reports, invoices and financial statements.",
+            },
+            packages: [
+              {
+                name: "Basic Accounting & Bookkeeping",
+                description:
+                  "Indicative monthly fee for lighter transaction volumes. Final fee depends on size and volume of business.",
+                price: 3000,
+                per: "month",
+                priceNote: "*₹3,000–₹8,000/month · exclusive of GST · subject to size & volume",
+                inclusions: [
+                  "Monthly bookkeeping",
+                  "Bank & ledger reconciliations",
+                  "Basic financial statements",
+                ],
+                popular: true,
+              },
+              {
+                name: "Accounting & Bookkeeping",
+                description:
+                  "Indicative monthly fee for fuller accounting support. Final fee depends on size and volume of business.",
+                price: 8000,
+                per: "month",
+                priceNote: "*₹8,000–₹20,000 onward/month · exclusive of GST · subject to size & volume",
+                inclusions: [
+                  "Full monthly bookkeeping",
+                  "Reconciliations & adjustments",
+                  "Financial statements",
+                  "Compliance-ready books for GST & income tax",
+                ],
+              },
+            ],
+            notes: [
+              "The cost of accounting and bookkeeping varies with your transaction volume, business structure, compliance obligations, and reporting requirements.",
+            ],
             featured: true,
           },
           {
@@ -2239,7 +2804,22 @@ export const pillars: Pillar[] = [
             heading: "RCM Preparation",
             tagline:
               "Identify and prepare GST reverse charge (RCM) liabilities so your returns and input credit stay accurate.",
-            packages: [],
+            packages: [
+              {
+                name: "RCM Preparation",
+                price: 25000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "RCM liability identification",
+                  "Process mapping for reverse charge",
+                  "Documentation for GST returns",
+                ],
+              },
+            ],
+            notes: [
+              "*Subject to size of business, existing business process and process improvement needs.",
+            ],
           },
           {
             slug: "sop-designing",
@@ -2247,7 +2827,22 @@ export const pillars: Pillar[] = [
             heading: "SOP Designing",
             tagline:
               "Standard operating procedures for finance, accounts and compliance processes, tailored to your business.",
-            packages: [],
+            packages: [
+              {
+                name: "SOP Design",
+                price: 25000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Finance & compliance process documentation",
+                  "Role-wise checklists",
+                  "Implementation walkthrough",
+                ],
+              },
+            ],
+            notes: [
+              "*Subject to size of business, existing business process and process improvement needs.",
+            ],
           },
           {
             slug: "ind-as-conversion",
@@ -2255,7 +2850,43 @@ export const pillars: Pillar[] = [
             heading: "Ind AS Conversion",
             tagline:
               "Convert your financial statements to Indian Accounting Standards (Ind AS) with impact analysis and disclosures.",
-            packages: [],
+            packages: [
+              {
+                name: "First-Time Adoption of Ind AS",
+                price: 50000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Ind AS impact analysis",
+                  "Opening balance sheet adjustments",
+                  "First-time adoption disclosures",
+                ],
+                popular: true,
+              },
+              {
+                name: "Lease Accounting (Ind AS 116)",
+                price: 30000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Lease identification & measurement",
+                  "Lease registers",
+                  "Disclosures under Ind AS 116",
+                ],
+              },
+              {
+                name: "Ind AS 118 Implementation",
+                price: 30000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Presentation & disclosure readiness",
+                  "Gap assessment vs current reporting",
+                  "Implementation roadmap",
+                ],
+              },
+            ],
+            notes: ["*Subject to size of business."],
           },
           {
             slug: "ifrs",
@@ -2263,7 +2894,20 @@ export const pillars: Pillar[] = [
             heading: "IFRS Reporting",
             tagline:
               "IFRS-compliant financial statements and conversion support for businesses reporting to overseas parents or investors.",
-            packages: [],
+            packages: [
+              {
+                name: "IFRS Reporting",
+                price: 50000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "IFRS conversion / dual reporting support",
+                  "Key difference analysis vs Ind AS / Indian GAAP",
+                  "Disclosure pack for group reporting",
+                ],
+              },
+            ],
+            notes: ["*Subject to size of business."],
           },
           {
             slug: "consolidation",
@@ -2271,7 +2915,20 @@ export const pillars: Pillar[] = [
             heading: "Consolidation of Financial Statements",
             tagline:
               "Consolidated financial statements for groups with subsidiaries, associates or joint ventures.",
-            packages: [],
+            packages: [
+              {
+                name: "Consolidation",
+                price: 50000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Consolidation workings under Ind AS 110 / 28 / 111",
+                  "Elimination entries & minority interest",
+                  "Consolidated financial statements pack",
+                ],
+              },
+            ],
+            notes: ["*Subject to size of business."],
           },
           {
             slug: "mis-dashboard-for-startups",
@@ -2280,7 +2937,20 @@ export const pillars: Pillar[] = [
             heading: "MIS Dashboard for Startups",
             tagline:
               "Monthly MIS dashboards that show founders and investors revenue, burn, runway and key metrics at a glance.",
-            packages: [],
+            packages: [
+              {
+                name: "MIS Dashboard",
+                price: 10000,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Owner / investor dashboard setup",
+                  "Key metrics from your books",
+                  "Walkthrough for founders",
+                ],
+              },
+            ],
+            notes: ["*Subject to size of business."],
           },
         ],
       },
@@ -2301,7 +2971,20 @@ export const pillars: Pillar[] = [
             heading: "Website Designing",
             tagline:
               "Clean, conversion-focused websites for startups and professional firms — built to load fast and look credible.",
-            packages: [],
+            packages: [
+              {
+                name: "Website Designing",
+                price: 5499,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Mobile-first business website",
+                  "Enquiry / contact forms",
+                  "Basic SEO structure",
+                ],
+              },
+            ],
+            notes: ["*Subject to nature of work required to be done."],
             featured: true,
           },
           {
@@ -2309,7 +2992,20 @@ export const pillars: Pillar[] = [
             name: "Logo Designing",
             heading: "Logo Designing",
             tagline: "A professional logo for your new business, designed to work across print and digital.",
-            packages: [],
+            packages: [
+              {
+                name: "Logo Designing",
+                price: 2499,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Original logo concepts",
+                  "Final files for print & digital",
+                  "Basic brand colour guidance",
+                ],
+              },
+            ],
+            notes: ["*Subject to nature of work required to be done."],
           },
           {
             slug: "seo",
@@ -2317,7 +3013,20 @@ export const pillars: Pillar[] = [
             heading: "Search Engine Optimisation (SEO)",
             tagline:
               "Technical and content SEO so your service pages and blogs rank for the queries your customers actually search.",
-            packages: [],
+            packages: [
+              {
+                name: "SEO",
+                price: 9999,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Technical & on-page SEO setup",
+                  "Keyword mapping for key pages",
+                  "Baseline ranking & reporting setup",
+                ],
+              },
+            ],
+            notes: ["*Subject to nature of work required to be done."],
           },
           {
             slug: "performance-marketing",
@@ -2325,7 +3034,20 @@ export const pillars: Pillar[] = [
             heading: "Performance Marketing",
             tagline:
               "Paid acquisition programmes measured on leads and ROAS — not vanity clicks — across search and social.",
-            packages: [],
+            packages: [
+              {
+                name: "Performance Marketing",
+                price: 9999,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Campaign strategy & funnel setup",
+                  "Tracking & conversion goals",
+                  "Initial optimisation cycle",
+                ],
+              },
+            ],
+            notes: ["*Subject to nature of work required to be done."],
           },
           {
             slug: "ads",
@@ -2333,7 +3055,20 @@ export const pillars: Pillar[] = [
             heading: "Ads",
             tagline:
               "Google, Meta and LinkedIn ad creatives and campaigns tuned for compliance and professional-service leads.",
-            packages: [],
+            packages: [
+              {
+                name: "Ads",
+                price: 9999,
+                per: "one-time",
+                priceNote: EXCL_GST,
+                inclusions: [
+                  "Ad account / campaign setup",
+                  "Creative & targeting basics",
+                  "Launch & first optimisation pass",
+                ],
+              },
+            ],
+            notes: ["*Subject to nature of work required to be done."],
           },
         ],
       },

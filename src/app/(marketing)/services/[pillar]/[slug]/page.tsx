@@ -11,17 +11,21 @@ import {
   servicePriceFrom,
 } from "@/content/services";
 import { JsonLd } from "@/components/blog/JsonLd";
-import { GstServiceArticle, GstServiceFaqs } from "@/components/gst/GstServiceArticle";
 import { CheckList, PackageCard, ServiceCard } from "@/components/services/ServiceCard";
+import { SeoArticle } from "@/components/services/seo/SeoArticle";
+import { SeoFaqs } from "@/components/services/seo/SeoFaqs";
 import { LeadForm } from "@/components/leads/LeadForm";
 import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
 import { PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
 import { whatsappLink } from "@/content/company";
-import { getGstServicePage } from "@/content/gstServicePages";
 import { bannerForService, splitHeading } from "@/content/pageBanners";
 import { serviceResources } from "@/content/links";
+import { getSeoServicePage } from "@/content/seoRegistry";
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
+
+// Side-effect: register pillar SEO lookups
+import "@/content/seoLookups";
 
 type Props = {
   params: Promise<{ pillar: string; slug: string }>;
@@ -37,16 +41,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar, slug } = await params;
   const result = getService(pillar, slug);
   if (!result) return {};
-  const gstPage = getGstServicePage(slug);
+  const seoPage = getSeoServicePage(pillar, slug);
   const from = servicePriceFrom(result.service);
   const priced = from !== null ? ` Starting at ${formatInr(from)}.` : "";
-  if (gstPage) {
+  if (seoPage) {
     return pageMetadata({
-      title: gstPage.metaTitle,
-      description: gstPage.metaDescription,
+      title: seoPage.metaTitle,
+      description: seoPage.metaDescription,
       path: serviceHref(result.pillar, result.service),
       absoluteTitle: true,
-      keywords: gstPage.keywords,
+      keywords: seoPage.keywords,
     });
   }
   return pageMetadata({
@@ -115,17 +119,17 @@ export default async function ServiceDetailPage({ params }: Props) {
   const offers = service.packages
     .filter((p) => typeof p.price === "number")
     .map((p) => ({ name: p.name, price: p.price as number, description: p.description ?? p.bestFor }));
-  const gstPage = getGstServicePage(service.slug);
-  const heading = gstPage ? { title: gstPage.h1, accent: undefined } : splitHeading(service.heading);
-  const chips = gstPage?.highlights ?? service.highlights;
+  const seoPage = getSeoServicePage(pillar.slug, service.slug);
+  const heading = seoPage ? { title: seoPage.h1, accent: undefined } : splitHeading(service.heading);
+  const chips = seoPage?.highlights ?? service.highlights;
 
   return (
     <div className="bg-[#f3f7fa]">
       <JsonLd
         data={[
           serviceJsonLd({
-            name: gstPage?.h1 ?? service.name,
-            description: gstPage?.metaDescription ?? service.tagline,
+            name: seoPage?.h1 ?? service.name,
+            description: seoPage?.metaDescription ?? service.tagline,
             path: href,
             category: pillar.name,
             offers,
@@ -136,17 +140,17 @@ export default async function ServiceDetailPage({ params }: Props) {
             { name: pillar.name, path: `/services/${pillar.slug}` },
             { name: service.shortName ?? service.name, path: href },
           ]),
-          ...(gstPage ? [faqJsonLd(gstPage.faqs)] : []),
+          ...(seoPage ? [faqJsonLd(seoPage.faqs)] : []),
         ]}
       />
       <InnerHero
         art={bannerForService(pillar.slug, service.slug)}
         title={heading.title}
         accent={heading.accent}
-        imageAlt={gstPage?.imageAlt}
+        imageAlt={seoPage?.imageAlt}
         body={
           <>
-            <p>{gstPage?.lead ?? service.tagline}</p>
+            <p>{seoPage?.lead ?? service.tagline}</p>
             {chips ? (
               <ul className="mt-3 flex flex-wrap gap-2">
                 {chips.map((h) => (
@@ -190,9 +194,9 @@ export default async function ServiceDetailPage({ params }: Props) {
           },
         ]}
         actions={
-          gstPage ? (
+          seoPage ? (
             <>
-              <PrimaryButton href="#service-lead">{gstPage.cta}</PrimaryButton>
+              <PrimaryButton href="#service-lead">{seoPage.cta}</PrimaryButton>
               <SecondaryButton href={whatsappLink(`Hi Filing360, I need help with ${service.name}.`)}>WhatsApp a CA</SecondaryButton>
             </>
           ) : undefined
@@ -230,87 +234,6 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
-        {gstPage ? <GstServiceArticle page={gstPage} /> : null}
-
-        {!gstPage && (service.about || service.scope) && (
-          <section className="grid gap-5 rounded-2xl border border-[#d7e4de] bg-white p-5 md:grid-cols-2 md:gap-8 md:p-8 lg:p-10">
-            <div className="min-w-0">
-              <SectionTitle>{service.about?.title ?? "Scope"}</SectionTitle>
-              {service.about?.body && (
-                <p className="mt-3 text-[15px] leading-relaxed text-[#4a5d68] md:mt-4 md:text-[16px]">{service.about.body}</p>
-              )}
-              {service.scope && (
-                <p className="mt-4 rounded-xl bg-[#e3f2ed] px-4 py-3 text-[14.5px] font-medium text-[#145a45] md:mt-5 md:text-[15px]">
-                  {service.scope}
-                </p>
-              )}
-            </div>
-            {service.about?.points && (
-              <div className="rounded-2xl bg-[#f3f7fa] p-4 md:p-6">
-                <CheckList items={service.about.points} />
-              </div>
-            )}
-          </section>
-        )}
-
-        {!gstPage && service.usps && (
-          <section>
-            <SectionTitle>Why founders choose Filing360</SectionTitle>
-            {service.positioning && (
-              <p className="mt-3 max-w-4xl rounded-xl bg-[#e3f2ed] px-4 py-3 text-[15px] font-medium leading-relaxed text-[#145a45] md:mt-4 md:px-5 md:py-4 md:text-[16.5px]">
-                {service.positioning}
-              </p>
-            )}
-            <ul
-              className={`rail rail-bleed mt-5 grid gap-4 [--rail-item:72%] [--rail-item-sm:40%] md:mt-6 ${service.usps.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-5"}`}
-            >
-              {service.usps.map((u) => (
-                <li key={u.title} className="rounded-2xl border border-[#d7e4de] bg-white p-4 md:p-5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#e3f2ed] text-[#0e7b5b]">
-                    <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
-                      <path d="m5 12 4 4 10-9" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <p className="mt-3 text-[16px] font-bold leading-snug text-[#0f2a45]">{u.title}</p>
-                  <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#5b6e7a]">{u.body}</p>
-                </li>
-              ))}
-            </ul>
-            {service.compareHref && (
-              <Link
-                href={service.compareHref}
-                className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#0e7b5b] hover:underline"
-              >
-                See how we compare with other providers <span aria-hidden>→</span>
-              </Link>
-            )}
-          </section>
-        )}
-
-        {!gstPage && service.why && (
-          <section className="rounded-2xl border border-[#d7e4de] bg-white p-5 md:p-10">
-            <SectionTitle>{service.why.title}</SectionTitle>
-            {service.why.intro && (
-              <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-[#4a5d68] md:mt-4 md:text-[16px]">{service.why.intro}</p>
-            )}
-            <ul className="rail mt-5 grid gap-4 [--rail-item:82%] [--rail-item-sm:46%] md:mt-6 lg:grid-cols-2">
-              {service.why.points.map((point) => {
-                const [lead, ...rest] = point.split(". ");
-                return (
-                  <li key={point} className="rounded-xl border border-[#e8f0ec] bg-[#f3f7fa] p-4 text-[15px] leading-relaxed text-[#4a5d68] md:p-5 md:text-[15px]">
-                    <span className="font-semibold text-[#0f2a45]">{lead}.</span> {rest.join(". ")}
-                  </li>
-                );
-              })}
-            </ul>
-            {service.why.outro && (
-              <p className="mt-6 rounded-xl bg-[#e3f2ed] px-5 py-4 text-[15.5px] font-medium text-[#145a45]">
-                {service.why.outro}
-              </p>
-            )}
-          </section>
-        )}
-
         <section id="packages" className="scroll-mt-24">
           <SectionTitle>{service.packages.length ? "Packages & pricing" : "Pricing"}</SectionTitle>
           {service.packages.length ? (
@@ -345,9 +268,95 @@ export default async function ServiceDetailPage({ params }: Props) {
           )}
         </section>
 
-        {gstPage ? <GstServiceFaqs page={gstPage} /> : null}
+        {seoPage ? <SeoArticle sections={seoPage.sections} related={seoPage.related} /> : null}
 
-        {!gstPage && service.coverage && (
+        {!seoPage && (service.about || service.scope) && (
+          <section className="grid gap-5 rounded-2xl border border-[#d7e4de] bg-white p-5 md:grid-cols-2 md:gap-8 md:p-8 lg:p-10">
+            <div className="min-w-0">
+              <SectionTitle>{service.about?.title ?? "Scope"}</SectionTitle>
+              {service.about?.body && (
+                <p className="mt-3 text-[15px] leading-relaxed text-[#4a5d68] md:mt-4 md:text-[16px]">{service.about.body}</p>
+              )}
+              {service.scope && (
+                <p className="mt-4 rounded-xl bg-[#e3f2ed] px-4 py-3 text-[14.5px] font-medium text-[#145a45] md:mt-5 md:text-[15px]">
+                  {service.scope}
+                </p>
+              )}
+            </div>
+            {service.about?.points && (
+              <div className="rounded-2xl bg-[#f3f7fa] p-4 md:p-6">
+                <CheckList items={service.about.points} />
+              </div>
+            )}
+          </section>
+        )}
+
+        {!seoPage && service.usps && (
+          <section>
+            <SectionTitle>Why founders choose Filing360</SectionTitle>
+            {service.positioning && (
+              <p className="mt-3 max-w-4xl rounded-xl bg-[#e3f2ed] px-4 py-3 text-[15px] font-medium leading-relaxed text-[#145a45] md:mt-4 md:px-5 md:py-4 md:text-[16.5px]">
+                {service.positioning}
+              </p>
+            )}
+            <ul
+              className={`rail rail-bleed mt-5 grid gap-4 [--rail-item:72%] [--rail-item-sm:40%] md:mt-6 ${service.usps.length % 3 === 0 ? "lg:grid-cols-3" : "lg:grid-cols-5"}`}
+            >
+              {service.usps.map((u) => (
+                <li key={u.title} className="rounded-2xl border border-[#d7e4de] bg-white p-4 md:p-5">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#e3f2ed] text-[#0e7b5b]">
+                    <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+                      <path d="m5 12 4 4 10-9" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <p className="mt-3 text-[16px] font-bold leading-snug text-[#0f2a45]">{u.title}</p>
+                  <p className="mt-1.5 text-[14.5px] leading-relaxed text-[#5b6e7a]">{u.body}</p>
+                </li>
+              ))}
+            </ul>
+            {service.compareHref && (
+              <Link
+                href={service.compareHref}
+                className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#0e7b5b] hover:underline"
+              >
+                See how we compare with other providers <span aria-hidden>→</span>
+              </Link>
+            )}
+          </section>
+        )}
+
+        {!seoPage && service.why && (
+          <section className="rounded-2xl border border-[#d7e4de] bg-white p-5 md:p-10">
+            <SectionTitle>{service.why.title}</SectionTitle>
+            {service.why.intro && (
+              <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-[#4a5d68] md:mt-4 md:text-[16px]">{service.why.intro}</p>
+            )}
+            <ul className="rail mt-5 grid gap-4 [--rail-item:82%] [--rail-item-sm:46%] md:mt-6 lg:grid-cols-2">
+              {service.why.points.map((point) => {
+                const [lead, ...rest] = point.split(". ");
+                return (
+                  <li key={point} className="rounded-xl border border-[#e8f0ec] bg-[#f3f7fa] p-4 text-[15px] leading-relaxed text-[#4a5d68] md:p-5 md:text-[15px]">
+                    <span className="font-semibold text-[#0f2a45]">{lead}.</span> {rest.join(". ")}
+                  </li>
+                );
+              })}
+            </ul>
+            {service.why.outro && (
+              <p className="mt-6 rounded-xl bg-[#e3f2ed] px-5 py-4 text-[15.5px] font-medium text-[#145a45]">
+                {service.why.outro}
+              </p>
+            )}
+          </section>
+        )}
+
+        {seoPage ? (
+          <SeoFaqs
+            faqs={seoPage.faqs}
+            updatedSuffix={seoPage.updated ? `· Updated ${seoPage.updated}` : "· Updated 10 November 2026"}
+          />
+        ) : null}
+
+        {!seoPage && service.coverage && (
           <section>
             <SectionTitle>{service.coverage.title ?? "What each plan covers"}</SectionTitle>
             <div className="mt-5 max-h-[70vh] overflow-auto overscroll-contain rounded-2xl border border-[#d7e4de] bg-white md:mt-6 lg:max-h-none">
@@ -393,7 +402,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
-        {!gstPage && service.tables?.map((table) => (
+        {!seoPage && service.tables?.map((table) => (
           <section key={table.title}>
             <SectionTitle>{table.title}</SectionTitle>
             {table.intro && <p className="mt-2 text-[15px] text-[#5b6e7a] md:text-[15px]">{table.intro}</p>}
