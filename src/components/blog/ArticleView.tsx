@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { LeadForm } from "@/components/leads/LeadForm";
+import { SeoFaqs } from "@/components/services/seo/SeoFaqs";
 import { ReviewedBy } from "@/components/site/ReviewedBy";
+import type { BlogFaq } from "@/lib/blog/faqs";
 import { withHeadingIds } from "@/lib/blog/html";
 import type { PostCard as PostCardData } from "@/lib/blog/queries";
 import { formatDate } from "@/lib/format";
@@ -24,7 +26,17 @@ export type ArticleData = {
   author: { full_name: string | null; job_title: string | null; bio: string | null; avatar_url: string | null } | null;
 };
 
-export function ArticleView({ post, related = [], shareUrl }: { post: ArticleData; related?: PostCardData[]; shareUrl: string }) {
+export function ArticleView({
+  post,
+  related = [],
+  shareUrl,
+  faqs = [],
+}: {
+  post: ArticleData;
+  related?: PostCardData[];
+  shareUrl: string;
+  faqs?: BlogFaq[];
+}) {
   const { html, toc } = withHeadingIds(post.content_html);
   const body = html.replace(/<img /g, '<img loading="lazy" decoding="async" ');
   const updated =
@@ -85,6 +97,12 @@ export function ArticleView({ post, related = [], shareUrl }: { post: ArticleDat
             {showToc && <ArticleToc toc={toc} placement="top" />}
 
             <div className="article-body" dangerouslySetInnerHTML={{ __html: body }} />
+
+            {faqs.length > 0 ? (
+              <div className="mt-10">
+                <SeoFaqs faqs={faqs} title="Frequently asked questions" showReviewedBy={false} />
+              </div>
+            ) : null}
 
             {post.tags.length > 0 && (
               <ul className="mt-10 flex flex-wrap gap-2" aria-label="Tags">

@@ -6,9 +6,9 @@
 export const company = {
   brand: "Filing360",
   /** Registered legal entity, e.g. "Filing360 Private Limited". */
-  legalName: "",
+  legalName: "FilingEdge360 Advisors LLP",
   /** e.g. "Private Limited Company incorporated under the Companies Act, 2013" */
-  entityDescription: "",
+  entityDescription: "Limited Liability Partnership registered in India",
   cin: "",
   gstin: "",
   /** Courts of this city have exclusive jurisdiction in the Terms of Use. */

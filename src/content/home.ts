@@ -608,6 +608,13 @@ export const homeMidCta = {
   body: "Tell us your plans. We’ll recommend a structure, share a fee breakdown with government charges, and list the documents you need.",
 } as const;
 
+export const homeKnowledge = {
+  title: "Guides from Filing360",
+  subtitle: "Practical articles on company registration, GST, income tax and compliance — written by our CAs.",
+  cta: "View all articles",
+  href: "/blog",
+} as const;
+
 export const homeReviews = {
   eyebrow: "Founder feedback",
   titleLead: "What people say after",

@@ -1,30 +1,42 @@
 import { JsonLd } from "@/components/blog/JsonLd";
 import { CompanyDetails } from "@/components/site/CompanyDetails";
-import { container, CtaBand, LinkCards, PageHero, PrimaryButton, SecondaryButton, SectionHeading } from "@/components/site/PageShell";
-import { company, legalEntity } from "@/content/company";
-import { pillars, pillarHref } from "@/content/services";
+import { container, CtaBand, PageHero, PrimaryButton, SecondaryButton, SectionHeading } from "@/components/site/PageShell";
+import { company, legalEntity, whatsappLink } from "@/content/company";
 import { pageMetadata, webPageJsonLd } from "@/lib/seo";
 
-const TITLE = "About Filing360 — Company Registration, GST & Tax Experts";
+const TITLE = "About Filingedge360 — Senior Professionals. Personal Attention. Fair Prices.";
 const DESCRIPTION =
-  "Filing360 helps founders, freelancers and small businesses in India register, file and stay compliant — with qualified CA / CS professionals, transparent fees and real-time updates.";
+  "Filingedge360 pairs clients with experienced CAs, CSs, MBAs, lawyers and technologists — quality work under one brand, at fair transparent prices.";
 
 export const metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: "/about" });
 
-const PRINCIPLES = [
-  { title: "Qualified people, not scripts", body: "Every filing is prepared or reviewed by a Chartered Accountant, Company Secretary or tax professional." },
-  { title: "Transparent pricing", body: "Professional fee and government fee shown separately before you pay. No hidden add-ons." },
-  { title: "Milestone payments", body: "Pay in stages as work progresses, with a clear refund policy if plans change." },
-  { title: "Honest about approvals", body: "Approvals come from MCA, GSTN, the Trademark Registry and other authorities — we never promise what only they can grant." },
-  { title: "Your data, protected", body: "Documents are stored securely, shared only as needed for your work, and handled under India's DPDP Act." },
-  { title: "Updates without chasing", body: "Status updates at every milestone on email and WhatsApp, plus online tracking with your reference number." },
+const STAND_FOR = [
+  {
+    title: "Experience on every engagement",
+    body: "Your work is handled by qualified professionals, not passed down to interns.",
+  },
+  {
+    title: "Transparent pricing",
+    body: "Fixed, upfront fees, with government charges shown separately.",
+  },
+  {
+    title: "Ownership",
+    body: "One brand, one point of contact, full accountability.",
+  },
+  {
+    title: "Respect for timelines",
+    body: "We work to deadlines the way leading organisations do.",
+  },
+  {
+    title: "Confidentiality",
+    body: "Your data is handled securely and only by those who need it.",
+  },
 ];
 
-const HOW = [
-  { title: "Free consultation", body: "Tell us what you're trying to do. We recommend the right structure or filing and send a written quote." },
-  { title: "Share documents", body: "Upload online or send on WhatsApp. We check them before anything is filed." },
-  { title: "We prepare & file", body: "Your assigned expert drafts, files and follows up with the department." },
-  { title: "Delivered & reminded", body: "You receive certificates and acknowledgements — and reminders before your next deadline." },
+const WIN_FOR = [
+  { for: "Clients", means: "Senior-level expertise at fair, transparent prices" },
+  { for: "Professionals", means: "Meaningful independent work alongside their careers" },
+  { for: "The ecosystem", means: "More businesses compliant, better advised and able to grow" },
 ];
 
 export default function AboutPage() {
@@ -32,73 +44,128 @@ export default function AboutPage() {
     <div className="bg-[#f3f7fa]">
       <JsonLd data={webPageJsonLd({ name: TITLE, description: DESCRIPTION, path: "/about", type: "AboutPage" })} />
       <PageHero
-        eyebrow="About us"
-        title="Making business compliance in India simple, transparent and on time"
+        eyebrow="About Filingedge360"
+        title="Senior professionals. Personal attention. Fair prices."
         crumbs={[{ name: "About", path: "/about" }]}
         intro={
           <p>
-            {company.brand} helps founders, freelancers and growing businesses register, file and stay compliant — from the first incorporation
-            to every annual return. We combine qualified professionals with a clear online process, so you always know what&apos;s happening,
-            what it costs and what comes next.
+            Most people and businesses want the same thing from their CA, CS or lawyer: an experienced professional who
+            understands their situation and takes ownership of the work. {company.brand} was built so that is what you
+            actually get.
           </p>
         }
       >
-        <PrimaryButton href="/book-consultation">Book a free consultation</PrimaryButton>
-        <SecondaryButton href="/team">Meet the team</SecondaryButton>
+        <PrimaryButton href="/book-consultation">Get a Free Consultation</PrimaryButton>
+        <SecondaryButton href={whatsappLink("Hi Filingedge360, I have a question.")}>WhatsApp Us</SecondaryButton>
       </PageHero>
 
       <section className={`${container} py-12`}>
-        <SectionHeading title="What we stand for" />
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PRINCIPLES.map((p) => (
-            <div key={p.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
-              <h3 className="text-[17px] font-bold text-[#0f2a45]">{p.title}</h3>
-              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{p.body}</p>
-            </div>
-          ))}
+        <SectionHeading title="Why we started" />
+        <div className="mt-5 max-w-3xl space-y-4 text-[16px] leading-relaxed text-[#2c3f4e]">
+          <p>
+            What people often get is different. Established firms charge premium fees, but the work is frequently handled
+            by junior staff or interns, with the senior professional appearing only at the start or when something goes
+            wrong. Small businesses, startups and individuals end up paying a lot without getting the experience they were
+            paying for.
+          </p>
+          <p className="font-semibold text-[#0f2a45]">We believed there was a better way.</p>
         </div>
       </section>
 
       <section className={`${container} pb-12`}>
-        <SectionHeading title="How we work" />
-        <ol className="mt-6 grid gap-4 md:grid-cols-4">
-          {HOW.map((s, i) => (
-            <li key={s.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
-              <span className="text-[13px] font-bold uppercase tracking-[0.1em] text-[#0e7b5b]">Step {i + 1}</span>
-              <p className="mt-1 text-[17px] font-bold text-[#0f2a45]">{s.title}</p>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-[#4a5d68]">{s.body}</p>
-            </li>
-          ))}
-        </ol>
+        <SectionHeading title="Our model" />
+        <div className="mt-5 max-w-3xl space-y-4 text-[16px] leading-relaxed text-[#2c3f4e]">
+          <p>
+            India has a large pool of highly qualified professionals working in leading organisations: Chartered
+            Accountants, Company Secretaries, MBAs, lawyers, software engineers and AI specialists. They are used to tight
+            deadlines, high standards and serious accountability. Many have time beyond their regular roles and want to use
+            their expertise independently.
+          </p>
+          <p>
+            Filingedge360 brings these professionals together and pairs them with clients who need quality work at a fair
+            price. Clients get experienced hands on their work. Professionals get a structured, trusted platform for their
+            skills.
+          </p>
+        </div>
       </section>
 
       <section className={`${container} pb-12`}>
-        <SectionHeading title="What we do" />
-        <div className="mt-6">
-          <LinkCards
-            items={pillars.map((p) => ({
-              href: pillarHref(p),
-              title: p.name,
-              body: p.services
-                .slice(0, 4)
-                .map((s) => s.shortName ?? s.name)
-                .join(" · "),
-            }))}
-          />
+        <SectionHeading title="A platform, not an aggregator" />
+        <div className="mt-5 max-w-3xl space-y-4 text-[16px] leading-relaxed text-[#2c3f4e]">
+          <p>
+            We don&apos;t simply list professionals and leave you to deal with them. Every engagement is delivered under
+            the Filingedge360 name, and we take full responsibility for it: quality, timelines, confidentiality and
+            follow-up. If something isn&apos;t right, you come to us, and we fix it.
+          </p>
+          <p>
+            Every engagement follows defined processes, checklists and review steps, so the standard you get doesn&apos;t
+            depend on any one individual.
+          </p>
+        </div>
+      </section>
+
+      <section className={`${container} pb-12`}>
+        <SectionHeading title="Who we are" />
+        <div className="mt-5 max-w-3xl space-y-4 text-[16px] leading-relaxed text-[#2c3f4e]">
+          <p>
+            We are a team of Chartered Accountants, Company Secretaries, MBAs, software engineers and AI developers,
+            working towards a common goal: making expert financial, legal and business services accessible to everyone.
+          </p>
+          <p>
+            Our technology team builds tools that make our work faster and more accurate, from compliance trackers to
+            automated reconciliations. That lets our professionals spend their time on judgement and advice, not paperwork.
+          </p>
+        </div>
+      </section>
+
+      <section className={`${container} pb-12`}>
+        <SectionHeading title="What we stand for" />
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {STAND_FOR.map((item) => (
+            <li key={item.title} className="rounded-2xl border border-[#d7e4de] bg-white p-5">
+              <h3 className="text-[17px] font-bold text-[#0f2a45]">{item.title}</h3>
+              <p className="mt-1.5 text-[15.5px] leading-relaxed text-[#4a5d68]">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={`${container} pb-12`}>
+        <SectionHeading title="A win for everyone" />
+        <div className="mt-6 overflow-hidden rounded-2xl border border-[#d7e4de] bg-white">
+          <table className="w-full text-left text-[15px]">
+            <thead className="bg-[#e8f2ee] text-[#0f2a45]">
+              <tr>
+                <th className="px-5 py-3 font-semibold">For</th>
+                <th className="px-5 py-3 font-semibold">What it means</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#d7e4de] text-[#2c3f4e]">
+              {WIN_FOR.map((row) => (
+                <tr key={row.for}>
+                  <td className="px-5 py-3.5 font-semibold text-[#0f2a45]">{row.for}</td>
+                  <td className="px-5 py-3.5">{row.means}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
       <section className={`${container} pb-14`}>
         <SectionHeading
-          title="Company information"
-          intro={`${legalEntity()} provides professional facilitation services. We are a private firm and are not affiliated with any government department.`}
+          title="The company behind the brand"
+          intro={`Filingedge360 is a brand of ${legalEntity()}, registered in India.`}
         />
         <div className="mt-5">
           <CompanyDetails />
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand
+        title="Have a question or a requirement? Talk to us."
+        body="Get a free consultation or message us on WhatsApp — we'll tell you what you need, what it costs and how long it takes."
+      />
     </div>
   );
 }

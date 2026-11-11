@@ -1,10 +1,11 @@
 import { AdminShell } from "@/components/admin/AdminShell";
 import { ACCESS, ROLE_LABELS, requireStaff, type Section } from "@/lib/auth/dal";
 
-const NAV: { href: string; label: string; section: Section; icon: "home" | "leads" | "blog" | "careers" | "team" }[] = [
+const NAV: { href: string; label: string; section: Section; icon: "home" | "leads" | "blog" | "banners" | "careers" | "team" }[] = [
   { href: "/admin", label: "Dashboard", section: "dashboard", icon: "home" },
   { href: "/admin/leads", label: "Leads", section: "leads", icon: "leads" },
   { href: "/admin/blog", label: "Blog", section: "blog", icon: "blog" },
+  { href: "/admin/banners", label: "Banners", section: "banners", icon: "banners" },
   { href: "/admin/careers", label: "Careers", section: "careers", icon: "careers" },
   { href: "/admin/team", label: "Team", section: "team", icon: "team" },
 ];

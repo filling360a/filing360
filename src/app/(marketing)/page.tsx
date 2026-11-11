@@ -2,11 +2,13 @@ import { BannerCarousel } from "@/components/home/BannerCarousel";
 import { CompareEntities } from "@/components/home/CompareEntities";
 import { Faq } from "@/components/home/Faq";
 import { Hero } from "@/components/home/Hero";
+import { KnowledgeHub } from "@/components/home/KnowledgeHub";
 import { NextSteps } from "@/components/home/NextSteps";
 import { PopularServices } from "@/components/home/PopularServices";
 import { Process } from "@/components/home/Process";
 import { Proof } from "@/components/home/Proof";
 import { SpotlightBanner } from "@/components/home/SpotlightBanner";
+import { getHomeHeroSlides } from "@/lib/banners/store";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -27,18 +29,20 @@ export const metadata = pageMetadata({
 /**
  * Post-hero order researched to beat RegisterKaro, IndiaFilings, Zolvit, Rize:
  * Services → Entity compare (AEO) → Process → After incorporation →
- * Reviews → FAQ
+ * Knowledge Hub → Reviews → FAQ
  */
-export default function HomePage() {
+export default async function HomePage() {
+  const slides = await getHomeHeroSlides();
   return (
     <>
-      <Hero />
+      <Hero slides={slides} />
       <PopularServices />
       <CompareEntities />
       <BannerCarousel />
       <Process />
       <NextSteps />
       <SpotlightBanner />
+      <KnowledgeHub />
       <Proof />
       <Faq />
     </>

@@ -7,7 +7,7 @@ import { signOut } from "@/app/admin/(auth)/actions";
 import { siteConfig } from "@/lib/siteConfig";
 import { Logo } from "@/components/chrome/Logo";
 
-type Icon = "home" | "leads" | "blog" | "careers" | "team";
+type Icon = "home" | "leads" | "blog" | "banners" | "careers" | "team";
 
 const icons: Record<Icon, ReactNode> = {
   home: <path d="M3 11.5 12 4l9 7.5M5 10v10h5v-6h4v6h5V10" />,
@@ -18,6 +18,12 @@ const icons: Record<Icon, ReactNode> = {
     </>
   ),
   blog: <path d="M5 4h10l4 4v12H5zM15 4v4h4M8.5 12h7M8.5 16h7M8.5 8h3" />,
+  banners: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 15l4.5-4.5L12 15l3-3 6 6M14.5 9.5h.01" />
+    </>
+  ),
   careers: (
     <>
       <rect x="3" y="7" width="18" height="13" rx="2" />

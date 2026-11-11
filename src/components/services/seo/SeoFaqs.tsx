@@ -12,10 +12,12 @@ export function SeoFaqs({
   faqs,
   title = "Frequently asked questions",
   updatedSuffix,
+  showReviewedBy = true,
 }: {
   faqs: { q: string; a: string }[];
   title?: string;
   updatedSuffix?: string;
+  showReviewedBy?: boolean;
 }) {
   return (
     <section id="faqs" className="scroll-mt-28">
@@ -33,7 +35,7 @@ export function SeoFaqs({
           </details>
         ))}
       </div>
-      <ReviewedBy suffix={updatedSuffix} />
+      {showReviewedBy ? <ReviewedBy suffix={updatedSuffix} /> : null}
     </section>
   );
 }

@@ -599,7 +599,7 @@ export const posts = [
     focusKeyword: "advance tax due dates",
     tags: ["advance tax", "234B", "234C", "tax planning", "instalments"],
     category: "income-tax",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/advance-tax-banner.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Advance tax calendar and calculation worksheet",
     html: [
@@ -630,7 +630,7 @@ export const posts = [
     focusKeyword: "old vs new tax regime",
     tags: ["old tax regime", "new tax regime", "tax rebate", "80C", "ITR filing"],
     category: "income-tax",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/thinking.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Old versus new tax regime comparison chart",
     html: [
@@ -655,7 +655,7 @@ export const posts = [
     focusKeyword: "Income-tax Act 2025",
     tags: ["Income-tax Act 2025", "tax year", "ITR", "tax law India"],
     category: "income-tax",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/income-tax-notice-banner.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Income-tax Act 2025 explainer graphic",
     html: [
@@ -678,7 +678,7 @@ export const posts = [
     focusKeyword: "AOC-4 due date",
     tags: ["AOC-4", "MGT-7", "ROC filing", "annual compliance", "MCA"],
     category: "compliance",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/45e07ea5-214a-48b7-8cfb-891ea07bd319.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "AOC-4 and MGT-7 ROC filing checklist",
     html: [
@@ -701,7 +701,7 @@ export const posts = [
     focusKeyword: "post incorporation compliance",
     tags: ["post incorporation", "INC-20A", "private limited company", "ROC", "startup compliance"],
     category: "compliance",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/67335ffa-063b-4d92-bd37-8f1c6d5f5021.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Post-incorporation compliance checklist for private limited companies",
     html: [
@@ -724,7 +724,7 @@ export const posts = [
     focusKeyword: "DIR-3 KYC",
     tags: ["DIR-3 KYC", "DIN", "director KYC", "MCA", "DIN deactivated"],
     category: "compliance",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/aac5bb7c-91ab-4304-ac87-9e4596a835c6.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "DIR-3 KYC filing on the MCA portal",
     html: [
@@ -747,7 +747,7 @@ export const posts = [
     focusKeyword: "what is a Virtual CFO",
     tags: ["virtual CFO", "outsourced CFO", "cash flow", "fundraising", "MIS"],
     category: "compliance",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/150b9957-9a1d-4b30-925b-e321393e110d.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Virtual CFO reviewing startup financial dashboard",
     html: [
@@ -770,7 +770,7 @@ export const posts = [
     focusKeyword: "what is MIS reporting",
     tags: ["MIS reporting", "management information system", "KPI dashboard", "cash flow"],
     category: "compliance",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/f477d466-898a-47a9-ad61-3a41c70eddd6.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Monthly MIS reporting pack for business owners",
     html: [
@@ -793,7 +793,7 @@ export const posts = [
     focusKeyword: "private limited company registration process",
     tags: ["private limited company", "SPICe+", "company registration", "MCA", "startup"],
     category: "company-registration",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "otherpageshero/bfe4f45b-e65b-41db-a592-8fce7b9ea822.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Private limited company registration process in India",
     html: [
@@ -816,7 +816,7 @@ export const posts = [
     focusKeyword: "Section 8 vs trust vs society",
     tags: ["Section 8 company", "trust registration", "society registration", "NGO", "non profit"],
     category: "company-registration",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "hero/start.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Section 8 company versus trust versus society comparison",
     html: [
@@ -839,7 +839,7 @@ export const posts = [
     focusKeyword: "what is a CMA report",
     tags: ["CMA report", "bank loan", "working capital", "MPBF", "project finance"],
     category: "startup",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "banners/expert-help.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "CMA report for bank loan assessment",
     html: [
@@ -862,7 +862,7 @@ export const posts = [
     focusKeyword: "Ind AS 116 example",
     tags: ["Ind AS 116", "lease accounting", "ROU asset", "lease liability", "IFRS 16"],
     category: "compliance",
-    cover: "otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
+    cover: "banners/itr-office.png",
     inline: "otherpageshero/2acbfb32-51bc-47eb-9a9c-98db6b34c280.png",
     coverAlt: "Ind AS 116 lease accounting example illustration",
     html: [

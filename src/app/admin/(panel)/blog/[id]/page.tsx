@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PostEditor } from "@/components/admin/blog/PostEditor";
 import { requireStaff } from "@/lib/auth/dal";
+import { getPostFaqs } from "@/lib/blog/faqs-store";
 import { env } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 
@@ -25,10 +26,12 @@ export default async function EditPostPage({ params }: PageProps<"/admin/blog/[i
       .limit(30),
   ]);
   if (!post) notFound();
+  const faqs = await getPostFaqs(post.id, post.content_html);
 
   return (
     <PostEditor
       post={post}
+      faqs={faqs}
       categories={categories ?? []}
       authors={authors ?? []}
       revisions={(revisions ?? []).map((r) => ({ id: r.id, title: r.title, created_at: r.created_at, editor: r.editor?.full_name ?? null }))}

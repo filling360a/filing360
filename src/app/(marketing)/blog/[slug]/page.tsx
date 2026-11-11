@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { ArticleView } from "@/components/blog/ArticleView";
 import { JsonLd } from "@/components/blog/JsonLd";
 import { getPostBySlug, getRelatedPosts, listPosts } from "@/lib/blog/queries";
-import { extractFaqs, extractHowTo } from "@/lib/blog/structured-data";
+import { getPostFaqs } from "@/lib/blog/faqs-store";
+import { extractHowTo } from "@/lib/blog/structured-data";
 import { env } from "@/lib/env";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -51,7 +52,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
 
   const related = await getRelatedPosts(post);
   const url = `${env.siteUrl}/blog/${post.slug}`;
-  const faqs = extractFaqs(post.content_html);
+  const faqs = await getPostFaqs(post.id, post.content_html);
   const howTo = extractHowTo(post.content_html);
   const logoUrl = `${env.siteUrl}${siteConfig.logo.src}`;
 
@@ -98,8 +99,8 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
             "@type": "FAQPage",
             mainEntity: faqs.map((faq) => ({
               "@type": "Question",
-              name: faq.question,
-              acceptedAnswer: { "@type": "Answer", text: faq.answer },
+              name: faq.q,
+              acceptedAnswer: { "@type": "Answer", text: faq.a },
             })),
           },
         ]
@@ -124,7 +125,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
   return (
     <>
       <JsonLd data={structuredData} />
-      <ArticleView post={post} related={related} shareUrl={url} />
+      <ArticleView post={post} related={related} shareUrl={url} faqs={faqs} />
     </>
   );
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleView } from "@/components/blog/ArticleView";
 import { requireStaff } from "@/lib/auth/dal";
+import { getPostFaqs } from "@/lib/blog/faqs-store";
 import { env } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 
@@ -20,6 +21,7 @@ export default async function PreviewPostPage({ params }: PageProps<"/admin/blog
     .eq("id", id)
     .maybeSingle();
   if (!post) notFound();
+  const faqs = await getPostFaqs(post.id, post.content_html);
 
   return (
     <div className="-mx-4 -my-6 sm:-mx-6 lg:-mx-8 lg:-my-8">
@@ -30,6 +32,7 @@ export default async function PreviewPostPage({ params }: PageProps<"/admin/blog
       <ArticleView
         post={{ ...post, published_at: post.published_at ?? new Date().toISOString() }}
         shareUrl={`${env.siteUrl}/blog/${post.slug}`}
+        faqs={faqs}
       />
     </div>
   );

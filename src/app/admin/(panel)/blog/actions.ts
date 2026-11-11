@@ -1,15 +1,24 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { assertStaff, AuthError } from "@/lib/auth/dal";
+import { normalizeFaqs } from "@/lib/blog/faqs";
+import { writePostFaqs } from "@/lib/blog/faqs-store";
 import { postStats, sanitizePostHtml } from "@/lib/blog/html";
 import { SLUG_PATTERN, slugify } from "@/lib/slug";
 import { createClient } from "@/lib/supabase/server";
 import type { PostStatus } from "@/lib/supabase/database.types";
 
-export type BlogActionState = { ok?: boolean; error?: string; message?: string; status?: PostStatus; publishedAt?: string | null } | undefined;
+export type BlogActionState = {
+  ok?: boolean;
+  error?: string;
+  message?: string;
+  status?: PostStatus;
+  publishedAt?: string | null;
+  category?: { id: string; name: string; slug: string };
+} | undefined;
 
 function fail(err: unknown): BlogActionState {
   if (err instanceof AuthError) return { error: err.message };
@@ -18,6 +27,7 @@ function fail(err: unknown): BlogActionState {
 }
 
 function revalidatePublicBlog(slugs: (string | null | undefined)[] = []) {
+  revalidatePath("/");
   revalidatePath("/blog", "layout");
   for (const slug of slugs) if (slug) revalidatePath(`/blog/${slug}`);
   revalidatePath("/blog/rss.xml");
@@ -104,6 +114,15 @@ const postSchema = z.object({
   canonical_url: z.union([z.literal(""), z.url().max(500)]).transform((v) => v || null),
   noindex: z.boolean(),
   scheduled_for: z.string().nullable(),
+  faqs: z
+    .array(
+      z.object({
+        q: z.string().trim().max(300),
+        a: z.string().trim().max(2000),
+      }),
+    )
+    .max(30)
+    .optional(),
 });
 
 export type PostInput = z.input<typeof postSchema>;
@@ -115,7 +134,7 @@ export async function savePost(postId: string, input: PostInput, intent: SaveInt
     if (!z.uuid().safeParse(postId).success) return { error: "Invalid post" };
     const parsed = postSchema.safeParse(input);
     if (!parsed.success) return { error: parsed.error.issues[0]?.message };
-    const { scheduled_for, ...values } = parsed.data;
+    const { scheduled_for, faqs, ...values } = parsed.data;
     if (RESERVED_SLUGS.has(values.slug)) return { error: `"${values.slug}" is reserved — choose a different URL` };
 
     const db = await createClient();
@@ -172,6 +191,11 @@ export async function savePost(postId: string, input: PostInput, intent: SaveInt
       .eq("id", postId);
     if (error) return { error: error.message };
 
+    if (faqs !== undefined) {
+      await writePostFaqs(postId, normalizeFaqs(faqs));
+      revalidateTag(`post-faqs:${postId}`, "max");
+    }
+
     const wasLive = current.status === "published" || current.status === "scheduled";
     const isLive = status === "published" || status === "scheduled";
     if (wasLive || isLive) revalidatePublicBlog([current.slug, values.slug]);
@@ -197,6 +221,12 @@ export async function deletePost(postId: string): Promise<BlogActionState> {
     const { data: post } = await db.from("blog_posts").select("slug").eq("id", postId).single();
     const { error } = await db.from("blog_posts").delete().eq("id", postId);
     if (error) return { error: error.message };
+    try {
+      await writePostFaqs(postId, []);
+      revalidateTag(`post-faqs:${postId}`, "max");
+    } catch {
+      /* FAQ file may not exist */
+    }
     revalidatePublicBlog([post?.slug]);
   } catch (err) {
     return fail(err);
@@ -248,18 +278,34 @@ export async function saveCategory(categoryId: string | null, _: BlogActionState
     if (!SLUG_PATTERN.test(slug)) return { error: "Invalid slug" };
 
     const db = await createClient();
-    const values = { ...parsed.data, slug };
-    const { error } = categoryId
-      ? await db.from("blog_categories").update(values).eq("id", categoryId)
-      : await db.from("blog_categories").insert(values);
-    if (error) return { error: error.code === "23505" ? "A category with that URL already exists" : error.message };
+    const values = { name: parsed.data.name, description: parsed.data.description, sort_order: parsed.data.sort_order, slug };
+    if (categoryId) {
+      const { error } = await db.from("blog_categories").update(values).eq("id", categoryId);
+      if (error) return { error: error.code === "23505" ? "A category with that URL already exists" : error.message };
+      revalidatePublicBlog();
+      revalidatePath("/admin/blog/categories");
+      revalidatePath("/admin/blog");
+      return { ok: true, message: "Category updated", category: { id: categoryId, name: values.name, slug } };
+    }
+
+    const { data, error } = await db.from("blog_categories").insert(values).select("id, name, slug").single();
+    if (error || !data) return { error: error?.code === "23505" ? "A category with that URL already exists" : error?.message ?? "Could not create category" };
 
     revalidatePublicBlog();
     revalidatePath("/admin/blog/categories");
-    return { ok: true, message: categoryId ? "Category updated" : "Category added" };
+    revalidatePath("/admin/blog");
+    return { ok: true, message: "Category added", category: data };
   } catch (err) {
     return fail(err);
   }
+}
+
+/** Create a category from the post editor / new-post form without leaving the page. */
+export async function createCategoryQuick(name: string): Promise<BlogActionState> {
+  const form = new FormData();
+  form.set("name", name);
+  form.set("sort_order", "100");
+  return saveCategory(null, undefined, form);
 }
 
 export async function deleteCategory(categoryId: string): Promise<BlogActionState> {

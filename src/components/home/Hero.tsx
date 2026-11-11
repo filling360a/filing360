@@ -12,7 +12,7 @@ const easeExit = [0.4, 0, 1, 1] as const;
 
 type Align = "left" | "right";
 
-type Slide = {
+export type HeroSlide = {
   src: string;
   align: Align;
   object: string;
@@ -22,7 +22,7 @@ type Slide = {
   lightNav?: boolean;
 };
 
-const slides: Slide[] = [
+const FALLBACK_SLIDES: HeroSlide[] = [
   {
     src: "/images/hero/start.png",
     align: "left",
@@ -54,7 +54,7 @@ function wipeFrom(align: Align) {
   return align === "left" ? "inset(0% 100% 0% 0%)" : "inset(0% 0% 0% 100%)";
 }
 
-export function Hero() {
+export function Hero({ slides = FALLBACK_SLIDES }: { slides?: HeroSlide[] }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -65,14 +65,15 @@ export function Hero() {
   const regionRef = useRef<HTMLDivElement>(null);
   const remainingRef = useRef(INTERVAL_MS);
   const lastTickRef = useRef<number | null>(null);
-  const slide = slides[index];
+  const safeSlides = slides.length > 0 ? slides : FALLBACK_SLIDES;
+  const slide = safeSlides[index % safeSlides.length];
   const paused = hoverPaused || toggledPaused || offscreen || hidden;
 
   const go = useCallback(
     (delta: number) => {
-      setIndex((current) => (current + delta + slides.length) % slides.length);
+      setIndex((current) => (current + delta + safeSlides.length) % safeSlides.length);
     },
-    [],
+    [safeSlides.length],
   );
 
   const goTo = useCallback((next: number) => {
@@ -301,13 +302,13 @@ export function Hero() {
             <Chevron dir="left" />
           </button>
           <div className="flex items-center gap-2" role="tablist" aria-label="Choose banner">
-            {slides.map((item, i) => (
+            {safeSlides.map((item, i) => (
               <button
-                key={item.src}
+                key={`${item.src}-${i}`}
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={`Show banner ${i + 1} of ${slides.length}`}
+                aria-label={`Show banner ${i + 1} of ${safeSlides.length}`}
                 onClick={() => goTo(i)}
                 className="h-1.5 overflow-hidden rounded-full bg-[#0f2a45]/18 transition-[width] duration-300"
                 style={{ width: i === index ? 44 : 18 }}

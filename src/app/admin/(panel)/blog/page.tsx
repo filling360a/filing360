@@ -54,7 +54,7 @@ export default async function BlogAdminPage({ searchParams }: PageProps<"/admin/
     <>
       <PageHeader
         title="Blog"
-        description="Write, schedule and publish articles."
+        description="Write, schedule and publish articles. Each post has a separate FAQs section below the article body."
         actions={
           <>
             <Link href="/admin/blog/categories" className={buttonClass("secondary")}>Categories</Link>

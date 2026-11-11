@@ -20,6 +20,7 @@ export const ACCESS = {
   dashboard: ["admin", "sales", "editor", "hr"],
   leads: ["admin", "sales"],
   blog: ["admin", "editor"],
+  banners: ["admin", "editor"],
   careers: ["admin", "hr"],
   team: ["admin"],
 } as const satisfies Record<string, readonly AppRole[]>;

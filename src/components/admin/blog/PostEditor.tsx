@@ -2,17 +2,20 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { deletePost, restoreRevision, savePost, type PostInput, type SaveIntent } from "@/app/admin/(panel)/blog/actions";
+import { createCategoryQuick, deletePost, restoreRevision, savePost, type PostInput, type SaveIntent } from "@/app/admin/(panel)/blog/actions";
 import { Alert, Button, buttonClass, Card, inputClass, labelClass, PostStatusBadge } from "@/components/admin/ui";
+import type { BlogFaq } from "@/lib/blog/faqs";
 import { uploadBlogImage } from "@/lib/blog/upload-client";
 import { runSeoChecks } from "@/lib/blog/seo-checks";
 import { fromIstInputValue, timeAgo, toIstInputValue } from "@/lib/format";
 import { slugify } from "@/lib/slug";
 import type { PostStatus, Tables } from "@/lib/supabase/database.types";
+import { FaqEditor } from "./FaqEditor";
 import { RichTextEditor } from "./RichTextEditor";
 
 type Props = {
   post: Tables<"blog_posts">;
+  faqs?: BlogFaq[];
   categories: { id: string; name: string }[];
   authors: { id: string; full_name: string | null; email: string }[];
   revisions: { id: string; title: string; created_at: string; editor: string | null }[];
@@ -36,9 +39,10 @@ type FormState = {
   canonical_url: string;
   noindex: boolean;
   scheduled_for: string;
+  faqs: BlogFaq[];
 };
 
-function initialState(post: Tables<"blog_posts">): FormState {
+function initialState(post: Tables<"blog_posts">, faqs: BlogFaq[] = []): FormState {
   return {
     title: post.title,
     slug: post.slug,
@@ -55,6 +59,7 @@ function initialState(post: Tables<"blog_posts">): FormState {
     canonical_url: post.canonical_url ?? "",
     noindex: post.noindex,
     scheduled_for: post.status === "scheduled" ? toIstInputValue(post.published_at) : "",
+    faqs,
   };
 }
 
@@ -63,14 +68,15 @@ function toInput(form: FormState): PostInput {
     ...form,
     tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
     scheduled_for: fromIstInputValue(form.scheduled_for),
+    faqs: form.faqs,
   };
 }
 
 const AUTOSAVE_MS = 45_000;
 
-export function PostEditor({ post, categories, authors, revisions, siteUrl, canDelete }: Props) {
-  const [form, setForm] = useState<FormState>(() => initialState(post));
-  const [saved, setSaved] = useState<string>(() => JSON.stringify(initialState(post)));
+export function PostEditor({ post, faqs = [], categories, authors, revisions, siteUrl, canDelete }: Props) {
+  const [form, setForm] = useState<FormState>(() => initialState(post, faqs));
+  const [saved, setSaved] = useState<string>(() => JSON.stringify(initialState(post, faqs)));
   const [status, setStatus] = useState<PostStatus>(post.status);
   const [publishedAt, setPublishedAt] = useState(post.published_at);
   const [plainText, setPlainText] = useState(() => post.content_html.replace(/<[^>]+>/g, " "));
@@ -79,6 +85,11 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
   const [slugTouched, setSlugTouched] = useState(post.slug !== slugify(post.title));
   const [coverUploading, setCoverUploading] = useState(false);
   const [pending, startTransition] = useTransition();
+  const [categoryOptions, setCategoryOptions] = useState(categories);
+  const [newCategoryOpen, setNewCategoryOpen] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [categoryBusy, setCategoryBusy] = useState(false);
+  const [categoryError, setCategoryError] = useState<string | null>(null);
   const coverInput = useRef<HTMLInputElement>(null);
 
   const [now, setNow] = useState(() => Date.now());
@@ -233,6 +244,7 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
               setPlainText(text);
             }}
           />
+          <FaqEditor faqs={form.faqs} onChange={(next) => set("faqs", next)} />
         </div>
 
         <div className="space-y-4">
@@ -314,8 +326,74 @@ export function PostEditor({ post, categories, authors, revisions, siteUrl, canD
                   <label htmlFor="category" className={labelClass}>Category</label>
                   <select id="category" value={form.category_id} onChange={(e) => set("category_id", e.target.value)} className={inputClass}>
                     <option value="">None</option>
-                    {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+                    {categoryOptions.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </select>
+                  {!newCategoryOpen ? (
+                    <button
+                      type="button"
+                      className="mt-1.5 text-[12.5px] font-semibold text-[#0e7b5b] hover:underline"
+                      onClick={() => {
+                        setCategoryError(null);
+                        setNewCategoryOpen(true);
+                      }}
+                    >
+                      + Create new category
+                    </button>
+                  ) : (
+                    <div className="mt-2 space-y-1.5 rounded-lg border border-[#d7e4de] bg-[#f3f7fa] p-2.5">
+                      <label htmlFor="new-category" className={labelClass}>New category name</label>
+                      <input
+                        id="new-category"
+                        value={newCategoryName}
+                        onChange={(e) => setNewCategoryName(e.target.value)}
+                        placeholder="e.g. Accounting"
+                        maxLength={60}
+                        className={inputClass}
+                        autoFocus
+                      />
+                      {categoryError ? <p className="text-[12px] text-[#b91c1c]">{categoryError}</p> : null}
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          size="sm"
+                          disabled={categoryBusy || newCategoryName.trim().length < 2}
+                          onClick={() => {
+                            setCategoryBusy(true);
+                            setCategoryError(null);
+                            startTransition(async () => {
+                              const res = await createCategoryQuick(newCategoryName.trim());
+                              setCategoryBusy(false);
+                              if (res?.error || !res?.category) {
+                                setCategoryError(res?.error ?? "Could not create category");
+                                return;
+                              }
+                              setCategoryOptions((prev) =>
+                                prev.some((c) => c.id === res.category!.id) ? prev : [...prev, { id: res.category!.id, name: res.category!.name }],
+                              );
+                              set("category_id", res.category.id);
+                              setNewCategoryName("");
+                              setNewCategoryOpen(false);
+                              setFeedback({ ok: true, text: `Category “${res.category.name}” created — it will show on /blog` });
+                            });
+                          }}
+                        >
+                          {categoryBusy ? "Creating…" : "Add category"}
+                        </Button>
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => {
+                            setNewCategoryOpen(false);
+                            setNewCategoryName("");
+                            setCategoryError(null);
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="author" className={labelClass}>Author</label>
