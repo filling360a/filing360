@@ -3,8 +3,8 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { assertStaff, AuthError } from "@/lib/auth/dal";
-import { BANNER_SLOTS, type BannerAlign, type BannerOverridesMap } from "@/lib/banners/defaults";
-import { getBannerOverrides, writeBannerOverrides } from "@/lib/banners/store";
+import { type BannerAlign, type BannerOverridesMap } from "@/lib/banners/defaults";
+import { getBannerOverrides, getBannerSlots, writeBannerOverrides } from "@/lib/banners/store";
 
 export type BannerActionState = { ok?: boolean; error?: string; message?: string } | undefined;
 
@@ -29,8 +29,14 @@ const saveSchema = z.object({
 function revalidateBannerPages(key: string) {
   revalidateTag("site-banners", "max");
   revalidatePath("/");
-  const slot = BANNER_SLOTS.find((s) => s.key === key);
-  if (slot?.pagePath && slot.pagePath !== "/") revalidatePath(slot.pagePath);
+  const slot = getBannerSlots().find((s) => s.key === key);
+  if (slot?.pagePath && slot.pagePath !== "/") {
+    revalidatePath(slot.pagePath);
+    // Child pages that inherit a prefix slot (guides, cities, industries…)
+    if (["/guides", "/for", "/documents", "/company-registration-in"].includes(slot.pagePath)) {
+      revalidatePath(slot.pagePath, "layout");
+    }
+  }
   revalidatePath("/admin/banners");
 }
 
@@ -50,7 +56,7 @@ export async function saveBannerSlot(_: BannerActionState, formData: FormData): 
     });
     if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
 
-    const slot = BANNER_SLOTS.find((s) => s.key === parsed.data.key);
+    const slot = getBannerSlots().find((s) => s.key === parsed.data.key);
     if (!slot) return { error: "Unknown banner slot" };
 
     const current = await getBannerOverrides();
@@ -59,14 +65,15 @@ export async function saveBannerSlot(_: BannerActionState, formData: FormData): 
 
     const imageUrl = parsed.data.resetImage ? null : parsed.data.imageUrl ?? prev.imageUrl ?? null;
 
+    const isHome = slot.group === "home_hero";
     next[slot.key] = {
       imageUrl,
       align: parsed.data.align as BannerAlign,
       object: parsed.data.object || slot.object,
-      title: slot.layout === "split" ? parsed.data.title || slot.title || null : prev.title ?? null,
-      accent: slot.layout === "split" ? parsed.data.accent || slot.accent || null : prev.accent ?? null,
-      body: slot.layout === "split" ? parsed.data.body || slot.body || null : prev.body ?? null,
-      lightNav: slot.layout === "split" ? Boolean(parsed.data.lightNav) : prev.lightNav,
+      title: isHome ? parsed.data.title || slot.title || null : prev.title ?? null,
+      accent: isHome ? parsed.data.accent || slot.accent || null : prev.accent ?? null,
+      body: isHome ? parsed.data.body || slot.body || null : prev.body ?? null,
+      lightNav: isHome ? Boolean(parsed.data.lightNav) : prev.lightNav,
       updatedAt: new Date().toISOString(),
     };
 
@@ -74,7 +81,7 @@ export async function saveBannerSlot(_: BannerActionState, formData: FormData): 
     const o = next[slot.key];
     const unchangedImage = !o.imageUrl;
     const unchangedCopy =
-      slot.layout !== "split" ||
+      !isHome ||
       ((o.title ?? null) === (slot.title ?? null) &&
         (o.accent ?? null) === (slot.accent ?? null) &&
         (o.body ?? null) === (slot.body ?? null) &&
@@ -82,6 +89,11 @@ export async function saveBannerSlot(_: BannerActionState, formData: FormData): 
     const unchangedAlign = o.align === slot.align && (o.object || slot.object) === slot.object;
     if (unchangedImage && unchangedCopy && unchangedAlign) {
       delete next[slot.key];
+    }
+
+    // Drop legacy short keys when saving the new path-based key
+    for (const legacy of [`page:${slot.pagePath.replace(/^\/services\//, "")}`]) {
+      if (legacy !== slot.key) delete next[legacy];
     }
 
     await writeBannerOverrides(next);

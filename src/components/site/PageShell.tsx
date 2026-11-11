@@ -2,8 +2,9 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/blog/JsonLd";
 import { InnerHero } from "@/components/site/InnerHero";
-import { bannerForPath, splitHeading } from "@/content/pageBanners";
+import { splitHeading } from "@/content/pageBanners";
 import { whatsappLink } from "@/content/company";
+import { resolveBannerArt } from "@/lib/banners/store";
 import { breadcrumbJsonLd, faqJsonLd, type Crumb } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -32,7 +33,7 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   );
 }
 
-export function PageHero({
+export async function PageHero({
   title,
   intro,
   crumbs,
@@ -50,11 +51,12 @@ export function PageHero({
 }) {
   const path = imageKey ?? crumbs?.at(-1)?.path ?? (typeof title === "string" ? title : "/");
   const heading = typeof title === "string" ? splitHeading(title) : null;
+  const art = await resolveBannerArt(path);
   return (
     <>
       {crumbs ? <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, ...crumbs])} /> : null}
       <InnerHero
-        art={bannerForPath(path)}
+        art={art}
         title={heading ? heading.title : title}
         accent={heading?.accent}
         body={intro}

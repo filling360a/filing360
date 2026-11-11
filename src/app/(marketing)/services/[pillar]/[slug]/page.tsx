@@ -18,10 +18,10 @@ import { LeadForm } from "@/components/leads/LeadForm";
 import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
 import { PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
 import { whatsappLink } from "@/content/company";
-import { bannerForService, splitHeading, type BannerArt } from "@/content/pageBanners";
+import { splitHeading } from "@/content/pageBanners";
 import { serviceResources } from "@/content/links";
 import { getSeoServicePage } from "@/content/seoRegistry";
-import { getPageBannerOverride } from "@/lib/banners/store";
+import { resolveBannerArt } from "@/lib/banners/store";
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -123,15 +123,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   const seoPage = getSeoServicePage(pillar.slug, service.slug);
   const heading = seoPage ? { title: seoPage.h1, accent: undefined } : splitHeading(service.heading);
   const chips = seoPage?.highlights ?? service.highlights;
-  const override = await getPageBannerOverride(`${pillar.slug}/${service.slug}`);
-  const art: BannerArt = override
-    ? {
-        src: override.src,
-        align: override.align,
-        object: override.object,
-        layout: override.layout === "campaign" ? "campaign" : undefined,
-      }
-    : bannerForService(pillar.slug, service.slug);
+  const art = await resolveBannerArt(href);
 
   return (
     <div className="bg-[#f3f7fa]">

@@ -10,8 +10,9 @@ import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
 import { PrimaryButton, SecondaryButton } from "@/components/site/PageShell";
 import { GST, GST_HUB_PATH, gstFaqs, gstHubMeta, gstPrices } from "@/content/gstHub";
 import { getPillarHub } from "@/content/hubRegistry";
-import { bannerForPillar, splitHeading } from "@/content/pageBanners";
+import { splitHeading } from "@/content/pageBanners";
 import { formatInr, getPillar, pillars, type Pillar } from "@/content/services";
+import { resolveBannerArt } from "@/lib/banners/store";
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 
 import "@/content/seoLookups";
@@ -54,7 +55,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-function GstPillar({ pillar }: { pillar: Pillar }) {
+async function GstPillar({ pillar }: { pillar: Pillar }) {
+  const art = await resolveBannerArt(GST_HUB_PATH);
   return (
     <div className="bg-[#f3f7fa]">
       <JsonLd
@@ -84,7 +86,7 @@ function GstPillar({ pillar }: { pillar: Pillar }) {
         ]}
       />
       <InnerHero
-        art={bannerForPillar("gst")}
+        art={art}
         title={gstHubMeta.h1}
         imageAlt="GST registration process by Filing360"
         body={
@@ -127,12 +129,13 @@ function GstPillar({ pillar }: { pillar: Pillar }) {
   );
 }
 
-function SeoPillar({ pillar, hub }: { pillar: Pillar; hub: NonNullable<ReturnType<typeof getPillarHub>> }) {
+async function SeoPillar({ pillar, hub }: { pillar: Pillar; hub: NonNullable<ReturnType<typeof getPillarHub>> }) {
   const updated = new Date(`${hub.updated}T00:00:00+05:30`).toLocaleDateString("en-IN", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
+  const art = await resolveBannerArt(hub.path);
 
   return (
     <div className="bg-[#f3f7fa]">
@@ -162,7 +165,7 @@ function SeoPillar({ pillar, hub }: { pillar: Pillar; hub: NonNullable<ReturnTyp
         ]}
       />
       <InnerHero
-        art={bannerForPillar(pillar.slug)}
+        art={art}
         title={hub.meta.h1}
         imageAlt={hub.imageAlt}
         body={<p>{hub.heroLead}</p>}
@@ -227,11 +230,12 @@ export default async function PillarPage({ params }: Props) {
   if (hub) return <SeoPillar pillar={pillar} hub={hub} />;
 
   const heading = splitHeading(`${pillar.name} services`);
+  const art = await resolveBannerArt(`/services/${pillar.slug}`);
 
   return (
     <div className="bg-[#f3f7fa]">
       <InnerHero
-        art={bannerForPillar(pillar.slug)}
+        art={art}
         title={heading.title}
         accent={heading.accent}
         body={<p>{pillar.description}</p>}

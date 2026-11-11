@@ -115,7 +115,14 @@ export function BannerEditor({ banner }: { banner: ResolvedBanner }) {
           </div>
           {uploadError ? <Alert>{uploadError}</Alert> : null}
 
-          {banner.layout === "split" ? (
+          {banner.layout === "campaign" ? (
+            <>
+              <input type="hidden" name="align" value={align} />
+              <p className="rounded-lg border border-[#d7e4de] bg-[#f3f7fa] px-3 py-2 text-[13px] leading-relaxed text-[#5b6e7a]">
+                Campaign banner — put the headline and CTA in the image. The quote form stays below the banner in the same place.
+              </p>
+            </>
+          ) : (
             <>
               <div>
                 <label htmlFor={`${banner.key}-align`} className={labelClass}>
@@ -132,66 +139,68 @@ export function BannerEditor({ banner }: { banner: ResolvedBanner }) {
                   <option value="right">Form on right · subject on left</option>
                 </select>
                 <p className="mt-1 text-[12px] text-[#5b6e7a]">
-                  The lead form stays in this position — only the background image and copy change.
+                  The lead form stays in this position — only the background image
+                  {banner.group === "home_hero" ? " and copy" : ""} change.
                 </p>
               </div>
-              <div>
-                <label htmlFor={`${banner.key}-title`} className={labelClass}>
-                  Title
-                </label>
-                <input
-                  id={`${banner.key}-title`}
-                  name="title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  maxLength={120}
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label htmlFor={`${banner.key}-accent`} className={labelClass}>
-                  Accent line
-                </label>
-                <input
-                  id={`${banner.key}-accent`}
-                  name="accent"
-                  value={accent}
-                  onChange={(e) => setAccent(e.target.value)}
-                  maxLength={120}
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label htmlFor={`${banner.key}-body`} className={labelClass}>
-                  Supporting text
-                </label>
-                <textarea
-                  id={`${banner.key}-body`}
-                  name="body"
-                  rows={3}
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
-                  maxLength={400}
-                  className={inputClass}
-                />
-              </div>
-              <label className="flex items-center gap-2 text-[13.5px] text-[#2c3f4e]">
-                <input
-                  type="checkbox"
-                  name="lightNav"
-                  checked={lightNav}
-                  onChange={(e) => setLightNav(e.target.checked)}
-                  className="h-4 w-4 rounded border-[#d0dcd6]"
-                />
-                Light top navigation on this slide
-              </label>
-            </>
-          ) : (
-            <>
-              <input type="hidden" name="align" value={align} />
-              <p className="rounded-lg border border-[#d7e4de] bg-[#f3f7fa] px-3 py-2 text-[13px] leading-relaxed text-[#5b6e7a]">
-                Campaign banner — put the headline and CTA in the image. The quote form stays below the banner in the same place.
-              </p>
+              {banner.group === "home_hero" ? (
+                <>
+                  <div>
+                    <label htmlFor={`${banner.key}-title`} className={labelClass}>
+                      Title
+                    </label>
+                    <input
+                      id={`${banner.key}-title`}
+                      name="title"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      maxLength={120}
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor={`${banner.key}-accent`} className={labelClass}>
+                      Accent line
+                    </label>
+                    <input
+                      id={`${banner.key}-accent`}
+                      name="accent"
+                      value={accent}
+                      onChange={(e) => setAccent(e.target.value)}
+                      maxLength={120}
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor={`${banner.key}-body`} className={labelClass}>
+                      Supporting text
+                    </label>
+                    <textarea
+                      id={`${banner.key}-body`}
+                      name="body"
+                      rows={3}
+                      value={body}
+                      onChange={(e) => setBody(e.target.value)}
+                      maxLength={400}
+                      className={inputClass}
+                    />
+                  </div>
+                  <label className="flex items-center gap-2 text-[13.5px] text-[#2c3f4e]">
+                    <input
+                      type="checkbox"
+                      name="lightNav"
+                      checked={lightNav}
+                      onChange={(e) => setLightNav(e.target.checked)}
+                      className="h-4 w-4 rounded border-[#d0dcd6]"
+                    />
+                    Light top navigation on this slide
+                  </label>
+                </>
+              ) : (
+                <p className="rounded-lg border border-[#d7e4de] bg-[#f3f7fa] px-3 py-2 text-[13px] leading-relaxed text-[#5b6e7a]">
+                  Page headline and body come from the page itself — upload a new image here to change only the banner photo.
+                </p>
+              )}
             </>
           )}
 

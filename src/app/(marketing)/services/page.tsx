@@ -1,4 +1,5 @@
 import { ServicesHub } from "@/components/services/ServicesHub";
+import { resolveBannerArt } from "@/lib/banners/store";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -16,6 +17,7 @@ export const metadata = pageMetadata({
   ],
 });
 
-export default function ServicesHubPage() {
-  return <ServicesHub />;
+export default async function ServicesHubPage() {
+  const art = await resolveBannerArt("/services");
+  return <ServicesHub art={art} />;
 }

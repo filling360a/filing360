@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BannerEditor } from "@/components/admin/banners/BannerEditor";
+import { PageBannersPanel } from "@/components/admin/banners/PageBannersPanel";
 import { PageHeader } from "@/components/admin/ui";
 import { requireStaff } from "@/lib/auth/dal";
 import { BANNER_SPECS } from "@/lib/banners/defaults";
@@ -23,7 +24,7 @@ export default async function BannersAdminPage({
     <>
       <PageHeader
         title="Banners"
-        description="Update homepage hero slides and service-page banners. The lead form always stays in the same place."
+        description="Update homepage hero slides and banners on every service and marketing page. The lead form always stays in the same place."
       />
 
       <div className="mb-5 flex flex-wrap gap-2">
@@ -46,11 +47,15 @@ export default async function BannersAdminPage({
         <p className="mt-0.5">{specs.note}</p>
       </div>
 
-      <div className="space-y-5">
-        {banners.map((banner) => (
-          <BannerEditor key={banner.key} banner={banner} />
-        ))}
-      </div>
+      {active === "home" ? (
+        <div className="space-y-5">
+          {banners.map((banner) => (
+            <BannerEditor key={banner.key} banner={banner} />
+          ))}
+        </div>
+      ) : (
+        <PageBannersPanel banners={banners} />
+      )}
     </>
   );
 }

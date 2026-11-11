@@ -5,9 +5,9 @@ import Link from "next/link";
 import { pillars } from "@/content/services";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { InnerHero, bannerMarks } from "@/components/site/InnerHero";
-import { bannerForPath } from "@/content/pageBanners";
+import type { BannerArt } from "@/content/pageBanners";
 
-export function ServicesHub() {
+export function ServicesHub({ art }: { art: BannerArt }) {
   const [query, setQuery] = useState("");
 
   const results = useMemo(() => {
@@ -28,7 +28,7 @@ export function ServicesHub() {
   return (
     <div className="bg-[#f3f7fa]">
       <InnerHero
-        art={bannerForPath("/services")}
+        art={art}
         title="Every filing,"
         accent="one place."
         body={

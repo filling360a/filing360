@@ -18,6 +18,8 @@ export type BannerSlot = {
   accent?: string;
   body?: string;
   lightNav?: boolean;
+  /** Admin grouping label for Other pages */
+  section?: string;
   /** Shown in the admin form */
   sizeHint: string;
   ratioHint: string;
@@ -40,7 +42,7 @@ export const BANNER_SPECS = {
   },
 } as const;
 
-export const BANNER_SLOTS: BannerSlot[] = [
+export const HOME_HERO_SLOTS: BannerSlot[] = [
   {
     key: "home_hero_1",
     group: "home_hero",
@@ -89,58 +91,6 @@ export const BANNER_SLOTS: BannerSlot[] = [
     sizeHint: BANNER_SPECS.home_hero.sizeHint,
     ratioHint: BANNER_SPECS.home_hero.ratioHint,
     sortOrder: 30,
-  },
-  {
-    key: "page:income-tax/advance-tax-calculation",
-    group: "page",
-    label: "Advance Tax",
-    pagePath: "/services/income-tax/advance-tax-calculation",
-    defaultSrc: "/images/otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
-    align: "left",
-    object: "object-[84%_center]",
-    layout: "split",
-    sizeHint: BANNER_SPECS.home_hero.sizeHint,
-    ratioHint: BANNER_SPECS.home_hero.ratioHint,
-    sortOrder: 110,
-  },
-  {
-    key: "page:income-tax/income-tax-notice",
-    group: "page",
-    label: "Income Tax Notice",
-    pagePath: "/services/income-tax/income-tax-notice",
-    defaultSrc: "/images/otherpageshero/thinking.png",
-    align: "left",
-    object: "object-[82%_center]",
-    layout: "split",
-    sizeHint: BANNER_SPECS.home_hero.sizeHint,
-    ratioHint: BANNER_SPECS.home_hero.ratioHint,
-    sortOrder: 120,
-  },
-  {
-    key: "page:income-tax/revised-return",
-    group: "page",
-    label: "Revised Return",
-    pagePath: "/services/income-tax/revised-return",
-    defaultSrc: "/images/otherpageshero/06e846a4-84af-43f0-94c4-1bd30a5cc794.png",
-    align: "left",
-    object: "object-[84%_center]",
-    layout: "split",
-    sizeHint: BANNER_SPECS.home_hero.sizeHint,
-    ratioHint: BANNER_SPECS.home_hero.ratioHint,
-    sortOrder: 130,
-  },
-  {
-    key: "page:income-tax/updated-return",
-    group: "page",
-    label: "Updated Return (ITR-U)",
-    pagePath: "/services/income-tax/updated-return",
-    defaultSrc: "/images/otherpageshero/94491b05-7085-433d-8efb-cb4c309798ae.png",
-    align: "right",
-    object: "object-[18%_center]",
-    layout: "split",
-    sizeHint: BANNER_SPECS.home_hero.sizeHint,
-    ratioHint: BANNER_SPECS.home_hero.ratioHint,
-    sortOrder: 140,
   },
 ];
 
