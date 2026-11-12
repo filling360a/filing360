@@ -23,6 +23,7 @@ export type BlogActionState = {
 function fail(err: unknown): BlogActionState {
   if (err instanceof AuthError) return { error: err.message };
   console.error("[admin/blog]", err);
+  if (err instanceof Error && err.message.trim()) return { error: err.message };
   return { error: "Something went wrong. Please try again." };
 }
 
@@ -146,6 +147,7 @@ export async function savePost(postId: string, input: PostInput, intent: SaveInt
 
     const content_html = sanitizePostHtml(values.content_html);
     const { wordCount, readingMinutes } = postStats(content_html);
+    const cleanedFaqs = faqs !== undefined ? normalizeFaqs(faqs) : undefined;
 
     let status: PostStatus = current.status;
     let published_at = current.published_at;
@@ -177,6 +179,8 @@ export async function savePost(postId: string, input: PostInput, intent: SaveInt
       return { error: "Add some content before publishing" };
     }
 
+    // Keep FAQs out of this update so missing `faqs` column (migration not applied)
+    // cannot block publishing. Persist them separately with DB→storage fallback.
     const { error } = await db
       .from("blog_posts")
       .update({
@@ -191,9 +195,16 @@ export async function savePost(postId: string, input: PostInput, intent: SaveInt
       .eq("id", postId);
     if (error) return { error: error.message };
 
-    if (faqs !== undefined) {
-      await writePostFaqs(postId, normalizeFaqs(faqs));
-      revalidateTag(`post-faqs:${postId}`, "max");
+    if (cleanedFaqs !== undefined) {
+      try {
+        await writePostFaqs(postId, cleanedFaqs);
+        revalidateTag(`post-faqs:${postId}`, "max");
+      } catch (faqErr) {
+        const message = faqErr instanceof Error ? faqErr.message : "Could not save FAQs";
+        return {
+          error: `Post saved, but FAQs failed: ${message}. Allow application/json on the blog-media bucket, or run the faqs column migration.`,
+        };
+      }
     }
 
     const wasLive = current.status === "published" || current.status === "scheduled";
@@ -221,12 +232,7 @@ export async function deletePost(postId: string): Promise<BlogActionState> {
     const { data: post } = await db.from("blog_posts").select("slug").eq("id", postId).single();
     const { error } = await db.from("blog_posts").delete().eq("id", postId);
     if (error) return { error: error.message };
-    try {
-      await writePostFaqs(postId, []);
-      revalidateTag(`post-faqs:${postId}`, "max");
-    } catch {
-      /* FAQ file may not exist */
-    }
+    revalidateTag(`post-faqs:${postId}`, "max");
     revalidatePublicBlog([post?.slug]);
   } catch (err) {
     return fail(err);

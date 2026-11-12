@@ -143,6 +143,8 @@ type BlogPostRow = {
   noindex: boolean;
   reading_minutes: number;
   word_count: number;
+  /** Structured FAQ items from the admin editor: `{ q, a }[]`. */
+  faqs: Json;
   created_by: string | null;
   updated_by: string | null;
   created_at: string;
@@ -395,6 +397,7 @@ export type Database = {
           | "noindex"
           | "reading_minutes"
           | "word_count"
+          | "faqs"
           | "created_by"
           | "updated_by"
           | "created_at"
