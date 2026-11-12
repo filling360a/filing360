@@ -24,6 +24,11 @@ function fail(err: unknown): BlogActionState {
   if (err instanceof AuthError) return { error: err.message };
   console.error("[admin/blog]", err);
   if (err instanceof Error && err.message.trim()) return { error: err.message };
+  if (typeof err === "string" && err.trim()) return { error: err };
+  if (err && typeof err === "object" && "message" in err) {
+    const message = String((err as { message: unknown }).message ?? "").trim();
+    if (message) return { error: message };
+  }
   return { error: "Something went wrong. Please try again." };
 }
 
@@ -179,38 +184,45 @@ export async function savePost(postId: string, input: PostInput, intent: SaveInt
       return { error: "Add some content before publishing" };
     }
 
-    // Keep FAQs out of this update so missing `faqs` column (migration not applied)
-    // cannot block publishing. Persist them separately with DB→storage fallback.
-    const { error } = await db
+    // Prefer writing FAQs in the same row update (column exists after migration).
+    // If the column is missing, retry without it and fall back to storage.
+    const baseUpdate = {
+      ...values,
+      content_html,
+      word_count: wordCount,
+      reading_minutes: readingMinutes,
+      status,
+      published_at,
+      updated_by: staff.id,
+    };
+    let { error } = await db
       .from("blog_posts")
-      .update({
-        ...values,
-        content_html,
-        word_count: wordCount,
-        reading_minutes: readingMinutes,
-        status,
-        published_at,
-        updated_by: staff.id,
-      })
+      .update(cleanedFaqs !== undefined ? { ...baseUpdate, faqs: cleanedFaqs } : baseUpdate)
       .eq("id", postId);
-    if (error) return { error: error.message };
 
-    if (cleanedFaqs !== undefined) {
-      try {
-        await writePostFaqs(postId, cleanedFaqs);
-        revalidateTag(`post-faqs:${postId}`, "max");
-      } catch (faqErr) {
-        const message = faqErr instanceof Error ? faqErr.message : "Could not save FAQs";
-        return {
-          error: `Post saved, but FAQs failed: ${message}. Allow application/json on the blog-media bucket, or run the faqs column migration.`,
-        };
+    if (error && cleanedFaqs !== undefined && /faqs/i.test(error.message)) {
+      ({ error } = await db.from("blog_posts").update(baseUpdate).eq("id", postId));
+      if (!error) {
+        try {
+          await writePostFaqs(postId, cleanedFaqs);
+        } catch (faqErr) {
+          const message = faqErr instanceof Error ? faqErr.message : "Could not save FAQs";
+          return { error: `Post saved, but FAQs failed: ${message}` };
+        }
       }
     }
+    if (error) return { error: error.message };
 
-    const wasLive = current.status === "published" || current.status === "scheduled";
-    const isLive = status === "published" || status === "scheduled";
-    if (wasLive || isLive) revalidatePublicBlog([current.slug, values.slug]);
-    revalidatePath("/admin/blog");
+    try {
+      if (cleanedFaqs !== undefined) revalidateTag(`post-faqs:${postId}`, "max");
+      const wasLive = current.status === "published" || current.status === "scheduled";
+      const isLive = status === "published" || status === "scheduled";
+      if (wasLive || isLive) revalidatePublicBlog([current.slug, values.slug]);
+      revalidatePath("/admin/blog");
+    } catch (revalidateErr) {
+      console.error("[admin/blog] revalidate", revalidateErr);
+      // Post/FAQs already persisted — don't fail the save over cache busting.
+    }
 
     const messages: Record<SaveIntent, string> = {
       save: "Saved",
